@@ -5,6 +5,7 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float rotateSpeed = 100f;
 
     float prevX = 0;
     float prevZ = 0;
@@ -12,9 +13,10 @@ public class Mover : MonoBehaviour
 
     void Update()
     {
-        float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
+        float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
         float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
-        transform.Translate(xValue, 0, zValue);
+        transform.Translate(0, 0, zValue);
+        transform.Rotate(0, xValue, 0);
         if (xValue != prevX || zValue != prevZ) {
             Debug.Log("Moved " + xValue + ", " + zValue);
             prevX = xValue;
