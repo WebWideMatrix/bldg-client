@@ -322,18 +322,18 @@ public class BldgController : MonoBehaviour
 					bldgClone.tag = "Building";
                     BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 					bldgObject.initialize(b, this);
-					// Debug.Log(b.summary);
-					// TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
-					// foreach (TMP_Text label in labels) {
-					// 	if (label.name == "summary")
-					// 		label.text = b.summary;
-					// 	else if (label.name == "entity_type")
-					// 		label.text = b.entity_type;
-					// 	else if (label.name == "name")
-					// 		label.text = b.name;					
-					// 	else if (label.name == "state")
-					// 		label.text = b.state;
-					// }
+					Debug.Log(b.summary);
+					TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
+					foreach (TMP_Text label in labels) {
+						if (label.name == "summary")
+							label.text = b.summary;
+						else if (label.name == "entity_type")
+							label.text = b.entity_type;
+						else if (label.name == "name")
+							label.text = b.name;					
+						else if (label.name == "state")
+							label.text = b.state;
+					}
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
