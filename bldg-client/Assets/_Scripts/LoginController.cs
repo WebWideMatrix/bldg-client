@@ -35,6 +35,9 @@ public class LoginController : MonoBehaviour
         // TODO validate the email address, indicate in color & disable the login button until valid
     }
 
+    public void Show() {
+        this.gameObject.SetActive(true);
+    }
 
     void SignInHandler() {
         string email = emailInputField.text;
