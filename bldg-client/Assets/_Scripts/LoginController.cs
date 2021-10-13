@@ -11,11 +11,14 @@ public class LoginController : MonoBehaviour
 	public string bldgServer = "https://api.w2m.site";
 
     public ResidentController residentController;
-
-    private string basePath = "/v1/residents";
 	
     public Button signInButton;
     public TMP_InputField emailInputField;
+    public TMP_Text errorDisplay;
+
+
+    private string basePath = "/v1/residents";
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +39,10 @@ public class LoginController : MonoBehaviour
     void SignInHandler() {
         string email = emailInputField.text;
         Debug.Log("Signing in as " + email);
+        errorDisplay.text = "";
 
         // disable the button
-        signInButton.enabled = false;
-        signInButton.interactable = false;
+        toggleEnable(false);
         
         // TODO show spinner
 
@@ -58,12 +61,26 @@ public class LoginController : MonoBehaviour
             // once login result received, initialize player with resident details
             residentController.initialize(loginResponse.data);
 
+            // hide the login dialog
+            this.gameObject.SetActive(false);
+
             	
 		}).Catch(err => {
             Debug.Log(err.Message);
 
-            // TODO show login error
+            errorDisplay.text = "Failed to sign in (" + err.Message + "), please check your email & try again";
+            toggleEnable(true);
         });
+
+        void toggleEnable(bool formEnabled) {
+            if (!formEnabled) {
+                signInButton.enabled = false;
+                signInButton.interactable = false;
+            } else {
+                signInButton.enabled = true;
+                signInButton.interactable = true;
+            }
+        }
 
     }
 }
