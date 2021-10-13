@@ -37,48 +37,43 @@ namespace Models
 		}
 	}
 
-	// [Serializable]
-	// public struct UserSummary
-	// {
-	// 	public string screen_name;
-	// 	public string profile_text_color;
-	// 	public string profile_background_color;
-	// 	public string name;
-	// }
+	[Serializable]
+	public struct ResidentAttributes
+	{
+
+	}
 
 
-	// [Serializable]
-	// public struct ArticleMetadata
-	// {
-	// 	public string title;
-	// 	public string image_url;
-	// 	public string site;
-	// }
+	[Serializable]
+	public struct Resident
+	{
+		public string alias;
+		public int direction;
+		public string email;
+		public string home_bldg;
+		public int id;
+		public string text;
+		public bool is_online;
+		public DateTime last_login_at;
+		public string location;
+		public string name;
+		public ResidentAttributes other_attributes;
+		public string[] previous_messages;
+		public string session_id;
+	}
 
 
-	// [Serializable]
-	// public struct Payload
-	// {
-	// 	// article-text
-	// 	public string url;
-	// 	public string display_url;
-	// 	// twitter-social-post
-	// 	public int reshare_count;
-	// 	public int favorite_count;
-	// }
+	[Serializable]
+	public struct LoginRequest
+	{
+		public string email;
+	}
 
-
-	// [Serializable]
-	// public struct Summary
-	// {
-	// 	public string name;
-	// 	public string picture;
-	// 	public UserSummary user;
-	// 	public ArticleMetadata metadata;
-	// 	public string text;
-	// 	public string external_url;
-	// 	public DateTime created_at;
-	// }
-
+	[Serializable]
+	public struct LoginResponse
+	{
+		public Resident data;
+	}
+	
 }
 
