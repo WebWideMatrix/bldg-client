@@ -1050,7 +1050,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bldgServer: http://localhost:4000
-  basePath: /v1/bldgs
+  bldgsBasePath: /v1/bldgs
+  residentsBasePath: /v1/residents
   DEFAULT_BLDG: fromteal.app
   floorStartX: -8
   floorStartZ: -6
@@ -1060,6 +1061,7 @@ MonoBehaviour:
   tabletBldg: {fileID: 0}
   filingCabinetBldg: {fileID: 0}
   buildingWithStorefront: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
+  baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   contextMenu: {fileID: 1506027556}
   relocateCursorTexture: {fileID: 0}
   targetURL: 
@@ -2212,6 +2214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bldgServer: http://localhost:4000
   residentController: {fileID: 230341551}
+  bldgController: {fileID: 734139650}
   signInButton: {fileID: 441306661}
   emailInputField: {fileID: 618908368}
   errorDisplay: {fileID: 1498641680}

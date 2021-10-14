@@ -13,7 +13,9 @@ public class BldgController : MonoBehaviour
 {
 
 	public string bldgServer = "https://api.w2m.site";
-	public string basePath = "/v1/bldgs";
+	public string bldgsBasePath = "/v1/bldgs";
+	public string residentsBasePath = "/v1/residents";
+
 	public string DEFAULT_BLDG = "fromteal.app";
 
 
@@ -28,6 +30,8 @@ public class BldgController : MonoBehaviour
 	public GameObject tabletBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
+
+	public GameObject baseResidentObject;
 
 	public GameObject contextMenu;
 
@@ -47,6 +51,8 @@ public class BldgController : MonoBehaviour
     string currentAddress;
 	string currentFlr;
 
+	Resident currentRsdt;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +62,9 @@ public class BldgController : MonoBehaviour
 		// #endif
         Debug.Log("Started");
 
-        if (currentAddress == null) {
+        // if (currentAddress == null) {
 			// TODO change to user's home bldg (received from login?)
-			SetAddress("g");
+			// SetAddress("g");
 
 //			string lastAddress = PlayerPrefs.GetString ("currentAddress");
 //			if (lastAddress != null && lastAddress != "") {
@@ -67,9 +73,14 @@ public class BldgController : MonoBehaviour
         		// Debug.Log("Going to default bldg: " + DEFAULT_BLDG);
 				// EnterBuilding(DEFAULT_BLDG);
 //			}
-		}
+		// }
 
     }
+
+
+	public void SetCurrentResident(Resident rsdt) {
+		currentRsdt = rsdt;
+	}
 
 	void showContextMenu() {
 		isShowingContextMenu = true;
@@ -161,7 +172,7 @@ public class BldgController : MonoBehaviour
 		int newY = (int)(point.z - floorStartZ);
 		Debug.Log("Invoking relocate API to move bldg " + clickedModel.name + ", from (" + clickedModel.x + ", " + clickedModel.y + ") to (" + newX + ", " + newY + ")");
 		string newAddress = generateNewAddress(clickedModel.address, newX, newY);
-		string url = bldgServer + basePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
+		string url = bldgServer + bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
 		Debug.Log("url = " + url);
 		// invoke relocate API
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
@@ -235,7 +246,7 @@ public class BldgController : MonoBehaviour
  
         Debug.Log("Resolvin bldg for web_url: " + web_url);
 		string address = null;
-		string url = bldgServer + basePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
+		string url = bldgServer + bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
 		Debug.Log(url);
 		RestClient.Get(url).Then(res =>
 			{
@@ -296,6 +307,12 @@ public class BldgController : MonoBehaviour
 			updateFloorSign ();
 		}
 
+		reloadBuildings(address);
+		reloadResidents(address);
+	}
+
+
+	void reloadBuildings(string address) {
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
 			GameObject.Destroy (bldg);
@@ -303,7 +320,7 @@ public class BldgController : MonoBehaviour
 
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        string url = bldgServer + basePath + "/look/" + address;
+        string url = bldgServer + bldgsBasePath + "/look/" + address;
 		Debug.Log("Loading buildings from: " + url);
 		RestClient.GetArray<Bldg>(url).Then(res =>
 			{
@@ -341,6 +358,45 @@ public class BldgController : MonoBehaviour
 				Debug.Log("Rendered " + count + " bldgs");
 			});
 	}
+
+	void reloadResidents(string address) {
+		GameObject[] currentFlrResidents = GameObject.FindGameObjectsWithTag("Resident");
+		foreach (GameObject rsdnt in currentFlrResidents) {
+			GameObject.Destroy (rsdnt);
+		}
+
+		// We can add default request headers for all requests
+		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        string url = bldgServer + residentsBasePath + "/look/" + address;
+		Debug.Log("Loading residents from: " + url);
+		RestClient.GetArray<Resident>(url).Then(result =>
+			{
+				int count = 0;
+				foreach (Resident r in result) {
+					count += 1;
+					Debug.Log("processing resident " + count);
+					// if it's the current user, skip
+					if (r.alias == currentRsdt.alias) continue;
+
+					// // The area is 16x12, going from (8,6) - (-8,-6)
+
+					Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+					baseline.x += count * 2; //r.x;
+					baseline.z += count * 3; //r.y;
+					Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
+					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, Quaternion.identity);
+					rsdtClone.tag = "Resident";
+                    ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+					rsdtObject.initialize(r);
+					Debug.Log(r.alias);
+					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
+                    // TODO create picture element
+					// controller.renderMainPicture();
+				};
+				Debug.Log("Rendered " + count + " bldgs");
+			});
+	}
+
 
 	GameObject getPrefabByEntityClass(string entity_type) {
 		switch (entity_type) {

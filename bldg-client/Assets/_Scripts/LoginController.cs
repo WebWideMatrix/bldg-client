@@ -11,6 +11,7 @@ public class LoginController : MonoBehaviour
 	public string bldgServer = "https://api.w2m.site";
 
     public ResidentController residentController;
+    public BldgController bldgController;
 	
     public Button signInButton;
     public TMP_InputField emailInputField;
@@ -62,7 +63,9 @@ public class LoginController : MonoBehaviour
             Debug.Log(loginResponse.data.alias);
             
             // once login result received, initialize player with resident details
-            residentController.initialize(loginResponse.data);
+            residentController.initialize(loginResponse.data, true);
+            bldgController.SetCurrentResident(loginResponse.data);
+            bldgController.SetAddress("g");
 
             // hide the login dialog
             this.gameObject.SetActive(false);
