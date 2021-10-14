@@ -45,6 +45,7 @@ public class BldgController : MonoBehaviour
 	bool isRelocating = false;
 	BldgObject relocatedObject; 
 	bool isShowingContextMenu = false;
+	bool isReloadingInLoop = false;
 
     // public ChaseCamera camera;
 
@@ -291,13 +292,20 @@ public class BldgController : MonoBehaviour
 		// }
 
 		// load the new address
-		switchAddress (currentAddress);
+		Reload();
 	}
 
 
 	public void Reload() {
+		Debug.Log("Reload invoked");
 		// TODO compare new content with existing to decide whether a reload is really needed
 		switchAddress (currentAddress);
+		if (!isReloadingInLoop) {
+			Debug.Log("Starting reload loop");
+			isReloadingInLoop = true;
+		} else {
+			Invoke("Reload", 5.0f);
+		}
 	}
 
 	void switchAddress(string address) {
@@ -381,8 +389,8 @@ public class BldgController : MonoBehaviour
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
 					Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-					baseline.x += count * 2; //r.x;
-					baseline.z += count * 3; //r.y;
+					baseline.x += r.x;
+					baseline.z += r.y;
 					Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
 					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, Quaternion.identity);
 					rsdtClone.tag = "Resident";

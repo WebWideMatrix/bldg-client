@@ -60,6 +60,8 @@ namespace Models
 		public ResidentAttributes other_attributes;
 		public string[] previous_messages;
 		public string session_id;
+		public int x;
+		public int y;
 	}
 
 
