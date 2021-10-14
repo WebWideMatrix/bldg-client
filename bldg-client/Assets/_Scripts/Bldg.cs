@@ -77,5 +77,15 @@ namespace Models
 		public Resident data;
 	}
 	
+	[Serializable]
+	public struct MoveAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string move_location;
+		public int move_x;
+		public int move_y;
+	}
+
 }
 

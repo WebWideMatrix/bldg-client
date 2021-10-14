@@ -303,9 +303,8 @@ public class BldgController : MonoBehaviour
 		if (!isReloadingInLoop) {
 			Debug.Log("Starting reload loop");
 			isReloadingInLoop = true;
-		} else {
-			Invoke("Reload", 5.0f);
 		}
+		Invoke("Reload", 5.0f);
 	}
 
 	void switchAddress(string address) {

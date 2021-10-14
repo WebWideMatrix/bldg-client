@@ -47,8 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e5e0d4eec44444492e9c4f429ecca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bldgServer: http://localhost:4000
   moveSpeed: 10
   rotateSpeed: 100
+  ACTION_SEND_INTERVAL: 200
+  floorStartX: -8
+  floorStartZ: -6
 --- !u!1 &6904879942471808116
 GameObject:
   m_ObjectHideFlags: 0

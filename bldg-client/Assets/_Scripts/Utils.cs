@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 // using NUnit.Framework;
 
 
@@ -77,6 +78,15 @@ namespace Utils {
 			}
 			string level_str = last_part.Substring (1);
 			return System.Int32.Parse(level_str);
+		}
+
+		public static string updateLocation(string addr, int newX, int newY) {
+			// replaces the coordinates in the container bldg
+			// assumes the container bldg is the last part in the given address
+			if (!isBldg(addr)) throw new ArgumentException("Given address isn't a location: " + addr);
+			string[] parts = addr.Split (DELIM_CHAR_ARRAY);
+			parts[parts.Length - 1] = "b(" + newX + "," + newY + ")";
+			return string.Join (DELIM, parts);
 		}
 
 		public static string getContainingBldgAddress(string flr_addr) {
