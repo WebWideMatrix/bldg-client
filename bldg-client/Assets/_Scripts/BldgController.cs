@@ -384,12 +384,23 @@ public class BldgController : MonoBehaviour
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + residentsBasePath + "/look/" + address;
 		Debug.Log("Loading residents from: " + url);
+		bool clearedChatHistory = false;
 		RestClient.GetArray<Resident>(url).Then(result =>
 			{
 				int count = 0;
 				foreach (Resident r in result) {
 					count += 1;
 					Debug.Log("processing resident " + count);
+
+					if (!clearedChatHistory) {
+						bldgChatController.ClearMessageHistory();
+						clearedChatHistory = true;
+					}
+
+					if (r.previous_messages.Length > 0) {
+						bldgChatController.AddHistoricMessages(r.alias, r.previous_messages);
+					}
+
 					// if it's the current user, skip
 					if (r.alias == currentRsdt.alias) continue;
 

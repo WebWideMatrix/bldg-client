@@ -14,11 +14,8 @@ public class ChatUIController : MonoBehaviour {
     public Scrollbar ChatScrollbar;
 
     private ResidentController rsdtController;
+    private string residentAlias;
 
-
-    public void SetResidentController(ResidentController controller) {
-        rsdtController = controller;
-    }
 
 
     void OnEnable()
@@ -32,6 +29,29 @@ public class ChatUIController : MonoBehaviour {
     }
 
 
+    public void SetResidentController(ResidentController controller) {
+        rsdtController = controller;
+        residentAlias = rsdtController.resident.alias;
+    }
+
+    public void AddMessageToHistory(string from, string newText) {
+        string formattedInput = "[<#FFFF80>" + from + "</color>] " + newText;
+
+        if (ChatDisplayOutput != null)
+        {
+            // No special formatting for first entry
+            // Add line feed before each subsequent entries
+            if (ChatDisplayOutput.text == string.Empty)
+                ChatDisplayOutput.text = formattedInput;
+            else
+                ChatDisplayOutput.text += "\n" + formattedInput;
+        }
+    }
+
+    public void ClearMessageHistory() {
+        ChatDisplayOutput.text = string.Empty;
+    }
+
     void HandleNewMessage(string text) {
         AddToChatOutput(text);
         SendChatMessage(text);
@@ -42,9 +62,11 @@ public class ChatUIController : MonoBehaviour {
         // Clear Input Field
         ChatInputField.text = string.Empty;
 
-        var timeNow = System.DateTime.Now;
+        // var timeNow = System.DateTime.Now;
 
-        string formattedInput = "[<#FFFF80>" + timeNow.Hour.ToString("d2") + ":" + timeNow.Minute.ToString("d2") + ":" + timeNow.Second.ToString("d2") + "</color>] " + newText;
+        // string formattedInput = "[<#FFFF80>" + timeNow.Hour.ToString("d2") + ":" + timeNow.Minute.ToString("d2") + ":" + timeNow.Second.ToString("d2") + "</color>] " + newText;
+        string formattedInput = "[<#FFFF80>" + residentAlias + "</color>] " + newText;
+
 
         if (ChatDisplayOutput != null)
         {
