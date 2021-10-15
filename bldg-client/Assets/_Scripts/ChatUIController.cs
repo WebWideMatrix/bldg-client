@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +18,7 @@ public class ChatUIController : MonoBehaviour {
     private ResidentController rsdtController;
     private string residentAlias;
 
+    List<SayAction> chatHistory;
 
 
     void OnEnable()
@@ -36,22 +38,33 @@ public class ChatUIController : MonoBehaviour {
     }
 
     public void AddMessageToHistory(string from, SayAction msg) {
-        string newText = msg.say_text;
-        string formattedInput = "[<#FFFF80>" + from + "</color>] " + newText;
+        chatHistory.Add(msg);
+        chatHistory.Sort(delegate(SayAction m1, SayAction m2) {
+            if (m1.say_time > m2.say_time) return 1;
+            if (m1.say_time < m2.say_time) return -1;
+            return 0;
+        });
 
-        if (ChatDisplayOutput != null)
-        {
-            // No special formatting for first entry
-            // Add line feed before each subsequent entries
+        ChatDisplayOutput.text = string.Empty;
+        foreach (SayAction m in chatHistory) {
+            string formattedInput = formatMessage(m.say_speaker, m.say_text);
             if (ChatDisplayOutput.text == string.Empty)
                 ChatDisplayOutput.text = formattedInput;
             else
                 ChatDisplayOutput.text += "\n" + formattedInput;
         }
+
+        // Set the scrollbar to the bottom when next text is submitted.
+        ChatScrollbar.value = 0;
+    }
+
+    string formatMessage(string from, string text) {
+        return "[<#FFFF80>" + from + "</color>] " + text;
     }
 
     public void ClearMessageHistory() {
         ChatDisplayOutput.text = string.Empty;
+        chatHistory = new List<SayAction>();
     }
 
     void HandleNewMessage(string text) {
@@ -67,7 +80,7 @@ public class ChatUIController : MonoBehaviour {
         // var timeNow = System.DateTime.Now;
 
         // string formattedInput = "[<#FFFF80>" + timeNow.Hour.ToString("d2") + ":" + timeNow.Minute.ToString("d2") + ":" + timeNow.Second.ToString("d2") + "</color>] " + newText;
-        string formattedInput = "[<#FFFF80>" + residentAlias + "</color>] " + newText;
+        string formattedInput = formatMessage(residentAlias, newText);
 
 
         if (ChatDisplayOutput != null)
