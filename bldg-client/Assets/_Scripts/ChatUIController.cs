@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -34,7 +35,8 @@ public class ChatUIController : MonoBehaviour {
         residentAlias = rsdtController.resident.alias;
     }
 
-    public void AddMessageToHistory(string from, string newText) {
+    public void AddMessageToHistory(string from, SayAction msg) {
+        string newText = msg.say_text;
         string formattedInput = "[<#FFFF80>" + from + "</color>] " + newText;
 
         if (ChatDisplayOutput != null)
@@ -87,12 +89,19 @@ public class ChatUIController : MonoBehaviour {
 
     void SendChatMessage(string text) {
         Debug.Log("Got new text " + text);
+        // TODO extract recipient
         if (rsdtController) {
             Debug.Log("Found a rsdt controller");
             rsdtController.SendSayAction(new SayAction {
                 resident_email = rsdtController.resident.email,
                 action_type = "SAY",
-                say_text = text
+                say_speaker = rsdtController.resident.alias,
+                say_text = text,
+                say_time = DateTime.Now.Ticks,
+                say_flr = rsdtController.resident.flr,
+                say_location = rsdtController.resident.location,
+                say_mimetype = "text/plain",
+                say_recipient = null
             });
         }
     }

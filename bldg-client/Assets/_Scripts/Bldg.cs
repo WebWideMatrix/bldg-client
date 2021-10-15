@@ -62,6 +62,7 @@ namespace Models
 		public string session_id;
 		public int x;
 		public int y;
+		public string flr;
 	}
 
 
@@ -92,7 +93,13 @@ namespace Models
 	{
 		public string resident_email;
 		public string action_type;
+		public string say_speaker;
 		public string say_text;
+		public long say_time;
+		public string say_flr;
+		public string say_location;
+		public string say_mimetype;
+		public string say_recipient;
 	}
 
 }

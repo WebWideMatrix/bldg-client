@@ -14,7 +14,8 @@ public class BldgChatController : MonoBehaviour
 
     public void AddHistoricMessages(string from, string[] messages) {
         foreach (string msg in messages) {
-            chatUIController.AddMessageToHistory(from, msg);
+            SayAction msgObject = JsonUtility.FromJson<SayAction>(msg);
+            chatUIController.AddMessageToHistory(from, msgObject);
         }
     }
 
