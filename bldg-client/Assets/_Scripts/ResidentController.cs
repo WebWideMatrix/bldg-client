@@ -13,7 +13,7 @@ public class ResidentController : MonoBehaviour
     public string bldgServer = "https://api.w2m.site";
     private string baseResidentsPath = "/v1/residents";
 
-    private Resident resident;
+    public Resident resident;
     private TMP_Text alias;
     private bool initialized = false;
 
@@ -88,8 +88,7 @@ public class ResidentController : MonoBehaviour
     }
 
 
-    void SendMoveAction(MoveAction action)
-    {
+    void SendMoveAction(MoveAction action) {
         DateTime currentTime = DateTime.Now;
         float timeSinceLastActionSend = currentTime.Subtract(lastActionTime).Milliseconds;  
         // don't send action in frequency smaller than the configured interval
@@ -111,6 +110,18 @@ public class ResidentController : MonoBehaviour
                 Debug.Log(loginResponse.data.location);
             });
         }
+    }
 
+
+    public void SendSayAction(SayAction action) {
+        Debug.Log("Sending say action from " + action.resident_email);
+        string url = bldgServer + baseResidentsPath + "/act";
+        Debug.Log("url = " + url);
+        // invoke act API
+        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        // TODO change to ActionResponse
+        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+            Debug.Log("Action sent");
+        });
     }
 }

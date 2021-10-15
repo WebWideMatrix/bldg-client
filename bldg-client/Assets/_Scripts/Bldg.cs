@@ -87,5 +87,13 @@ namespace Models
 		public int move_y;
 	}
 
+	[Serializable]
+	public struct SayAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string say_text;
+	}
+
 }
 

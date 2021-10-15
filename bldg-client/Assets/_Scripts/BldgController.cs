@@ -42,6 +42,8 @@ public class BldgController : MonoBehaviour
 	public BldgObject clickedObject;
     public Bldg clickedModel; 
 
+	
+
 	bool isRelocating = false;
 	BldgObject relocatedObject; 
 	bool isShowingContextMenu = false;
@@ -53,6 +55,7 @@ public class BldgController : MonoBehaviour
 	string currentFlr;
 
 	Resident currentRsdt;
+	BldgChatController bldgChatController;
 
 
     // Start is called before the first frame update
@@ -62,6 +65,8 @@ public class BldgController : MonoBehaviour
 		// 	WebGLInput.captureAllKeyboardInput = false;
 		// #endif
         Debug.Log("Started");
+
+		bldgChatController = gameObject.GetComponent<BldgChatController>();
 
         // if (currentAddress == null) {
 			// TODO change to user's home bldg (received from login?)
@@ -78,6 +83,9 @@ public class BldgController : MonoBehaviour
 
     }
 
+	public void SetCurrentResidentController(ResidentController rsdtController) {
+		bldgChatController.SetResidentController(rsdtController);
+	}
 
 	public void SetCurrentResident(Resident rsdt) {
 		currentRsdt = rsdt;

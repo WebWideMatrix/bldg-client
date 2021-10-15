@@ -85,6 +85,7 @@ public class LoginController : MonoBehaviour
             // once login result received, initialize player with resident details
             bldgController.bldgServer = bldgServer;
             bldgController.SetCurrentResident(rsdt);
+            bldgController.SetCurrentResidentController(rsdtObject);
             bldgController.SetAddress("g");
 
             // hide the login dialog
