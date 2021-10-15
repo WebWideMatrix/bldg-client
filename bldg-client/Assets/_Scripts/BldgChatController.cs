@@ -4,10 +4,7 @@ using UnityEngine;
 using Models;
 
 public class BldgChatController : MonoBehaviour
-{
-
-    public ResidentController rsdtController;
-    public Resident currentResident;
+{    
 
     public ChatUIController chatUIController;
 
