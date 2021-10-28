@@ -166,13 +166,13 @@ public class BldgController : MonoBehaviour
 	string generateNewAddress(string oldAddress, int newX, int newY) {
 		// generate new address based on new coordinates
 		Debug.Log("Old address is: " + oldAddress);
-		string[] addressParts = oldAddress.Split('-');
+		string[] addressParts = oldAddress.Split(AddressUtils.DELIM_CHAR);
 		string[] newAddressParts = new string[addressParts.Length];
 		for (int i = 0; i < addressParts.Length - 1; i++) {
 			newAddressParts[i] = addressParts[i];
 		}
 		newAddressParts[newAddressParts.Length - 1] = "b(" + newX + "," + newY + ")";
-		return string.Join("-", newAddressParts);
+		return string.Join(AddressUtils.DELIM, newAddressParts);
 	}
 
 	public void completeRelocatingBldg(Vector3 point) {
