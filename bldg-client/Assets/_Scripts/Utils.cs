@@ -9,8 +9,8 @@ using System;
 namespace Utils {
 	public class AddressUtils {
 
-		public static readonly string DELIM = "-";
-		public static readonly char DELIM_CHAR = '-';
+		public static readonly string DELIM = "/";
+		public static readonly char DELIM_CHAR = '/';
 		public static readonly char[] DELIM_CHAR_ARRAY = { DELIM_CHAR };
 
 
@@ -55,7 +55,7 @@ namespace Utils {
 
 		public static string generateInsideAddress(string addr) {
 			if (isBldg (addr)) {
-				addr = addr + "-l0";
+				addr = addr + DELIM_CHAR + "l0";
 			}
 			return addr;
 		}
