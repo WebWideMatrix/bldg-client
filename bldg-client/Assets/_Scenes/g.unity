@@ -606,7 +606,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776498, y: 1}
+    m_SensorSize: {x: 3.4772182, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1429,7 +1429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0005419379}
+  m_AnchoredPosition: {x: 0, y: 0.00038167328}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &698572714
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   DEFAULT_BLDG: fromteal.app
   floorStartX: -8
   floorStartZ: -6
-  chairBldg: {fileID: 0}
+  chairBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
   laptopBldg: {fileID: 0}
   briefcaseBldg: {fileID: 0}
   tabletBldg: {fileID: 0}
@@ -1818,21 +1818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af93534f394540f3bf8cf29d68dbeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rsdtController: {fileID: 0}
-  currentResident:
-    alias: 
-    direction: 0
-    email: 
-    home_bldg: 
-    id: 0
-    text: 
-    is_online: 0
-    location: 
-    name: 
-    previous_messages: []
-    session_id: 
-    x: 0
-    y: 0
   chatUIController: {fileID: 2030830007}
 --- !u!1 &764044123
 GameObject:
@@ -2791,7 +2776,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1765968574}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9988859
+  m_Size: 0.9987016
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
