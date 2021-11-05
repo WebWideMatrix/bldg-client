@@ -83,6 +83,9 @@ public class ResidentController : MonoBehaviour
                     move_x = moveX,
                     move_y = moveY
                 });
+                resident.location = moveLocation;
+                resident.x = moveX;
+                resident.y = moveY;
             }
         }
     }
