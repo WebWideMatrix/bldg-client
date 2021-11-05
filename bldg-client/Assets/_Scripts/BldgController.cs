@@ -262,7 +262,7 @@ public class BldgController : MonoBehaviour
 				Debug.Log(res);
 				address = res.Text;
 				Debug.Log("Resolve address was successful: " + address);
-				address = address + "-l0";	// TODO add floor only if really needed
+				address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
 				SetAddress(address);
 
 			}).Catch(err => {
