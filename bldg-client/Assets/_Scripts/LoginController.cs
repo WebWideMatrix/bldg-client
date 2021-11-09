@@ -91,6 +91,8 @@ public class LoginController : MonoBehaviour
             // hide the login dialog
             this.gameObject.SetActive(false);
 
+            EventManager.TriggerEvent("LoginSuccessful");
+
             	
 		}).Catch(err => {
             Debug.Log(err.Message);

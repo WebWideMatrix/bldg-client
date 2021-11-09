@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 using Models;
 
@@ -12,6 +13,7 @@ public class ChatUIController : MonoBehaviour {
     public TMP_InputField ChatInputField;
 
     public TMP_Text ChatDisplayOutput;
+    public GameObject ChatHistoryDisplay;
 
     public Scrollbar ChatScrollbar;
 
@@ -20,16 +22,34 @@ public class ChatUIController : MonoBehaviour {
 
     List<SayAction> chatHistory;
 
+    private UnityAction onLogin;
+
+    
 
     void OnEnable()
     {
         ChatInputField.onSubmit.AddListener(HandleNewMessage);
+        EventManager.StartListening("LoginSuccessful", onLogin);
     }
 
     void OnDisable()
     {
         ChatInputField.onSubmit.RemoveListener(HandleNewMessage);
+        EventManager.StopListening("LoginSuccessful", onLogin);
     }
+
+
+    private void Awake()
+    {
+        onLogin = new UnityAction(OnLogin);
+    }
+
+    private void OnLogin()
+    {
+        ChatInputField.gameObject.SetActive(true);
+        ChatHistoryDisplay.gameObject.SetActive(true);
+    }
+
 
 
     public void SetResidentController(ResidentController controller) {
