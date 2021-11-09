@@ -46,7 +46,6 @@ public class ChatUIController : MonoBehaviour {
 
     private void OnLogin()
     {
-        Debug.Log("###############  received login!");
         ChatInputField.gameObject.SetActive(true);
         ChatHistoryDisplay.gameObject.SetActive(true);
     }
