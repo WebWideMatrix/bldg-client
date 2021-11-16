@@ -24,6 +24,8 @@ public class BldgController : MonoBehaviour
 
 	// SHAPES
     // TODO: change to array
+	public GameObject whiteboardBldg;
+	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
 	public GameObject briefcaseBldg;
