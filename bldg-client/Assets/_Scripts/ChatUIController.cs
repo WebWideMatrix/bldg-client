@@ -9,7 +9,7 @@ using Models;
 
 public class ChatUIController : MonoBehaviour {
 
-    public int CHAT_HISTORY_SIZE = 10;
+    public int CHAT_HISTORY_SIZE = 25;
 
     public TMP_InputField ChatInputField;
 
