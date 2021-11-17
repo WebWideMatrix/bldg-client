@@ -128,7 +128,7 @@ public class BldgController : MonoBehaviour
 
     public void handleLongClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
         Debug.Log("long click on: " + bldgModel.name);
-		showContextMenu();
+		//showContextMenu();
     }
 
     public void handleRightClick(Bldg model, Vector3 position) {
