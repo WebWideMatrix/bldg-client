@@ -9,6 +9,7 @@ using Models;
 
 public class ChatUIController : MonoBehaviour {
 
+    public int CHAT_HISTORY_SIZE = 25;
 
     public TMP_InputField ChatInputField;
 
@@ -66,8 +67,17 @@ public class ChatUIController : MonoBehaviour {
             return 0;
         });
 
+        int toSkip = 0;
+        if (chatHistory.Count > CHAT_HISTORY_SIZE) {
+            toSkip = chatHistory.Count - CHAT_HISTORY_SIZE;
+        }
         ChatDisplayOutput.text = string.Empty;
         foreach (SayAction m in chatHistory) {
+            if (toSkip > 0) {
+                toSkip--;
+                continue;
+            }
+            Debug.Log("Rendering message");
             string formattedInput = formatMessage(m.say_speaker, m.say_text);
             if (ChatDisplayOutput.text == string.Empty)
                 ChatDisplayOutput.text = formattedInput;

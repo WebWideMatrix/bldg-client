@@ -606,7 +606,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6865315, y: 1}
+    m_SensorSize: {x: 1.9362245, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3744,6 +3744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0672c8373a96b42b29b36a2257c2744c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CHAT_HISTORY_SIZE: 25
   ChatInputField: {fileID: 1438347856}
   ChatDisplayOutput: {fileID: 17415392}
   ChatHistoryDisplay: {fileID: 557951614}
