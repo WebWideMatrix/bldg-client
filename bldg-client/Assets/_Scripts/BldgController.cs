@@ -25,6 +25,7 @@ public class BldgController : MonoBehaviour
 	// SHAPES
     // TODO: change to array
 	public GameObject whiteboardBldg;
+	public GameObject presentationStandBldg;
 	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
@@ -429,7 +430,9 @@ public class BldgController : MonoBehaviour
 	GameObject getPrefabByEntityClass(string entity_type) {
 		switch (entity_type) {
 		case "purpose":
-			return chairBldg;
+			return whiteboardBldg;
+		case "cantata":
+			return presentationStandBldg;
 		case "member":
 			return laptopBldg;
 		case "milestone":

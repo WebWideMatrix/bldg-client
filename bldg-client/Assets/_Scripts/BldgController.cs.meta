@@ -3,7 +3,19 @@ guid: 24ffe5337d7264865aecd624f57798fc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
+  - presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
+  - chairBldg: {instanceID: 0}
+  - laptopBldg: {instanceID: 0}
+  - briefcaseBldg: {instanceID: 0}
+  - tabletBldg: {instanceID: 0}
+  - filingCabinetBldg: {instanceID: 0}
+  - buildingWithStorefront: {instanceID: 0}
+  - baseResidentObject: {instanceID: 0}
+  - contextMenu: {instanceID: 0}
+  - relocateCursorTexture: {instanceID: 0}
+  - clickedObject: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
