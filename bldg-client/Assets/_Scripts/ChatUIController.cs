@@ -77,7 +77,7 @@ public class ChatUIController : MonoBehaviour {
                 toSkip--;
                 continue;
             }
-            Debug.Log("Rendering message");
+            // Debug.Log("Rendering message");
             string formattedInput = formatMessage(m.say_speaker, m.say_text);
             if (ChatDisplayOutput.text == string.Empty)
                 ChatDisplayOutput.text = formattedInput;

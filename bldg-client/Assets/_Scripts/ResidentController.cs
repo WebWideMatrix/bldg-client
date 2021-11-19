@@ -25,6 +25,11 @@ public class ResidentController : MonoBehaviour
     float prevX = 0;
     float prevZ = 0;
 
+    int exactDirection = -1;
+    int previousDirection = -1;
+
+    int directionInterval = 45;
+
     bool isCurrentUser = false;
     DateTime lastActionTime;
 
@@ -62,12 +67,48 @@ public class ResidentController : MonoBehaviour
         }
 
         if (isCurrentUser) {
+            if (exactDirection == -1) {
+                // initialize the values
+                exactDirection = resident.direction;
+                previousDirection = resident.direction;
+            }
+            
             // control movement
             float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
             float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
             transform.Translate(0, 0, zValue);
             transform.Rotate(0, xValue, 0);
-            if (xValue != prevX || zValue != prevZ) {
+            bool isRotationChange = xValue != prevX;
+            bool isMovementChange = zValue != prevZ;
+            // check whether resident turned to the sides
+            if (isRotationChange) {
+                prevX = xValue;
+                Debug.Log("======================================");
+                int directionDelta = (int)(xValue * 10);
+                Debug.Log("directionDelta = " + directionDelta);
+                exactDirection += (int)directionDelta + 360;
+                exactDirection = exactDirection % 360;                
+                Debug.Log("exactDirection = " + exactDirection);
+
+                
+                Debug.Log("exactDirection after modulus = " + exactDirection);
+
+                int newDirection = exactDirection - (exactDirection % directionInterval);
+                Debug.Log("newDirection = " + newDirection);
+
+                if (newDirection != previousDirection) {
+                    Debug.Log("Sending turn action");
+                    SendTurnAction(new TurnAction {
+                        resident_email = resident.email,
+                        action_type = "TURN",
+                        turn_direction = newDirection
+                    });
+                    resident.direction = newDirection;
+                }
+            }
+
+            // check whether residemt moved 
+            if (isMovementChange) {
                 //Debug.Log("Moved " + xValue + ", " + zValue);
                 prevX = xValue;
                 prevZ = zValue;
@@ -89,6 +130,22 @@ public class ResidentController : MonoBehaviour
             }
         }
     }
+
+
+    void SendTurnAction(TurnAction action) {
+        // call the act API
+        Debug.Log("Invoking resident turn action for resident " + resident.email);
+        string url = bldgServer + baseResidentsPath + "/act";
+        Debug.Log("url = " + url);
+        // invoke act API
+        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        // TODO change to ActionResponse
+        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+            Debug.Log("Action sent, received new location");
+            Debug.Log(loginResponse.data.location);
+        });
+    }
+
 
 
     void SendMoveAction(MoveAction action) {
