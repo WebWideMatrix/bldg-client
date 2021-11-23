@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using ImageUtils;
 using Models;
 using Proyecto26;
 using UnityEngine.SceneManagement;
@@ -368,6 +369,10 @@ public class BldgController : MonoBehaviour
 							label.text = b.name;					
 						else if (label.name == "state")
 							label.text = b.state;
+					}
+					ImageController[] imageDisplays = bldgClone.GetComponentsInChildren<ImageController>();
+					foreach (ImageController imgDisplay in imageDisplays) {
+						imgDisplay.SetImageURL(b.picture_url);
 					}
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element

@@ -1747,8 +1747,9 @@ MonoBehaviour:
   DEFAULT_BLDG: fromteal.app
   floorStartX: -8
   floorStartZ: -6
-  whiteboardBldg: {fileID: 0}
-  chairBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
+  whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
+  presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
+  chairBldg: {fileID: 1000013919163964, guid: 356ca97b20719aa4a941ab3a69fddce0, type: 3}
   laptopBldg: {fileID: 0}
   briefcaseBldg: {fileID: 0}
   tabletBldg: {fileID: 0}
@@ -3553,7 +3554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b77998b793245e392f3e1b475495ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bldgServer: https://api.w2m.site
+  bldgServer: http://localhost:4000
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
   camera: {fileID: 199427418}
