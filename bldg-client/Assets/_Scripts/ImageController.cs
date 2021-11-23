@@ -9,10 +9,6 @@ namespace ImageUtils
 {
     public class ImageController : MonoBehaviour
     {
-
-        public string _imageUrl;
-        public string _linkURL;
-
         public GameObject _imageDisplay;
         Texture2D _texture;
 
@@ -20,7 +16,7 @@ namespace ImageUtils
         public void SetImageURL(string imageURL) {
             //_texture = await GetRemoteTexture(_imageUrl);
             //_material.mainTexture = _texture;
-            StartCoroutine(DownloadImage(_imageUrl, _imageDisplay.GetComponent<Renderer>().material));
+            StartCoroutine(DownloadImage(imageURL, _imageDisplay.GetComponent<Renderer>().material));
         }
 
 

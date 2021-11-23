@@ -26,13 +26,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975714801}
-  m_LocalRotation: {x: 0.13284801, y: 0.058352277, z: -0.0065126303, w: 0.9893958}
-  m_LocalPosition: {x: 0, y: 0, z: -0.08}
+  m_LocalRotation: {x: 0.124837026, y: 0.060597386, z: -0.007248053, w: 0.9902985}
+  m_LocalPosition: {x: 0, y: 0, z: -0.084}
   m_LocalScale: {x: 0.1497655, y: 0.08342555, z: 0.0009988847}
   m_Children: []
   m_Father: {fileID: 2742541555221942243}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 15.286, y: 6.771, z: 0.155}
+  m_LocalEulerAnglesHint: {x: 14.367, y: 7.009, z: 0.046}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.03, y: 1.477}
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 18.95
   m_fontSizeBase: 6
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 3.1242707, y: -1.301094, z: 3.2977023, w: 0}
+  m_margin: {x: 2.958045, y: 7.3613243, z: 2.752008, w: -0.33027935}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -231,8 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57207a0731d11439199bc61d9f4f873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imageUrl: 
-  _linkURL: 
   _imageDisplay: {fileID: 2742541555855206072}
 --- !u!1 &2742541555855206072
 GameObject:
@@ -261,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2742541555855206072}
   m_LocalRotation: {x: -0.060668632, y: 0.12546112, z: -0.9901873, w: -0.010391819}
-  m_LocalPosition: {x: 0.0435, y: 1.56, z: -0.062}
+  m_LocalPosition: {x: 0.0435, y: 1.638, z: -0.062}
   m_LocalScale: {x: 0.6321365, y: 0.8404361, z: 0.0001}
   m_Children: []
   m_Father: {fileID: 2742541555221942243}
