@@ -374,6 +374,8 @@ public class BldgController : MonoBehaviour
 						else if (label.name == "entity_type")
 							label.text = b.entity_type;
 						else if (label.name == "name")
+							label.text = b.name;
+						else if (label.name == "name2")
 							label.text = b.name;					
 						else if (label.name == "state")
 							label.text = b.state;

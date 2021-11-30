@@ -24,9 +24,7 @@ namespace BrowserUtils
                 RaycastHit hit;
                 // Casts the ray and get the first game object hit
                 Physics.Raycast(ray, out hit);
-                Debug.Log("This hit at " + hit.point );
                 if (hit.collider.gameObject == linkObject) {
-                    Debug.Log("Opening link");
                     OpenLink();
                 }
             }
