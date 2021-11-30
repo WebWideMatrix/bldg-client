@@ -14,8 +14,6 @@ namespace ImageUtils
 
 
         public void SetImageURL(string imageURL) {
-            //_texture = await GetRemoteTexture(_imageUrl);
-            //_material.mainTexture = _texture;
             StartCoroutine(DownloadImage(imageURL, _imageDisplay.GetComponent<Renderer>().material));
         }
 
@@ -27,7 +25,6 @@ namespace ImageUtils
             if (request.isNetworkError || request.isHttpError)
                 Debug.Log(request.error);
             else
-                //this.gameObject.GetComponent<Renderer>().material.mainTexture = ((DownloadHandlerTexture)request.downloadHandler).texture;
                 _texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
                 targetMaterial.mainTexture = _texture;
         }

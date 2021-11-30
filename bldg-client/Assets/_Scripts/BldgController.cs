@@ -120,14 +120,6 @@ public class BldgController : MonoBehaviour
 
 
     public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
-        Debug.Log("*********************************");
-        Debug.Log("click !!!!!!!!");
-        Debug.Log("click !!!!!!!!");
-        Debug.Log("click !!!!!!!!");
-        Debug.Log("click !!!!!!!!");
-        Debug.Log("click !!!!!!!!");
-		Debug.Log("*********************************");
-
         //camera.moveToTarget(position);
 		if (clickedModel != bldgModel) {
 			Debug.Log("Clicked on different object: " + clickedModel.name);
