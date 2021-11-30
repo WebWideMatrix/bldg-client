@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 using ImageUtils;
+using BrowserUtils;
 using Models;
 using Proyecto26;
 using UnityEngine.SceneManagement;
@@ -119,7 +120,14 @@ public class BldgController : MonoBehaviour
 
 
     public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
-        Debug.Log("click");
+        Debug.Log("*********************************");
+        Debug.Log("click !!!!!!!!");
+        Debug.Log("click !!!!!!!!");
+        Debug.Log("click !!!!!!!!");
+        Debug.Log("click !!!!!!!!");
+        Debug.Log("click !!!!!!!!");
+		Debug.Log("*********************************");
+
         //camera.moveToTarget(position);
 		if (clickedModel != bldgModel) {
 			Debug.Log("Clicked on different object: " + clickedModel.name);
@@ -340,7 +348,7 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + bldgsBasePath + "/look/" + address;
-		Debug.Log("Loading buildings from: " + url);
+		// Debug.Log("Loading buildings from: " + url);
 		RestClient.GetArray<Bldg>(url).Then(res =>
 			{
 				int count = 0;
@@ -374,11 +382,15 @@ public class BldgController : MonoBehaviour
 					foreach (ImageController imgDisplay in imageDisplays) {
 						imgDisplay.SetImageURL(b.picture_url);
 					}
+					LinkController[] linkObjects = bldgClone.GetComponentsInChildren<LinkController>();
+					foreach (LinkController linkObj in linkObjects) {
+						linkObj.SetLinkURL(b.web_url);
+					}
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
 				}
-				Debug.Log("Rendered " + count + " bldgs");
+				// Debug.Log("Rendered " + count + " bldgs");
 			});
 	}
 
@@ -391,14 +403,14 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + residentsBasePath + "/look/" + address;
-		Debug.Log("Loading residents from: " + url);
+		// Debug.Log("Loading residents from: " + url);
 		bool clearedChatHistory = false;
 		RestClient.GetArray<Resident>(url).Then(result =>
 			{
 				int count = 0;
 				foreach (Resident r in result) {
 					count += 1;
-					Debug.Log("processing resident " + count);
+					// Debug.Log("processing resident " + count);
 
 					if (!clearedChatHistory) {
 						bldgChatController.ClearMessageHistory();
@@ -417,17 +429,17 @@ public class BldgController : MonoBehaviour
 					Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += r.x;
 					baseline.z += r.y;
-					Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
+					// Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
 					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, Quaternion.identity);
 					rsdtClone.tag = "Resident";
                     ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
 					rsdtObject.initialize(r);
-					Debug.Log(r.alias);
+					// Debug.Log(r.alias);
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
 				};
-				Debug.Log("Rendered " + count + " bldgs");
+				// Debug.Log("Rendered " + count + " bldgs");
 			});
 	}
 

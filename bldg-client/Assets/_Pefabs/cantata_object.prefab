@@ -195,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2742541555221942243}
   - component: {fileID: 2742541555221942240}
+  - component: {fileID: 1865851086}
   m_Layer: 0
   m_Name: cantata_object
   m_TagString: Untagged
@@ -233,6 +234,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _imageDisplay: {fileID: 2742541555855206072}
+--- !u!114 &1865851086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742541555221942242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baea3849cac2d49ccbf376169fa485aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkObject: {fileID: 2742541555855206072}
 --- !u!1 &2742541555855206072
 GameObject:
   m_ObjectHideFlags: 0
