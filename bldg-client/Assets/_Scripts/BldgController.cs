@@ -28,6 +28,7 @@ public class BldgController : MonoBehaviour
     // TODO: change to array
 	public GameObject whiteboardBldg;
 	public GameObject presentationStandBldg;
+	public GameObject trafficSignBldg;
 	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
@@ -444,6 +445,8 @@ public class BldgController : MonoBehaviour
 			return whiteboardBldg;
 		case "cantata":
 			return presentationStandBldg;
+		case "neighborhood":
+			return trafficSignBldg;
 		case "member":
 			return laptopBldg;
 		case "milestone":
