@@ -29,7 +29,7 @@ public class BldgObject : MonoBehaviour, IPointerDownHandler
     public void initialize(Bldg theModel, BldgController theController) {
         this.model = theModel;
         this.bldgController = theController;
-        Debug.Log("model " + this.model.name + " status is " + this.model.state);
+        //Debug.Log("model " + this.model.name + " status is " + this.model.state);
         // if (!CHECKMARK_STATUSES.Contains(this.model.state)) {
         // 	Debug.Log("model " + this.model.name + " is NOT checked!");
         // 	string tag = "StatusCheck";

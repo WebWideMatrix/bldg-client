@@ -13,12 +13,12 @@ public class BldgChatController : MonoBehaviour
     }
 
     public void AddHistoricMessages(string from, string[] messages) {
-        Debug.Log("Got messages for " + from);
+        // Debug.Log("Got messages for " + from);
         foreach (string msg in messages) {
             SayAction msgObject = JsonUtility.FromJson<SayAction>(msg);
             chatUIController.AddMessageToHistory(from, msgObject);
         }
-        Debug.Log("Done adding them to chat history");
+        // Debug.Log("Done adding them to chat history");
     }
 
     public void ClearMessageHistory() {
