@@ -340,11 +340,7 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + bldgsBasePath + "/look/" + address;
-<<<<<<< HEAD
-		//Debug.Log("Loading buildings from: " + url);
-=======
 		// Debug.Log("Loading buildings from: " + url);
->>>>>>> e822bdf27f79b48ff38844a88fee8a0c5017c4c7
 		RestClient.GetArray<Bldg>(url).Then(res =>
 			{
 				int count = 0;
@@ -388,11 +384,7 @@ public class BldgController : MonoBehaviour
                     // TODO create picture element
 					// controller.renderMainPicture();
 				}
-<<<<<<< HEAD
-				//Debug.Log("Rendered " + count + " bldgs");
-=======
 				// Debug.Log("Rendered " + count + " bldgs");
->>>>>>> e822bdf27f79b48ff38844a88fee8a0c5017c4c7
 			});
 	}
 
@@ -405,22 +397,14 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + residentsBasePath + "/look/" + address;
-<<<<<<< HEAD
-		//Debug.Log("Loading residents from: " + url);
-=======
 		// Debug.Log("Loading residents from: " + url);
->>>>>>> e822bdf27f79b48ff38844a88fee8a0c5017c4c7
 		bool clearedChatHistory = false;
 		RestClient.GetArray<Resident>(url).Then(result =>
 			{
 				int count = 0;
 				foreach (Resident r in result) {
 					count += 1;
-<<<<<<< HEAD
-					//Debug.Log("processing resident " + count);
-=======
 					// Debug.Log("processing resident " + count);
->>>>>>> e822bdf27f79b48ff38844a88fee8a0c5017c4c7
 
 					if (!clearedChatHistory) {
 						bldgChatController.ClearMessageHistory();

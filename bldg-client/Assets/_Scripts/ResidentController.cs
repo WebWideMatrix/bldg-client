@@ -67,31 +67,28 @@ public class ResidentController : MonoBehaviour
         }
 
         if (isCurrentUser) {
-            if (exactDirection == -1) {
-                // initialize the values
-                exactDirection = resident.direction;
-                previousDirection = resident.direction;
-            }
+            // if (exactDirection == -1) {
+            //     // initialize the values
+            //     exactDirection = resident.direction;
+            //     previousDirection = resident.direction;
+            // }
             
             // control movement
             float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
             float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
             transform.Translate(0, 0, zValue);
             transform.Rotate(0, xValue, 0);
+
+            Debug.Log("Current rotation: " + transform.eulerAngles.y);
+            exactDirection = (int)transform.eulerAngles.y;
+
             bool isRotationChange = xValue != prevX;
             bool isMovementChange = zValue != prevZ;
             // check whether resident turned to the sides
             if (isRotationChange) {
                 prevX = xValue;
                 Debug.Log("======================================");
-                int directionDelta = (int)(xValue * 10);
-                Debug.Log("directionDelta = " + directionDelta);
-                exactDirection += (int)directionDelta + 360;
-                exactDirection = exactDirection % 360;                
                 Debug.Log("exactDirection = " + exactDirection);
-
-                
-                Debug.Log("exactDirection after modulus = " + exactDirection);
 
                 int newDirection = exactDirection - (exactDirection % directionInterval);
                 Debug.Log("newDirection = " + newDirection);
