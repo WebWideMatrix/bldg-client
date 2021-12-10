@@ -75,7 +75,9 @@ public class LoginController : MonoBehaviour
             baseline.x += rsdt.x;
             baseline.z += rsdt.y;
             Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-            GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, Quaternion.identity);
+            Quaternion qrt = Quaternion.identity;
+            qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
+            GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
             camera.Follow = rsdtClone.transform;
             camera.LookAt = rsdtClone.transform;
             ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();

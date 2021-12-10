@@ -89,6 +89,14 @@ namespace Models
 	}
 
 	[Serializable]
+	public struct TurnAction
+	{
+		public string resident_email;
+		public string action_type;
+		public int turn_direction;
+	}
+
+	[Serializable]
 	public struct SayAction
 	{
 		public string resident_email;

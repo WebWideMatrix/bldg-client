@@ -425,7 +425,10 @@ public class BldgController : MonoBehaviour
 					baseline.x += r.x;
 					baseline.z += r.y;
 					// Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
-					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, Quaternion.identity);
+					Debug.Log("Changing direction of " + r.alias + " to " + r.direction);
+					Quaternion qrt = Quaternion.identity;
+					qrt.eulerAngles = new Vector3(0, r.direction, 0);
+					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
 					rsdtClone.tag = "Resident";
                     ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
 					rsdtObject.initialize(r);
