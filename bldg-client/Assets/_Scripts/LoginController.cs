@@ -21,6 +21,7 @@ public class LoginController : MonoBehaviour
     public Button signInButton;
     public TMP_InputField emailInputField;
     public TMP_Text errorDisplay;
+    public TMP_Text verifyDisplay;
 
 
     private string basePath = "/v1/residents";
@@ -59,6 +60,8 @@ public class LoginController : MonoBehaviour
         
         // TODO show spinner
 
+        verifyDisplay.text = "Please click on the link in the email that was just sent to you";
+
         // call the login API
     	Debug.Log("Invoking resident Login API for resident " + email);
 		string url = bldgServer + basePath + "/login";
@@ -68,32 +71,35 @@ public class LoginController : MonoBehaviour
 		RestClient.Post<LoginResponse>(url, new LoginRequest {
             email = email
         }).Then(loginResponse => {
-            Resident rsdt = loginResponse.data;
-			Debug.Log("Login done, received " + rsdt.alias);
 
-            Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-            baseline.x += rsdt.x;
-            baseline.z += rsdt.y;
-            Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-            Quaternion qrt = Quaternion.identity;
-            qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-            GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-            camera.Follow = rsdtClone.transform;
-            camera.LookAt = rsdtClone.transform;
-            ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-            rsdtObject.bldgServer = bldgServer;
-			rsdtObject.initialize(rsdt, true);
+            // TODO move this code to the verification status handler
 
-            // once login result received, initialize player with resident details
-            bldgController.bldgServer = bldgServer;
-            bldgController.SetCurrentResident(rsdt);
-            bldgController.SetCurrentResidentController(rsdtObject);
-            bldgController.SetAddress("g");
+            // Resident rsdt = loginResponse.data;
+			// Debug.Log("Login done, received " + rsdt.alias);
 
-            // hide the login dialog
-            this.gameObject.SetActive(false);
+            // Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+            // baseline.x += rsdt.x;
+            // baseline.z += rsdt.y;
+            // Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
+            // Quaternion qrt = Quaternion.identity;
+            // qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
+            // GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+            // camera.Follow = rsdtClone.transform;
+            // camera.LookAt = rsdtClone.transform;
+            // ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+            // rsdtObject.bldgServer = bldgServer;
+			// rsdtObject.initialize(rsdt, true);
 
-            EventManager.TriggerEvent("LoginSuccessful");
+            // // once login result received, initialize player with resident details
+            // bldgController.bldgServer = bldgServer;
+            // bldgController.SetCurrentResident(rsdt);
+            // bldgController.SetCurrentResidentController(rsdtObject);
+            // bldgController.SetAddress("g");
+
+            // // hide the login dialog
+            // this.gameObject.SetActive(false);
+
+            // EventManager.TriggerEvent("LoginSuccessful");
 
             	
 		}).Catch(err => {
