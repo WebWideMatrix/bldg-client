@@ -136,11 +136,11 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
+        // TODO proper authorization
         RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        // TODO change to ActionResponse
-        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+        RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
-            Debug.Log(loginResponse.data.location);
+            Debug.Log(actionResponse.data.location);
         });
     }
 
@@ -161,11 +161,11 @@ public class ResidentController : MonoBehaviour
             string url = bldgServer + baseResidentsPath + "/act";
             Debug.Log("url = " + url);
             // invoke act API
+            // TODO proper authorization
             RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-            // TODO change to ActionResponse
-            RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+            RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
                 Debug.Log("Action sent, received new location");
-                Debug.Log(loginResponse.data.location);
+                Debug.Log(actionResponse.data.location);
             });
         }
     }
@@ -176,9 +176,9 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
+        // TODO proper authorization
         RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        // TODO change to ActionResponse
-        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+        RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
             Debug.Log("Action sent");
         });
     }

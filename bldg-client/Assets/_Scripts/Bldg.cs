@@ -75,9 +75,15 @@ namespace Models
 	[Serializable]
 	public struct LoginResponse
 	{
-		public Resident data;
+		public Resident data;	// with only the email attribute populated
 	}
 	
+	[Serializable]
+	public struct ActionResponse
+	{
+		public Resident data;
+	}
+
 	[Serializable]
 	public struct MoveAction
 	{
