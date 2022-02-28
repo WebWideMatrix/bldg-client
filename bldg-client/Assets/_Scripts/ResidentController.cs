@@ -17,6 +17,7 @@ public class ResidentController : MonoBehaviour
     private TMP_Text alias;
     private bool initialized = false;
 
+    [SerializeField] bool inFlyingMode = true;
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 100f;
@@ -67,7 +68,21 @@ public class ResidentController : MonoBehaviour
         }
 
         if (isCurrentUser) {
+
+            if (Input.GetKey("f")) {
+                inFlyingMode = true;
+                Debug.Log("Fly mode");
+                transform.position = new Vector3(transform.position.x, 70, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+            }
             
+            if (Input.GetKey("l")) {
+                inFlyingMode = false;
+                Debug.Log("Walking mode");
+                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+            }
+
             // control movement
             float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
             float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
