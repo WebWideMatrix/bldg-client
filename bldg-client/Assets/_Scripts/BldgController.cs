@@ -17,6 +17,7 @@ public class BldgController : MonoBehaviour
 	public string bldgServer = "https://api.w2m.site";
 	public string bldgsBasePath = "/v1/bldgs";
 	public string residentsBasePath = "/v1/residents";
+	public string roadsBasePath = "/v1/roads";
 
 	public string DEFAULT_BLDG = "fromteal.app";
 
@@ -36,6 +37,8 @@ public class BldgController : MonoBehaviour
 	public GameObject tabletBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
+
+	public GameObject roadObject;
 
 	public GameObject baseResidentObject;
 
@@ -329,6 +332,7 @@ public class BldgController : MonoBehaviour
 
 		reloadBuildings(address);
 		reloadResidents(address);
+		reloadRoads(address);
 	}
 
 
@@ -442,6 +446,55 @@ public class BldgController : MonoBehaviour
 				// Debug.Log("Rendered " + count + " bldgs");
 			});
 	}
+
+	void reloadRoads(string address) {
+		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
+		foreach (GameObject road in currentFlrRoads) {
+			GameObject.Destroy (road);
+		}
+
+		// We can add default request headers for all requests
+		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        string url = bldgServer + roadsBasePath + "/look/" + address;
+		Debug.Log("Loading roads from: " + url);
+		RestClient.GetArray<Road>(url).Then(res =>
+			{
+				Debug.Log("Got response for look roads");
+				int count = 0;
+				foreach (Road r in res) {
+					count += 1;
+					Debug.Log("processing road " + count);
+					Debug.Log("road is from " + r.from_x + ", " + r.from_y);
+					
+					// // The area is 16x12, going from (8,6) - (-8,-6)
+
+					Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+					int default_road_scale = 10;
+					int d_x = 0;
+					if (r.to_x > r.from_x) {
+						d_x = (r.to_x - r.from_x) / default_road_scale;
+					}
+					int d_y = 0;
+					if (r.to_y > r.from_y) {
+						d_y = (r.to_y - r.from_y) / default_road_scale;
+					}
+
+					baseline.x += r.from_x;
+					baseline.z += r.from_y;
+					GameObject bldgClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
+					bldgClone.transform.Translate(d_x / 2, 0, d_y / 2);
+					bldgClone.transform.localScale += new Vector3(d_x, 0, d_y);
+					bldgClone.tag = "Road";
+                    
+					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
+                    // TODO create picture element
+					// controller.renderMainPicture();
+				}
+				Debug.Log("Rendered " + count + " roads");
+			});
+	}
+
+
 
 
 	GameObject getPrefabByEntityClass(string entity_type) {

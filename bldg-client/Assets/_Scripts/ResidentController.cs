@@ -23,6 +23,8 @@ public class ResidentController : MonoBehaviour
     [SerializeField] float rotateSpeed = 100f;
     [SerializeField] float ACTION_SEND_INTERVAL = 200;  // Milliseconds
 
+    [SerializeField] int FLY_HEIGHT = 70;
+
     float prevX = 0;
     float prevZ = 0;
 
@@ -72,7 +74,7 @@ public class ResidentController : MonoBehaviour
             if (Input.GetKey("f")) {
                 inFlyingMode = true;
                 Debug.Log("Fly mode");
-                transform.position = new Vector3(transform.position.x, 70, transform.position.z);
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
                 //transform.Rotate(90, 0, 0);
             }
             
@@ -80,7 +82,7 @@ public class ResidentController : MonoBehaviour
                 inFlyingMode = false;
                 Debug.Log("Walking mode");
                 transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                //transform.Rotate(90, 0, 0);
+                //transform.Rotate(-90, 0, 0);
             }
 
             // control movement
