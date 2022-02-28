@@ -482,7 +482,12 @@ public class BldgController : MonoBehaviour
 					baseline.x += r.from_x;
 					baseline.z += r.from_y;
 					GameObject bldgClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
-					bldgClone.transform.Translate(d_x / 2, 0, d_y / 2);
+					
+					
+					
+					
+					
+					bldgClone.transform.Translate((d_x / 2) * default_road_scale, 0, (d_y / 2) * default_road_scale);
 					bldgClone.transform.localScale += new Vector3(d_x, 0, d_y);
 					bldgClone.tag = "Road";
                     
