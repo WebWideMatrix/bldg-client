@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 using Proyecto26;
 using Models;
@@ -16,7 +17,9 @@ public class LoginController : MonoBehaviour
 
     public BldgController bldgController;
 
-    public CinemachineVirtualCamera camera;
+    public CinemachineVirtualCamera flyCamera;
+    public CinemachineVirtualCamera walkCamera;
+    
 	
     public Button signInButton;
     public TMP_InputField emailInputField;
@@ -29,6 +32,9 @@ public class LoginController : MonoBehaviour
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
+    private UnityAction onFlying;
+    private UnityAction onWalking;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +45,39 @@ public class LoginController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        // TODO validate the email address, indicate in color & disable the login button until valid
+        Debug.Log("LoginController Awake");
+        onFlying = new UnityAction(OnFlying);
+        onWalking = new UnityAction(OnWalking);
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("LoginController On Enable");
+        EventManager.StartListening("SwitchToFlying", onFlying);
+        EventManager.StartListening("SwitchToWalking", onWalking);
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("LoginController On Disable");
+        //EventManager.StopListening("SwitchToFlying", onFlying);
+        //EventManager.StopListening("SwitchToWalking", onWalking);
+    }
+
+    private void OnFlying()
+    {
+        Debug.Log("On Flying");
+        flyCamera.gameObject.SetActive(true);
+        walkCamera.gameObject.SetActive(false);
+    }
+
+    private void OnWalking()
+    {
+        Debug.Log("On Walking");
+        walkCamera.gameObject.SetActive(true);
+        flyCamera.gameObject.SetActive(false);
     }
 
     public void Show() {
@@ -78,8 +113,10 @@ public class LoginController : MonoBehaviour
             Quaternion qrt = Quaternion.identity;
             qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
             GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-            camera.Follow = rsdtClone.transform;
-            camera.LookAt = rsdtClone.transform;
+            flyCamera.Follow = rsdtClone.transform;
+            flyCamera.LookAt = rsdtClone.transform;
+            walkCamera.Follow = rsdtClone.transform;
+            walkCamera.LookAt = rsdtClone.transform;
             ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
             rsdtObject.bldgServer = bldgServer;
 			rsdtObject.initialize(rsdt, true);

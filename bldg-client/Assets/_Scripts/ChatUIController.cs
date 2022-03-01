@@ -35,6 +35,7 @@ public class ChatUIController : MonoBehaviour {
 
     void OnDisable()
     {
+        
         ChatInputField.onSubmit.RemoveListener(HandleNewMessage);
         EventManager.StopListening("LoginSuccessful", onLogin);
     }
@@ -42,6 +43,7 @@ public class ChatUIController : MonoBehaviour {
 
     private void Awake()
     {
+        
         onLogin = new UnityAction(OnLogin);
     }
 

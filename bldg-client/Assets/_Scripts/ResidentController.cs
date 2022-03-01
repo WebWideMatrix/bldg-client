@@ -76,13 +76,15 @@ public class ResidentController : MonoBehaviour
                 Debug.Log("Fly mode");
                 transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
                 //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
             }
             
             if (Input.GetKey("l")) {
                 inFlyingMode = false;
                 Debug.Log("Walking mode");
-                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                transform.position = new Vector3(transform.position.x, 0.5F, transform.position.z);
                 //transform.Rotate(-90, 0, 0);
+                EventManager.TriggerEvent("SwitchToWalking");
             }
 
             // control movement
