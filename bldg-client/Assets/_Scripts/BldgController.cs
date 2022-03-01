@@ -463,44 +463,48 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Road r in res) {
 					count += 1;
-					Debug.Log("processing road " + count);
-					Debug.Log("road is from " + r.from_x + ", " + r.from_y);
-					
-					// // The area is 16x12, going from (8,6) - (-8,-6)
-
-					Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-					int default_road_scale = 10;
-					int d_x = 0;
-					if (r.to_x > r.from_x) {
-						d_x = (r.to_x - r.from_x) / default_road_scale;
-					}
-					int d_y = 0;
-					if (r.to_y > r.from_y) {
-						d_y = (r.to_y - r.from_y) / default_road_scale;
-					}
-
-					baseline.x += r.from_x;
-					baseline.z += r.from_y;
-					GameObject bldgClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
-					
-					
-					
-					
-					
-					bldgClone.transform.Translate((d_x / 2) * default_road_scale, 0, (d_y / 2) * default_road_scale);
-					bldgClone.transform.localScale += new Vector3(d_x, 0, d_y);
-					bldgClone.tag = "Road";
-                    
-					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
-                    // TODO create picture element
-					// controller.renderMainPicture();
+					Debug.Log("processing road " + count + " from " + r.from_x + ", " + r.from_y);					
+					renderRoad(r.from_x, r.from_y, r.to_x, r.to_y);
 				}
 				Debug.Log("Rendered " + count + " roads");
 			});
 	}
 
 
+	void renderRoad(int from_x, int from_y, int to_x, int to_y)
+	{		
+		int d_x = 0;
+		if (to_x > from_x) {
+			d_x = (to_x - from_x);
+		}
+		int d_y = 0;
+		if (to_y > from_y) {
+			d_y = (to_y - from_y);
+		}
+		// if straight line, draw 1 segment
+		if (d_x == 0 || d_y == 0) {
+			renderRoadSegment(from_x, from_y, d_x, d_y);
+		}
+		// else break to 2 segments
+		else {
+			int mid_x = from_x + d_x;
+			int mid_y = from_y;
+			renderRoadSegment(from_x, from_y, d_x, 0);
+			renderRoadSegment(mid_x, mid_y, 0, d_y);
+		}
+	}
 
+	void renderRoadSegment(int from_x, int from_y, int d_x, int d_y) 
+	{
+		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+		int default_road_scale = 10;
+		baseline.x += from_x;
+		baseline.z += from_y;
+		GameObject roadClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
+		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
+		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
+		roadClone.tag = "Road";
+	}
 
 	GameObject getPrefabByEntityClass(string entity_type) {
 		switch (entity_type) {
