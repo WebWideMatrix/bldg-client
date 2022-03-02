@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Utils;
 using ImageUtils;
@@ -472,25 +473,35 @@ public class BldgController : MonoBehaviour
 
 
 	void renderRoad(int from_x, int from_y, int to_x, int to_y)
-	{		
-		int d_x = 0;
-		if (to_x > from_x) {
+	{	
+		if (from_x > to_x) {
+			int tmp_from_x = from_x;
+			int tmp_from_y = from_y;
+			from_x = to_x;
+			from_y = to_y;
+			to_x = tmp_from_x;
+			to_y = tmp_from_y;
+		}
+
+		int d_x = 0;	// 27
+		if (to_x != from_x) {
 			d_x = (to_x - from_x);
 		}
-		int d_y = 0;
-		if (to_y > from_y) {
-			d_y = (to_y - from_y);
+		int d_y = 0;	// -62
+		if (to_y != from_y) {
+			d_y = Math.Abs(to_y - from_y);
 		}
 		// if straight line, draw 1 segment
 		if (d_x == 0 || d_y == 0) {
+			// (88,-2), d27, d-62
 			renderRoadSegment(from_x, from_y, d_x, d_y);
 		}
 		// else break to 2 segments
 		else {
-			int mid_x = from_x + d_x;
-			int mid_y = from_y;
-			renderRoadSegment(from_x, from_y, d_x, 0);
-			renderRoadSegment(mid_x, mid_y, 0, d_y);
+			int mid_x = from_x + d_x;	// 115
+			int mid_y = from_y;			// -2
+			renderRoadSegment(from_x, from_y, d_x, 0);	// 88,-2 -> d27, d0
+			renderRoadSegment(mid_x, mid_y, 0, d_y);	// 115,-2 -> d0, -62x
 		}
 	}
 
