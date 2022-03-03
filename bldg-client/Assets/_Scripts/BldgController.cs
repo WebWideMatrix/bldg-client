@@ -474,6 +474,7 @@ public class BldgController : MonoBehaviour
 
 	void renderRoad(int from_x, int from_y, int to_x, int to_y)
 	{	
+		Debug.Log("************************************************");
 		if (from_x > to_x) {
 			int tmp_from_x = from_x;
 			int tmp_from_y = from_y;
@@ -489,18 +490,25 @@ public class BldgController : MonoBehaviour
 		}
 		int d_y = 0;
 		if (to_y != from_y) {
-			d_y = Math.Abs(to_y - from_y) + 1;
+			d_y = to_y - from_y;
 		}
+		
 		// if straight line, draw 1 segment
 		if (d_x == 0 || d_y == 0) {
 			renderRoadSegment(from_x, from_y, d_x, d_y);
 		}
 		// else break to 2 segments
 		else {
-			int mid_x = from_x + d_x;
+			int mid_x = from_x + d_x - 1;
 			int mid_y = from_y;
+
 			if (from_y > to_y) {
+				Debug.Log("Happened:");
 				mid_y = mid_y - 1;	// TODO figure out why
+				mid_y = mid_y + d_y;
+				d_y = -1 * d_y;
+				Debug.Log("Segment 1: (" + from_x + "," + from_y + ") -> " + d_x + "," + 0);
+				Debug.Log("Segment 2: (" + mid_x + "," + mid_y + ") -> " + 0 + "," + d_y);
 			}
 			renderRoadSegment(from_x, from_y, d_x, 0);
 			renderRoadSegment(mid_x, mid_y, 0, d_y);

@@ -60,6 +60,7 @@ public class ResidentController : MonoBehaviour
     void Start()
     {
         alias = this.gameObject.GetComponentInChildren<TMP_Text>();
+        inFlyingMode = false;
     }
 
     // Update is called once per frame
@@ -71,7 +72,7 @@ public class ResidentController : MonoBehaviour
 
         if (isCurrentUser) {
 
-            if (Input.GetKey("f")) {
+            if (Input.GetKey("f") && !inFlyingMode) {
                 inFlyingMode = true;
                 Debug.Log("Fly mode");
                 transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
@@ -79,7 +80,7 @@ public class ResidentController : MonoBehaviour
                 EventManager.TriggerEvent("SwitchToFlying");
             }
             
-            if (Input.GetKey("l")) {
+            if (Input.GetKey("l") && inFlyingMode) {
                 inFlyingMode = false;
                 Debug.Log("Walking mode");
                 transform.position = new Vector3(transform.position.x, 0.5F, transform.position.z);
