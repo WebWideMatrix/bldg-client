@@ -499,12 +499,12 @@ public class BldgController : MonoBehaviour
 		}
 		// else break to 2 segments
 		else {
-			int mid_x = from_x + d_x - 1;
+			int mid_x = from_x + d_x;// - 1;
 			int mid_y = from_y;
 
 			if (from_y > to_y) {
 				Debug.Log("Happened:");
-				mid_y = mid_y - 1;	// TODO figure out why
+				mid_y = mid_y + 1;	// TODO figure out why
 				mid_y = mid_y + d_y;
 				d_y = -1 * d_y;
 				Debug.Log("Segment 1: (" + from_x + "," + from_y + ") -> " + d_x + "," + 0);
