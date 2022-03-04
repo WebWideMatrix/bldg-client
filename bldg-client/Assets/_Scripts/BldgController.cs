@@ -474,16 +474,6 @@ public class BldgController : MonoBehaviour
 
 	void renderRoad(int from_x, int from_y, int to_x, int to_y)
 	{	
-		Debug.Log("************************************************");
-		if (from_x > to_x) {
-			int tmp_from_x = from_x;
-			int tmp_from_y = from_y;
-			from_x = to_x;
-			from_y = to_y;
-			to_x = tmp_from_x;
-			to_y = tmp_from_y;
-		}
-
 		int d_x = 0;
 		if (to_x != from_x) {
 			d_x = to_x - from_x;
@@ -499,16 +489,17 @@ public class BldgController : MonoBehaviour
 		}
 		// else break to 2 segments
 		else {
-			int mid_x = from_x + d_x;// - 1;
+			int mid_x = from_x + d_x;
 			int mid_y = from_y;
 
+			if (from_x > to_x) {
+				from_x = mid_x;
+				d_x = -1 * d_x;
+			}
+
 			if (from_y > to_y) {
-				Debug.Log("Happened:");
-				mid_y = mid_y + 1;	// TODO figure out why
 				mid_y = mid_y + d_y;
 				d_y = -1 * d_y;
-				Debug.Log("Segment 1: (" + from_x + "," + from_y + ") -> " + d_x + "," + 0);
-				Debug.Log("Segment 2: (" + mid_x + "," + mid_y + ") -> " + 0 + "," + d_y);
 			}
 			renderRoadSegment(from_x, from_y, d_x, 0);
 			renderRoadSegment(mid_x, mid_y, 0, d_y);
@@ -518,7 +509,7 @@ public class BldgController : MonoBehaviour
 	void renderRoadSegment(int from_x, int from_y, int d_x, int d_y) 
 	{
 		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-		int default_road_scale = 10;
+		float default_road_scale = 10.01F;
 		baseline.x += from_x;
 		baseline.z += from_y;
 		GameObject roadClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);

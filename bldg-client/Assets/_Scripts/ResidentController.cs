@@ -23,7 +23,7 @@ public class ResidentController : MonoBehaviour
     [SerializeField] float rotateSpeed = 100f;
     [SerializeField] float ACTION_SEND_INTERVAL = 200;  // Milliseconds
 
-    [SerializeField] int FLY_HEIGHT = 70;
+    [SerializeField] int FLY_HEIGHT = 80;
 
     float prevX = 0;
     float prevZ = 0;
