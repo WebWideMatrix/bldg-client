@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Utils;
 using ImageUtils;
@@ -17,6 +18,7 @@ public class BldgController : MonoBehaviour
 	public string bldgServer = "https://api.w2m.site";
 	public string bldgsBasePath = "/v1/bldgs";
 	public string residentsBasePath = "/v1/residents";
+	public string roadsBasePath = "/v1/roads";
 
 	public string DEFAULT_BLDG = "fromteal.app";
 
@@ -36,6 +38,8 @@ public class BldgController : MonoBehaviour
 	public GameObject tabletBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
+
+	public GameObject roadObject;
 
 	public GameObject baseResidentObject;
 
@@ -329,6 +333,7 @@ public class BldgController : MonoBehaviour
 
 		reloadBuildings(address);
 		reloadResidents(address);
+		reloadRoads(address);
 	}
 
 
@@ -364,12 +369,17 @@ public class BldgController : MonoBehaviour
 					foreach (TMP_Text label in labels) {
 						if (label.name == "summary")
 							label.text = b.summary;
+						else if (label.name == "summary_top") {
+							label.text = b.summary;
+						}
 						else if (label.name == "entity_type")
 							label.text = b.entity_type;
 						else if (label.name == "name")
 							label.text = b.name;
 						else if (label.name == "name2")
-							label.text = b.name;					
+							label.text = b.name;		
+						else if (label.name == "name_top")
+							label.text = b.name;
 						else if (label.name == "state")
 							label.text = b.state;
 					}
@@ -441,6 +451,74 @@ public class BldgController : MonoBehaviour
 			});
 	}
 
+	void reloadRoads(string address) {
+		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
+		foreach (GameObject road in currentFlrRoads) {
+			GameObject.Destroy (road);
+		}
+
+		// We can add default request headers for all requests
+		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        string url = bldgServer + roadsBasePath + "/look/" + address;
+		Debug.Log("Loading roads from: " + url);
+		RestClient.GetArray<Road>(url).Then(res =>
+			{
+				Debug.Log("Got response for look roads");
+				int count = 0;
+				foreach (Road r in res) {
+					count += 1;
+					renderRoad(r.from_x, r.from_y, r.to_x, r.to_y);
+				}
+				Debug.Log("Rendered " + count + " roads");
+			});
+	}
+
+
+	void renderRoad(int from_x, int from_y, int to_x, int to_y)
+	{	
+		int d_x = 0;
+		if (to_x != from_x) {
+			d_x = to_x - from_x;
+		}
+		int d_y = 0;
+		if (to_y != from_y) {
+			d_y = to_y - from_y;
+		}
+		
+		// if straight line, draw 1 segment
+		if (d_x == 0 || d_y == 0) {
+			renderRoadSegment(from_x, from_y, d_x, d_y);
+		}
+		// else break to 2 segments
+		else {
+			int mid_x = from_x + d_x;
+			int mid_y = from_y;
+
+			if (from_x > to_x) {
+				from_x = mid_x;
+				d_x = -1 * d_x;
+			}
+
+			if (from_y > to_y) {
+				mid_y = mid_y + d_y;
+				d_y = -1 * d_y;
+			}
+			renderRoadSegment(from_x, from_y, d_x, 0);
+			renderRoadSegment(mid_x, mid_y, 0, d_y);
+		}
+	}
+
+	void renderRoadSegment(int from_x, int from_y, int d_x, int d_y) 
+	{
+		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
+		float default_road_scale = 10.01F;
+		baseline.x += from_x;
+		baseline.z += from_y;
+		GameObject roadClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
+		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
+		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
+		roadClone.tag = "Road";
+	}
 
 	GameObject getPrefabByEntityClass(string entity_type) {
 		switch (entity_type) {

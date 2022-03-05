@@ -65,6 +65,19 @@ namespace Models
 		public string flr;
 	}
 
+	[Serializable]
+	public struct Road 
+	{
+		public int id;
+		public string flr;
+		public string from_address;
+		public int from_x;
+		public int from_y;
+		
+		public string to_address;
+		public int to_x;
+		public int to_y;
+	}
 
 	[Serializable]
 	public struct LoginRequest

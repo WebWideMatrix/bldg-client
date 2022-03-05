@@ -17,10 +17,13 @@ public class ResidentController : MonoBehaviour
     private TMP_Text alias;
     private bool initialized = false;
 
+    [SerializeField] bool inFlyingMode = true;
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 100f;
     [SerializeField] float ACTION_SEND_INTERVAL = 200;  // Milliseconds
+
+    [SerializeField] int FLY_HEIGHT = 80;
 
     float prevX = 0;
     float prevZ = 0;
@@ -57,6 +60,7 @@ public class ResidentController : MonoBehaviour
     void Start()
     {
         alias = this.gameObject.GetComponentInChildren<TMP_Text>();
+        inFlyingMode = false;
     }
 
     // Update is called once per frame
@@ -67,7 +71,31 @@ public class ResidentController : MonoBehaviour
         }
 
         if (isCurrentUser) {
+
+            if (Input.GetKey("f") && !inFlyingMode) {
+                inFlyingMode = true;
+                Debug.Log("Fly mode");
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
+            }
+            if (Input.GetKey("h") && !inFlyingMode) {
+                // fly higher
+                inFlyingMode = true;
+                Debug.Log("High fly mode");
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
+            }
             
+            if (Input.GetKey("l") && inFlyingMode) {
+                inFlyingMode = false;
+                Debug.Log("Walking mode");
+                transform.position = new Vector3(transform.position.x, 0.5F, transform.position.z);
+                //transform.Rotate(-90, 0, 0);
+                EventManager.TriggerEvent("SwitchToWalking");
+            }
+
             // control movement
             float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
             float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
