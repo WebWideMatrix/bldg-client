@@ -467,7 +467,6 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Road r in res) {
 					count += 1;
-					Debug.Log("processing road " + count + " from " + r.from_x + ", " + r.from_y);					
 					renderRoad(r.from_x, r.from_y, r.to_x, r.to_y);
 				}
 				Debug.Log("Rendered " + count + " roads");
@@ -511,7 +510,7 @@ public class BldgController : MonoBehaviour
 
 	void renderRoadSegment(int from_x, int from_y, int d_x, int d_y) 
 	{
-		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
 		float default_road_scale = 10.01F;
 		baseline.x += from_x;
 		baseline.z += from_y;
