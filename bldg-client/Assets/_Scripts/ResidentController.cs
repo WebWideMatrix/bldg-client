@@ -79,6 +79,14 @@ public class ResidentController : MonoBehaviour
                 //transform.Rotate(90, 0, 0);
                 EventManager.TriggerEvent("SwitchToFlying");
             }
+            if (Input.GetKey("h") && !inFlyingMode) {
+                // fly higher
+                inFlyingMode = true;
+                Debug.Log("High fly mode");
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
+            }
             
             if (Input.GetKey("l") && inFlyingMode) {
                 inFlyingMode = false;

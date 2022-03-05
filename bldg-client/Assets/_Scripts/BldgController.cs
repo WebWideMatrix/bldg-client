@@ -369,6 +369,9 @@ public class BldgController : MonoBehaviour
 					foreach (TMP_Text label in labels) {
 						if (label.name == "summary")
 							label.text = b.summary;
+						else if (label.name == "summary_top") {
+							label.text = b.summary;
+						}
 						else if (label.name == "entity_type")
 							label.text = b.entity_type;
 						else if (label.name == "name")
