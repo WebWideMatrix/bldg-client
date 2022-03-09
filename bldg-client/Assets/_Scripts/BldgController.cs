@@ -40,6 +40,7 @@ public class BldgController : MonoBehaviour
 	public GameObject buildingWithStorefront;
 
 	public GameObject roadObject;
+	public GameObject lotObject;
 
 	public GameObject baseResidentObject;
 
@@ -536,6 +537,8 @@ public class BldgController : MonoBehaviour
 			return tabletBldg;
 		case "team":
 			return buildingWithStorefront;
+		case "lot":
+			return lotObject;
 		default:
 			return chairBldg;
 		}
