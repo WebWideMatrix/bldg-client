@@ -31,6 +31,7 @@ public class BldgController : MonoBehaviour
 	public GameObject whiteboardBldg;
 	public GameObject presentationStandBldg;
 	public GameObject trafficSignBldg;
+	public GameObject streetSignBldg;
 	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
@@ -531,6 +532,8 @@ public class BldgController : MonoBehaviour
 			return presentationStandBldg;
 		case "neighborhood":
 			return trafficSignBldg;
+		case "street":
+			return streetSignBldg;
 		case "member":
 			return laptopBldg;
 		case "milestone":
