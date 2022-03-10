@@ -40,7 +40,9 @@ public class BldgController : MonoBehaviour
 	public GameObject buildingWithStorefront;
 
 	public GameObject roadObject;
-	public GameObject lotObject;
+	public GameObject greenLotObject;
+	public GameObject blueLotObject;
+	public GameObject yellowLotObject;
 
 	public GameObject baseResidentObject;
 
@@ -538,7 +540,13 @@ public class BldgController : MonoBehaviour
 		case "team":
 			return buildingWithStorefront;
 		case "lot":
-			return lotObject;
+			return greenLotObject;
+		case "green-lot":
+			return greenLotObject;
+		case "blue-lot":
+			return blueLotObject;
+		case "yellow-lot":
+			return yellowLotObject;
 		default:
 			return chairBldg;
 		}
