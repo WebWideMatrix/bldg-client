@@ -31,6 +31,7 @@ public class BldgController : MonoBehaviour
 	public GameObject whiteboardBldg;
 	public GameObject presentationStandBldg;
 	public GameObject trafficSignBldg;
+	public GameObject streetSignBldg;
 	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
@@ -40,7 +41,9 @@ public class BldgController : MonoBehaviour
 	public GameObject buildingWithStorefront;
 
 	public GameObject roadObject;
-	public GameObject lotObject;
+	public GameObject greenLotObject;
+	public GameObject blueLotObject;
+	public GameObject yellowLotObject;
 
 	public GameObject baseResidentObject;
 
@@ -529,6 +532,8 @@ public class BldgController : MonoBehaviour
 			return presentationStandBldg;
 		case "neighborhood":
 			return trafficSignBldg;
+		case "street":
+			return streetSignBldg;
 		case "member":
 			return laptopBldg;
 		case "milestone":
@@ -538,7 +543,13 @@ public class BldgController : MonoBehaviour
 		case "team":
 			return buildingWithStorefront;
 		case "lot":
-			return lotObject;
+			return greenLotObject;
+		case "green-lot":
+			return greenLotObject;
+		case "blue-lot":
+			return blueLotObject;
+		case "yellow-lot":
+			return yellowLotObject;
 		default:
 			return chairBldg;
 		}

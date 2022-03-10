@@ -1845,6 +1845,7 @@ MonoBehaviour:
   whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
   presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
   trafficSignBldg: {fileID: 7470651789751783693, guid: b93b1df134467463085645bf52f7e3b5, type: 3}
+  streetSignBldg: {fileID: 6582989488119007097, guid: 5d8bd93a290cb4c1eb2e8e7ed95b815b, type: 3}
   chairBldg: {fileID: 1000011006089572, guid: 38c5e3d697adf88469bb91aa7f8b7b60, type: 3}
   laptopBldg: {fileID: 0}
   briefcaseBldg: {fileID: 0}
@@ -1852,7 +1853,9 @@ MonoBehaviour:
   filingCabinetBldg: {fileID: 0}
   buildingWithStorefront: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
   roadObject: {fileID: 1687224343315314799, guid: e80ca7004cc86469ea05fab909283aaf, type: 3}
-  lotObject: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+  greenLotObject: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+  blueLotObject: {fileID: 2492593957530484147, guid: 798b16d319a8e4269bb879e3f5c7ff5c, type: 3}
+  yellowLotObject: {fileID: 8427195997855233162, guid: f95c43762484a4e199d99301a94a28f7, type: 3}
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   contextMenu: {fileID: 1506027556}
   relocateCursorTexture: {fileID: 0}
@@ -3533,7 +3536,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9020618, y: 1}
+    m_SensorSize: {x: 2.4039087, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3722,7 +3725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b77998b793245e392f3e1b475495ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bldgServer: https://api.w2m.site
+  bldgServer: http://localhost:4000
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
   flyCamera: {fileID: 199427418}
