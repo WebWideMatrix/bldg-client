@@ -342,9 +342,13 @@ public class BldgController : MonoBehaviour
 
 
 	void reloadBuildings(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		var addrCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
-			GameObject.Destroy (bldg);
+			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
+			idsCache.Add(bObj.model.id, bldg);
+			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
 
 		// We can add default request headers for all requests
@@ -359,6 +363,20 @@ public class BldgController : MonoBehaviour
 					// Debug.Log("processing bldg " + count);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
+
+					bool newBldg = !idsCache.ContainsKey(b.id);
+					bool movedBldg = false;
+					if (!newBldg) {
+						movedBldg = addrCache[b.id] != b.address;
+					}
+					if (!(newBldg || movedBldg)) {
+						// don't draw existing or unmoved bldgs
+						// TODO this is just a temporary measure - bldgs could change & need redraw
+						continue;
+					}
+					if (movedBldg) {
+						GameObject.Destroy (idsCache[b.id]);
+					}
 
 					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
