@@ -6,6 +6,7 @@ namespace Models
 	[Serializable]
 	public class Bldg
 	{
+		public int id;
 		public int x;
 
 		public int y;

@@ -1862,6 +1862,7 @@ MonoBehaviour:
   targetURL: 
   clickedObject: {fileID: 0}
   clickedModel:
+    id: 0
     x: 0
     y: 0
     web_url: 
@@ -3725,7 +3726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b77998b793245e392f3e1b475495ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bldgServer: http://localhost:4000
+  bldgServer: https://api.w2m.site
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
   flyCamera: {fileID: 199427418}

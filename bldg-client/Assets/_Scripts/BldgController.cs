@@ -342,9 +342,13 @@ public class BldgController : MonoBehaviour
 
 
 	void reloadBuildings(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		var addrCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
-			GameObject.Destroy (bldg);
+			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
+			idsCache.Add(bObj.model.id, bldg);
+			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
 
 		// We can add default request headers for all requests
@@ -359,6 +363,20 @@ public class BldgController : MonoBehaviour
 					// Debug.Log("processing bldg " + count);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
+
+					bool newBldg = !idsCache.ContainsKey(b.id);
+					bool movedBldg = false;
+					if (!newBldg) {
+						movedBldg = addrCache[b.id] != b.address;
+					}
+					if (!(newBldg || movedBldg)) {
+						// don't draw existing or unmoved bldgs
+						// TODO this is just a temporary measure - bldgs could change & need redraw
+						continue;
+					}
+					if (movedBldg) {
+						GameObject.Destroy (idsCache[b.id]);
+					}
 
 					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
@@ -456,9 +474,13 @@ public class BldgController : MonoBehaviour
 	}
 
 	void reloadRoads(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
 		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
 		foreach (GameObject road in currentFlrRoads) {
-			GameObject.Destroy (road);
+			RoadObject rObj = road.GetComponentsInChildren<RoadObject>()[0];
+			if (!idsCache.ContainsKey(rObj.model.id)) {
+				idsCache.Add(rObj.model.id, road);
+			}
 		}
 
 		// We can add default request headers for all requests
@@ -471,14 +493,22 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Road r in res) {
 					count += 1;
-					renderRoad(r.from_x, r.from_y, r.to_x, r.to_y);
+
+					bool newRoad = !idsCache.ContainsKey(r.id);
+					if (!newRoad) {
+						// don't draw existing roads
+						// TODO this is just a temporary measure - roads could change & need redraw
+						continue;
+					}
+
+					renderRoad(r, r.from_x, r.from_y, r.to_x, r.to_y);
 				}
 				Debug.Log("Rendered " + count + " roads");
 			});
 	}
 
 
-	void renderRoad(int from_x, int from_y, int to_x, int to_y)
+	void renderRoad(Road r, int from_x, int from_y, int to_x, int to_y)
 	{	
 		int d_x = 0;
 		if (to_x != from_x) {
@@ -491,7 +521,7 @@ public class BldgController : MonoBehaviour
 		
 		// if straight line, draw 1 segment
 		if (d_x == 0 || d_y == 0) {
-			renderRoadSegment(from_x, from_y, d_x, d_y);
+			renderRoadSegment(r, from_x, from_y, d_x, d_y);
 		}
 		// else break to 2 segments
 		else {
@@ -507,18 +537,20 @@ public class BldgController : MonoBehaviour
 				mid_y = mid_y + d_y;
 				d_y = -1 * d_y;
 			}
-			renderRoadSegment(from_x, from_y, d_x, 0);
-			renderRoadSegment(mid_x, mid_y, 0, d_y);
+			renderRoadSegment(r, from_x, from_y, d_x, 0);
+			renderRoadSegment(r, mid_x, mid_y, 0, d_y);
 		}
 	}
 
-	void renderRoadSegment(int from_x, int from_y, int d_x, int d_y) 
+	void renderRoadSegment(Road r, int from_x, int from_y, int d_x, int d_y) 
 	{
 		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
 		float default_road_scale = 10.01F;
 		baseline.x += from_x;
 		baseline.z += from_y;
 		GameObject roadClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
+		RoadObject roadObj = roadClone.AddComponent<RoadObject>();
+		roadObj.initialize(r);
 		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
 		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
 		roadClone.tag = "Road";
