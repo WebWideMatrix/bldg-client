@@ -25,11 +25,15 @@ public class ChatUIController : MonoBehaviour {
 
     private UnityAction onLogin;
 
+    private UnityAction<string> onSelect;
+    private UnityAction<string> onDeselect;
     
 
     void OnEnable()
     {
         ChatInputField.onSubmit.AddListener(HandleNewMessage);
+        ChatInputField.onSelect.AddListener(onSelect);
+        ChatInputField.onDeselect.AddListener(onDeselect);
         EventManager.StartListening("LoginSuccessful", onLogin);
     }
 
@@ -45,6 +49,8 @@ public class ChatUIController : MonoBehaviour {
     {
         
         onLogin = new UnityAction(OnLogin);
+        onSelect = new UnityAction<string>(OnInputFieldSelect);
+        onDeselect = new UnityAction<string>(OnInputFieldDeselect);
     }
 
     private void OnLogin()
@@ -55,6 +61,13 @@ public class ChatUIController : MonoBehaviour {
     }
 
 
+    void OnInputFieldSelect(string s) {
+        rsdtController.enabled = false;
+    }
+
+    void OnInputFieldDeselect(string s) {
+        rsdtController.enabled = true;
+    }
 
     public void SetResidentController(ResidentController controller) {
         rsdtController = controller;
@@ -99,6 +112,7 @@ public class ChatUIController : MonoBehaviour {
         ChatDisplayOutput.text = string.Empty;
         chatHistory = new List<SayAction>();
     }
+
 
     void HandleNewMessage(string text) {
         AddToChatOutput(text);
