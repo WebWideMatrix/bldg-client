@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370486207527085815, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 370486207527085815, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.40784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 370486207527085815, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 370486207527085815, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294469632
+      objectReference: {fileID: 0}
     - target: {fileID: 3999425085977993505, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
