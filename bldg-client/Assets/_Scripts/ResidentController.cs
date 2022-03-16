@@ -94,14 +94,14 @@ public class ResidentController : MonoBehaviour
                 // clicking h while on the land: fly high
                 inFlyingMode = true;
                 Debug.Log("High fly mode");
-                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3, transform.position.z);
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
                 //transform.Rotate(90, 0, 0);
                 EventManager.TriggerEvent("SwitchToFlying");
             }
             else if (Input.GetKey("h") && !flyingHigh) {
                 // clicking h while flying low: fly higher
                 flyingHigh = true;
-                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3, transform.position.z);
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
             }
             
             if (Input.GetKey("l") && inFlyingMode) {
