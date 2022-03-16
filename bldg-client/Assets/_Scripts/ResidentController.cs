@@ -17,10 +17,15 @@ public class ResidentController : MonoBehaviour
     private TMP_Text alias;
     private bool initialized = false;
 
+    private bool inFlyingMode = false;
+    private bool flyingHigh = false; 
+
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 100f;
     [SerializeField] float ACTION_SEND_INTERVAL = 200;  // Milliseconds
+
+    [SerializeField] int FLY_HEIGHT = 80;
 
     float prevX = 0;
     float prevZ = 0;
@@ -57,6 +62,8 @@ public class ResidentController : MonoBehaviour
     void Start()
     {
         alias = this.gameObject.GetComponentInChildren<TMP_Text>();
+        inFlyingMode = false;
+        flyingHigh = false;
     }
 
     // Update is called once per frame
@@ -67,7 +74,46 @@ public class ResidentController : MonoBehaviour
         }
 
         if (isCurrentUser) {
+
+            if (Input.GetKey("f") && !inFlyingMode) {
+                // clicking f while on the land: start flying
+                inFlyingMode = true;
+                flyingHigh = false;
+                Debug.Log("Fly mode");
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
+            }
+            else if (Input.GetKey("f") && flyingHigh) {
+                // clicking f while flying high: fly lower
+                flyingHigh = false;
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
+            }
+
+            if (Input.GetKey("h") && !inFlyingMode) {
+                // clicking h while on the land: fly high
+                inFlyingMode = true;
+                Debug.Log("High fly mode");
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
+                //transform.Rotate(90, 0, 0);
+                EventManager.TriggerEvent("SwitchToFlying");
+            }
+            else if (Input.GetKey("h") && !flyingHigh) {
+                // clicking h while flying low: fly higher
+                flyingHigh = true;
+                transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
+            }
             
+            if (Input.GetKey("l") && inFlyingMode) {
+                // clicking l while flying: land on the ground
+                inFlyingMode = false;
+                flyingHigh = false;
+                Debug.Log("Walking mode");
+                transform.position = new Vector3(transform.position.x, 0.5F, transform.position.z);
+                //transform.Rotate(-90, 0, 0);
+                EventManager.TriggerEvent("SwitchToWalking");
+            }
+
             // control movement
             float xValue =  Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
             float zValue =  Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
