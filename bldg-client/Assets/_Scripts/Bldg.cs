@@ -6,6 +6,7 @@ namespace Models
 	[Serializable]
 	public class Bldg
 	{
+		public int id;
 		public int x;
 
 		public int y;
@@ -65,6 +66,19 @@ namespace Models
 		public string flr;
 	}
 
+	[Serializable]
+	public struct Road 
+	{
+		public int id;
+		public string flr;
+		public string from_address;
+		public int from_x;
+		public int from_y;
+		
+		public string to_address;
+		public int to_x;
+		public int to_y;
+	}
 
 	[Serializable]
 	public struct LoginRequest
@@ -77,6 +91,14 @@ namespace Models
 	{
 		public Resident data;	// with only the email attribute populated
 	}
+
+	[Serializable]
+	public struct VerificationRequest
+	{
+		public string email;
+		public string session_id;
+	}
+
 	
 	[Serializable]
 	public struct ActionResponse

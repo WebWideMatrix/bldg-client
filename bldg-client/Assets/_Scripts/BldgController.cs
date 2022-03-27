@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Utils;
 using ImageUtils;
@@ -17,6 +18,7 @@ public class BldgController : MonoBehaviour
 	public string bldgServer = "https://api.w2m.site";
 	public string bldgsBasePath = "/v1/bldgs";
 	public string residentsBasePath = "/v1/residents";
+	public string roadsBasePath = "/v1/roads";
 
 	public string DEFAULT_BLDG = "fromteal.app";
 
@@ -29,6 +31,7 @@ public class BldgController : MonoBehaviour
 	public GameObject whiteboardBldg;
 	public GameObject presentationStandBldg;
 	public GameObject trafficSignBldg;
+	public GameObject streetSignBldg;
 	
 	public GameObject chairBldg;
 	public GameObject laptopBldg;
@@ -36,6 +39,11 @@ public class BldgController : MonoBehaviour
 	public GameObject tabletBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
+
+	public GameObject roadObject;
+	public GameObject greenLotObject;
+	public GameObject blueLotObject;
+	public GameObject yellowLotObject;
 
 	public GameObject baseResidentObject;
 
@@ -329,13 +337,18 @@ public class BldgController : MonoBehaviour
 
 		reloadBuildings(address);
 		reloadResidents(address);
+		reloadRoads(address);
 	}
 
 
 	void reloadBuildings(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		var addrCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
-			GameObject.Destroy (bldg);
+			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
+			idsCache.Add(bObj.model.id, bldg);
+			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
 
 		// We can add default request headers for all requests
@@ -351,6 +364,20 @@ public class BldgController : MonoBehaviour
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
+					bool newBldg = !idsCache.ContainsKey(b.id);
+					bool movedBldg = false;
+					if (!newBldg) {
+						movedBldg = addrCache[b.id] != b.address;
+					}
+					if (!(newBldg || movedBldg)) {
+						// don't draw existing or unmoved bldgs
+						// TODO this is just a temporary measure - bldgs could change & need redraw
+						continue;
+					}
+					if (movedBldg) {
+						GameObject.Destroy (idsCache[b.id]);
+					}
+
 					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
@@ -364,12 +391,17 @@ public class BldgController : MonoBehaviour
 					foreach (TMP_Text label in labels) {
 						if (label.name == "summary")
 							label.text = b.summary;
+						else if (label.name == "summary_top") {
+							label.text = b.summary;
+						}
 						else if (label.name == "entity_type")
 							label.text = b.entity_type;
 						else if (label.name == "name")
 							label.text = b.name;
 						else if (label.name == "name2")
-							label.text = b.name;					
+							label.text = b.name;		
+						else if (label.name == "name_top")
+							label.text = b.name;
 						else if (label.name == "state")
 							label.text = b.state;
 					}
@@ -441,6 +473,88 @@ public class BldgController : MonoBehaviour
 			});
 	}
 
+	void reloadRoads(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
+		foreach (GameObject road in currentFlrRoads) {
+			RoadObject rObj = road.GetComponentsInChildren<RoadObject>()[0];
+			if (!idsCache.ContainsKey(rObj.model.id)) {
+				idsCache.Add(rObj.model.id, road);
+			}
+		}
+
+		// We can add default request headers for all requests
+		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+        string url = bldgServer + roadsBasePath + "/look/" + address;
+		Debug.Log("Loading roads from: " + url);
+		RestClient.GetArray<Road>(url).Then(res =>
+			{
+				Debug.Log("Got response for look roads");
+				int count = 0;
+				foreach (Road r in res) {
+					count += 1;
+
+					bool newRoad = !idsCache.ContainsKey(r.id);
+					if (!newRoad) {
+						// don't draw existing roads
+						// TODO this is just a temporary measure - roads could change & need redraw
+						continue;
+					}
+
+					renderRoad(r, r.from_x, r.from_y, r.to_x, r.to_y);
+				}
+				Debug.Log("Rendered " + count + " roads");
+			});
+	}
+
+
+	void renderRoad(Road r, int from_x, int from_y, int to_x, int to_y)
+	{	
+		int d_x = 0;
+		if (to_x != from_x) {
+			d_x = to_x - from_x;
+		}
+		int d_y = 0;
+		if (to_y != from_y) {
+			d_y = to_y - from_y;
+		}
+		
+		// if straight line, draw 1 segment
+		if (d_x == 0 || d_y == 0) {
+			renderRoadSegment(r, from_x, from_y, d_x, d_y);
+		}
+		// else break to 2 segments
+		else {
+			int mid_x = from_x + d_x;
+			int mid_y = from_y;
+
+			if (from_x > to_x) {
+				from_x = mid_x;
+				d_x = -1 * d_x;
+			}
+
+			if (from_y > to_y) {
+				mid_y = mid_y + d_y;
+				d_y = -1 * d_y;
+			}
+			renderRoadSegment(r, from_x, from_y, d_x, 0);
+			renderRoadSegment(r, mid_x, mid_y, 0, d_y);
+		}
+	}
+
+	void renderRoadSegment(Road r, int from_x, int from_y, int d_x, int d_y) 
+	{
+		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
+		float default_road_scale = 10.01F;
+		baseline.x += from_x;
+		baseline.z += from_y;
+		GameObject roadClone = (GameObject) Instantiate(roadObject, baseline, Quaternion.identity);
+		RoadObject roadObj = roadClone.AddComponent<RoadObject>();
+		roadObj.initialize(r);
+		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
+		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
+		roadClone.tag = "Road";
+	}
 
 	GameObject getPrefabByEntityClass(string entity_type) {
 		switch (entity_type) {
@@ -450,6 +564,8 @@ public class BldgController : MonoBehaviour
 			return presentationStandBldg;
 		case "neighborhood":
 			return trafficSignBldg;
+		case "street":
+			return streetSignBldg;
 		case "member":
 			return laptopBldg;
 		case "milestone":
@@ -458,6 +574,14 @@ public class BldgController : MonoBehaviour
 			return tabletBldg;
 		case "team":
 			return buildingWithStorefront;
+		case "lot":
+			return greenLotObject;
+		case "green-lot":
+			return greenLotObject;
+		case "blue-lot":
+			return blueLotObject;
+		case "yellow-lot":
+			return yellowLotObject;
 		default:
 			return chairBldg;
 		}
