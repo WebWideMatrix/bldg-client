@@ -91,6 +91,14 @@ namespace Models
 	{
 		public Resident data;	// with only the email attribute populated
 	}
+
+	[Serializable]
+	public struct VerificationRequest
+	{
+		public string email;
+		public string session_id;
+	}
+
 	
 	[Serializable]
 	public struct ActionResponse

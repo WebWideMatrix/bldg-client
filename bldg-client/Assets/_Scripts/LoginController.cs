@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class LoginController : MonoBehaviour
 
     public BldgController bldgController;
 
+
+    // TODO is there a better place for the cameras?
     public CinemachineVirtualCamera flyCamera;
     public CinemachineVirtualCamera walkCamera;
     
@@ -36,6 +39,11 @@ public class LoginController : MonoBehaviour
     private UnityAction onFlying;
     private UnityAction onWalking;
 
+    private bool isPollingForVerificationStatus = false;
+    private int pollInterval = 2000;
+    private DateTime lastPollTime = DateTime.Now;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +51,19 @@ public class LoginController : MonoBehaviour
         // TODO disable movement
 
         signInButton.onClick.AddListener(SignInHandler);
+
+    }
+
+    void Update()
+    {
+        if (isPollingForVerificationStatus) {
+            DateTime currentTime = DateTime.Now;
+            double elapsedTime = currentTime.Subtract(lastPollTime).TotalMilliseconds;
+            if (elapsedTime > pollInterval) {
+                lastPollTime = DateTime.Now;
+                pollForVerificationStatus();
+            }
+        }
 
     }
 
@@ -107,6 +128,10 @@ public class LoginController : MonoBehaviour
             email = email
         }).Then(loginResponse => {
 
+
+            isPollingForVerificationStatus = true;
+            lastPollTime = DateTime.Now;
+
             // TODO move this code to the verification status handler
 
             // Resident rsdt = loginResponse.data;
@@ -154,5 +179,22 @@ public class LoginController : MonoBehaviour
             }
         }
 
+    }
+
+
+    void pollForVerificationStatus() {
+        if (isPollingForVerificationStatus) {
+            Debug.Log("Polling for verification status!");
+
+            string url = bldgServer + basePath + "/verification_status?email=email@example.com&session_id=123xyz";
+            Debug.Log("url = " + url);
+            // invoke verification status API
+            RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
+            RestClient.Get<LoginResponse>(url).Then(loginResponse => {
+                Debug.Log("Got verification status response: " + loginResponse);
+                // TODO once verified, change the isPollingForVerificationStatus to false
+            });
+
+        }
     }
 }
