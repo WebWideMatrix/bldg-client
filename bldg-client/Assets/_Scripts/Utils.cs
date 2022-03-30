@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using UnityEngine.Networking;
+using Proyecto26;
 // using NUnit.Framework;
 
 
@@ -123,6 +127,51 @@ namespace Utils {
 			return string.Join (DELIM, parts);
 		}
 
+
+
+	}
+
+
+	public class DisabledCertificateHandler : CertificateHandler {
+		protected override bool ValidateCertificate(byte[] certificateData)
+		{
+			return true;
+		}
+	}
+
+
+	public static class RestUtils {
+
+		public static RequestHelper createRequest(string method, string url) {
+			return new RequestHelper { 
+				Uri = url,
+				Method = method,
+				Timeout = 10,
+				Headers = new Dictionary<string, string> {
+					{ "Authorization", "Bearer JWT_token..." }
+				},
+				CertificateHandler = new DisabledCertificateHandler(), //Create custom certificates
+				ContentType = "application/json", //JSON is used by default
+				Retries = 3, //Number of retries
+				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
+			};
+		}
+
+		public static RequestHelper createRequest(string method, string url, object body) {
+			return new RequestHelper { 
+				Uri = url,
+				Method = method,
+				Timeout = 10,
+				Headers = new Dictionary<string, string> {
+					{ "Authorization", "Bearer JWT_token..." }
+				},
+				Body = body, //Serialize object using JsonUtility by default
+				CertificateHandler = new DisabledCertificateHandler(), //Create custom certificates
+				ContentType = "application/json", //JSON is used by default
+				Retries = 3, //Number of retries
+				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
+			};
+		}
 
 
 	}

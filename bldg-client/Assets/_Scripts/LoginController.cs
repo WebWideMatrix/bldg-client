@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using TMPro;
 using Proyecto26;
 using Models;
+using Utils;
 using Cinemachine;
 
 
@@ -106,6 +107,7 @@ public class LoginController : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
+
     void SignInHandler() {
         string email = emailInputField.text;
         Debug.Log("Signing in as " + email);
@@ -123,10 +125,8 @@ public class LoginController : MonoBehaviour
 		string url = bldgServer + basePath + "/login";
 		Debug.Log("url = " + url);
 		// invoke login API
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-		RestClient.Post<LoginResponse>(url, new LoginRequest {
-            email = email
-        }).Then(loginResponse => {
+        RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
+		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
 
 
             isPollingForVerificationStatus = true;
@@ -189,8 +189,8 @@ public class LoginController : MonoBehaviour
             string url = bldgServer + basePath + "/verification_status?email=email@example.com&session_id=123xyz";
             Debug.Log("url = " + url);
             // invoke verification status API
-            RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-            RestClient.Get<LoginResponse>(url).Then(loginResponse => {
+            RequestHelper req = RestUtils.createRequest("GET", url);
+            RestClient.Get<LoginResponse>(req).Then(loginResponse => {
                 Debug.Log("Got verification status response: " + loginResponse);
                 // TODO once verified, change the isPollingForVerificationStatus to false
             });
