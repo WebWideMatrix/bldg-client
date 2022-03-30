@@ -182,9 +182,8 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
-        // TODO proper authorization
-        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
+        RequestHelper req = RestUtils.createRequest("POST", url, action);
+        RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
             Debug.Log(actionResponse.data.location);
         });
@@ -207,9 +206,8 @@ public class ResidentController : MonoBehaviour
             string url = bldgServer + baseResidentsPath + "/act";
             Debug.Log("url = " + url);
             // invoke act API
-            // TODO proper authorization
-            RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-            RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
+            RequestHelper req = RestUtils.createRequest("POST", url, action);
+            RestClient.Post<ActionResponse>(req).Then(actionResponse => {
                 Debug.Log("Action sent, received new location");
                 Debug.Log(actionResponse.data.location);
             });
@@ -222,9 +220,8 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
-        // TODO proper authorization
-        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        RestClient.Post<ActionResponse>(url, action).Then(actionResponse => {
+        RequestHelper req = RestUtils.createRequest("POST", url, action);
+        RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent");
         });
     }

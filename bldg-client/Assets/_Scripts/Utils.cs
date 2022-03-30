@@ -158,6 +158,7 @@ namespace Utils {
 		}
 
 		public static RequestHelper createRequest(string method, string url, object body) {
+			// TODO please add proper auth headers for all requests
 			return new RequestHelper { 
 				Uri = url,
 				Method = method,

@@ -351,11 +351,10 @@ public class BldgController : MonoBehaviour
 			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
 
-		// We can add default request headers for all requests
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + bldgsBasePath + "/look/" + address;
 		// Debug.Log("Loading buildings from: " + url);
-		RestClient.GetArray<Bldg>(url).Then(res =>
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.GetArray<Bldg>(req).Then(res =>
 			{
 				int count = 0;
 				foreach (Bldg b in res) {
@@ -427,12 +426,11 @@ public class BldgController : MonoBehaviour
 			GameObject.Destroy (rsdnt);
 		}
 
-		// We can add default request headers for all requests
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
 		bool clearedChatHistory = false;
-		RestClient.GetArray<Resident>(url).Then(result =>
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.GetArray<Resident>(req).Then(result =>
 			{
 				int count = 0;
 				foreach (Resident r in result) {
@@ -483,11 +481,10 @@ public class BldgController : MonoBehaviour
 			}
 		}
 
-		// We can add default request headers for all requests
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
         string url = bldgServer + roadsBasePath + "/look/" + address;
 		Debug.Log("Loading roads from: " + url);
-		RestClient.GetArray<Road>(url).Then(res =>
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.GetArray<Road>(req).Then(res =>
 			{
 				Debug.Log("Got response for look roads");
 				int count = 0;
