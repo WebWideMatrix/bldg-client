@@ -44,6 +44,8 @@ public class LoginController : MonoBehaviour
     private int pollInterval = 2000;
     private DateTime lastPollTime = DateTime.Now;
 
+    private string currentResidentEmail = null;
+    private string currentResidentSessionId = null;
 
 
     // Start is called before the first frame update
@@ -128,39 +130,10 @@ public class LoginController : MonoBehaviour
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
 		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
 
-
+            currentResidentEmail = loginResponse.data.email;
+            currentResidentSessionId = loginResponse.data.session_id;
             isPollingForVerificationStatus = true;
             lastPollTime = DateTime.Now;
-
-            // TODO move this code to the verification status handler
-
-            // Resident rsdt = loginResponse.data;
-			// Debug.Log("Login done, received " + rsdt.alias);
-
-            // Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-            // baseline.x += rsdt.x;
-            // baseline.z += rsdt.y;
-            // Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-            // Quaternion qrt = Quaternion.identity;
-            // qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-            // GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-            // camera.Follow = rsdtClone.transform;
-            // camera.LookAt = rsdtClone.transform;
-            // ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-            // rsdtObject.bldgServer = bldgServer;
-			// rsdtObject.initialize(rsdt, true);
-
-            // // once login result received, initialize player with resident details
-            // bldgController.bldgServer = bldgServer;
-            // bldgController.SetCurrentResident(rsdt);
-            // bldgController.SetCurrentResidentController(rsdtObject);
-            // bldgController.SetAddress("g");
-
-            // // hide the login dialog
-            // this.gameObject.SetActive(false);
-
-            // EventManager.TriggerEvent("LoginSuccessful");
-
             	
 		}).Catch(err => {
             Debug.Log(err.Message);
@@ -186,13 +159,48 @@ public class LoginController : MonoBehaviour
         if (isPollingForVerificationStatus) {
             Debug.Log("Polling for verification status!");
 
-            string url = bldgServer + basePath + "/verification_status?email=email@example.com&session_id=123xyz";
+            string url = bldgServer + basePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
             Debug.Log("url = " + url);
             // invoke verification status API
             RequestHelper req = RestUtils.createRequest("GET", url);
             RestClient.Get<LoginResponse>(req).Then(loginResponse => {
-                Debug.Log("Got verification status response: " + loginResponse);
-                // TODO once verified, change the isPollingForVerificationStatus to false
+                Debug.Log("Got verification status response: ");
+                Debug.Log(loginResponse);
+                
+                // If status is 200, meaning that the verification is successful:
+                // - change the isPollingForVerificationStatus to false
+                // - continue the login flow
+
+                Resident rsdt = loginResponse.data;
+                Debug.Log("Login done, received " + rsdt.alias);
+
+                Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+                baseline.x += rsdt.x;
+                baseline.z += rsdt.y;
+                Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
+                Quaternion qrt = Quaternion.identity;
+                qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
+                GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+                // TODO fix this issue - stopped working in Unity22
+                // GetComponent<Camera>().Follow = rsdtClone.transform;
+                // GetComponent<Camera>().LookAt = rsdtClone.transform;
+                ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+                rsdtObject.bldgServer = bldgServer;
+                rsdtObject.initialize(rsdt, true);
+
+                // once login result received, initialize player with resident details
+                bldgController.bldgServer = bldgServer;
+                bldgController.SetCurrentResident(rsdt);
+                bldgController.SetCurrentResidentController(rsdtObject);
+                bldgController.SetAddress("g");
+
+                // hide the login dialog
+                this.gameObject.SetActive(false);
+
+                EventManager.TriggerEvent("LoginSuccessful");
+
+            }).Catch(err => {
+                Debug.Log(err.Message);
             });
 
         }

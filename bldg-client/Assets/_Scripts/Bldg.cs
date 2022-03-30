@@ -89,7 +89,7 @@ namespace Models
 	[Serializable]
 	public struct LoginResponse
 	{
-		public Resident data;	// with only the email attribute populated
+		public Resident data;	// containing just the email & session_id attributes
 	}
 
 	[Serializable]
