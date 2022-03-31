@@ -181,9 +181,10 @@ public class LoginController : MonoBehaviour
                 Quaternion qrt = Quaternion.identity;
                 qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
                 GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-                // TODO fix this issue - stopped working in Unity22
-                // GetComponent<Camera>().Follow = rsdtClone.transform;
-                // GetComponent<Camera>().LookAt = rsdtClone.transform;
+                walkCamera.Follow = rsdtClone.transform;
+                walkCamera.LookAt = rsdtClone.transform;
+                flyCamera.Follow = rsdtClone.transform;
+                flyCamera.LookAt = rsdtClone.transform;
                 ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
                 rsdtObject.bldgServer = bldgServer;
                 rsdtObject.initialize(rsdt, true);

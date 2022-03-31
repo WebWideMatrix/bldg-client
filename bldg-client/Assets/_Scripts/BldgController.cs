@@ -197,8 +197,8 @@ public class BldgController : MonoBehaviour
 		string url = bldgServer + bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
 		Debug.Log("url = " + url);
 		// invoke relocate API
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-		RestClient.Post(url, null).Then(res => {
+		RequestHelper req = RestUtils.createRequest("POST", url);
+		RestClient.Post(req).Then(res => {
 			Debug.Log("Relocation done");
 			isRelocating = false;
 			relocatedObject = null;
@@ -263,14 +263,13 @@ public class BldgController : MonoBehaviour
 	public void EnterBuilding(string web_url) {
 		Debug.Log("EnterBuilding -> " + web_url);
 		// lookup the address for that web_url
-		// We can add default request headers for all requests
-		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
- 
+		// We can add default request headers for all requests 
         Debug.Log("Resolvin bldg for web_url: " + web_url);
 		string address = null;
 		string url = bldgServer + bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
 		Debug.Log(url);
-		RestClient.Get(url).Then(res =>
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.Get(req).Then(res =>
 			{
 				Debug.Log(res);
 				address = res.Text;
