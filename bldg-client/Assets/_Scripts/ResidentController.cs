@@ -143,6 +143,7 @@ public class ResidentController : MonoBehaviour
                 //Debug.Log("newDirection = " + newDirection);
 
                 if (newDirection != previousDirection) {
+                    previousDirection = newDirection;
                     //Debug.Log("Sending turn action for " + resident.alias + " ^^^^^^^^^^^^^^^^^^^^^^^ " + newDirection);
                     SendTurnAction(new TurnAction {
                         resident_email = resident.email,
