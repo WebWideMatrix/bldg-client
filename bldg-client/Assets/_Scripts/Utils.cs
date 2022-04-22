@@ -132,6 +132,9 @@ namespace Utils {
 	}
 
 
+	public class NormalCertificateHandler : CertificateHandler {
+	}
+
 	public class DisabledCertificateHandler : CertificateHandler {
 		protected override bool ValidateCertificate(byte[] certificateData)
 		{
@@ -142,6 +145,13 @@ namespace Utils {
 
 	public static class RestUtils {
 
+		public static CertificateHandler _getCertificateHandler(string url) {
+			if (url.IndexOf("localhost") >= 0 || url.IndexOf("127.0.0.1") >= 0) {
+				return new DisabledCertificateHandler();
+			}
+			return new NormalCertificateHandler();
+		}
+
 		public static RequestHelper createRequest(string method, string url) {
 			return new RequestHelper { 
 				Uri = url,
@@ -150,7 +160,7 @@ namespace Utils {
 				Headers = new Dictionary<string, string> {
 					{ "Authorization", "Bearer JWT_token..." }
 				},
-				CertificateHandler = new DisabledCertificateHandler(), //Create custom certificates
+				CertificateHandler = _getCertificateHandler(url),
 				ContentType = "application/json", //JSON is used by default
 				Retries = 3, //Number of retries
 				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
@@ -167,7 +177,7 @@ namespace Utils {
 					{ "Authorization", "Bearer JWT_token..." }
 				},
 				Body = body, //Serialize object using JsonUtility by default
-				CertificateHandler = new DisabledCertificateHandler(), //Create custom certificates
+				CertificateHandler = _getCertificateHandler(url),
 				ContentType = "application/json", //JSON is used by default
 				Retries = 3, //Number of retries
 				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
