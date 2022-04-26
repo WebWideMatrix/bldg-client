@@ -42,7 +42,9 @@ public class LoginController : MonoBehaviour
 
     private bool isPollingForVerificationStatus = false;
     private int pollInterval = 2000;
+    private int verificationExpirationTime = 6*60*1000; // 6 minutess
     private DateTime lastPollTime = DateTime.Now;
+    private DateTime loginStartTime = DateTime.Now;
 
     private string currentResidentEmail = null;
     private string currentResidentSessionId = null;
@@ -134,6 +136,7 @@ public class LoginController : MonoBehaviour
             currentResidentSessionId = loginResponse.data.session_id;
             isPollingForVerificationStatus = true;
             lastPollTime = DateTime.Now;
+            loginStartTime = DateTime.Now;
             	
 		}).Catch(err => {
             Debug.Log(err.Message);
@@ -164,13 +167,12 @@ public class LoginController : MonoBehaviour
             // invoke verification status API
             RequestHelper req = RestUtils.createRequest("GET", url);
             RestClient.Get<LoginResponse>(req).Then(loginResponse => {
-                Debug.Log("Got verification status response: ");
-                Debug.Log(loginResponse);
                 
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
 
+                isPollingForVerificationStatus = false;
                 Resident rsdt = loginResponse.data;
                 Debug.Log("Login done, received " + rsdt.alias);
 
@@ -201,7 +203,14 @@ public class LoginController : MonoBehaviour
                 EventManager.TriggerEvent("LoginSuccessful");
 
             }).Catch(err => {
-                Debug.Log(err.Message);
+                Debug.Log("Emeil verification not yet done - " + err.Message);
+                DateTime currentTime = DateTime.Now;
+                double elapsedTime = currentTime.Subtract(loginStartTime).TotalMilliseconds;
+                if (elapsedTime > verificationExpirationTime) {
+                    verifyDisplay.text = "";
+                    errorDisplay.text = "Login attempt expired. Please try again";
+                    isPollingForVerificationStatus = false;
+                }
             });
 
         }
