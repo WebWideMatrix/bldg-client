@@ -143,6 +143,7 @@ public class ResidentController : MonoBehaviour
                 //Debug.Log("newDirection = " + newDirection);
 
                 if (newDirection != previousDirection) {
+                    previousDirection = newDirection;
                     //Debug.Log("Sending turn action for " + resident.alias + " ^^^^^^^^^^^^^^^^^^^^^^^ " + newDirection);
                     SendTurnAction(new TurnAction {
                         resident_email = resident.email,
@@ -182,11 +183,10 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
-        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        // TODO change to ActionResponse
-        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+        RequestHelper req = RestUtils.createRequest("POST", url, action);
+        RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
-            Debug.Log(loginResponse.data.location);
+            Debug.Log(actionResponse.data.location);
         });
     }
 
@@ -207,11 +207,10 @@ public class ResidentController : MonoBehaviour
             string url = bldgServer + baseResidentsPath + "/act";
             Debug.Log("url = " + url);
             // invoke act API
-            RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-            // TODO change to ActionResponse
-            RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+            RequestHelper req = RestUtils.createRequest("POST", url, action);
+            RestClient.Post<ActionResponse>(req).Then(actionResponse => {
                 Debug.Log("Action sent, received new location");
-                Debug.Log(loginResponse.data.location);
+                Debug.Log(actionResponse.data.location);
             });
         }
     }
@@ -222,9 +221,8 @@ public class ResidentController : MonoBehaviour
         string url = bldgServer + baseResidentsPath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
-        RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
-        // TODO change to ActionResponse
-        RestClient.Post<LoginResponse>(url, action).Then(loginResponse => {
+        RequestHelper req = RestUtils.createRequest("POST", url, action);
+        RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent");
         });
     }

@@ -89,9 +89,23 @@ namespace Models
 	[Serializable]
 	public struct LoginResponse
 	{
+		public Resident data;	// containing just the email & session_id attributes
+	}
+
+	[Serializable]
+	public struct VerificationRequest
+	{
+		public string email;
+		public string session_id;
+	}
+
+	
+	[Serializable]
+	public struct ActionResponse
+	{
 		public Resident data;
 	}
-	
+
 	[Serializable]
 	public struct MoveAction
 	{

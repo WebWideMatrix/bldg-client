@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using UnityEngine.Networking;
+using Proyecto26;
 // using NUnit.Framework;
 
 
@@ -123,6 +127,62 @@ namespace Utils {
 			return string.Join (DELIM, parts);
 		}
 
+
+
+	}
+
+
+	public class NormalCertificateHandler : CertificateHandler {
+	}
+
+	public class DisabledCertificateHandler : CertificateHandler {
+		protected override bool ValidateCertificate(byte[] certificateData)
+		{
+			return true;
+		}
+	}
+
+
+	public static class RestUtils {
+
+		public static CertificateHandler _getCertificateHandler(string url) {
+			if (url.IndexOf("localhost") >= 0 || url.IndexOf("127.0.0.1") >= 0) {
+				return new DisabledCertificateHandler();
+			}
+			return new NormalCertificateHandler();
+		}
+
+		public static RequestHelper createRequest(string method, string url) {
+			return new RequestHelper { 
+				Uri = url,
+				Method = method,
+				Timeout = 10,
+				Headers = new Dictionary<string, string> {
+					{ "Authorization", "Bearer JWT_token..." }
+				},
+				CertificateHandler = _getCertificateHandler(url),
+				ContentType = "application/json", //JSON is used by default
+				Retries = 3, //Number of retries
+				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
+			};
+		}
+
+		public static RequestHelper createRequest(string method, string url, object body) {
+			// TODO please add proper auth headers for all requests
+			return new RequestHelper { 
+				Uri = url,
+				Method = method,
+				Timeout = 10,
+				Headers = new Dictionary<string, string> {
+					{ "Authorization", "Bearer JWT_token..." }
+				},
+				Body = body, //Serialize object using JsonUtility by default
+				CertificateHandler = _getCertificateHandler(url),
+				ContentType = "application/json", //JSON is used by default
+				Retries = 3, //Number of retries
+				RetrySecondsDelay = 2, //Seconds of delay to make a retry            
+			};
+		}
 
 
 	}
