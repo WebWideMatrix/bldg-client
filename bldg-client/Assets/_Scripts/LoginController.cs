@@ -122,8 +122,6 @@ public class LoginController : MonoBehaviour
         
         // TODO show spinner
 
-        verifyDisplay.text = "Please click on the link in the email that was just sent to you";
-
         // call the login API
     	Debug.Log("Invoking resident Login API for resident " + email);
 		string url = bldgServer + basePath + "/login";
@@ -131,6 +129,7 @@ public class LoginController : MonoBehaviour
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
 		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
+            verifyDisplay.text = "Please click on the link in the email that was just sent to you";
 
             currentResidentEmail = loginResponse.data.email;
             currentResidentSessionId = loginResponse.data.session_id;
