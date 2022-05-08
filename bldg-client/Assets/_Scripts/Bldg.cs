@@ -80,6 +80,7 @@ namespace Models
 		public string to_address;
 		public int to_x;
 		public int to_y;
+		public string[] owners;
 	}
 
 	[Serializable]
