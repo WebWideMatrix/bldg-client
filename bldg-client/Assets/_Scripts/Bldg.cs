@@ -33,6 +33,8 @@ namespace Models
 
 		public string picture_url;
 
+		public string[] owners;
+
 		public override string ToString(){
 			return UnityEngine.JsonUtility.ToJson (this, true);
 		}
