@@ -112,6 +112,38 @@ public class LoginController : MonoBehaviour
     }
 
 
+    void completeLogin(Resident rsdt) {
+        isPollingForVerificationStatus = false;
+        Debug.Log("Login done, received " + rsdt.alias);
+
+        Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+        baseline.x += rsdt.x;
+        baseline.z += rsdt.y;
+        Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
+        Quaternion qrt = Quaternion.identity;
+        qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
+        GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+        walkCamera.Follow = rsdtClone.transform;
+        walkCamera.LookAt = rsdtClone.transform;
+        flyCamera.Follow = rsdtClone.transform;
+        flyCamera.LookAt = rsdtClone.transform;
+        ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+        rsdtObject.bldgServer = bldgServer;
+        rsdtObject.initialize(rsdt, true);
+
+        // once login result received, initialize player with resident details
+        bldgController.bldgServer = bldgServer;
+        bldgController.SetCurrentResident(rsdt);
+        bldgController.SetCurrentResidentController(rsdtObject);
+        bldgController.SetAddress("g");
+
+        // hide the login dialog
+        this.gameObject.SetActive(false);
+
+        EventManager.TriggerEvent("LoginSuccessful");
+    }
+
+
     void SignInHandler() {
         string email = emailInputField.text;
         Debug.Log("Signing in as " + email);
@@ -129,14 +161,20 @@ public class LoginController : MonoBehaviour
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
 		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
-            verifyDisplay.text = "Please click on the link in the email that was just sent to you";
+            // TODO find a better way to determine whether the login was done
+            if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
+                // there was already a valid session, so just complete the login
+                completeLogin(loginResponse.data);
+            } else {
+                // no valid session found, notify the user that they need to verify their email
+                verifyDisplay.text = "Please click on the link in the email that was just sent to you";
 
-            currentResidentEmail = loginResponse.data.email;
-            currentResidentSessionId = loginResponse.data.session_id;
-            isPollingForVerificationStatus = true;
-            lastPollTime = DateTime.Now;
-            loginStartTime = DateTime.Now;
-            	
+                currentResidentEmail = loginResponse.data.email;
+                currentResidentSessionId = loginResponse.data.session_id;
+                isPollingForVerificationStatus = true;
+                lastPollTime = DateTime.Now;
+                loginStartTime = DateTime.Now;
+            }	
 		}).Catch(err => {
             Debug.Log(err.Message);
 
@@ -156,7 +194,6 @@ public class LoginController : MonoBehaviour
 
     }
 
-
     void pollForVerificationStatus() {
         if (isPollingForVerificationStatus) {
             Debug.Log("Polling for verification status!");
@@ -166,41 +203,10 @@ public class LoginController : MonoBehaviour
             // invoke verification status API
             RequestHelper req = RestUtils.createRequest("GET", url);
             RestClient.Get<LoginResponse>(req).Then(loginResponse => {
-                
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
-
-                isPollingForVerificationStatus = false;
-                Resident rsdt = loginResponse.data;
-                Debug.Log("Login done, received " + rsdt.alias);
-
-                Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-                baseline.x += rsdt.x;
-                baseline.z += rsdt.y;
-                Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-                Quaternion qrt = Quaternion.identity;
-                qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-                GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-                walkCamera.Follow = rsdtClone.transform;
-                walkCamera.LookAt = rsdtClone.transform;
-                flyCamera.Follow = rsdtClone.transform;
-                flyCamera.LookAt = rsdtClone.transform;
-                ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-                rsdtObject.bldgServer = bldgServer;
-                rsdtObject.initialize(rsdt, true);
-
-                // once login result received, initialize player with resident details
-                bldgController.bldgServer = bldgServer;
-                bldgController.SetCurrentResident(rsdt);
-                bldgController.SetCurrentResidentController(rsdtObject);
-                bldgController.SetAddress("g");
-
-                // hide the login dialog
-                this.gameObject.SetActive(false);
-
-                EventManager.TriggerEvent("LoginSuccessful");
-
+                completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);
                 DateTime currentTime = DateTime.Now;
