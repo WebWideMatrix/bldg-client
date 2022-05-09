@@ -29,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.062}
   m_LocalScale: {x: 0.14374943, y: 0.09039402, z: 0.0009988847}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3633249363041345783}
   m_RootOrder: 2
@@ -214,6 +215,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.062}
   m_LocalScale: {x: 0.14374943, y: 0.08342555, z: 0.0009988847}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3633249363041345783}
   m_RootOrder: 3
@@ -399,6 +401,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: -0.1497655, y: 0.08342555, z: 0.0009988847}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3633249363041345783}
   m_RootOrder: 1
@@ -564,6 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3633249363041345783}
+  - component: {fileID: 1892181808285924308}
   m_Layer: 0
   m_Name: purpose_object
   m_TagString: Untagged
@@ -581,19 +585,34 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.069336, y: 0, z: 15.818992}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3631538432701446939}
   - {fileID: 3633249362401872132}
   - {fileID: 1194364076}
   - {fileID: 4443142956372181262}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1892181808285924308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633249363041345782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.798523, y: 1.9644394, z: 0.7764454}
+  m_Center: {x: -0.0028743744, y: 1.0128386, z: 0.01311779}
 --- !u!1001 &3633249362655362221
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3633249363041345783}
     m_Modifications:
     - target: {fileID: 1000011173360544, guid: 0e247c73fbb96a64da5e72b156bd7337, type: 3}
@@ -645,6 +664,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e247c73fbb96a64da5e72b156bd7337, type: 3}
 --- !u!4 &3631538432701446939 stripped
 Transform:
