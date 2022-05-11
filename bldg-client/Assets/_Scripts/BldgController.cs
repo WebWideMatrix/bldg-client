@@ -255,10 +255,34 @@ public class BldgController : MonoBehaviour
 	// }
 
 
+	private void clearEverythingBut(string address) {
+		// clear bldgs
+		GameObject[] currentFlrBldgs = GameObject.FindGameObjectsWithTag("Building");
+		foreach (GameObject bldg in currentFlrBldgs) {
+			BldgObject bldgObject = bldg.GetComponent<BldgObject>();
+			if (bldgObject.model.address != address) {
+				GameObject.Destroy (bldg);
+			}
+		}
+		// clear roads
+		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
+		foreach (GameObject road in currentFlrRoads) {
+			GameObject.Destroy (road);
+		}
+	}
+
 	public void SetAddress(string address) {
 		Debug.Log("SetAddress -> " + address);
 		currentAddress = address;
 		AddressChanged();
+	}
+
+
+	public void EnterBuildingByAddress(string address) {
+		//clearEverythingBut(address);
+		//address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
+		//SetAddress(address);
+		SceneManager.LoadScene("bldg_flr");
 	}
 
 	public void EnterBuilding(string web_url) {
@@ -275,15 +299,12 @@ public class BldgController : MonoBehaviour
 				Debug.Log(res);
 				address = res.Text;
 				Debug.Log("Resolve address was successful: " + address);
-				address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
-				SetAddress(address);
-
+				EnterBuildingByAddress(address);
 			}).Catch(err => {
 				Debug.Log(err.Message);
 				Debug.Log("Failed to resolve address for: " + web_url);
 			});
 	}
-
 
 	public void AddressChanged() {
 		Debug.Log ("Address changed to: " + currentAddress);
