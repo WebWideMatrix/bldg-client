@@ -23,7 +23,7 @@ public class BldgDoorKnob : MonoBehaviour
     }
 
     void OnMouseDown() {
-        if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ.", "Ok", "Cancel")) {
+        if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Tardis effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
             EventManager.TriggerEvent("EnteringBldg");
             bldgController.EnterBuildingByAddress(bldgAddress);
         }
