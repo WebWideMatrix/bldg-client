@@ -150,20 +150,20 @@ public class ChatUIController : MonoBehaviour {
     void SendChatMessage(string text) {
         Debug.Log("Got new text " + text);
         // TODO extract recipient
-        if (rsdtController) {
-            Debug.Log("Found a rsdt controller");
-            rsdtController.SendSayAction(new SayAction {
-                resident_email = rsdtController.resident.email,
-                action_type = "SAY",
-                say_speaker = rsdtController.resident.alias,
-                say_text = text,
-                say_time = DateTime.Now.Ticks,
-                say_flr = rsdtController.resident.flr,
-                say_location = rsdtController.resident.location,
-                say_mimetype = "text/plain",
-                say_recipient = null
-            });
-        }
+        CurrentResidentController crc = CurrentResidentController.instance;
+        Debug.Log("Found a rsdt controller");
+        crc.SendSayAction(new SayAction {
+            resident_email = crc.resident.email,
+            action_type = "SAY",
+            say_speaker = crc.resident.alias,
+            say_text = text,
+            say_time = DateTime.Now.Ticks,
+            say_flr = crc.resident.flr,
+            say_location = crc.resident.location,
+            say_mimetype = "text/plain",
+            say_recipient = null
+        });
+        
     }
 
 }

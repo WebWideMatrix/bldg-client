@@ -119,6 +119,23 @@ namespace Models
 		public int move_y;
 	}
 
+
+	[Serializable]
+	public struct EnterBldgAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string bldg_address;
+	}
+
+	[Serializable]
+	public struct ExitBldgAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string bldg_address;
+	}
+
 	[Serializable]
 	public struct TurnAction
 	{

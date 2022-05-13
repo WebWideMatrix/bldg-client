@@ -128,7 +128,6 @@ public class LoginController : MonoBehaviour
         flyCamera.Follow = rsdtClone.transform;
         flyCamera.LookAt = rsdtClone.transform;
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-        rsdtObject.bldgServer = bldgServer;
         rsdtObject.initialize(rsdt, true);
 
         // once login result received, initialize player with resident details
