@@ -23,9 +23,15 @@ public class BldgDoorKnob : MonoBehaviour
     }
 
     void OnMouseDown() {
-        if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Tardis effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
+        if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Alice effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
             EventManager.TriggerEvent("EnteringBldg");
-            bldgController.EnterBuildingByAddress(bldgAddress);
+            bldgController.SetAddress(address);
+            CurrentResidentController crc = CurrentResidentController.instance;
+            crc.SendEnterBldgAction(new EnterBldgAction() {
+                resident_email = crc.resident.email,
+                action_type = "ENTER_BLDG",
+                bldg_address = address
+            });
         }
     }
 }

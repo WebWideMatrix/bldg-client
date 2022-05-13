@@ -14,14 +14,7 @@ using UnityEngine.Networking;
 
 public class BldgController : MonoBehaviour
 {
-
-	public string bldgServer = "https://api.w2m.site";
-	public string bldgsBasePath = "/v1/bldgs";
-	public string residentsBasePath = "/v1/residents";
-	public string roadsBasePath = "/v1/roads";
-
 	public string DEFAULT_BLDG = "fromteal.app";
-
 
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
@@ -195,7 +188,8 @@ public class BldgController : MonoBehaviour
 		int newY = (int)(point.z - floorStartZ);
 		Debug.Log("Invoking relocate API to move bldg " + clickedModel.name + ", from (" + clickedModel.x + ", " + clickedModel.y + ") to (" + newX + ", " + newY + ")");
 		string newAddress = generateNewAddress(clickedModel.address, newX, newY);
-		string url = bldgServer + bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
+		GlobalConfig conf = GlobalConfig.instance;
+		string url = conf.bldgServer + conf.bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
 		Debug.Log("url = " + url);
 		// invoke relocate API
 		RequestHelper req = RestUtils.createRequest("POST", url);
@@ -282,7 +276,6 @@ public class BldgController : MonoBehaviour
 		//clearEverythingBut(address);
 		//address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
 		//SetAddress(address);
-		SceneManager.LoadScene("bldg_flr");
 	}
 
 	public void EnterBuilding(string web_url) {
@@ -291,7 +284,8 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests 
         Debug.Log("Resolvin bldg for web_url: " + web_url);
 		string address = null;
-		string url = bldgServer + bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
+		GlobalConfig conf = GlobalConfig.instance;
+		string url = conf.bldgServer + conf.bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
 		Debug.Log(url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get(req).Then(res =>
@@ -371,8 +365,8 @@ public class BldgController : MonoBehaviour
 			idsCache.Add(bObj.model.id, bldg);
 			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
-
-        string url = bldgServer + bldgsBasePath + "/look/" + address;
+		GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.bldgsBasePath + "/look/" + address;
 		// Debug.Log("Loading buildings from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Bldg>(req).Then(res =>
@@ -446,8 +440,8 @@ public class BldgController : MonoBehaviour
 		foreach (GameObject rsdnt in currentFlrResidents) {
 			GameObject.Destroy (rsdnt);
 		}
-
-        string url = bldgServer + residentsBasePath + "/look/" + address;
+		GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
 		bool clearedChatHistory = false;
 		RequestHelper req = RestUtils.createRequest("GET", url);
@@ -501,8 +495,8 @@ public class BldgController : MonoBehaviour
 				idsCache.Add(rObj.model.id, road);
 			}
 		}
-
-        string url = bldgServer + roadsBasePath + "/look/" + address;
+		GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.roadsBasePath + "/look/" + address;
 		Debug.Log("Loading roads from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Road>(req).Then(res =>

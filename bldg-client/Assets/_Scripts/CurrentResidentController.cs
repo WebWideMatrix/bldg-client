@@ -9,9 +9,6 @@ using Utils;
 [CreateAssetMenu(fileName = "Resident", menuName = "Current Resident", order = 0)]
 public class CurrentResidentController : ScriptableSingleton<CurrentResidentController>
 {    
-    public string bldgServer = "https://api.w2m.site";
-    private string baseResidentsPath = "/v1/residents";
-
     public Resident resident;
 
     private bool initialized = false;
@@ -42,7 +39,8 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
     public void SendTurnAction(TurnAction action) {
         // call the act API
         Debug.Log("Invoking resident turn action for resident " + resident.email);
-        string url = bldgServer + baseResidentsPath + "/act";
+        GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
         RequestHelper req = RestUtils.createRequest("POST", url, action);
@@ -66,7 +64,8 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             // call the act API
             Debug.Log("Invoking resident move action for resident " + resident.email);
             lastActionTime = DateTime.Now;
-            string url = bldgServer + baseResidentsPath + "/act";
+            GlobalConfig conf = GlobalConfig.instance;
+            string url = conf.bldgServer + conf.residentsBasePath + "/act";
             Debug.Log("url = " + url);
             // invoke act API
             RequestHelper req = RestUtils.createRequest("POST", url, action);
@@ -80,20 +79,27 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
     public void SendEnterBldgAction(EnterBldgAction action) {
         // call the act API
         Debug.Log("Invoking resident enter bldg action for resident " + resident.email);
-        string url = bldgServer + baseResidentsPath + "/act";
+        GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
         RequestHelper req = RestUtils.createRequest("POST", url, action);
         RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
             Debug.Log(actionResponse.data.location);
+            resident.location = actionResponse.data.location;
+            resident.x = actionResponse.data.x;
+            resident.y = actionResponse.data.y;
+            resident.flr = actionResponse.data.flr;
+            SceneManager.LoadScene("bldg_flr");
         });
     }
 
     public void SendExitBldgAction(EnterBldgAction action) {
         // call the act API
         Debug.Log("Invoking resident exit bldg action for resident " + resident.email);
-        string url = bldgServer + baseResidentsPath + "/act";
+        GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
         RequestHelper req = RestUtils.createRequest("POST", url, action);
@@ -105,7 +111,8 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
 
     public void SendSayAction(SayAction action) {
         Debug.Log("Sending say action from " + action.resident_email);
-        string url = bldgServer + baseResidentsPath + "/act";
+        GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
         RequestHelper req = RestUtils.createRequest("POST", url, action);

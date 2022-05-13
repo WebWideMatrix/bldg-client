@@ -13,7 +13,6 @@ using Cinemachine;
 
 public class LoginController : MonoBehaviour
 {
-	public string bldgServer = "https://api.w2m.site";
 
     public GameObject baseResidentObject;
 
@@ -30,8 +29,6 @@ public class LoginController : MonoBehaviour
     public TMP_Text errorDisplay;
     public TMP_Text verifyDisplay;
 
-
-    private string basePath = "/v1/residents";
 
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -131,7 +128,6 @@ public class LoginController : MonoBehaviour
         rsdtObject.initialize(rsdt, true);
 
         // once login result received, initialize player with resident details
-        bldgController.bldgServer = bldgServer;
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
         bldgController.SetAddress("g");
@@ -155,7 +151,8 @@ public class LoginController : MonoBehaviour
 
         // call the login API
     	Debug.Log("Invoking resident Login API for resident " + email);
-		string url = bldgServer + basePath + "/login";
+        GlobalConfig conf = GlobalConfig.instance;
+		string url = conf.bldgServer + conf.residentsBasePath + "/login";
 		Debug.Log("url = " + url);
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
@@ -196,8 +193,8 @@ public class LoginController : MonoBehaviour
     void pollForVerificationStatus() {
         if (isPollingForVerificationStatus) {
             Debug.Log("Polling for verification status!");
-
-            string url = bldgServer + basePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
+            GlobalConfig conf = GlobalConfig.instance;
+            string url = conf.bldgServer + conf.residentsBasePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
             Debug.Log("url = " + url);
             // invoke verification status API
             RequestHelper req = RestUtils.createRequest("GET", url);
