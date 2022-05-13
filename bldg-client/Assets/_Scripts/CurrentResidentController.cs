@@ -4,6 +4,7 @@ using UnityEditor;
 using Models;
 using Proyecto26;
 using Utils;
+using UnityEngine.SceneManagement;
 
 
 [CreateAssetMenu(fileName = "Resident", menuName = "Current Resident", order = 0)]

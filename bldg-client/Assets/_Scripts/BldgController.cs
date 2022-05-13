@@ -600,8 +600,10 @@ public class BldgController : MonoBehaviour
 	}
 
 	void updateFloorSign() {
-		TextMesh flrSign = GameObject.FindGameObjectWithTag ("FloorSign").GetComponent<TextMesh>();
-		flrSign.text = currentFlr.ToUpper ();
+		//TODO ADD FLOOR SIGN TO BLDG PREFAB & uncomment
+
+		//TextMesh flrSign = GameObject.FindGameObjectWithTag ("FloorSign").GetComponent<TextMesh>();
+		//flrSign.text = currentFlr.ToUpper ();
 	}
 
 }
