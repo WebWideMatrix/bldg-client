@@ -359,7 +359,7 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Bldg b in res) {
 					count += 1;
-					// Debug.Log("processing bldg " + count);
+					Debug.Log("processing bldg " + count + ": " + b.name);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 

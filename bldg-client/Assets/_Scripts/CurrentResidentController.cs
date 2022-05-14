@@ -12,9 +12,9 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
 {    
     public Resident resident;
 
-    private bool initialized = false;
+    public bool initialized = false;
 
-    [SerializeField] float ACTION_SEND_INTERVAL = 200;  // Milliseconds
+    public float ACTION_SEND_INTERVAL = 200;  // Milliseconds
 
     public bool inFlyingMode = false;
     public bool flyingHigh = false; 
@@ -23,6 +23,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
 
 
     public void initialize(Resident model) {
+        Debug.Log("CRC initialized with " + model.alias);
         resident = model;
         Debug.Log("Initializing resident " + resident.alias + " at " + resident.location);
         initialized = true;
@@ -35,9 +36,15 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         return initialized;
     }
 
-    public void OnAwake() {
-
+    public void logout() {
+        initialized = false;
     }
+
+    public void OnAwake() {
+        Debug.Log("CRC awoken");
+    }
+
+
     
 
 
@@ -92,10 +99,12 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
             Debug.Log(actionResponse.data.location);
+            Debug.Log("Received resident location as " + actionResponse.data.x + ", " + actionResponse.data.y);
             resident.location = actionResponse.data.location;
             resident.x = actionResponse.data.x;
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
+            Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
             SceneManager.LoadScene("bldg_flr");
         }).Catch(err => {
                 Debug.Log("Enter bldg action failed - " + err.Message);

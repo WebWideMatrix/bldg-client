@@ -28,7 +28,7 @@ public class BldgDoorKnob : MonoBehaviour
         if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Alice effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
             EventManager.TriggerEvent("EnteringBldg");
             Debug.Log("Setting address");
-            bldgController.SetAddress(bldgAddress);
+            bldgController.SetAddress(bldgAddress + "/l0");
             Debug.Log("Invoking enter bldg action");
             CurrentResidentController crc = CurrentResidentController.instance;
             Debug.Log("Sending enter bldg action for resident " +  crc.resident.email);

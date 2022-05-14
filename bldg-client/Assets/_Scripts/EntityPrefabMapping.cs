@@ -28,7 +28,9 @@ public class EntityPrefabMapping : ScriptableSingleton<EntityPrefabMapping>
 
 
 	public GameObject getPrefabByEntityClass(string entity_type) {
-		switch (entity_type) {
+		Debug.Log("Getting prefab for entity class " + entity_type);
+        
+        switch (entity_type) {
 		case "purpose":
 			return whiteboardBldg;
 		case "cantata":

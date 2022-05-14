@@ -109,7 +109,7 @@ public class LoginController : MonoBehaviour
     }
 
 
-    void completeLogin(Resident rsdt) {
+    public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
 
@@ -129,8 +129,10 @@ public class LoginController : MonoBehaviour
 
         // once login result received, initialize crc & player with resident details
         CurrentResidentController crc = CurrentResidentController.instance;
-        crc.initialize(rsdt);
-        
+        if (!crc.isInitialized()) {
+            crc.initialize(rsdt);
+        }
+
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
         bldgController.SetAddress("g"); // TODO should be the current resident flr

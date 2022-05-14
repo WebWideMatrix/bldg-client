@@ -15,4 +15,6 @@ public class GlobalConfig : ScriptableSingleton<GlobalConfig>
 	[SerializeField] public string bldgsBasePath = "/v1/bldgs";
 	[SerializeField] public string roadsBasePath = "/v1/roads";
 
+
+    
 }
