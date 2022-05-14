@@ -13,7 +13,7 @@ public class InitApp : MonoBehaviour
     {
         // check whether logged in already
         CurrentResidentController crc = CurrentResidentController.instance;
-        if (!crc.initialized) {
+        if (!crc.isInitialized()) {
             loginController.Show();
         }
     }

@@ -31,6 +31,10 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         flyingHigh = false;
     }
 
+    public bool isInitialized() {
+        return initialized;
+    }
+
     public void OnAwake() {
 
     }

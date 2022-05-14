@@ -19,26 +19,8 @@ public class BldgController : MonoBehaviour
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
-	// SHAPES
-    // TODO: change to array
-	public GameObject whiteboardBldg;
-	public GameObject presentationStandBldg;
-	public GameObject trafficSignBldg;
-	public GameObject streetSignBldg;
-	
-	public GameObject chairBldg;
-	public GameObject laptopBldg;
-	public GameObject briefcaseBldg;
-	public GameObject tabletBldg;
-	public GameObject filingCabinetBldg;
-	public GameObject buildingWithStorefront;
-
-	public GameObject roadObject;
-	public GameObject greenLotObject;
-	public GameObject blueLotObject;
-	public GameObject yellowLotObject;
-
 	public GameObject baseResidentObject;
+	public GameObject roadObject;
 
 	public GameObject contextMenu;
 
@@ -395,10 +377,12 @@ public class BldgController : MonoBehaviour
 						GameObject.Destroy (idsCache[b.id]);
 					}
 
+					EntityPrefabMapping mapping = EntityPrefabMapping.instance;
+
 					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
-					GameObject prefab = getPrefabByEntityClass(b.entity_type);
+					GameObject prefab = mapping.getPrefabByEntityClass(b.entity_type);
 					GameObject bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
 					bldgClone.tag = "Building";
                     BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
@@ -575,37 +559,6 @@ public class BldgController : MonoBehaviour
 		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
 		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
 		roadClone.tag = "Road";
-	}
-
-	GameObject getPrefabByEntityClass(string entity_type) {
-		switch (entity_type) {
-		case "purpose":
-			return whiteboardBldg;
-		case "cantata":
-			return presentationStandBldg;
-		case "neighborhood":
-			return trafficSignBldg;
-		case "street":
-			return streetSignBldg;
-		case "member":
-			return laptopBldg;
-		case "milestone":
-			return briefcaseBldg;
-		case "web_page":
-			return tabletBldg;
-		case "team":
-			return buildingWithStorefront;
-		case "lot":
-			return greenLotObject;
-		case "green-lot":
-			return greenLotObject;
-		case "blue-lot":
-			return blueLotObject;
-		case "yellow-lot":
-			return yellowLotObject;
-		default:
-			return chairBldg;
-		}
 	}
 
 	void updateFloorSign() {
