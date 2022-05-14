@@ -127,10 +127,14 @@ public class LoginController : MonoBehaviour
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
 
-        // once login result received, initialize player with resident details
+        // once login result received, initialize crc & player with resident details
+        CurrentResidentController crc = CurrentResidentController.instance;
+        crc.initialize(rsdt);
+        
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
-        bldgController.SetAddress("g");
+        bldgController.SetAddress("g"); // TODO should be the current resident flr
+        
 
         // hide the login dialog
         this.gameObject.SetActive(false);

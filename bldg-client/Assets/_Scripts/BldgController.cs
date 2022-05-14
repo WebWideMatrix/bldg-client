@@ -365,6 +365,9 @@ public class BldgController : MonoBehaviour
 			idsCache.Add(bObj.model.id, bldg);
 			addrCache.Add(bObj.model.id, bObj.model.address);
 		}
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
 		GlobalConfig conf = GlobalConfig.instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/look/" + address;
 		// Debug.Log("Loading buildings from: " + url);
@@ -440,6 +443,9 @@ public class BldgController : MonoBehaviour
 		foreach (GameObject rsdnt in currentFlrResidents) {
 			GameObject.Destroy (rsdnt);
 		}
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
 		GlobalConfig conf = GlobalConfig.instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
@@ -495,6 +501,9 @@ public class BldgController : MonoBehaviour
 				idsCache.Add(rObj.model.id, road);
 			}
 		}
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
 		GlobalConfig conf = GlobalConfig.instance;
         string url = conf.bldgServer + conf.roadsBasePath + "/look/" + address;
 		Debug.Log("Loading roads from: " + url);

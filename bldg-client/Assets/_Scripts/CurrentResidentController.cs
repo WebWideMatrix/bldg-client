@@ -93,7 +93,10 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
             SceneManager.LoadScene("bldg_flr");
-        });
+        }).Catch(err => {
+                Debug.Log("Enter bldg action failed - " + err.Message);
+                
+            });;
     }
 
     public void SendExitBldgAction(EnterBldgAction action) {

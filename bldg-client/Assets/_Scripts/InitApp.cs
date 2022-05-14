@@ -11,7 +11,11 @@ public class InitApp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        loginController.Show();
+        // check whether logged in already
+        CurrentResidentController crc = CurrentResidentController.instance;
+        if (!crc.initialized) {
+            loginController.Show();
+        }
     }
 
 }
