@@ -14,74 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 80
+    direction: 180
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(15,97)
+    location: g/b(16,92)
     name: Udi Bauman
-    previous_messages:
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(19,100)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name ftpurpose and summary Connect people with shared purpose
-      to create great things","say_time":637877334107364700}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(8,105)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      cantata bldg with name Cantata1 and website cantata1.org and picture https://dibau.files.wordpress.com/2022/02/img_1067.jpg","say_time":637876412508508610}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(8,105)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      cantata object with name Cantata1 and website cantata1.org and picture https://dibau.files.wordpress.com/2022/02/img_1067.jpg","say_time":637876412063240370}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(9,101)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      cantata object with name Cantata1 and website cantata1.org and picture https://dibau.files.wordpress.com/2022/02/img_1067.jpg
-      and summary Cantata 1","say_time":637876411677820640}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-82,101)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg test4.org here","say_time":637875216923674020}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-82,101)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg test1.org here","say_time":637875216714395180}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
-      owner eduard.fidler12@gmail.com from bldg test4.org","say_time":637875214789887360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
-      owner eduard.fidler12@gmail.com from bldg test1.org","say_time":637875214461251480}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner eduard.fidler12@gmail.com to bldg test1.org","say_time":637875214174859210}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner eduard.fidler12@gmail.com to bldg teal.org","say_time":637875213735370120}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner eduard.fidler12@gmail.com to bldg test4.org","say_time":637875209143283080}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner eddie12@gmail.com to bldg test1.org","say_time":637875208110241040}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-32,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner eddie@gmail.com to bldg test1.org","say_time":637875206731143440}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-44,144)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
-      owner inna.bauman@gmail.com from bldg test4.org","say_time":637873346588424340}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-44,144)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
-      owner inna.bauman@gmail.com from bldg test4.org","say_time":637873345322862360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-44,144)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
-      owner inna.bauman@gmai.com from bldg test4.org","say_time":637873344151951170}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-44,144)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
-      owner inna.bauman@gmail.com to bldg test1.org","say_time":637873330641953860}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-45,146)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      road between fromteal.com and test4.org","say_time":637873308867969890}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-44,133)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      team bldg with name test4 and website test4.org","say_time":637873304731968820}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-3,130)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      team bldg with name test2 and website test2.xyz","say_time":637873303771713360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-29,96)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      team bldg with name test1 and website test1.org","say_time":637873293738023300}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-13,100)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      team bldg with name holocracyone and website holocracyone.com and summary Holocracy
-      One","say_time":637872460269187590}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(16,92)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      team bldg with name fromTeal and website fromteal.com and summary fromTeal","say_time":637872457716363090}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(23,57)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637870709656858960}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(25,53)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      street bldg with name Teal and website teal.org and summary Teal","say_time":637843952178832630}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(15,-1)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      neighborhood bldg with name Ikigai and website ikigai.org and summary Ikigai","say_time":637843307297739610}'
+    previous_messages: []
     session_id: f310cbb0-dfff-46ed-902b-670e1937b668
-    x: 15
-    y: 97
-    flr: g/b(16,92)/l0
-  initialized: 0
+    x: 16
+    y: 92
+    flr: g
+  initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0

@@ -57,8 +57,9 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         // invoke act API
         RequestHelper req = RestUtils.createRequest("POST", url, action);
         RestClient.Post<ActionResponse>(req).Then(actionResponse => {
-            Debug.Log("Action sent, received new location");
-            Debug.Log(actionResponse.data.location);
+            Debug.Log("Action sent, received new direction");
+            Debug.Log(actionResponse.data.direction);
+            resident.direction = actionResponse.data.direction;
         });
     }
 
@@ -84,6 +85,10 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             RestClient.Post<ActionResponse>(req).Then(actionResponse => {
                 Debug.Log("Action sent, received new location");
                 Debug.Log(actionResponse.data.location);
+                resident.location = actionResponse.data.location;
+                resident.x = actionResponse.data.x;
+                resident.y = actionResponse.data.y;
+                resident.flr = actionResponse.data.flr;
             });
         }
     }
