@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 160
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)
+    location: g/b(16,92)/l0/b(0,30)
     name: Udi Bauman
     previous_messages: []
     session_id: f310cbb0-dfff-46ed-902b-670e1937b668
-    x: 16
-    y: 92
-    flr: g
+    x: 0
+    y: 30
+    flr: g/b(16,92)/l0
   initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0

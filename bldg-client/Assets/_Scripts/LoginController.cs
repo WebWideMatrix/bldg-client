@@ -112,8 +112,11 @@ public class LoginController : MonoBehaviour
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
-
-        Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+        float height = 0.5F;
+        if (rsdt.flr != "g") {
+            height = 1.6F;  // bldg is larger when inside a bldg, so floor is higher
+        }
+        Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
         baseline.x += rsdt.x;
         baseline.z += rsdt.y;
         Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
