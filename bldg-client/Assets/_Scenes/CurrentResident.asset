@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 160
+    direction: 180
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(-46,123)
+    location: g/b(16,92)/l0/b(8,38)
     name: Udi Bauman
     previous_messages: []
     session_id: f310cbb0-dfff-46ed-902b-670e1937b668
-    x: -46
-    y: 123
-    flr: g
+    x: 8
+    y: 38
+    flr: g/b(16,92)/l0
   initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
