@@ -9,6 +9,7 @@ using Proyecto26;
 using Models;
 using Utils;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 
 public class LoginController : MonoBehaviour
@@ -112,6 +113,22 @@ public class LoginController : MonoBehaviour
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
+
+
+        // once login result received, initialize crc & player with resident details
+        CurrentResidentController crc = CurrentResidentController.instance;
+        if (!crc.isInitialized()) {
+            crc.initialize(rsdt);
+        }
+
+        // check whether we need to load the bldg_flr scene
+        if (crc.resident.flr != "g") {
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name != "bldg_flr") {
+                SceneManager.LoadScene("bldg_flr");
+            }
+        }
+
         float height = 0.5F;
         if (rsdt.flr != "g") {
             height = 2.6F;  // bldg is larger when inside a bldg, so floor is higher
@@ -130,11 +147,6 @@ public class LoginController : MonoBehaviour
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
 
-        // once login result received, initialize crc & player with resident details
-        CurrentResidentController crc = CurrentResidentController.instance;
-        if (!crc.isInitialized()) {
-            crc.initialize(rsdt);
-        }
 
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);

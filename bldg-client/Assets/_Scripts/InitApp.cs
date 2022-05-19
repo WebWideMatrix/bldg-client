@@ -22,13 +22,6 @@ public class InitApp : MonoBehaviour
         }
         else {
             Debug.Log("CRC Initialized!!!!");
-            // check whether we need to load the bldg_flr scene
-            if (crc.resident.flr != "g") {
-                Scene scene = SceneManager.GetActiveScene();
-                if (scene.name != "bldg_flr") {
-                    SceneManager.LoadScene("bldg_flr");
-                }
-            }
             loginController.completeLogin(crc.resident);
         }
     }
