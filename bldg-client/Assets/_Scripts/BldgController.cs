@@ -53,7 +53,7 @@ public class BldgController : MonoBehaviour
     	// #if !UNITY_EDITOR && UNITY_WEBGL
 		// 	WebGLInput.captureAllKeyboardInput = false;
 		// #endif
-        Debug.Log("Started");
+        Debug.Log("BldgController Started");
 
 		bldgChatController = gameObject.GetComponent<BldgChatController>();
 
@@ -73,6 +73,9 @@ public class BldgController : MonoBehaviour
     }
 
 	public void SetCurrentResidentController(ResidentController rsdtController) {
+		if (bldgChatController == null) {
+			bldgChatController = gameObject.GetComponent<BldgChatController>();
+		}
 		bldgChatController.SetResidentController(rsdtController);
 	}
 
@@ -378,7 +381,12 @@ public class BldgController : MonoBehaviour
 					}
 
 					EntityPrefabMapping mapping = EntityPrefabMapping.instance;
-					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+
+					float height = 0F;
+					if (address != "g") {
+						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
+					}
+					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
 					GameObject prefab = mapping.getPrefabByEntityClass(b.entity_type);

@@ -138,7 +138,7 @@ public class LoginController : MonoBehaviour
 
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
-        bldgController.SetAddress("g"); // TODO should be the current resident flr
+        bldgController.SetAddress(rsdt.flr);
         
 
         // hide the login dialog
