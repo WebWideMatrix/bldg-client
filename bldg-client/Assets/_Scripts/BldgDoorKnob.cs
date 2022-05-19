@@ -18,10 +18,12 @@ public class BldgDoorKnob : MonoBehaviour
     {
         GameObject bldg = transform.parent.gameObject;
         BldgObject bldgObject = bldg.GetComponent<BldgObject>();
-        Debug.Log("[DoorKnob] parent bldg object: " + bldgObject);
-        bldgName = bldgObject.model.name;
-        bldgAddress = bldgObject.model.address;
-        bldgController = bldgObject.bldgController;
+        if (bldgObject != null) {
+            Debug.Log("[DoorKnob] parent bldg object: " + bldgObject);
+            bldgName = bldgObject.model.name;
+            bldgAddress = bldgObject.model.address;
+            bldgController = bldgObject.bldgController;
+        }
     }
 
     void OnMouseDown() {
