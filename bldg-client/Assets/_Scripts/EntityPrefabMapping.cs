@@ -9,23 +9,27 @@ public class EntityPrefabMapping : ScriptableSingleton<EntityPrefabMapping>
 
     // SHAPES
     // TODO: change to array
-	[SerializeField] public GameObject whiteboardBldg;
-	[SerializeField] public GameObject presentationStandBldg;
-	[SerializeField] public GameObject trafficSignBldg;
-	[SerializeField] public GameObject streetSignBldg;
+	public GameObject whiteboardBldg;
+	public GameObject presentationStandBldg;
+	public GameObject trafficSignBldg;
+	public GameObject streetSignBldg;
 	
-	[SerializeField] public GameObject chairBldg;
-	[SerializeField] public GameObject laptopBldg;
-	[SerializeField] public GameObject briefcaseBldg;
-	[SerializeField] public GameObject tabletBldg;
-	[SerializeField] public GameObject filingCabinetBldg;
-	[SerializeField] public GameObject buildingWithStorefront;
+	public GameObject chairBldg;
+	public GameObject laptopBldg;
+	public GameObject briefcaseBldg;
+	public GameObject tabletBldg;
+	public GameObject filingCabinetBldg;
+	public GameObject buildingWithStorefront;
 
-	[SerializeField] public GameObject greenLotObject;
-	[SerializeField] public GameObject blueLotObject;
-	[SerializeField] public GameObject yellowLotObject;
+	public GameObject greenLotObject;
+	public GameObject blueLotObject;
+	public GameObject yellowLotObject;
 
 
+    private void OnEnable()
+    {
+        hideFlags = HideFlags.DontUnloadUnusedAsset;
+    }
 
 	public GameObject getPrefabByEntityClass(string entity_type) {
 		Debug.Log("Getting prefab for entity class " + entity_type);

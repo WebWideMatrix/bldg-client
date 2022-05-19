@@ -44,7 +44,10 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         Debug.Log("CRC awoken");
     }
 
-
+    private void OnEnable()
+    {
+        hideFlags = HideFlags.DontUnloadUnusedAsset;
+    }
     
 
 

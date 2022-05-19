@@ -10,11 +10,15 @@ using Utils;
 public class GlobalConfig : ScriptableSingleton<GlobalConfig>
 {   
 
-    [SerializeField] public string bldgServer = "https://api.w2m.site";
-    [SerializeField] public string residentsBasePath = "/v1/residents";
-	[SerializeField] public string bldgsBasePath = "/v1/bldgs";
-	[SerializeField] public string roadsBasePath = "/v1/roads";
+    public string bldgServer = "https://api.w2m.site";
+    public string residentsBasePath = "/v1/residents";
+	public string bldgsBasePath = "/v1/bldgs";
+	public string roadsBasePath = "/v1/roads";
 
 
-    
+    private void OnEnable()
+    {
+        hideFlags = HideFlags.DontUnloadUnusedAsset;
+    }
+
 }

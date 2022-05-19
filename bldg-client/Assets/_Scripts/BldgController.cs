@@ -378,42 +378,46 @@ public class BldgController : MonoBehaviour
 					}
 
 					EntityPrefabMapping mapping = EntityPrefabMapping.instance;
-
 					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
 					GameObject prefab = mapping.getPrefabByEntityClass(b.entity_type);
-					GameObject bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
-					bldgClone.tag = "Building";
-                    BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
-					bldgObject.initialize(b, this);
-					Debug.Log(b.summary);
-					TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
-					foreach (TMP_Text label in labels) {
-						if (label.name == "summary")
-							label.text = b.summary;
-						else if (label.name == "summary_top") {
-							label.text = b.summary;
+					GameObject bldgClone = null;
+					try {
+						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
+						bldgClone.tag = "Building";
+						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
+						bldgObject.initialize(b, this);
+						TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
+						foreach (TMP_Text label in labels) {
+							if (label.name == "summary")
+								label.text = b.summary;
+							else if (label.name == "summary_top")
+								label.text = b.summary;
+							else if (label.name == "entity_type")
+								label.text = b.entity_type;
+							else if (label.name == "name")
+								label.text = b.name;
+							else if (label.name == "name2")
+								label.text = b.name;		
+							else if (label.name == "name_top")
+								label.text = b.name;
+							else if (label.name == "state")
+								label.text = b.state;
 						}
-						else if (label.name == "entity_type")
-							label.text = b.entity_type;
-						else if (label.name == "name")
-							label.text = b.name;
-						else if (label.name == "name2")
-							label.text = b.name;		
-						else if (label.name == "name_top")
-							label.text = b.name;
-						else if (label.name == "state")
-							label.text = b.state;
+						ImageController[] imageDisplays = bldgClone.GetComponentsInChildren<ImageController>();
+						foreach (ImageController imgDisplay in imageDisplays) {
+							imgDisplay.SetImageURL(b.picture_url);
+						}
+						LinkController[] linkObjects = bldgClone.GetComponentsInChildren<LinkController>();
+						foreach (LinkController linkObj in linkObjects) {
+							linkObj.SetLinkURL(b.web_url);
+						}
+					} catch (Exception e) {
+						Debug.LogError(e.ToString());
 					}
-					ImageController[] imageDisplays = bldgClone.GetComponentsInChildren<ImageController>();
-					foreach (ImageController imgDisplay in imageDisplays) {
-						imgDisplay.SetImageURL(b.picture_url);
-					}
-					LinkController[] linkObjects = bldgClone.GetComponentsInChildren<LinkController>();
-					foreach (LinkController linkObj in linkObjects) {
-						linkObj.SetLinkURL(b.web_url);
-					}
+					
+					
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
