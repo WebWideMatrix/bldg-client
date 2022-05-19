@@ -114,7 +114,7 @@ public class LoginController : MonoBehaviour
         Debug.Log("Login done, received " + rsdt.alias);
         float height = 0.5F;
         if (rsdt.flr != "g") {
-            height = 1.6F;  // bldg is larger when inside a bldg, so floor is higher
+            height = 2.6F;  // bldg is larger when inside a bldg, so floor is higher
         }
         Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
         baseline.x += rsdt.x;
