@@ -47,6 +47,7 @@ public class BldgController : MonoBehaviour
 	BldgChatController bldgChatController;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -233,23 +234,6 @@ public class BldgController : MonoBehaviour
 	// 	AddressChanged ();
 	// }
 
-
-	private void clearEverythingBut(string address) {
-		// clear bldgs
-		GameObject[] currentFlrBldgs = GameObject.FindGameObjectsWithTag("Building");
-		foreach (GameObject bldg in currentFlrBldgs) {
-			BldgObject bldgObject = bldg.GetComponent<BldgObject>();
-			if (bldgObject.model.address != address) {
-				GameObject.Destroy (bldg);
-			}
-		}
-		// clear roads
-		GameObject[] currentFlrRoads = GameObject.FindGameObjectsWithTag("Road");
-		foreach (GameObject road in currentFlrRoads) {
-			GameObject.Destroy (road);
-		}
-	}
-
 	public void SetAddress(string address) {
 		Debug.Log("SetAddress -> " + address);
 		currentAddress = address;
@@ -329,15 +313,15 @@ public class BldgController : MonoBehaviour
 	}
 
 	void switchAddress(string address) {
-
-
 		if (address.ToLower() != "g") {
+			reloadContainerBldg();
 			updateFloorSign ();
 		}
 
 		reloadBuildings(address);
 		reloadResidents(address);
 		reloadRoads(address);
+
 	}
 
 
@@ -571,6 +555,54 @@ public class BldgController : MonoBehaviour
 		roadClone.transform.Translate((d_x / 2), 0, (d_y / 2));
 		roadClone.transform.localScale += new Vector3(d_x / default_road_scale, 0, d_y / default_road_scale);
 		roadClone.tag = "Road";
+	}
+
+
+	GameObject getContainerBldg() {
+		GameObject[] found = GameObject.FindGameObjectsWithTag("ContainerBuilding");
+		if (found.Length == 0) return null;
+		return found[0];
+	}
+
+
+	string removeFlrFromAddress(string address) {
+		string[] addressParts = address.Split(AddressUtils.DELIM_CHAR);
+		string lastPart = addressParts[addressParts.Length - 1];
+		if (lastPart.Substring(0, 1) == "l") {
+			string[] newParts = new string[addressParts.Length - 1];
+			for (int i = 0; i < addressParts.Length - 1; i++) {
+				newParts[i] = addressParts[i];
+			}
+			return string.Join(AddressUtils.DELIM_CHAR, newParts);
+		}
+		return address;
+	}
+
+	void reloadContainerBldg() {
+		// check whether the container bldg already has a model object
+		GameObject container = getContainerBldg();
+		if (container == null) return;
+		BldgObject bldgObj = container.GetComponent<BldgObject>();
+		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
+
+		// if not: load the data of the container bldg
+		// remove floor from address
+		string address = removeFlrFromAddress(currentAddress);
+		// url encode the address
+		string encodedAddress = Uri.EscapeDataString(address);
+		// invoke the get bldg API
+		GlobalConfig conf = GlobalConfig.instance;
+        string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
+		Debug.Log("Loading container bldg model from: " + url);
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.Get<WrappedBldg>(req).Then(res =>
+		{
+			bldgObj.model = res.data;
+			Debug.Log("Loaded container bldg data: " + bldgObj.model.name);
+		}).Catch(err => {
+			Debug.Log(err.Message);
+			Debug.Log("Failed to load container bldg model: " + address);
+		});
 	}
 
 	void updateFloorSign() {

@@ -3186,6 +3186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building6 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
+      propertyPath: m_TagString
+      value: ContainerBuilding
+      objectReference: {fileID: 0}
     - target: {fileID: 4653659293184744241, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
       propertyPath: m_Size.y
       value: 6.44601
@@ -3202,6 +3206,47 @@ PrefabInstance:
     - {fileID: 4653659293184744241, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
+--- !u!1 &1543010140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
+  m_PrefabInstance: {fileID: 1543010139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1543010141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543010140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d376a563e52c44c0a40683adcd0345c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model:
+    id: 0
+    x: 0
+    y: 0
+    web_url: 
+    summary: 
+    is_composite: 0
+    flr: 
+    entity_type: 
+    name: 
+    state: 
+    category: 
+    tags: []
+    address: 
+    picture_url: 
+    owners: []
+  bldgController: {fileID: 2138089338}
+  redColor: 0
+  greenColor: 0
+  blueColor: 0
+  ClickDuration: 1
+  CHECKMARK_STATUSES:
+  - completed
+  - approved
 --- !u!1 &1672715075
 GameObject:
   m_ObjectHideFlags: 3

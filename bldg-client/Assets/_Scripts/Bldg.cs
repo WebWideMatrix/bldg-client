@@ -4,6 +4,13 @@ using System.Collections.Generic;
 namespace Models
 {
 	[Serializable]
+	public class WrappedBldg
+	{
+		public Bldg data;
+	}
+
+
+	[Serializable]
 	public class Bldg
 	{
 		public int id;
