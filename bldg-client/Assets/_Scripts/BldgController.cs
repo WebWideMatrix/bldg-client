@@ -300,11 +300,15 @@ public class BldgController : MonoBehaviour
 		Reload();
 	}
 
+	string getCurrentAddressFromResident() {
+		CurrentResidentController crc = CurrentResidentController.instance;
+		return crc.resident.flr;
+	}
+
 
 	public void Reload() {
 		Debug.Log("Reload invoked");
-		// TODO compare new content with existing to decide whether a reload is really needed
-		switchAddress (currentAddress);
+		switchAddress (getCurrentAddressFromResident());
 		if (!isReloadingInLoop) {
 			Debug.Log("Starting reload loop");
 			isReloadingInLoop = true;

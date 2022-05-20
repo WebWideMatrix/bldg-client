@@ -12,7 +12,6 @@ public class InternalBldgDoorKnob : MonoBehaviour
 
     private string bldgName = "";
     private string bldgAddress = "";
-    private BldgController bldgController;
 
     void getContainerBldgDetails()
     {
@@ -21,7 +20,6 @@ public class InternalBldgDoorKnob : MonoBehaviour
         if (bldgObject != null) {
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
-            bldgController = bldgObject.bldgController;
         }
     }
 
@@ -32,10 +30,6 @@ public class InternalBldgDoorKnob : MonoBehaviour
         
         if (EditorUtility.DisplayDialog ("Exiting " + bldgName, "You're about to exit the " + bldgName + " team HQ.", "Ok", "Cancel")) {
             EventManager.TriggerEvent("ExitingBldg");
-            Debug.Log("Setting address");
-            // TODO extract the parent bldg address
-            string containerFlr = AddressUtils.getContainerFlr(bldgAddress);
-            bldgController.SetAddress(containerFlr);
             Debug.Log("Invoking exit bldg action");
             CurrentResidentController crc = CurrentResidentController.instance;
             Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);

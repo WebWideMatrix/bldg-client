@@ -11,7 +11,6 @@ public class BldgDoorKnob : MonoBehaviour
 
     private string bldgName = "";
     private string bldgAddress = "";
-    private BldgController bldgController;
 
     // Start is called before the first frame update
     void Start()
@@ -22,15 +21,12 @@ public class BldgDoorKnob : MonoBehaviour
             Debug.Log("[DoorKnob] parent bldg object: " + bldgObject);
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
-            bldgController = bldgObject.bldgController;
         }
     }
 
     void OnMouseDown() {
         if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Alice effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
             EventManager.TriggerEvent("EnteringBldg");
-            Debug.Log("Setting address");
-            bldgController.SetAddress(bldgAddress + "/l0");
             Debug.Log("Invoking enter bldg action");
             CurrentResidentController crc = CurrentResidentController.instance;
             Debug.Log("Sending enter bldg action for resident " +  crc.resident.email);
