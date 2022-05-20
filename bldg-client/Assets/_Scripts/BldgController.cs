@@ -331,8 +331,12 @@ public class BldgController : MonoBehaviour
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
 			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
-			idsCache.Add(bObj.model.id, bldg);
-			addrCache.Add(bObj.model.id, bObj.model.address);
+			if (!idsCache.ContainsKey(bObj.model.id)) {
+				idsCache.Add(bObj.model.id, bldg);
+				addrCache.Add(bObj.model.id, bObj.model.address);
+			} else {
+				Debug.LogWarning("Building rendered twice! " + bObj.model.name);
+			}
 		}
 		// escape the address
 		address = Uri.EscapeDataString(address);
@@ -577,6 +581,7 @@ public class BldgController : MonoBehaviour
 		}
 		return address;
 	}
+	
 
 	void reloadContainerBldg() {
 		// check whether the container bldg already has a model object

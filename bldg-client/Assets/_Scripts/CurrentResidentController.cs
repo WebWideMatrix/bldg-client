@@ -115,12 +115,11 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
             SceneManager.LoadScene("bldg_flr");
         }).Catch(err => {
-                Debug.Log("Enter bldg action failed - " + err.Message);
-                
-            });;
+            Debug.Log("Enter bldg action failed - " + err.Message);        
+        });
     }
 
-    public void SendExitBldgAction(EnterBldgAction action) {
+    public void SendExitBldgAction(ExitBldgAction action) {
         // call the act API
         Debug.Log("Invoking resident exit bldg action for resident " + resident.email);
         GlobalConfig conf = GlobalConfig.instance;
@@ -131,6 +130,17 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
         RestClient.Post<ActionResponse>(req).Then(actionResponse => {
             Debug.Log("Action sent, received new location");
             Debug.Log(actionResponse.data.location);
+            Debug.Log("Received resident location as " + actionResponse.data.x + ", " + actionResponse.data.y);
+            resident.location = actionResponse.data.location;
+            resident.x = actionResponse.data.x;
+            resident.y = actionResponse.data.y;
+            resident.flr = actionResponse.data.flr;
+            Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
+            if (resident.flr == "g") {
+                SceneManager.LoadScene("g");
+            }
+        }).Catch(err => {
+            Debug.Log("Enter bldg action failed - " + err.Message);        
         });
     }
 

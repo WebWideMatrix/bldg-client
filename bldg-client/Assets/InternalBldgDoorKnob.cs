@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
 using Models;
+using Utils;
 
 
 public class InternalBldgDoorKnob : MonoBehaviour
@@ -33,13 +34,14 @@ public class InternalBldgDoorKnob : MonoBehaviour
             EventManager.TriggerEvent("ExitingBldg");
             Debug.Log("Setting address");
             // TODO extract the parent bldg address
-            bldgController.SetAddress(bldgAddress + "/l0");
-            Debug.Log("Invoking enter bldg action");
+            string containerFlr = AddressUtils.getContainerFlr(bldgAddress);
+            bldgController.SetAddress(containerFlr);
+            Debug.Log("Invoking exit bldg action");
             CurrentResidentController crc = CurrentResidentController.instance;
-            Debug.Log("Sending enter bldg action for resident " +  crc.resident.email);
-            crc.SendEnterBldgAction(new EnterBldgAction() {
+            Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);
+            crc.SendExitBldgAction(new ExitBldgAction() {
                 resident_email = crc.resident.email,
-                action_type = "ENTER_BLDG",
+                action_type = "EXIT_BLDG",
                 bldg_address = bldgAddress
             });
         }
