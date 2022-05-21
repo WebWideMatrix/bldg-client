@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 20
+    direction: 0
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,98)
+    location: g/b(16,92)/l0/b(8,22)
     name: Udi Bauman
     previous_messages:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
     session_id: f310cbb0-dfff-46ed-902b-670e1937b668
-    x: 16
-    y: 98
-    flr: g
+    x: 8
+    y: 22
+    flr: g/b(16,92)/l0
   initialized: 1
   ACTION_SEND_INTERVAL: 200
-  inFlyingMode: 0
+  inFlyingMode: 1
   flyingHigh: 0

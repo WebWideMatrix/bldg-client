@@ -113,8 +113,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
             Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
-            Scene scene = SceneManager.GetActiveScene();
-            if (resident.flr != "g" && scene.name != "bldg_flr") {
+            if (resident.flr != "g") {
                 SceneManager.LoadScene("bldg_flr");
             }
         }).Catch(err => {
@@ -142,6 +141,8 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             Scene scene = SceneManager.GetActiveScene();
             if (resident.flr == "g" && scene.name != "g") {
                 SceneManager.LoadScene("g");
+            } else {
+                SceneManager.LoadScene("bldg_flr");
             }
         }).Catch(err => {
             Debug.Log("Enter bldg action failed - " + err.Message);        
