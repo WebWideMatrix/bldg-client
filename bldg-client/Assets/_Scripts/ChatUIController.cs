@@ -34,14 +34,14 @@ public class ChatUIController : MonoBehaviour {
         ChatInputField.onSubmit.AddListener(HandleNewMessage);
         ChatInputField.onSelect.AddListener(onSelect);
         ChatInputField.onDeselect.AddListener(onDeselect);
-        EventManager.instance.StartListening("LoginSuccessful", onLogin);
+        EventManager.Instance.StartListening("LoginSuccessful", onLogin);
     }
 
     void OnDisable()
     {
         
         ChatInputField.onSubmit.RemoveListener(HandleNewMessage);
-        EventManager.instance.StopListening("LoginSuccessful", onLogin);
+        EventManager.Instance.StopListening("LoginSuccessful", onLogin);
     }
 
 
@@ -150,7 +150,7 @@ public class ChatUIController : MonoBehaviour {
     void SendChatMessage(string text) {
         Debug.Log("Got new text " + text);
         // TODO extract recipient
-        CurrentResidentController crc = CurrentResidentController.instance;
+        CurrentResidentController crc = CurrentResidentController.Instance;
         Debug.Log("Found a rsdt controller");
         crc.SendSayAction(new SayAction {
             resident_email = crc.resident.email,

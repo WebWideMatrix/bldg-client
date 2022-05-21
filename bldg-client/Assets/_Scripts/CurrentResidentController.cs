@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 
 [CreateAssetMenu(fileName = "Resident", menuName = "Current Resident", order = 0)]
-public class CurrentResidentController : ScriptableSingleton<CurrentResidentController>
+public class CurrentResidentController : ScriptableObjectSingleton<CurrentResidentController>
 {    
     public Resident resident;
 
@@ -54,7 +54,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
     public void SendTurnAction(TurnAction action) {
         // call the act API
         Debug.Log("Invoking resident turn action for resident " + resident.email);
-        GlobalConfig conf = GlobalConfig.instance;
+        GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
@@ -80,7 +80,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
             // call the act API
             Debug.Log("Invoking resident move action for resident " + resident.email);
             lastActionTime = DateTime.Now;
-            GlobalConfig conf = GlobalConfig.instance;
+            GlobalConfig conf = GlobalConfig.Instance;
             string url = conf.bldgServer + conf.residentsBasePath + "/act";
             Debug.Log("url = " + url);
             // invoke act API
@@ -99,7 +99,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
     public void SendEnterBldgAction(EnterBldgAction action) {
         // call the act API
         Debug.Log("Invoking resident enter bldg action for resident " + resident.email);
-        GlobalConfig conf = GlobalConfig.instance;
+        GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
@@ -124,7 +124,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
     public void SendExitBldgAction(ExitBldgAction action) {
         // call the act API
         Debug.Log("Invoking resident exit bldg action for resident " + resident.email);
-        GlobalConfig conf = GlobalConfig.instance;
+        GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API
@@ -151,7 +151,7 @@ public class CurrentResidentController : ScriptableSingleton<CurrentResidentCont
 
     public void SendSayAction(SayAction action) {
         Debug.Log("Sending say action from " + action.resident_email);
-        GlobalConfig conf = GlobalConfig.instance;
+        GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
         // invoke act API

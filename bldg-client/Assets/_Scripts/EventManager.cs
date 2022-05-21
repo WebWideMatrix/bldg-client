@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 
 [CreateAssetMenu(fileName = "EventManager", menuName = "EventManager", order = 0)]
-public class EventManager : ScriptableSingleton<EventManager> {
+public class EventManager : ScriptableObjectSingleton<EventManager> {
 
     private Dictionary <string, UnityEvent> eventDictionary;
 
@@ -24,7 +24,7 @@ public class EventManager : ScriptableSingleton<EventManager> {
 
         Init();
         UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
+        if (eventDictionary.TryGetValue (eventName, out thisEvent))
         {
             thisEvent.AddListener (listener);
         } 
@@ -32,7 +32,7 @@ public class EventManager : ScriptableSingleton<EventManager> {
         {
             thisEvent = new UnityEvent ();
             thisEvent.AddListener (listener);
-            instance.eventDictionary.Add (eventName, thisEvent);
+            eventDictionary.Add (eventName, thisEvent);
         }
     }
 
@@ -42,7 +42,7 @@ public class EventManager : ScriptableSingleton<EventManager> {
 
         Init();
         UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
+        if (eventDictionary.TryGetValue (eventName, out thisEvent))
         {
             thisEvent.RemoveListener (listener);
         }
@@ -54,7 +54,7 @@ public class EventManager : ScriptableSingleton<EventManager> {
 
         Init();
         UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
+        if (eventDictionary.TryGetValue (eventName, out thisEvent))
         {
             thisEvent.Invoke ();
         }

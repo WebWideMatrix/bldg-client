@@ -4,7 +4,7 @@ using UnityEditor;
 
 
 [CreateAssetMenu(fileName = "EntityMapping", menuName = "Entity prefab mapping", order = 0)]
-public class EntityPrefabMapping : ScriptableSingleton<EntityPrefabMapping>
+public class EntityPrefabMapping : ScriptableObjectSingleton<EntityPrefabMapping>
 {   
 
     // SHAPES

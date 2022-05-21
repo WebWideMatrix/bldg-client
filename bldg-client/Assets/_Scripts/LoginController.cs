@@ -94,7 +94,7 @@ public class LoginController : MonoBehaviour
 
 
         // once login result received, initialize crc & player with resident details
-        CurrentResidentController crc = CurrentResidentController.instance;
+        CurrentResidentController crc = CurrentResidentController.Instance;
         if (!crc.isInitialized()) {
             crc.initialize(rsdt);
         }
@@ -109,7 +109,7 @@ public class LoginController : MonoBehaviour
 
         float height = 0.5F;
         if (rsdt.flr != "g") {
-            height = 2.6F;  // bldg is larger when inside a bldg, so floor is higher
+            height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
         }
         Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
         baseline.x += rsdt.x;
@@ -134,7 +134,7 @@ public class LoginController : MonoBehaviour
         // hide the login dialog
         this.gameObject.SetActive(false);
 
-        EventManager.instance.TriggerEvent("LoginSuccessful");
+        EventManager.Instance.TriggerEvent("LoginSuccessful");
     }
 
 
@@ -150,7 +150,7 @@ public class LoginController : MonoBehaviour
 
         // call the login API
     	Debug.Log("Invoking resident Login API for resident " + email);
-        GlobalConfig conf = GlobalConfig.instance;
+        GlobalConfig conf = GlobalConfig.Instance;
 		string url = conf.bldgServer + conf.residentsBasePath + "/login";
 		Debug.Log("url = " + url);
 		// invoke login API
@@ -192,7 +192,7 @@ public class LoginController : MonoBehaviour
     void pollForVerificationStatus() {
         if (isPollingForVerificationStatus) {
             Debug.Log("Polling for verification status!");
-            GlobalConfig conf = GlobalConfig.instance;
+            GlobalConfig conf = GlobalConfig.Instance;
             string url = conf.bldgServer + conf.residentsBasePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
             Debug.Log("url = " + url);
             // invoke verification status API

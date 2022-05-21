@@ -174,7 +174,7 @@ public class BldgController : MonoBehaviour
 		int newY = (int)(point.z - floorStartZ);
 		Debug.Log("Invoking relocate API to move bldg " + clickedModel.name + ", from (" + clickedModel.x + ", " + clickedModel.y + ") to (" + newX + ", " + newY + ")");
 		string newAddress = generateNewAddress(clickedModel.address, newX, newY);
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
 		string url = conf.bldgServer + conf.bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
 		Debug.Log("url = " + url);
 		// invoke relocate API
@@ -253,7 +253,7 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests 
         Debug.Log("Resolvin bldg for web_url: " + web_url);
 		string address = null;
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
 		string url = conf.bldgServer + conf.bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
 		Debug.Log(url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
@@ -301,7 +301,7 @@ public class BldgController : MonoBehaviour
 	}
 
 	string getCurrentAddressFromResident() {
-		CurrentResidentController crc = CurrentResidentController.instance;
+		CurrentResidentController crc = CurrentResidentController.Instance;
 		return crc.resident.flr;
 	}
 
@@ -372,7 +372,7 @@ public class BldgController : MonoBehaviour
 		// escape the address
 		address = Uri.EscapeDataString(address);
 		Debug.Log("address escaped to: " + address);
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/look/" + address;
 		// Debug.Log("Loading buildings from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
@@ -399,7 +399,7 @@ public class BldgController : MonoBehaviour
 						GameObject.Destroy (idsCache[b.id]);
 					}
 
-					EntityPrefabMapping mapping = EntityPrefabMapping.instance;
+					EntityPrefabMapping mapping = EntityPrefabMapping.Instance;
 
 					float height = 0F;
 					if (address != "g") {
@@ -437,7 +437,7 @@ public class BldgController : MonoBehaviour
 		// escape the address
 		address = Uri.EscapeDataString(address);
 		Debug.Log("address escaped to: " + address);
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
 		bool clearedChatHistory = false;
@@ -465,7 +465,7 @@ public class BldgController : MonoBehaviour
 
 					float height = 0.5F;
 					if (address != "g") {
-						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
+						height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
 					}
 					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += r.x;
@@ -499,7 +499,7 @@ public class BldgController : MonoBehaviour
 		// escape the address
 		address = Uri.EscapeDataString(address);
 		Debug.Log("address escaped to: " + address);
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.roadsBasePath + "/look/" + address;
 		Debug.Log("Loading roads from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
@@ -611,7 +611,7 @@ public class BldgController : MonoBehaviour
 		// url encode the address
 		string encodedAddress = Uri.EscapeDataString(address);
 		// invoke the get bldg API
-		GlobalConfig conf = GlobalConfig.instance;
+		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
 		Debug.Log("Loading container bldg model from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);

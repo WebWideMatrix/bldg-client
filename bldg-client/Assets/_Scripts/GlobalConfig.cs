@@ -7,7 +7,7 @@ using Utils;
 
 
 [CreateAssetMenu(fileName = "Config", menuName = "General Config", order = 1)]
-public class GlobalConfig : ScriptableSingleton<GlobalConfig>
+public class GlobalConfig : ScriptableObjectSingleton<GlobalConfig>
 {   
 
     public string bldgServer = "https://api.w2m.site";

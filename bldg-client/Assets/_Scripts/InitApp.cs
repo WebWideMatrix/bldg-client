@@ -26,7 +26,7 @@ public class InitApp : MonoBehaviour
     {
         Debug.Log("*********************   Init App   *********************");
         // check whether logged in already
-        CurrentResidentController crc = CurrentResidentController.instance;
+        CurrentResidentController crc = CurrentResidentController.Instance;
         if (!crc.isInitialized()) {
             Debug.Log("CRC not initialized");
             loginController.Show();
@@ -37,8 +37,8 @@ public class InitApp : MonoBehaviour
         }
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);
-        EventManager.instance.StartListening("SwitchToFlying", onFlying);
-        EventManager.instance.StartListening("SwitchToWalking", onWalking);
+        EventManager.Instance.StartListening("SwitchToFlying", onFlying);
+        EventManager.Instance.StartListening("SwitchToWalking", onWalking);
     }
 
 

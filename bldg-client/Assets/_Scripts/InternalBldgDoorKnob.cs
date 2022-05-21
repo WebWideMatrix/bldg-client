@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+// using UnityEditor;
 using UnityEngine.Events;
 using Models;
 using Utils;
@@ -28,16 +28,16 @@ public class InternalBldgDoorKnob : MonoBehaviour
             getContainerBldgDetails();
         }
         
-        if (EditorUtility.DisplayDialog ("Exiting " + bldgName, "You're about to exit the " + bldgName + " team HQ.", "Ok", "Cancel")) {
-            EventManager.instance.TriggerEvent("ExitingBldg");
+        // if (EditorUtility.DisplayDialog ("Exiting " + bldgName, "You're about to exit the " + bldgName + " team HQ.", "Ok", "Cancel")) {
+            EventManager.Instance.TriggerEvent("ExitingBldg");
             Debug.Log("Invoking exit bldg action");
-            CurrentResidentController crc = CurrentResidentController.instance;
+            CurrentResidentController crc = CurrentResidentController.Instance;
             Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);
             crc.SendExitBldgAction(new ExitBldgAction() {
                 resident_email = crc.resident.email,
                 action_type = "EXIT_BLDG",
                 bldg_address = bldgAddress
             });
-        }
+        // }
     }
 }

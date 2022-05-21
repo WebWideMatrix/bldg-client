@@ -65,7 +65,7 @@ public class ResidentController : MonoBehaviour
     }
 
     void handleMovement() {
-        CurrentResidentController currentResident = CurrentResidentController.instance; // TODO only get it when you need it
+        CurrentResidentController currentResident = CurrentResidentController.Instance; // TODO only get it when you need it
         if (Input.GetKey("f") && !currentResident.inFlyingMode) {
             // clicking f while on the land: start flying
             currentResident.inFlyingMode = true;
@@ -74,7 +74,7 @@ public class ResidentController : MonoBehaviour
             float h = getFlyHeight(currentResident);
             transform.position = new Vector3(transform.position.x, h, transform.position.z);
             //transform.Rotate(90, 0, 0);
-            EventManager.instance.TriggerEvent("SwitchToFlying");
+            EventManager.Instance.TriggerEvent("SwitchToFlying");
         }
         else if (Input.GetKey("f") && currentResident.flyingHigh) {
             // clicking f while flying high: fly lower
@@ -90,7 +90,7 @@ public class ResidentController : MonoBehaviour
             float h = getFlyHeight(currentResident);
             transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
             //transform.Rotate(90, 0, 0);
-            EventManager.instance.TriggerEvent("SwitchToFlying");
+            EventManager.Instance.TriggerEvent("SwitchToFlying");
         }
         else if (Input.GetKey("h") && !currentResident.flyingHigh) {
             // clicking h while flying low: fly higher
@@ -107,7 +107,7 @@ public class ResidentController : MonoBehaviour
             float h = getGroundHeight(currentResident);
             transform.position = new Vector3(transform.position.x, h, transform.position.z);
             //transform.Rotate(-90, 0, 0);
-            EventManager.instance.TriggerEvent("SwitchToWalking");
+            EventManager.Instance.TriggerEvent("SwitchToWalking");
         }
 
         // control movement
