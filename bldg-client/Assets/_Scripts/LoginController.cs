@@ -19,12 +19,6 @@ public class LoginController : MonoBehaviour
 
     public BldgController bldgController;
 
-
-    // TODO is there a better place for the cameras?
-    public CinemachineVirtualCamera flyCamera;
-    public CinemachineVirtualCamera walkCamera;
-    
-	
     public Button signInButton;
     public TMP_InputField emailInputField;
     public TMP_Text errorDisplay;
@@ -35,8 +29,9 @@ public class LoginController : MonoBehaviour
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
-    private UnityAction onFlying;
-    private UnityAction onWalking;
+    public CinemachineVirtualCamera flyCamera;
+    public CinemachineVirtualCamera walkCamera;
+
 
     private bool isPollingForVerificationStatus = false;
     private int pollInterval = 2000;
@@ -73,15 +68,12 @@ public class LoginController : MonoBehaviour
     private void Awake()
     {
         Debug.Log("LoginController Awake");
-        onFlying = new UnityAction(OnFlying);
-        onWalking = new UnityAction(OnWalking);
+
     }
 
     void OnEnable()
     {
         Debug.Log("LoginController On Enable");
-        EventManager.StartListening("SwitchToFlying", onFlying);
-        EventManager.StartListening("SwitchToWalking", onWalking);
     }
 
     void OnDisable()
@@ -89,20 +81,6 @@ public class LoginController : MonoBehaviour
         Debug.Log("LoginController On Disable");
         //EventManager.StopListening("SwitchToFlying", onFlying);
         //EventManager.StopListening("SwitchToWalking", onWalking);
-    }
-
-    private void OnFlying()
-    {
-        Debug.Log("On Flying");
-        flyCamera.gameObject.SetActive(true);
-        walkCamera.gameObject.SetActive(false);
-    }
-
-    private void OnWalking()
-    {
-        Debug.Log("On Walking");
-        walkCamera.gameObject.SetActive(true);
-        flyCamera.gameObject.SetActive(false);
     }
 
     public void Show() {
@@ -156,7 +134,7 @@ public class LoginController : MonoBehaviour
         // hide the login dialog
         this.gameObject.SetActive(false);
 
-        EventManager.TriggerEvent("LoginSuccessful");
+        EventManager.instance.TriggerEvent("LoginSuccessful");
     }
 
 

@@ -20,7 +20,11 @@ public class ResidentController : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float rotateSpeed = 100f;
 
-    [SerializeField] int FLY_HEIGHT = 80;
+    [SerializeField] float FLY_HEIGHT = 80F;
+    [SerializeField] float INDOOR_FLY_HEIGHT = 10F;
+    
+    [SerializeField] float GROUND_HEIGHT = 0.5F;
+    [SerializeField] float INDOOR_GROUND_HEIGHT = 2F;
 
     float prevX = 0;
     float prevZ = 0;
@@ -46,36 +50,53 @@ public class ResidentController : MonoBehaviour
         isCurrentUser = isCurrent;
     }
 
+    float getFlyHeight(CurrentResidentController crc) {
+        if (crc.resident.flr == "g")
+            return FLY_HEIGHT;
+        else
+            return INDOOR_FLY_HEIGHT;
+    }
+
+    float getGroundHeight(CurrentResidentController crc) {
+        if (crc.resident.flr == "g")
+            return GROUND_HEIGHT;
+        else
+            return INDOOR_GROUND_HEIGHT;
+    }
 
     void handleMovement() {
-        CurrentResidentController currentResident = CurrentResidentController.instance;
+        CurrentResidentController currentResident = CurrentResidentController.instance; // TODO only get it when you need it
         if (Input.GetKey("f") && !currentResident.inFlyingMode) {
             // clicking f while on the land: start flying
             currentResident.inFlyingMode = true;
             currentResident.flyingHigh = false;
             Debug.Log("Fly mode");
-            transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
+            float h = getFlyHeight(currentResident);
+            transform.position = new Vector3(transform.position.x, h, transform.position.z);
             //transform.Rotate(90, 0, 0);
-            EventManager.TriggerEvent("SwitchToFlying");
+            EventManager.instance.TriggerEvent("SwitchToFlying");
         }
         else if (Input.GetKey("f") && currentResident.flyingHigh) {
             // clicking f while flying high: fly lower
             currentResident.flyingHigh = false;
-            transform.position = new Vector3(transform.position.x, FLY_HEIGHT, transform.position.z);
+            float h = getFlyHeight(currentResident);
+            transform.position = new Vector3(transform.position.x, h, transform.position.z);
         }
 
         if (Input.GetKey("h") && !currentResident.inFlyingMode) {
             // clicking h while on the land: fly high
             currentResident.inFlyingMode = true;
             Debug.Log("High fly mode");
-            transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
+            float h = getFlyHeight(currentResident);
+            transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
             //transform.Rotate(90, 0, 0);
-            EventManager.TriggerEvent("SwitchToFlying");
+            EventManager.instance.TriggerEvent("SwitchToFlying");
         }
         else if (Input.GetKey("h") && !currentResident.flyingHigh) {
             // clicking h while flying low: fly higher
             currentResident.flyingHigh = true;
-            transform.position = new Vector3(transform.position.x, FLY_HEIGHT * 3.5F, transform.position.z);
+            float h = getFlyHeight(currentResident);
+            transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
         }
         
         if (Input.GetKey("l") && currentResident.inFlyingMode) {
@@ -83,9 +104,10 @@ public class ResidentController : MonoBehaviour
             currentResident.inFlyingMode = false;
             currentResident.flyingHigh = false;
             Debug.Log("Walking mode");
-            transform.position = new Vector3(transform.position.x, 0.5F, transform.position.z);
+            float h = getGroundHeight(currentResident);
+            transform.position = new Vector3(transform.position.x, h, transform.position.z);
             //transform.Rotate(-90, 0, 0);
-            EventManager.TriggerEvent("SwitchToWalking");
+            EventManager.instance.TriggerEvent("SwitchToWalking");
         }
 
         // control movement
@@ -128,7 +150,7 @@ public class ResidentController : MonoBehaviour
             }
         }
 
-        // check whether residemt moved 
+        // check whether resident moved 
         if (isMovementChange) {
             //Debug.Log("Moved " + xValue + ", " + zValue);
             // Send action to bldg server

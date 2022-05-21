@@ -29,7 +29,7 @@ public class InternalBldgDoorKnob : MonoBehaviour
         }
         
         if (EditorUtility.DisplayDialog ("Exiting " + bldgName, "You're about to exit the " + bldgName + " team HQ.", "Ok", "Cancel")) {
-            EventManager.TriggerEvent("ExitingBldg");
+            EventManager.instance.TriggerEvent("ExitingBldg");
             Debug.Log("Invoking exit bldg action");
             CurrentResidentController crc = CurrentResidentController.instance;
             Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);

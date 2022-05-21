@@ -34,14 +34,14 @@ public class ChatUIController : MonoBehaviour {
         ChatInputField.onSubmit.AddListener(HandleNewMessage);
         ChatInputField.onSelect.AddListener(onSelect);
         ChatInputField.onDeselect.AddListener(onDeselect);
-        EventManager.StartListening("LoginSuccessful", onLogin);
+        EventManager.instance.StartListening("LoginSuccessful", onLogin);
     }
 
     void OnDisable()
     {
         
         ChatInputField.onSubmit.RemoveListener(HandleNewMessage);
-        EventManager.StopListening("LoginSuccessful", onLogin);
+        EventManager.instance.StopListening("LoginSuccessful", onLogin);
     }
 
 

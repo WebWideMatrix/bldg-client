@@ -3694,7 +3694,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8578088, y: 1}
+    m_SensorSize: {x: 1.53861, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3889,14 +3889,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
-  flyCamera: {fileID: 199427418}
-  walkCamera: {fileID: 1825441622}
   signInButton: {fileID: 441306661}
   emailInputField: {fileID: 618908368}
   errorDisplay: {fileID: 1498641680}
   verifyDisplay: {fileID: 84836334}
   floorStartX: -8
   floorStartZ: -6
+  flyCamera: {fileID: 199427418}
+  walkCamera: {fileID: 1825441622}
 --- !u!1 &1985637515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3908,7 +3908,6 @@ GameObject:
   - component: {fileID: 1985637517}
   - component: {fileID: 1985637516}
   - component: {fileID: 1985637518}
-  - component: {fileID: 1985637519}
   m_Layer: 0
   m_Name: AppController
   m_TagString: Untagged
@@ -3956,18 +3955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginController: {fileID: 1914212569}
---- !u!114 &1985637519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985637515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d845d18d46fc644ccb143a1a4b1cb651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  flyCamera: {fileID: 199427418}
+  walkCamera: {fileID: 1825441622}
 --- !u!1 &2030830002
 GameObject:
   m_ObjectHideFlags: 0
