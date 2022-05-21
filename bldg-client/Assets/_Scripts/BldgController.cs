@@ -460,7 +460,11 @@ public class BldgController : MonoBehaviour
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
-					Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+					float height = 0.5F;
+					if (address != "g") {
+						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
+					}
+					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += r.x;
 					baseline.z += r.y;
 					// Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
@@ -510,14 +514,14 @@ public class BldgController : MonoBehaviour
 						continue;
 					}
 
-					renderRoad(r, r.from_x, r.from_y, r.to_x, r.to_y);
+					renderRoad(address, r, r.from_x, r.from_y, r.to_x, r.to_y);
 				}
 				Debug.Log("Rendered " + count + " roads");
 			});
 	}
 
 
-	void renderRoad(Road r, int from_x, int from_y, int to_x, int to_y)
+	void renderRoad(string address, Road r, int from_x, int from_y, int to_x, int to_y)
 	{	
 		int d_x = 0;
 		if (to_x != from_x) {
@@ -530,7 +534,7 @@ public class BldgController : MonoBehaviour
 		
 		// if straight line, draw 1 segment
 		if (d_x == 0 || d_y == 0) {
-			renderRoadSegment(r, from_x, from_y, d_x, d_y);
+			renderRoadSegment(address, r, from_x, from_y, d_x, d_y);
 		}
 		// else break to 2 segments
 		else {
@@ -546,14 +550,18 @@ public class BldgController : MonoBehaviour
 				mid_y = mid_y + d_y;
 				d_y = -1 * d_y;
 			}
-			renderRoadSegment(r, from_x, from_y, d_x, 0);
-			renderRoadSegment(r, mid_x, mid_y, 0, d_y);
+			renderRoadSegment(address, r, from_x, from_y, d_x, 0);
+			renderRoadSegment(address, r, mid_x, mid_y, 0, d_y);
 		}
 	}
 
-	void renderRoadSegment(Road r, int from_x, int from_y, int d_x, int d_y) 
+	void renderRoadSegment(string address, Road r, int from_x, int from_y, int d_x, int d_y) 
 	{
-		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
+		float height = 0.01F;
+		if (address != "g") {
+			height = 2.01F;  // bldg is larger when inside a bldg, so floor is higher
+		}
+		Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);
 		float default_road_scale = 10.01F;
 		baseline.x += from_x;
 		baseline.z += from_y;
