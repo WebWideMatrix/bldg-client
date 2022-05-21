@@ -328,6 +328,33 @@ public class BldgController : MonoBehaviour
 
 	}
 
+	void renderModelData(GameObject bldg, Bldg data) {
+		TMP_Text[] labels = bldg.GetComponentsInChildren<TMP_Text>();
+		foreach (TMP_Text label in labels) {
+			if (label.name == "summary")
+				label.text = data.summary;
+			else if (label.name == "summary_top")
+				label.text = data.summary;
+			else if (label.name == "entity_type")
+				label.text = data.entity_type;
+			else if (label.name == "name")
+				label.text = data.name;
+			else if (label.name == "name2")
+				label.text = data.name;		
+			else if (label.name == "name_top")
+				label.text = data.name;
+			else if (label.name == "state")
+				label.text = data.state;
+		}
+		ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
+		foreach (ImageController imgDisplay in imageDisplays) {
+			imgDisplay.SetImageURL(data.picture_url);
+		}
+		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
+		foreach (LinkController linkObj in linkObjects) {
+			linkObj.SetLinkURL(data.web_url);
+		}
+	}
 
 	void reloadBuildings(string address) {
 		var idsCache = new Dictionary<int, GameObject>();
@@ -388,31 +415,7 @@ public class BldgController : MonoBehaviour
 						bldgClone.tag = "Building";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 						bldgObject.initialize(b, this);
-						TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
-						foreach (TMP_Text label in labels) {
-							if (label.name == "summary")
-								label.text = b.summary;
-							else if (label.name == "summary_top")
-								label.text = b.summary;
-							else if (label.name == "entity_type")
-								label.text = b.entity_type;
-							else if (label.name == "name")
-								label.text = b.name;
-							else if (label.name == "name2")
-								label.text = b.name;		
-							else if (label.name == "name_top")
-								label.text = b.name;
-							else if (label.name == "state")
-								label.text = b.state;
-						}
-						ImageController[] imageDisplays = bldgClone.GetComponentsInChildren<ImageController>();
-						foreach (ImageController imgDisplay in imageDisplays) {
-							imgDisplay.SetImageURL(b.picture_url);
-						}
-						LinkController[] linkObjects = bldgClone.GetComponentsInChildren<LinkController>();
-						foreach (LinkController linkObj in linkObjects) {
-							linkObj.SetLinkURL(b.web_url);
-						}
+						renderModelData(bldgClone, b);
 					} catch (Exception e) {
 						Debug.LogError(e.ToString());
 					}
@@ -616,6 +619,8 @@ public class BldgController : MonoBehaviour
 		{
 			bldgObj.model = res.data;
 			Debug.Log("Loaded container bldg data: " + bldgObj.model.name);
+			renderModelData(container, res.data);
+			Debug.Log("Rendered bldg data");
 		}).Catch(err => {
 			Debug.Log(err.Message);
 			Debug.Log("Failed to load container bldg model: " + address);
