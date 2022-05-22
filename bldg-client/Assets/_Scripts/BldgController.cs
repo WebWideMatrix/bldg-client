@@ -14,38 +14,13 @@ using UnityEngine.Networking;
 
 public class BldgController : MonoBehaviour
 {
-
-	public string bldgServer = "https://api.w2m.site";
-	public string bldgsBasePath = "/v1/bldgs";
-	public string residentsBasePath = "/v1/residents";
-	public string roadsBasePath = "/v1/roads";
-
 	public string DEFAULT_BLDG = "fromteal.app";
-
 
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
-	// SHAPES
-    // TODO: change to array
-	public GameObject whiteboardBldg;
-	public GameObject presentationStandBldg;
-	public GameObject trafficSignBldg;
-	public GameObject streetSignBldg;
-	
-	public GameObject chairBldg;
-	public GameObject laptopBldg;
-	public GameObject briefcaseBldg;
-	public GameObject tabletBldg;
-	public GameObject filingCabinetBldg;
-	public GameObject buildingWithStorefront;
-
-	public GameObject roadObject;
-	public GameObject greenLotObject;
-	public GameObject blueLotObject;
-	public GameObject yellowLotObject;
-
 	public GameObject baseResidentObject;
+	public GameObject roadObject;
 
 	public GameObject contextMenu;
 
@@ -72,13 +47,14 @@ public class BldgController : MonoBehaviour
 	BldgChatController bldgChatController;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
     	// #if !UNITY_EDITOR && UNITY_WEBGL
 		// 	WebGLInput.captureAllKeyboardInput = false;
 		// #endif
-        Debug.Log("Started");
+        Debug.Log("BldgController Started");
 
 		bldgChatController = gameObject.GetComponent<BldgChatController>();
 
@@ -98,6 +74,9 @@ public class BldgController : MonoBehaviour
     }
 
 	public void SetCurrentResidentController(ResidentController rsdtController) {
+		if (bldgChatController == null) {
+			bldgChatController = gameObject.GetComponent<BldgChatController>();
+		}
 		bldgChatController.SetResidentController(rsdtController);
 	}
 
@@ -115,38 +94,39 @@ public class BldgController : MonoBehaviour
 		contextMenu.gameObject.SetActive(false);
 	}
 
-	public void handleFloorClick(Vector3 point) {
-		Debug.Log("Floor click at " + point);
-		if (isRelocating) {
-			completeRelocatingBldg(point);
-		} else if (!isShowingContextMenu) {
-			// camera.moveToStart();
-			contextMenu.gameObject.SetActive(false);
-			clickedModel = null;
-			clickedObject = null;
-		}
-	}
+	// public void handleFloorClick(Vector3 point) {
+	// 	Debug.Log("Floor click at " + point);
+	// 	if (isRelocating) {
+	// 		completeRelocatingBldg(point);
+	// 	} else if (!isShowingContextMenu) {
+	// 		// camera.moveToStart();
+	// 		contextMenu.gameObject.SetActive(false);
+	// 		clickedModel = null;
+	// 		clickedObject = null;
+	// 	}
+	// }
 
 
-    public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
-        //camera.moveToTarget(position);
-		if (clickedModel != bldgModel) {
-			Debug.Log("Clicked on different object: " + clickedModel.name);
-			clickedObject = bldgObject;
-			clickedModel = bldgModel;
-			hideContextMenu();
-			targetURL = null;
-		}
-    }
+    // public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
 
-    public void handleLongClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
-        Debug.Log("long click on: " + bldgModel.name);
-		//showContextMenu();
-    }
+    //     //camera.moveToTarget(position);
+	// 	if (clickedModel != bldgModel) {
+	// 		Debug.Log("Clicked on different object: " + clickedModel.name);
+	// 		clickedObject = bldgObject;
+	// 		clickedModel = bldgModel;
+	// 		hideContextMenu();
+	// 		targetURL = null;
+	// 	}
+    // }
 
-    public void handleRightClick(Bldg model, Vector3 position) {
-        Debug.Log("right click on: " + model.name);
-    }
+    // public void handleLongClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
+    //     Debug.Log("long click on: " + bldgModel.name);
+	// 	//showContextMenu();
+    // }
+
+    // public void handleRightClick(Bldg model, Vector3 position) {
+    //     Debug.Log("right click on: " + model.name);
+    // }
 
 	public void browse() {
 		if (targetURL != null) {
@@ -194,7 +174,8 @@ public class BldgController : MonoBehaviour
 		int newY = (int)(point.z - floorStartZ);
 		Debug.Log("Invoking relocate API to move bldg " + clickedModel.name + ", from (" + clickedModel.x + ", " + clickedModel.y + ") to (" + newX + ", " + newY + ")");
 		string newAddress = generateNewAddress(clickedModel.address, newX, newY);
-		string url = bldgServer + bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
+		GlobalConfig conf = GlobalConfig.Instance;
+		string url = conf.bldgServer + conf.bldgsBasePath + "/" + clickedModel.address + "/relocate_to/" + newAddress;
 		Debug.Log("url = " + url);
 		// invoke relocate API
 		RequestHelper req = RestUtils.createRequest("POST", url);
@@ -253,11 +234,17 @@ public class BldgController : MonoBehaviour
 	// 	AddressChanged ();
 	// }
 
-
 	public void SetAddress(string address) {
 		Debug.Log("SetAddress -> " + address);
 		currentAddress = address;
 		AddressChanged();
+	}
+
+
+	public void EnterBuildingByAddress(string address) {
+		//clearEverythingBut(address);
+		//address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
+		//SetAddress(address);
 	}
 
 	public void EnterBuilding(string web_url) {
@@ -266,7 +253,8 @@ public class BldgController : MonoBehaviour
 		// We can add default request headers for all requests 
         Debug.Log("Resolvin bldg for web_url: " + web_url);
 		string address = null;
-		string url = bldgServer + bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
+		GlobalConfig conf = GlobalConfig.Instance;
+		string url = conf.bldgServer + conf.bldgsBasePath + "/resolve_address?web_url=" + UnityWebRequest.EscapeURL(web_url);
 		Debug.Log(url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get(req).Then(res =>
@@ -274,15 +262,12 @@ public class BldgController : MonoBehaviour
 				Debug.Log(res);
 				address = res.Text;
 				Debug.Log("Resolve address was successful: " + address);
-				address = address + AddressUtils.DELIM + "l0";	// TODO add floor only if really needed
-				SetAddress(address);
-
+				EnterBuildingByAddress(address);
 			}).Catch(err => {
 				Debug.Log(err.Message);
 				Debug.Log("Failed to resolve address for: " + web_url);
 			});
 	}
-
 
 	public void AddressChanged() {
 		Debug.Log ("Address changed to: " + currentAddress);
@@ -315,11 +300,15 @@ public class BldgController : MonoBehaviour
 		Reload();
 	}
 
+	string getCurrentAddressFromResident() {
+		CurrentResidentController crc = CurrentResidentController.Instance;
+		return crc.resident.flr;
+	}
+
 
 	public void Reload() {
 		Debug.Log("Reload invoked");
-		// TODO compare new content with existing to decide whether a reload is really needed
-		switchAddress (currentAddress);
+		switchAddress (getCurrentAddressFromResident());
 		if (!isReloadingInLoop) {
 			Debug.Log("Starting reload loop");
 			isReloadingInLoop = true;
@@ -328,17 +317,44 @@ public class BldgController : MonoBehaviour
 	}
 
 	void switchAddress(string address) {
-
-
 		if (address.ToLower() != "g") {
+			reloadContainerBldg();
 			updateFloorSign ();
 		}
 
 		reloadBuildings(address);
 		reloadResidents(address);
 		reloadRoads(address);
+
 	}
 
+	void renderModelData(GameObject bldg, Bldg data) {
+		TMP_Text[] labels = bldg.GetComponentsInChildren<TMP_Text>();
+		foreach (TMP_Text label in labels) {
+			if (label.name == "summary")
+				label.text = data.summary;
+			else if (label.name == "summary_top")
+				label.text = data.summary;
+			else if (label.name == "entity_type")
+				label.text = data.entity_type;
+			else if (label.name == "name")
+				label.text = data.name;
+			else if (label.name == "name2")
+				label.text = data.name;		
+			else if (label.name == "name_top")
+				label.text = data.name;
+			else if (label.name == "state")
+				label.text = data.state;
+		}
+		ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
+		foreach (ImageController imgDisplay in imageDisplays) {
+			imgDisplay.SetImageURL(data.picture_url);
+		}
+		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
+		foreach (LinkController linkObj in linkObjects) {
+			linkObj.SetLinkURL(data.web_url);
+		}
+	}
 
 	void reloadBuildings(string address) {
 		var idsCache = new Dictionary<int, GameObject>();
@@ -346,11 +362,18 @@ public class BldgController : MonoBehaviour
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
 			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
-			idsCache.Add(bObj.model.id, bldg);
-			addrCache.Add(bObj.model.id, bObj.model.address);
+			if (!idsCache.ContainsKey(bObj.model.id)) {
+				idsCache.Add(bObj.model.id, bldg);
+				addrCache.Add(bObj.model.id, bObj.model.address);
+			} else {
+				Debug.LogWarning("Building rendered twice! " + bObj.model.name);
+			}
 		}
-
-        string url = bldgServer + bldgsBasePath + "/look/" + address;
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
+		GlobalConfig conf = GlobalConfig.Instance;
+        string url = conf.bldgServer + conf.bldgsBasePath + "/look/" + address;
 		// Debug.Log("Loading buildings from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Bldg>(req).Then(res =>
@@ -358,7 +381,7 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Bldg b in res) {
 					count += 1;
-					// Debug.Log("processing bldg " + count);
+					Debug.Log("processing bldg " + count + ": " + b.name);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
@@ -376,41 +399,28 @@ public class BldgController : MonoBehaviour
 						GameObject.Destroy (idsCache[b.id]);
 					}
 
-					Vector3 baseline = new Vector3(floorStartX, 0F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+					EntityPrefabMapping mapping = EntityPrefabMapping.Instance;
+
+					float height = 0F;
+					if (address != "g") {
+						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
+					}
+					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
-					GameObject prefab = getPrefabByEntityClass(b.entity_type);
-					GameObject bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
-					bldgClone.tag = "Building";
-                    BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
-					bldgObject.initialize(b, this);
-					Debug.Log(b.summary);
-					TMP_Text[] labels = bldgClone.GetComponentsInChildren<TMP_Text>();
-					foreach (TMP_Text label in labels) {
-						if (label.name == "summary")
-							label.text = b.summary;
-						else if (label.name == "summary_top") {
-							label.text = b.summary;
-						}
-						else if (label.name == "entity_type")
-							label.text = b.entity_type;
-						else if (label.name == "name")
-							label.text = b.name;
-						else if (label.name == "name2")
-							label.text = b.name;		
-						else if (label.name == "name_top")
-							label.text = b.name;
-						else if (label.name == "state")
-							label.text = b.state;
+					GameObject prefab = mapping.getPrefabByEntityClass(b.entity_type);
+					GameObject bldgClone = null;
+					try {
+						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
+						bldgClone.tag = "Building";
+						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
+						bldgObject.initialize(b, this);
+						renderModelData(bldgClone, b);
+					} catch (Exception e) {
+						Debug.LogError(e.ToString());
 					}
-					ImageController[] imageDisplays = bldgClone.GetComponentsInChildren<ImageController>();
-					foreach (ImageController imgDisplay in imageDisplays) {
-						imgDisplay.SetImageURL(b.picture_url);
-					}
-					LinkController[] linkObjects = bldgClone.GetComponentsInChildren<LinkController>();
-					foreach (LinkController linkObj in linkObjects) {
-						linkObj.SetLinkURL(b.web_url);
-					}
+					
+					
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
@@ -424,8 +434,11 @@ public class BldgController : MonoBehaviour
 		foreach (GameObject rsdnt in currentFlrResidents) {
 			GameObject.Destroy (rsdnt);
 		}
-
-        string url = bldgServer + residentsBasePath + "/look/" + address;
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
+		GlobalConfig conf = GlobalConfig.Instance;
+        string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
 		bool clearedChatHistory = false;
 		RequestHelper req = RestUtils.createRequest("GET", url);
@@ -450,7 +463,11 @@ public class BldgController : MonoBehaviour
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
-					Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+					float height = 0.5F;
+					if (address != "g") {
+						height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
+					}
+					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += r.x;
 					baseline.z += r.y;
 					// Debug.Log("Rendering resident " + r.alias + " at " + baseline.x + ", " + baseline.z);
@@ -479,8 +496,11 @@ public class BldgController : MonoBehaviour
 				idsCache.Add(rObj.model.id, road);
 			}
 		}
-
-        string url = bldgServer + roadsBasePath + "/look/" + address;
+		// escape the address
+		address = Uri.EscapeDataString(address);
+		Debug.Log("address escaped to: " + address);
+		GlobalConfig conf = GlobalConfig.Instance;
+        string url = conf.bldgServer + conf.roadsBasePath + "/look/" + address;
 		Debug.Log("Loading roads from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Road>(req).Then(res =>
@@ -497,14 +517,14 @@ public class BldgController : MonoBehaviour
 						continue;
 					}
 
-					renderRoad(r, r.from_x, r.from_y, r.to_x, r.to_y);
+					renderRoad(address, r, r.from_x, r.from_y, r.to_x, r.to_y);
 				}
 				Debug.Log("Rendered " + count + " roads");
 			});
 	}
 
 
-	void renderRoad(Road r, int from_x, int from_y, int to_x, int to_y)
+	void renderRoad(string address, Road r, int from_x, int from_y, int to_x, int to_y)
 	{	
 		int d_x = 0;
 		if (to_x != from_x) {
@@ -517,7 +537,7 @@ public class BldgController : MonoBehaviour
 		
 		// if straight line, draw 1 segment
 		if (d_x == 0 || d_y == 0) {
-			renderRoadSegment(r, from_x, from_y, d_x, d_y);
+			renderRoadSegment(address, r, from_x, from_y, d_x, d_y);
 		}
 		// else break to 2 segments
 		else {
@@ -533,14 +553,18 @@ public class BldgController : MonoBehaviour
 				mid_y = mid_y + d_y;
 				d_y = -1 * d_y;
 			}
-			renderRoadSegment(r, from_x, from_y, d_x, 0);
-			renderRoadSegment(r, mid_x, mid_y, 0, d_y);
+			renderRoadSegment(address, r, from_x, from_y, d_x, 0);
+			renderRoadSegment(address, r, mid_x, mid_y, 0, d_y);
 		}
 	}
 
-	void renderRoadSegment(Road r, int from_x, int from_y, int d_x, int d_y) 
+	void renderRoadSegment(string address, Road r, int from_x, int from_y, int d_x, int d_y) 
 	{
-		Vector3 baseline = new Vector3(floorStartX, 0.01F, floorStartZ);
+		float height = 0.01F;
+		if (address != "g") {
+			height = 2.01F;  // bldg is larger when inside a bldg, so floor is higher
+		}
+		Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);
 		float default_road_scale = 10.01F;
 		baseline.x += from_x;
 		baseline.z += from_y;
@@ -552,40 +576,62 @@ public class BldgController : MonoBehaviour
 		roadClone.tag = "Road";
 	}
 
-	GameObject getPrefabByEntityClass(string entity_type) {
-		switch (entity_type) {
-		case "purpose":
-			return whiteboardBldg;
-		case "cantata":
-			return presentationStandBldg;
-		case "neighborhood":
-			return trafficSignBldg;
-		case "street":
-			return streetSignBldg;
-		case "member":
-			return laptopBldg;
-		case "milestone":
-			return briefcaseBldg;
-		case "web_page":
-			return tabletBldg;
-		case "team":
-			return buildingWithStorefront;
-		case "lot":
-			return greenLotObject;
-		case "green-lot":
-			return greenLotObject;
-		case "blue-lot":
-			return blueLotObject;
-		case "yellow-lot":
-			return yellowLotObject;
-		default:
-			return chairBldg;
+
+	GameObject getContainerBldg() {
+		GameObject[] found = GameObject.FindGameObjectsWithTag("ContainerBuilding");
+		if (found.Length == 0) return null;
+		return found[0];
+	}
+
+
+	string removeFlrFromAddress(string address) {
+		string[] addressParts = address.Split(AddressUtils.DELIM_CHAR);
+		string lastPart = addressParts[addressParts.Length - 1];
+		if (lastPart.Substring(0, 1) == "l") {
+			string[] newParts = new string[addressParts.Length - 1];
+			for (int i = 0; i < addressParts.Length - 1; i++) {
+				newParts[i] = addressParts[i];
+			}
+			return string.Join(AddressUtils.DELIM_CHAR, newParts);
 		}
+		return address;
+	}
+	
+
+	void reloadContainerBldg() {
+		// check whether the container bldg already has a model object
+		GameObject container = getContainerBldg();
+		if (container == null) return;
+		BldgObject bldgObj = container.GetComponent<BldgObject>();
+		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
+
+		// if not: load the data of the container bldg
+		// remove floor from address
+		string address = removeFlrFromAddress(currentAddress);
+		// url encode the address
+		string encodedAddress = Uri.EscapeDataString(address);
+		// invoke the get bldg API
+		GlobalConfig conf = GlobalConfig.Instance;
+        string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
+		Debug.Log("Loading container bldg model from: " + url);
+		RequestHelper req = RestUtils.createRequest("GET", url);
+		RestClient.Get<WrappedBldg>(req).Then(res =>
+		{
+			bldgObj.model = res.data;
+			Debug.Log("Loaded container bldg data: " + bldgObj.model.name);
+			renderModelData(container, res.data);
+			Debug.Log("Rendered bldg data");
+		}).Catch(err => {
+			Debug.Log(err.Message);
+			Debug.Log("Failed to load container bldg model: " + address);
+		});
 	}
 
 	void updateFloorSign() {
-		TextMesh flrSign = GameObject.FindGameObjectWithTag ("FloorSign").GetComponent<TextMesh>();
-		flrSign.text = currentFlr.ToUpper ();
+		//TODO ADD FLOOR SIGN TO BLDG PREFAB & uncomment
+
+		//TextMesh flrSign = GameObject.FindGameObjectWithTag ("FloorSign").GetComponent<TextMesh>();
+		//flrSign.text = currentFlr.ToUpper ();
 	}
 
 }

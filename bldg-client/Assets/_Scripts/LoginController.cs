@@ -9,36 +9,29 @@ using Proyecto26;
 using Models;
 using Utils;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 
 public class LoginController : MonoBehaviour
 {
-	public string bldgServer = "https://api.w2m.site";
 
     public GameObject baseResidentObject;
 
     public BldgController bldgController;
 
-
-    // TODO is there a better place for the cameras?
-    public CinemachineVirtualCamera flyCamera;
-    public CinemachineVirtualCamera walkCamera;
-    
-	
     public Button signInButton;
     public TMP_InputField emailInputField;
     public TMP_Text errorDisplay;
     public TMP_Text verifyDisplay;
 
 
-    private string basePath = "/v1/residents";
-
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
-    private UnityAction onFlying;
-    private UnityAction onWalking;
+    public CinemachineVirtualCamera flyCamera;
+    public CinemachineVirtualCamera walkCamera;
+
 
     private bool isPollingForVerificationStatus = false;
     private int pollInterval = 2000;
@@ -75,15 +68,12 @@ public class LoginController : MonoBehaviour
     private void Awake()
     {
         Debug.Log("LoginController Awake");
-        onFlying = new UnityAction(OnFlying);
-        onWalking = new UnityAction(OnWalking);
+
     }
 
     void OnEnable()
     {
         Debug.Log("LoginController On Enable");
-        EventManager.StartListening("SwitchToFlying", onFlying);
-        EventManager.StartListening("SwitchToWalking", onWalking);
     }
 
     void OnDisable()
@@ -93,30 +83,35 @@ public class LoginController : MonoBehaviour
         //EventManager.StopListening("SwitchToWalking", onWalking);
     }
 
-    private void OnFlying()
-    {
-        Debug.Log("On Flying");
-        flyCamera.gameObject.SetActive(true);
-        walkCamera.gameObject.SetActive(false);
-    }
-
-    private void OnWalking()
-    {
-        Debug.Log("On Walking");
-        walkCamera.gameObject.SetActive(true);
-        flyCamera.gameObject.SetActive(false);
-    }
-
     public void Show() {
         this.gameObject.SetActive(true);
     }
 
 
-    void completeLogin(Resident rsdt) {
+    public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
 
-        Vector3 baseline = new Vector3(floorStartX, 0.5F, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
+
+        // once login result received, initialize crc & player with resident details
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        if (!crc.isInitialized()) {
+            crc.initialize(rsdt);
+        }
+
+        // check whether we need to load the bldg_flr scene
+        if (crc.resident.flr != "g") {
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name != "bldg_flr") {
+                SceneManager.LoadScene("bldg_flr");
+            }
+        }
+
+        float height = 0.5F;
+        if (rsdt.flr != "g") {
+            height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
+        }
+        Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
         baseline.x += rsdt.x;
         baseline.z += rsdt.y;
         Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
@@ -128,19 +123,18 @@ public class LoginController : MonoBehaviour
         flyCamera.Follow = rsdtClone.transform;
         flyCamera.LookAt = rsdtClone.transform;
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-        rsdtObject.bldgServer = bldgServer;
         rsdtObject.initialize(rsdt, true);
 
-        // once login result received, initialize player with resident details
-        bldgController.bldgServer = bldgServer;
+
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
-        bldgController.SetAddress("g");
+        bldgController.SetAddress(rsdt.flr);
+        
 
         // hide the login dialog
         this.gameObject.SetActive(false);
 
-        EventManager.TriggerEvent("LoginSuccessful");
+        EventManager.Instance.TriggerEvent("LoginSuccessful");
     }
 
 
@@ -156,7 +150,8 @@ public class LoginController : MonoBehaviour
 
         // call the login API
     	Debug.Log("Invoking resident Login API for resident " + email);
-		string url = bldgServer + basePath + "/login";
+        GlobalConfig conf = GlobalConfig.Instance;
+		string url = conf.bldgServer + conf.residentsBasePath + "/login";
 		Debug.Log("url = " + url);
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
@@ -197,8 +192,8 @@ public class LoginController : MonoBehaviour
     void pollForVerificationStatus() {
         if (isPollingForVerificationStatus) {
             Debug.Log("Polling for verification status!");
-
-            string url = bldgServer + basePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
+            GlobalConfig conf = GlobalConfig.Instance;
+            string url = conf.bldgServer + conf.residentsBasePath + "/verification_status?email=" + currentResidentEmail + "&session_id=" + currentResidentSessionId;
             Debug.Log("url = " + url);
             // invoke verification status API
             RequestHelper req = RestUtils.createRequest("GET", url);

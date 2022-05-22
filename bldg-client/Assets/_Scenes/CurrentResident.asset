@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3800c19267f1c4e44beae6f1b120e70f, type: 3}
+  m_Name: CurrentResident
+  m_EditorClassIdentifier: 
+  resident:
+    alias: dibau
+    direction: 300
+    email: dibaunaumh@gmail.com
+    home_bldg: g/b(17,24)/l0/b(4,5)
+    id: 1
+    text: 
+    is_online: 1
+    location: g/b(-14,70)
+    name: Udi Bauman
+    previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(-10,12)/l0","say_location":"g/b(16,92)/l0/b(-10,12)/l0/b(19,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name t4p and summary To be the test building every team needs","say_time":637887399613467500}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(19,38)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      road between test1.org and test7.org","say_time":637886748923448780}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(34,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name test7 and website test7.org","say_time":637886747431689410}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
+    session_id: f310cbb0-dfff-46ed-902b-670e1937b668
+    x: -14
+    y: 70
+    flr: g
+  initialized: 1
+  ACTION_SEND_INTERVAL: 200
+  inFlyingMode: 0
+  flyingHigh: 0

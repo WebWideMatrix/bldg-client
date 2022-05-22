@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: db2bacc286f5e4676b3e7ffc3d1ee507, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -746,7 +746,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.869898, y: 1}
+    m_SensorSize: {x: 2.3938053, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1988,28 +1988,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ffe5337d7264865aecd624f57798fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bldgServer: 
-  bldgsBasePath: /v1/bldgs
-  residentsBasePath: /v1/residents
-  roadsBasePath: /v1/roads
   DEFAULT_BLDG: fromteal.app
   floorStartX: -8
   floorStartZ: -6
-  whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
-  presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
-  trafficSignBldg: {fileID: 7470651789751783693, guid: b93b1df134467463085645bf52f7e3b5, type: 3}
-  streetSignBldg: {fileID: 6582989488119007097, guid: 5d8bd93a290cb4c1eb2e8e7ed95b815b, type: 3}
-  chairBldg: {fileID: 1000011006089572, guid: 38c5e3d697adf88469bb91aa7f8b7b60, type: 3}
-  laptopBldg: {fileID: 0}
-  briefcaseBldg: {fileID: 0}
-  tabletBldg: {fileID: 0}
-  filingCabinetBldg: {fileID: 0}
-  buildingWithStorefront: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
-  roadObject: {fileID: 1687224343315314799, guid: e80ca7004cc86469ea05fab909283aaf, type: 3}
-  greenLotObject: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
-  blueLotObject: {fileID: 2492593957530484147, guid: 798b16d319a8e4269bb879e3f5c7ff5c, type: 3}
-  yellowLotObject: {fileID: 8427195997855233162, guid: f95c43762484a4e199d99301a94a28f7, type: 3}
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
+  roadObject: {fileID: 1687224343315314799, guid: e80ca7004cc86469ea05fab909283aaf, type: 3}
   contextMenu: {fileID: 1506027556}
   relocateCursorTexture: {fileID: 0}
   targetURL: 
@@ -3711,7 +3694,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8240438, y: 1}
+    m_SensorSize: {x: 1.706422, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3904,17 +3887,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b77998b793245e392f3e1b475495ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bldgServer: https://api.w2m.site
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
-  flyCamera: {fileID: 199427418}
-  walkCamera: {fileID: 1825441622}
   signInButton: {fileID: 441306661}
   emailInputField: {fileID: 618908368}
   errorDisplay: {fileID: 1498641680}
   verifyDisplay: {fileID: 84836334}
   floorStartX: -8
   floorStartZ: -6
+  flyCamera: {fileID: 199427418}
+  walkCamera: {fileID: 1825441622}
 --- !u!1 &1985637515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,7 +3908,6 @@ GameObject:
   - component: {fileID: 1985637517}
   - component: {fileID: 1985637516}
   - component: {fileID: 1985637518}
-  - component: {fileID: 1985637519}
   m_Layer: 0
   m_Name: AppController
   m_TagString: Untagged
@@ -3974,18 +3955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginController: {fileID: 1914212569}
---- !u!114 &1985637519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985637515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d845d18d46fc644ccb143a1a4b1cb651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  flyCamera: {fileID: 199427418}
+  walkCamera: {fileID: 1825441622}
 --- !u!1 &2030830002
 GameObject:
   m_ObjectHideFlags: 0

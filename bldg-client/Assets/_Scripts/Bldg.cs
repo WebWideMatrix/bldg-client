@@ -4,6 +4,13 @@ using System.Collections.Generic;
 namespace Models
 {
 	[Serializable]
+	public class WrappedBldg
+	{
+		public Bldg data;
+	}
+
+
+	[Serializable]
 	public class Bldg
 	{
 		public int id;
@@ -117,6 +124,23 @@ namespace Models
 		public string move_location;
 		public int move_x;
 		public int move_y;
+	}
+
+
+	[Serializable]
+	public struct EnterBldgAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string bldg_address;
+	}
+
+	[Serializable]
+	public struct ExitBldgAction
+	{
+		public string resident_email;
+		public string action_type;
+		public string bldg_address;
 	}
 
 	[Serializable]

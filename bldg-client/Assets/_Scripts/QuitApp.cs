@@ -8,6 +8,8 @@ public class QuitApp : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) {
+            CurrentResidentController crc = CurrentResidentController.Instance;
+            crc.logout();
             Application.Quit();
         }
     }
