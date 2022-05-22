@@ -33,6 +33,27 @@ public class BldgController : MonoBehaviour
 
 	
 
+    // SHAPES
+    // TODO: change to array
+	public GameObject whiteboardBldg;
+	public GameObject presentationStandBldg;
+	public GameObject trafficSignBldg;
+	public GameObject streetSignBldg;
+	
+	public GameObject chairBldg;
+	public GameObject laptopBldg;
+	public GameObject briefcaseBldg;
+	public GameObject tabletBldg;
+	public GameObject filingCabinetBldg;
+	public GameObject buildingWithStorefront;
+
+	public GameObject greenLotObject;
+	public GameObject blueLotObject;
+	public GameObject yellowLotObject;
+
+
+
+
 	bool isRelocating = false;
 	BldgObject relocatedObject; 
 	bool isShowingContextMenu = false;
@@ -72,6 +93,42 @@ public class BldgController : MonoBehaviour
 		// }
 
     }
+
+
+
+GameObject getPrefabByEntityClass(string entity_type) {
+		Debug.Log("Getting prefab for entity class " + entity_type);
+        
+        switch (entity_type) {
+		case "purpose":
+			return whiteboardBldg;
+		case "cantata":
+			return presentationStandBldg;
+		case "neighborhood":
+			return trafficSignBldg;
+		case "street":
+			return streetSignBldg;
+		case "member":
+			return laptopBldg;
+		case "milestone":
+			return briefcaseBldg;
+		case "web_page":
+			return tabletBldg;
+		case "team":
+			return buildingWithStorefront;
+		case "lot":
+			return greenLotObject;
+		case "green-lot":
+			return greenLotObject;
+		case "blue-lot":
+			return blueLotObject;
+		case "yellow-lot":
+			return yellowLotObject;
+		default:
+			return chairBldg;
+		}
+	}
+
 
 	public void SetCurrentResidentController(ResidentController rsdtController) {
 		if (bldgChatController == null) {
@@ -399,8 +456,6 @@ public class BldgController : MonoBehaviour
 						GameObject.Destroy (idsCache[b.id]);
 					}
 
-					EntityPrefabMapping mapping = EntityPrefabMapping.Instance;
-
 					float height = 0F;
 					if (address != "g") {
 						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
@@ -408,7 +463,7 @@ public class BldgController : MonoBehaviour
 					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
-					GameObject prefab = mapping.getPrefabByEntityClass(b.entity_type);
+					GameObject prefab = getPrefabByEntityClass(b.entity_type);
 					GameObject bldgClone = null;
 					try {
 						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
