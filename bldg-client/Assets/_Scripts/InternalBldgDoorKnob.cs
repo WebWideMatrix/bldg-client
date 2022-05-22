@@ -12,15 +12,27 @@ public class InternalBldgDoorKnob : MonoBehaviour
 
     private string bldgName = "";
     private string bldgAddress = "";
+    private Color initialColor;
 
     void getContainerBldgDetails()
     {
+        initialColor = GetComponent<Renderer>().material.color;
         GameObject bldg = transform.parent.gameObject;
         BldgObject bldgObject = bldg.GetComponent<BldgObject>();
         if (bldgObject != null) {
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
         }
+    }
+
+    void OnMouseOver()
+    {
+        GetComponent<Renderer>().material.color = Color.cyan;
+    }
+
+    void OnMouseExit()
+    {
+        GetComponent<Renderer>().material.color = initialColor;
     }
 
     void OnMouseDown() {

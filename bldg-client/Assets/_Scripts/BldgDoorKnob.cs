@@ -12,9 +12,13 @@ public class BldgDoorKnob : MonoBehaviour
     private string bldgName = "";
     private string bldgAddress = "";
 
+    private Color initialColor;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        initialColor = GetComponent<Renderer>().material.color;
         GameObject bldg = transform.parent.gameObject;
         BldgObject bldgObject = bldg.GetComponent<BldgObject>();
         if (bldgObject != null) {
@@ -22,6 +26,16 @@ public class BldgDoorKnob : MonoBehaviour
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
         }
+    }
+
+    void OnMouseOver()
+    {
+        GetComponent<Renderer>().material.color = Color.cyan;
+    }
+
+    void OnMouseExit()
+    {
+        GetComponent<Renderer>().material.color = initialColor;
     }
 
     void OnMouseDown() {

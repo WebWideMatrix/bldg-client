@@ -94,39 +94,39 @@ public class BldgController : MonoBehaviour
 		contextMenu.gameObject.SetActive(false);
 	}
 
-	public void handleFloorClick(Vector3 point) {
-		Debug.Log("Floor click at " + point);
-		if (isRelocating) {
-			completeRelocatingBldg(point);
-		} else if (!isShowingContextMenu) {
-			// camera.moveToStart();
-			contextMenu.gameObject.SetActive(false);
-			clickedModel = null;
-			clickedObject = null;
-		}
-	}
+	// public void handleFloorClick(Vector3 point) {
+	// 	Debug.Log("Floor click at " + point);
+	// 	if (isRelocating) {
+	// 		completeRelocatingBldg(point);
+	// 	} else if (!isShowingContextMenu) {
+	// 		// camera.moveToStart();
+	// 		contextMenu.gameObject.SetActive(false);
+	// 		clickedModel = null;
+	// 		clickedObject = null;
+	// 	}
+	// }
 
 
-    public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
+    // public void handleClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
 
-        //camera.moveToTarget(position);
-		if (clickedModel != bldgModel) {
-			Debug.Log("Clicked on different object: " + clickedModel.name);
-			clickedObject = bldgObject;
-			clickedModel = bldgModel;
-			hideContextMenu();
-			targetURL = null;
-		}
-    }
+    //     //camera.moveToTarget(position);
+	// 	if (clickedModel != bldgModel) {
+	// 		Debug.Log("Clicked on different object: " + clickedModel.name);
+	// 		clickedObject = bldgObject;
+	// 		clickedModel = bldgModel;
+	// 		hideContextMenu();
+	// 		targetURL = null;
+	// 	}
+    // }
 
-    public void handleLongClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
-        Debug.Log("long click on: " + bldgModel.name);
-		//showContextMenu();
-    }
+    // public void handleLongClick(BldgObject bldgObject, Bldg bldgModel, Vector3 position) {
+    //     Debug.Log("long click on: " + bldgModel.name);
+	// 	//showContextMenu();
+    // }
 
-    public void handleRightClick(Bldg model, Vector3 position) {
-        Debug.Log("right click on: " + model.name);
-    }
+    // public void handleRightClick(Bldg model, Vector3 position) {
+    //     Debug.Log("right click on: " + model.name);
+    // }
 
 	public void browse() {
 		if (targetURL != null) {
