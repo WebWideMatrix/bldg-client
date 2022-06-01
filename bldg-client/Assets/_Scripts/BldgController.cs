@@ -44,6 +44,7 @@ public class BldgController : MonoBehaviour
 	public GameObject laptopBldg;
 	public GameObject briefcaseBldg;
 	public GameObject tabletBldg;
+	public GameObject roundTableBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
 
@@ -112,6 +113,8 @@ GameObject getPrefabByEntityClass(string entity_type) {
 			return laptopBldg;
 		case "milestone":
 			return briefcaseBldg;
+		case "task":
+			return roundTableBldg;
 		case "web_page":
 			return tabletBldg;
 		case "team":
