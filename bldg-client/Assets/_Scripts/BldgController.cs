@@ -19,6 +19,8 @@ public class BldgController : MonoBehaviour
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
+	public List<string> SIZE_CATEGORIES = new List<string>() {"xs", "s", "m", "l", "xl", "2xl", "3xl"}; 
+
 	public GameObject baseResidentObject;
 	public GameObject roadObject;
 
@@ -388,7 +390,26 @@ GameObject getPrefabByEntityClass(string entity_type) {
 
 	}
 
+	float getCategoryScaleFactor(string category) {
+		switch (category) {
+			case "xs": return 0.2F;
+			case "s": return 0.5F;
+			case "m": return 1F;
+			case "l": return 1.5F;
+			case "xl": return 2F;
+			case "2xl": return 3F;
+			case "3xl": return 4F;
+			default: return 1F;
+		}
+	}
+
 	void renderModelData(GameObject bldg, Bldg data) {
+		if (data.category != null) {
+			if (SIZE_CATEGORIES.Contains(data.category.ToLower())) {
+				float scaleFactor = getCategoryScaleFactor(data.category);
+				bldg.transform.localScale *= scaleFactor;
+			}
+		}
 		TMP_Text[] labels = bldg.GetComponentsInChildren<TMP_Text>();
 		foreach (TMP_Text label in labels) {
 			if (label.name == "summary")
