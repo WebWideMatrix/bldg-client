@@ -10,6 +10,8 @@ using Proyecto26;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 public class BldgController : MonoBehaviour
@@ -404,6 +406,12 @@ GameObject getPrefabByEntityClass(string entity_type) {
 	}
 
 	void renderModelData(GameObject bldg, Bldg data) {
+		Dictionary<string, string> data_attributes = new Dictionary<string, string>() {};
+		if (data.data != null) {
+			Debug.Log("bldg Data Attributes found");
+			data_attributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(data.data);
+		}
+
 		if (data.category != null) {
 			if (SIZE_CATEGORIES.Contains(data.category.ToLower())) {
 				float scaleFactor = getCategoryScaleFactor(data.category);
@@ -427,10 +435,15 @@ GameObject getPrefabByEntityClass(string entity_type) {
 			else if (label.name == "state")
 				label.text = data.state;
 		}
+		// TODO else, if label.name matches a key in data_attributes, take value from there
+
 		ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
 		foreach (ImageController imgDisplay in imageDisplays) {
 			imgDisplay.SetImageURL(data.picture_url);
 		}
+		// TODO else, if imgDisplay name matches a key in data_attributes, take value from there
+
+
 		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
 		foreach (LinkController linkObj in linkObjects) {
 			linkObj.SetLinkURL(data.web_url);

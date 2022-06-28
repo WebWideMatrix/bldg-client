@@ -42,6 +42,8 @@ namespace Models
 
 		public string[] owners;
 
+		public string data;
+
 		public override string ToString(){
 			return UnityEngine.JsonUtility.ToJson (this, true);
 		}
@@ -51,6 +53,12 @@ namespace Models
 	public struct ResidentAttributes
 	{
 
+	}
+
+	[Serializable]
+	public struct TaskDataAttributes
+	{
+		public string assignee1;
 	}
 
 
