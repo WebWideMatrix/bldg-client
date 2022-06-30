@@ -409,7 +409,11 @@ GameObject getPrefabByEntityClass(string entity_type) {
 		Dictionary<string, string> data_attributes = new Dictionary<string, string>() {};
 		if (data.data != null) {
 			Debug.Log("bldg Data Attributes found");
-			data_attributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(data.data);
+			Dictionary<string, string> da = JsonConvert.DeserializeObject<Dictionary<string, string>>(data.data);
+			if (da != null)
+				data_attributes = da;
+			else
+				Debug.Log("Failed to load data attributes JSON - got null");
 		}
 
 		if (data.category != null) {
@@ -434,20 +438,37 @@ GameObject getPrefabByEntityClass(string entity_type) {
 				label.text = data.name;
 			else if (label.name == "state")
 				label.text = data.state;
+			else if (data_attributes.ContainsKey(label.name)) {
+				Debug.Log("Yay - found data attribute matching label: " + label.name);
+				label.text = data_attributes[label.name];
+			}
+				
 		}
-		// TODO else, if label.name matches a key in data_attributes, take value from there
-
-		ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
-		foreach (ImageController imgDisplay in imageDisplays) {
-			imgDisplay.SetImageURL(data.picture_url);
+		
+		try {
+			// TODO: THIS IS NOT FINDING ANYTHING IN A TASK
+			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
+			foreach (ImageController imgDisplay in imageDisplays) {
+				Debug.Log("!*!*!*!!*!*!*!*!!*");
+				Debug.Log(imgDisplay.imageName);
+				Debug.Log(data_attributes);
+				
+				if (data_attributes.ContainsKey(imgDisplay.imageName))
+					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
+				else	
+					imgDisplay.SetImageURL(data.picture_url);
+				Debug.Log("!*!*!*!!*!*!*!*!!*");
+			}
+		} catch (Exception e) {
+			Debug.Log("Failed to render images: " + e.ToString());
 		}
-		// TODO else, if imgDisplay name matches a key in data_attributes, take value from there
-
 
 		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
 		foreach (LinkController linkObj in linkObjects) {
 			linkObj.SetLinkURL(data.web_url);
 		}
+		// TODO else, if linkObj name matches a key in data_attributes, take value from there
+
 	}
 
 	void reloadBuildings(string address) {

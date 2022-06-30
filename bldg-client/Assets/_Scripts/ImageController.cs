@@ -11,7 +11,12 @@ namespace ImageUtils
     {
         public GameObject _imageDisplay;
         Texture2D _texture;
+        public string imageName = "assignee1_picture";
 
+
+        void Start() {
+            imageName = transform.name;
+        }
 
         public void SetImageURL(string imageURL) {
             StartCoroutine(DownloadImage(imageURL, _imageDisplay.GetComponent<Renderer>().material));
