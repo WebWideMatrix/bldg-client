@@ -446,18 +446,12 @@ GameObject getPrefabByEntityClass(string entity_type) {
 		}
 		
 		try {
-			// TODO: THIS IS NOT FINDING ANYTHING IN A TASK
 			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
-			foreach (ImageController imgDisplay in imageDisplays) {
-				Debug.Log("!*!*!*!!*!*!*!*!!*");
-				Debug.Log(imgDisplay.imageName);
-				Debug.Log(data_attributes);
-				
+			foreach (ImageController imgDisplay in imageDisplays) {				
 				if (data_attributes.ContainsKey(imgDisplay.imageName))
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
-				else	
+				else
 					imgDisplay.SetImageURL(data.picture_url);
-				Debug.Log("!*!*!*!!*!*!*!*!!*");
 			}
 		} catch (Exception e) {
 			Debug.Log("Failed to render images: " + e.ToString());
@@ -465,7 +459,10 @@ GameObject getPrefabByEntityClass(string entity_type) {
 
 		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
 		foreach (LinkController linkObj in linkObjects) {
-			linkObj.SetLinkURL(data.web_url);
+			if (data_attributes.ContainsKey(linkObj.linkName))
+					linkObj.SetLinkURL(data_attributes[linkObj.linkName]);
+				else
+					linkObj.SetLinkURL(data.web_url);
 		}
 		// TODO else, if linkObj name matches a key in data_attributes, take value from there
 

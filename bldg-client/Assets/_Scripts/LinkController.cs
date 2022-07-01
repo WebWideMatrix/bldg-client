@@ -13,6 +13,13 @@ namespace BrowserUtils
         public GameObject linkObject;
 
         string _linkURL;
+        public string linkName;
+
+
+        void Start() {
+            if (transform.parent != null)
+                linkName = transform.parent.name;
+        }
 
         // Update is called once per frame
         void Update()

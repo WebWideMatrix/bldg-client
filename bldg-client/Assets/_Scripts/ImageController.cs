@@ -11,11 +11,12 @@ namespace ImageUtils
     {
         public GameObject _imageDisplay;
         Texture2D _texture;
-        public string imageName = "assignee1_picture";
+        public string imageName;
 
 
         void Start() {
-            imageName = transform.name;
+            if (transform.parent != null)
+                imageName = transform.parent.name;
         }
 
         public void SetImageURL(string imageURL) {
