@@ -56,13 +56,6 @@ namespace Models
 	}
 
 	[Serializable]
-	public struct TaskDataAttributes
-	{
-		public string assignee1;
-	}
-
-
-	[Serializable]
 	public struct Resident
 	{
 		public string alias;

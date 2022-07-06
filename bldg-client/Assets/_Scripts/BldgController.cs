@@ -408,7 +408,6 @@ GameObject getPrefabByEntityClass(string entity_type) {
 	void renderModelData(GameObject bldg, Bldg data) {
 		Dictionary<string, string> data_attributes = new Dictionary<string, string>() {};
 		if (data.data != null) {
-			Debug.Log("bldg Data Attributes found");
 			Dictionary<string, string> da = JsonConvert.DeserializeObject<Dictionary<string, string>>(data.data);
 			if (da != null)
 				data_attributes = da;
@@ -439,7 +438,6 @@ GameObject getPrefabByEntityClass(string entity_type) {
 			else if (label.name == "state")
 				label.text = data.state;
 			else if (data_attributes.ContainsKey(label.name)) {
-				Debug.Log("Yay - found data attribute matching label: " + label.name);
 				label.text = data_attributes[label.name];
 			}
 				
