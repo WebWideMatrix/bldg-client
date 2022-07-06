@@ -1991,6 +1991,14 @@ MonoBehaviour:
   DEFAULT_BLDG: fromteal.app
   floorStartX: -8
   floorStartZ: -6
+  SIZE_CATEGORIES:
+  - xs
+  - s
+  - m
+  - l
+  - xl
+  - 2xl
+  - 3xl
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   roadObject: {fileID: 1687224343315314799, guid: e80ca7004cc86469ea05fab909283aaf, type: 3}
   contextMenu: {fileID: 1506027556}
@@ -2013,6 +2021,7 @@ MonoBehaviour:
     address: 
     picture_url: 
     owners: []
+    data: 
   whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
   presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
   trafficSignBldg: {fileID: 7470651789751783693, guid: b93b1df134467463085645bf52f7e3b5, type: 3}
@@ -2021,6 +2030,7 @@ MonoBehaviour:
   laptopBldg: {fileID: 0}
   briefcaseBldg: {fileID: 0}
   tabletBldg: {fileID: 0}
+  roundTableBldg: {fileID: 7850256460131175102, guid: dba623613785b4336918b52437f055f9, type: 3}
   filingCabinetBldg: {fileID: 0}
   buildingWithStorefront: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
   greenLotObject: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
@@ -3707,7 +3717,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5923078, y: 1}
+    m_SensorSize: {x: 1.709589, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

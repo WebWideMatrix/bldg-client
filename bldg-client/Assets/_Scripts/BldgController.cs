@@ -10,6 +10,8 @@ using Proyecto26;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 public class BldgController : MonoBehaviour
@@ -18,6 +20,8 @@ public class BldgController : MonoBehaviour
 
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
+
+	public List<string> SIZE_CATEGORIES = new List<string>() {"xs", "s", "m", "l", "xl", "2xl", "3xl"}; 
 
 	public GameObject baseResidentObject;
 	public GameObject roadObject;
@@ -44,6 +48,7 @@ public class BldgController : MonoBehaviour
 	public GameObject laptopBldg;
 	public GameObject briefcaseBldg;
 	public GameObject tabletBldg;
+	public GameObject roundTableBldg;
 	public GameObject filingCabinetBldg;
 	public GameObject buildingWithStorefront;
 
@@ -112,6 +117,8 @@ GameObject getPrefabByEntityClass(string entity_type) {
 			return laptopBldg;
 		case "milestone":
 			return briefcaseBldg;
+		case "task":
+			return roundTableBldg;
 		case "web_page":
 			return tabletBldg;
 		case "team":
@@ -385,7 +392,35 @@ GameObject getPrefabByEntityClass(string entity_type) {
 
 	}
 
+	float getCategoryScaleFactor(string category) {
+		switch (category) {
+			case "xs": return 0.2F;
+			case "s": return 0.5F;
+			case "m": return 1F;
+			case "l": return 1.5F;
+			case "xl": return 2F;
+			case "2xl": return 3F;
+			case "3xl": return 4F;
+			default: return 1F;
+		}
+	}
+
 	void renderModelData(GameObject bldg, Bldg data) {
+		Dictionary<string, string> data_attributes = new Dictionary<string, string>() {};
+		if (data.data != null) {
+			Dictionary<string, string> da = JsonConvert.DeserializeObject<Dictionary<string, string>>(data.data);
+			if (da != null)
+				data_attributes = da;
+			else
+				Debug.Log("Failed to load data attributes JSON - got null");
+		}
+
+		if (data.category != null) {
+			if (SIZE_CATEGORIES.Contains(data.category.ToLower())) {
+				float scaleFactor = getCategoryScaleFactor(data.category);
+				bldg.transform.localScale *= scaleFactor;
+			}
+		}
 		TMP_Text[] labels = bldg.GetComponentsInChildren<TMP_Text>();
 		foreach (TMP_Text label in labels) {
 			if (label.name == "summary")
@@ -402,15 +437,33 @@ GameObject getPrefabByEntityClass(string entity_type) {
 				label.text = data.name;
 			else if (label.name == "state")
 				label.text = data.state;
+			else if (data_attributes.ContainsKey(label.name)) {
+				label.text = data_attributes[label.name];
+			}
+				
 		}
-		ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
-		foreach (ImageController imgDisplay in imageDisplays) {
-			imgDisplay.SetImageURL(data.picture_url);
+		
+		try {
+			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
+			foreach (ImageController imgDisplay in imageDisplays) {				
+				if (data_attributes.ContainsKey(imgDisplay.imageName))
+					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
+				else
+					imgDisplay.SetImageURL(data.picture_url);
+			}
+		} catch (Exception e) {
+			Debug.Log("Failed to render images: " + e.ToString());
 		}
+
 		LinkController[] linkObjects = bldg.GetComponentsInChildren<LinkController>();
 		foreach (LinkController linkObj in linkObjects) {
-			linkObj.SetLinkURL(data.web_url);
+			if (data_attributes.ContainsKey(linkObj.linkName))
+					linkObj.SetLinkURL(data_attributes[linkObj.linkName]);
+				else
+					linkObj.SetLinkURL(data.web_url);
 		}
+		// TODO else, if linkObj name matches a key in data_attributes, take value from there
+
 	}
 
 	void reloadBuildings(string address) {
