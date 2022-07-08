@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class InitApp : MonoBehaviour
 {
 
+    [Header("Resources")]
     public LoginController loginController;
 
     // TODO is there a better place for the cameras?
@@ -20,27 +21,25 @@ public class InitApp : MonoBehaviour
     private UnityAction onWalking;
 	
 
+    void OnEnable() {
+        Debug.Log("*********************   Init App - On Enable  *********************");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("*********************   Init App   *********************");
         // check whether logged in already
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (!crc.isInitialized()) {
             Debug.Log("CRC not initialized");
-            loginController.Show();
+            // loginController.Show();
         }
         else {
             Debug.Log("CRC Initialized!!!!");
             loginController.completeLogin(crc.resident);
         }
+
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);
         EventManager.Instance.StartListening("SwitchToFlying", onFlying);
         EventManager.Instance.StartListening("SwitchToWalking", onWalking);
     }
-
 
     private void OnFlying()
     {

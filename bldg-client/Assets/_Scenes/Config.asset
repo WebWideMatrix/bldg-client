@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d503ccf3601343e5b1372f450f0afcf, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  bldgServer: https://api.w2m.site
+  bldgServer: https://localhost:4443
   residentsBasePath: /v1/residents
   bldgsBasePath: /v1/bldgs
   roadsBasePath: /v1/roads
