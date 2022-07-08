@@ -21,6 +21,7 @@ namespace Michsky.UI.Shift
 
         void OnEnable()
         {
+            Debug.Log("000000");
             if (splashScreenAnimator == null) { splashScreenAnimator = splashScreen.GetComponent<Animator>(); }
             if (ssTimedEvent == null) { ssTimedEvent = splashScreen.GetComponent<TimedEvent>(); }
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
@@ -49,6 +50,7 @@ namespace Michsky.UI.Shift
 
             if (enableLoginScreen == true && enablePressAnyKeyScreen == false && disableSplashScreen == false)
             {
+                Debug.Log("Should be here!");
                 splashScreen.SetActive(true);
                 mainPanelsAnimator.Play("Invisible");
                 splashScreenAnimator.Play("Login");
@@ -61,6 +63,8 @@ namespace Michsky.UI.Shift
                 splashScreenAnimator.Play("Loading");
                 ssTimedEvent.StartIEnumerator();
             }
+            Debug.Log("111111");
+            Debug.Log("222222");
         }
 
         public void LoginScreenCheck()

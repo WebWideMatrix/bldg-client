@@ -36,44 +36,39 @@ namespace Michsky.UI.Shift
 
             if (preferSelector == true)
             {
-                if (resolutionDropdown != null)
-                    resolutionDropdown.gameObject.SetActive(false);
-
-                if (resolutionSelector != null)
-                    resolutionSelector.gameObject.SetActive(true);
-                else
-                    return;
+                if (resolutionDropdown != null) { resolutionDropdown.gameObject.SetActive(false); }
+                if (resolutionSelector != null) { resolutionSelector.gameObject.SetActive(true); }
+                else { return; }
 
                 resolutionSelector.itemList.RemoveRange(0, resolutionSelector.itemList.Count);
 
-                int currentResolutionIndex = 0;
+                int currentResolutionIndex = -1;
                 for (int i = 0; i < resolutions.Length; i++)
                 {
                     string option = resolutions[i].width + "x" + resolutions[i].height + " " + resolutions[i].refreshRate + "hz";
                     options.Add(option);
 
-                    if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                    resolutionSelector.CreateNewItem(options[i]);
+                    // resolutionSelector.itemList[i].onValueChanged.AddListener(UpdateResolution);
+
+                    if (resolutions[i].width == Screen.currentResolution.width
+                        && resolutions[i].height == Screen.currentResolution.height
+                          && resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
                     {
                         currentResolutionIndex = i;
                         resolutionSelector.index = currentResolutionIndex;
                     }
-
-                    resolutionSelector.CreateNewItem(options[i]);
-                    // resolutionSelector.itemList[i].onValueChanged.AddListener(UpdateResolution);
                 }
 
+                if (currentResolutionIndex == 0) { resolutionSelector.index = resolutionSelector.itemList.Count - 1; }
                 resolutionSelector.UpdateUI();
             }
 
             else
             {
-                if (resolutionSelector != null)
-                    resolutionSelector.gameObject.SetActive(false);
-
-                if (resolutionDropdown != null)
-                    resolutionDropdown.gameObject.SetActive(true);
-                else
-                    return;
+                if (resolutionSelector != null) { resolutionSelector.gameObject.SetActive(false); }
+                if (resolutionDropdown != null) { resolutionDropdown.gameObject.SetActive(true); }
+                else { return; }
 
                 resolutionDropdown.ClearOptions();
 
@@ -86,7 +81,8 @@ namespace Michsky.UI.Shift
                     options.Add(option);
 
                     if (resolutions[i].width == Screen.currentResolution.width
-                        && resolutions[i].height == Screen.currentResolution.height)
+                        && resolutions[i].height == Screen.currentResolution.height
+                          && resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
                         currentResolutionIndex = i;
                 }
 

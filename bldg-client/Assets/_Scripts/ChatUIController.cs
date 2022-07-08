@@ -55,9 +55,9 @@ public class ChatUIController : MonoBehaviour {
 
     private void OnLogin()
     {
-        ChatInputField.gameObject.SetActive(true);
+        // TODO RETURN ChatInputField.gameObject.SetActive(true);
         // ChatInputField.ActivateInputField();
-        ChatHistoryDisplay.gameObject.SetActive(true);
+        // TODO RETURN ChatHistoryDisplay.gameObject.SetActive(true);
     }
 
 
