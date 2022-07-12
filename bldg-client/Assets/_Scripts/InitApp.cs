@@ -25,15 +25,15 @@ public class InitApp : MonoBehaviour
         Debug.Log("*********************   Init App - On Enable  *********************");
 
         // check whether logged in already
-        CurrentResidentController crc = CurrentResidentController.Instance;
-        if (!crc.isInitialized()) {
-            Debug.Log("CRC not initialized");
-            // loginController.Show();
-        }
-        else {
-            Debug.Log("CRC Initialized!!!!");
-            loginController.completeLogin(crc.resident);
-        }
+        // CurrentResidentController crc = CurrentResidentController.Instance;
+        // if (!crc.isInitialized()) {
+        //     Debug.Log("CRC not initializede");
+        //     loginController.Show();
+        // }
+        // else {
+        //     Debug.Log("CRC Initialized!!!!");
+        //     loginController.completeLogin(crc.resident);
+        // }
 
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);

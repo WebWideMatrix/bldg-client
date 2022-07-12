@@ -138,7 +138,7 @@ public class LoginController : MonoBehaviour
     }
 
 
-    void SignInHandler() {
+    public void SignInHandler() {
         string email = emailInputField.text;
         Debug.Log("Signing in as " + email);
         errorDisplay.text = "";
