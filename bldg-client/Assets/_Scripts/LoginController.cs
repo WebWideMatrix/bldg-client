@@ -42,6 +42,8 @@ public class LoginController : MonoBehaviour
     private string currentResidentEmail = null;
     private string currentResidentSessionId = null;
 
+    private Animator splashScreenAnimator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -88,9 +90,14 @@ public class LoginController : MonoBehaviour
     }
 
 
+    public void setAnimator(Animator animator) {
+        splashScreenAnimator = animator;
+    }
+
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
+        splashScreenAnimator.Play("Login to Loading");
 
 
         // once login result received, initialize crc & player with resident details
