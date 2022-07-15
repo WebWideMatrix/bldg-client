@@ -35,7 +35,7 @@ public class LoginController : MonoBehaviour
 
 
     private bool isPollingForVerificationStatus = false;
-    private bool isCompletingLogin = false;
+    private bool isSigningOnStarted = false;
     private int pollInterval = 2000;
     private int verificationExpirationTime = 6*60*1000; // 6 minutess
     private DateTime lastPollTime = DateTime.Now;
@@ -101,8 +101,6 @@ public class LoginController : MonoBehaviour
     }
 
     public void completeLogin(Resident rsdt) {
-        if (isCompletingLogin) return;
-        isCompletingLogin = true;
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
         splashScreenAnimator.Play("Login to Loading");
@@ -154,8 +152,10 @@ public class LoginController : MonoBehaviour
 
 
     public void SignInHandler() {
+        if (isSigningOnStarted) return;
+        isSigningOnStarted = true;
         string email = emailInputField.text;
-        Debug.Log("Signing in as " + email);
+        Debug.Log("Signing in as " + email + " " + DateTime.UtcNow);
         errorDisplay.text = "";
 
         // disable the button
@@ -171,6 +171,7 @@ public class LoginController : MonoBehaviour
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
 		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
+            isSigningOnStarted = false;
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
