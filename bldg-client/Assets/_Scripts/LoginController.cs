@@ -10,6 +10,7 @@ using Models;
 using Utils;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using Michsky.UI.Shift;
 
 
 public class LoginController : MonoBehaviour
@@ -34,6 +35,7 @@ public class LoginController : MonoBehaviour
 
 
     private bool isPollingForVerificationStatus = false;
+    private bool isCompletingLogin = false;
     private int pollInterval = 2000;
     private int verificationExpirationTime = 6*60*1000; // 6 minutess
     private DateTime lastPollTime = DateTime.Now;
@@ -41,6 +43,10 @@ public class LoginController : MonoBehaviour
 
     private string currentResidentEmail = null;
     private string currentResidentSessionId = null;
+
+    private Animator splashScreenAnimator;
+    private Animator mainAnimator;
+    private TimedEvent startTimedEvent;
 
 
     // Start is called before the first frame update
@@ -88,10 +94,19 @@ public class LoginController : MonoBehaviour
     }
 
 
+    public void setAnimators(Animator sAnimator, Animator mAnimator, TimedEvent stEvent) {
+        splashScreenAnimator = sAnimator;
+        mainAnimator = mAnimator;
+        startTimedEvent = stEvent;
+    }
+
     public void completeLogin(Resident rsdt) {
+        if (isCompletingLogin) return;
+        isCompletingLogin = true;
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
-
+        splashScreenAnimator.Play("Login to Loading");
+        startTimedEvent.StartIEnumerator();
 
         // once login result received, initialize crc & player with resident details
         CurrentResidentController crc = CurrentResidentController.Instance;
@@ -138,7 +153,7 @@ public class LoginController : MonoBehaviour
     }
 
 
-    void SignInHandler() {
+    public void SignInHandler() {
         string email = emailInputField.text;
         Debug.Log("Signing in as " + email);
         errorDisplay.text = "";

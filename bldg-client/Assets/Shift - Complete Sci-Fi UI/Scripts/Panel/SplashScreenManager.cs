@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Michsky.UI.Shift
 {
@@ -18,6 +19,8 @@ namespace Michsky.UI.Shift
         public bool enableLoginScreen;
 
         MainPanelManager mpm;
+        LoginController loginController;
+
 
         void OnEnable()
         {
@@ -25,6 +28,8 @@ namespace Michsky.UI.Shift
             if (ssTimedEvent == null) { ssTimedEvent = splashScreen.GetComponent<TimedEvent>(); }
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
+            if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
+            loginController.setAnimators(splashScreenAnimator, mainPanelsAnimator, ssTimedEvent);
 
             if (disableSplashScreen == true)
             {
@@ -49,9 +54,20 @@ namespace Michsky.UI.Shift
 
             if (enableLoginScreen == true && enablePressAnyKeyScreen == false && disableSplashScreen == false)
             {
+                Debug.Log("Should be here!");
+
                 splashScreen.SetActive(true);
                 mainPanelsAnimator.Play("Invisible");
-                splashScreenAnimator.Play("Login");
+                // check whether logged in already
+                CurrentResidentController crc = CurrentResidentController.Instance;
+                if (!crc.isInitialized()) {
+                    Debug.Log("CRC not initialized - show login screen");
+                    splashScreenAnimator.Play("Login");
+                } 
+                else {
+                    loginController.completeLogin(crc.resident);
+                }
+
             }
 
             if (enableLoginScreen == false && enablePressAnyKeyScreen == false && disableSplashScreen == false)

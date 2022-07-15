@@ -17,7 +17,7 @@ namespace Michsky.UI.Shift
         public UnityEvent OnEvents;
         public UnityEvent OffEvents;
 
-        Animator switchAnimator;
+        [HideInInspector] public Animator switchAnimator;
         Button switchButton;
 
         void OnEnable()

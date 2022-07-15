@@ -131,12 +131,9 @@ public class ResidentController : MonoBehaviour
 
         // check whether resident turned to the sides
         if (isRotationChange) {
-            
-            //Debug.Log("======================================");
-            //Debug.Log("exactDirection = " + exactDirection);
+
 
             int newDirection = exactDirection - (exactDirection % directionInterval);
-            //Debug.Log("newDirection = " + newDirection);
 
             if (newDirection != previousDirection) {
                 previousDirection = newDirection;
