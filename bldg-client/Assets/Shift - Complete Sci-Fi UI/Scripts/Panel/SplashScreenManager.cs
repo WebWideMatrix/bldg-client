@@ -68,6 +68,7 @@ namespace Michsky.UI.Shift
                 } 
                 else {
                     Debug.Log("bbbbbbbb");
+                    Debug.Log("PPP!!!! - 3");
                     loginController.completeLogin(crc.resident);
                 }
 

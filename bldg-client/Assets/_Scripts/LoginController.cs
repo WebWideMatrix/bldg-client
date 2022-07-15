@@ -35,6 +35,7 @@ public class LoginController : MonoBehaviour
 
 
     private bool isPollingForVerificationStatus = false;
+    private bool isCompletingLogin = false;
     private int pollInterval = 2000;
     private int verificationExpirationTime = 6*60*1000; // 6 minutess
     private DateTime lastPollTime = DateTime.Now;
@@ -100,6 +101,8 @@ public class LoginController : MonoBehaviour
     }
 
     public void completeLogin(Resident rsdt) {
+        if (isCompletingLogin) return;
+        isCompletingLogin = true;
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
         splashScreenAnimator.Play("Login to Loading");
@@ -171,6 +174,7 @@ public class LoginController : MonoBehaviour
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
+                Debug.Log("PPP!!!! - 1");
                 completeLogin(loginResponse.data);
             } else {
                 // no valid session found, notify the user that they need to verify their email
@@ -213,6 +217,7 @@ public class LoginController : MonoBehaviour
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
+                Debug.Log("PPP!!!! - 2");
                 completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);
