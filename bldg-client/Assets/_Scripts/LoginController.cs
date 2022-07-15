@@ -174,7 +174,6 @@ public class LoginController : MonoBehaviour
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
-                Debug.Log("PPP!!!! - 1");
                 completeLogin(loginResponse.data);
             } else {
                 // no valid session found, notify the user that they need to verify their email
@@ -217,7 +216,6 @@ public class LoginController : MonoBehaviour
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
-                Debug.Log("PPP!!!! - 2");
                 completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);
