@@ -30,7 +30,7 @@ namespace Michsky.UI.Shift
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
             if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
-            loginController.setAnimators(splashScreenAnimator, mainPanelsAnimator);
+            loginController.setAnimators(splashScreenAnimator, mainPanelsAnimator, ssTimedEvent);
 
             if (disableSplashScreen == true)
             {
@@ -69,8 +69,6 @@ namespace Michsky.UI.Shift
                 else {
                     Debug.Log("bbbbbbbb");
                     loginController.completeLogin(crc.resident);
-                    // ssTimedEvent.StartIEnumerator();
-
                 }
 
             }

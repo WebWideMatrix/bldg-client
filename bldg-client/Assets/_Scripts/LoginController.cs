@@ -10,6 +10,7 @@ using Models;
 using Utils;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using Michsky.UI.Shift;
 
 
 public class LoginController : MonoBehaviour
@@ -44,6 +45,7 @@ public class LoginController : MonoBehaviour
 
     private Animator splashScreenAnimator;
     private Animator mainAnimator;
+    private TimedEvent startTimedEvent;
 
 
     // Start is called before the first frame update
@@ -91,18 +93,17 @@ public class LoginController : MonoBehaviour
     }
 
 
-    public void setAnimators(Animator sAnimator, Animator mAnimator) {
+    public void setAnimators(Animator sAnimator, Animator mAnimator, TimedEvent stEvent) {
         splashScreenAnimator = sAnimator;
         mainAnimator = mAnimator;
+        startTimedEvent = stEvent;
     }
 
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
-        splashScreenAnimator.Play("Loading Out");
-        mainAnimator.Play("Start");
-
-
+        splashScreenAnimator.Play("Login to Loading");
+        startTimedEvent.StartIEnumerator();
 
         // once login result received, initialize crc & player with resident details
         CurrentResidentController crc = CurrentResidentController.Instance;
