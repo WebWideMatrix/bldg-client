@@ -30,7 +30,7 @@ namespace Michsky.UI.Shift
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
             if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
-            loginController.setAnimator(splashScreenAnimator);
+            loginController.setAnimators(splashScreenAnimator, mainPanelsAnimator);
 
             if (disableSplashScreen == true)
             {
@@ -69,8 +69,8 @@ namespace Michsky.UI.Shift
                 else {
                     Debug.Log("bbbbbbbb");
                     loginController.completeLogin(crc.resident);
-                    // splashScreenAnimator.Play("Login to Loading");
-                    ssTimedEvent.StartIEnumerator();
+                    // ssTimedEvent.StartIEnumerator();
+
                 }
 
             }
@@ -84,16 +84,6 @@ namespace Michsky.UI.Shift
             }
             Debug.Log("111111");
             Debug.Log("222222");
-        }
-
-        public void OnLoginComplete(string residentName) 
-        {
-            Debug.Log("OOOOOOO");
-            Debug.Log("Yay, " + residentName + " has successfully logged in");
-            CurrentResidentController crc = CurrentResidentController.Instance;
-            loginController.completeLogin(crc.resident);
-            splashScreenAnimator.Play("Login to Loading");
-            ssTimedEvent.StartIEnumerator();
         }
 
         public void LoginScreenCheck()
