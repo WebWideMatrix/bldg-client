@@ -4797,7 +4797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224962817517893130, guid: 7ea731f501442984589dad30e8f89c28, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1189.5321
+      value: 681.83984
       objectReference: {fileID: 0}
     - target: {fileID: 224962817517893130, guid: 7ea731f501442984589dad30e8f89c28, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12401,7 +12401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af93534f394540f3bf8cf29d68dbeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatUIController: {fileID: 2030830007}
+  chatUIController: {fileID: 1659716085}
 --- !u!224 &753746425 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224213959708931710, guid: 3ca89c93d9a2e5847a41e2fd716a23be, type: 3}
@@ -14461,7 +14461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224357076414380102, guid: 34454bb273a5c294491cb70404c95a1f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 899.03357
+      value: 645.18744
       objectReference: {fileID: 0}
     - target: {fileID: 224357076414380102, guid: 34454bb273a5c294491cb70404c95a1f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -17862,6 +17862,17 @@ Transform:
   m_Father: {fileID: 1898233749}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306240450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114535913984789350, guid: 60163bc4b1f0ef54e9bcc329aa406bce, type: 3}
+  m_PrefabInstance: {fileID: 1527922959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1352474254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19010,7 +19021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224962817517893130, guid: 7ea731f501442984589dad30e8f89c28, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1391.5421
+      value: 883.84985
       objectReference: {fileID: 0}
     - target: {fileID: 224962817517893130, guid: 7ea731f501442984589dad30e8f89c28, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -22635,6 +22646,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1659716085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659716077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9540e26a23e6c4e9bad9f14cba580fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfMessages: {fileID: 1306240450}
+  chatMessageObj: {fileID: 1558964313246128260, guid: ebcb3596467f9446a909f1df37c13c07, type: 3}
 --- !u!1 &1678142204
 GameObject:
   m_ObjectHideFlags: 0
@@ -23864,7 +23889,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7911319, y: 1}
+    m_SensorSize: {x: 1.0291716, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
