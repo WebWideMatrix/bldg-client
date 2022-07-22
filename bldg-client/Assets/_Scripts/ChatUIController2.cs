@@ -55,7 +55,18 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     void RedrawChatHistory() {
-        // TODO add more children if chatHistory has more
+        Debug.Log("@@@@ There are " + chatHistory.Count + " messages in the chat to draw");
+        Debug.Log("@@@@ There are " + listOfMessages.transform.childCount + " chat message children");
+
+        // add more children if needed
+        if (chatHistory.Count > listOfMessages.transform.childCount) {
+            for (int j = listOfMessages.transform.childCount; j < chatHistory.Count; j++) {
+                Debug.Log("@@@@ Adding chat message child");
+                GameObject newMessage = Instantiate(chatMessageObj, listOfMessages.transform) as GameObject;
+                newMessage.gameObject.SetActive(false);
+                // newMessage.transform.parent = listOfMessages.transform;
+            }
+        }
 
         // loop through children
         int i = 0;
@@ -70,8 +81,10 @@ public class ChatUIController2 : MonoBehaviour {
                     msgController.Clear();
                     msgController.SetMessage(msg.say_speaker, msg.say_text);
                 }
+                Debug.Log("@@@@ Drawn message " + i);
             } else {
                 child.gameObject.SetActive(false);
+                Debug.Log("@@@@ chat message " + i + " isn't used, disabled");
             }
             i++;
         }
