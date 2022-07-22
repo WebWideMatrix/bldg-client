@@ -20,12 +20,15 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     List<SayAction> chatHistory;
+    private ScrollRect scrollRect;
 
 
 
     void OnEnable()
     {
-
+        if (scrollRect == null) {
+            scrollRect = gameObject.GetComponent<ScrollRect>();
+        }
     }
 
 
@@ -88,6 +91,7 @@ public class ChatUIController2 : MonoBehaviour {
             }
             i++;
         }
+        scrollRect.verticalNormalizedPosition = 0;
     }
 
 
