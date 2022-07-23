@@ -12,6 +12,7 @@ using Models;
 public class ChatUIController2 : MonoBehaviour {
 
     public VerticalLayoutGroup listOfMessages;
+    public TMP_InputField chatMessageInput;
     public GameObject chatMessageObj;
 
 
@@ -29,8 +30,60 @@ public class ChatUIController2 : MonoBehaviour {
         if (scrollRect == null) {
             scrollRect = gameObject.GetComponent<ScrollRect>();
         }
+        chatMessageInput.onSubmit.AddListener(HandleNewMessage);
     }
 
+    void OnDisable()
+    {
+        
+        chatMessageInput.onSubmit.RemoveListener(HandleNewMessage);
+    }
+
+
+    void HandleNewMessage(string text) {
+        Debug.Log("@@@@@@ Sending new message");
+
+        SayAction act = CreateChatMessage(text);
+        AddToChatOutput(act); 
+        SendChatMessage(act);
+    }
+
+
+    void AddToChatOutput(SayAction act)
+    {
+        // Clear Input Field
+        chatMessageInput.text = string.Empty;
+        List<SayAction> chatWithNewMessage = new List<SayAction>(chatHistory);
+        chatWithNewMessage.Add(act);
+        RedrawChat(chatWithNewMessage);
+    }
+
+    SayAction CreateChatMessage(string text) {
+        // TODO extract recipient
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        Debug.Log("Found a rsdt controller");
+        SayAction act = new SayAction {
+            resident_email = crc.resident.email,
+            action_type = "SAY",
+            say_speaker = crc.resident.alias,
+            say_text = text,
+            say_time = DateTime.Now.Ticks,
+            say_flr = crc.resident.flr,
+            say_location = crc.resident.location,
+            say_mimetype = "text/plain",
+            say_recipient = null
+        };
+        return act;
+    }
+
+
+    void SendChatMessage(SayAction act) {
+        // TODO extract recipient
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        Debug.Log("Found a rsdt controller");
+        crc.SendSayAction(act);
+    }
+    
 
     public void SetResidentController(ResidentController controller) {
         rsdtController = controller;
@@ -46,7 +99,7 @@ public class ChatUIController2 : MonoBehaviour {
             return 0;
         });
 
-        RedrawChatHistory();
+        RedrawChat(chatHistory);
 
         //GameObject newMessage = Instantiate(chatMessageObj, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
         //newMessage.transform.parent = listOfMessages.transform;
@@ -57,13 +110,13 @@ public class ChatUIController2 : MonoBehaviour {
     }
 
 
-    void RedrawChatHistory() {
-        Debug.Log("@@@@ There are " + chatHistory.Count + " messages in the chat to draw");
+    void RedrawChat(List<SayAction> chat) {
+        Debug.Log("@@@@ There are " + chat.Count + " messages in the chat to draw");
         Debug.Log("@@@@ There are " + listOfMessages.transform.childCount + " chat message children");
 
         // add more children if needed
-        if (chatHistory.Count > listOfMessages.transform.childCount) {
-            for (int j = listOfMessages.transform.childCount; j < chatHistory.Count; j++) {
+        if (chat.Count > listOfMessages.transform.childCount) {
+            for (int j = listOfMessages.transform.childCount; j < chat.Count; j++) {
                 Debug.Log("@@@@ Adding chat message child");
                 GameObject newMessage = Instantiate(chatMessageObj, listOfMessages.transform) as GameObject;
                 newMessage.gameObject.SetActive(false);
@@ -76,8 +129,8 @@ public class ChatUIController2 : MonoBehaviour {
 
         foreach (Transform child in listOfMessages.transform)
         {
-            if (i < chatHistory.Count) {
-                SayAction msg = chatHistory[i];
+            if (i < chat.Count) {
+                SayAction msg = chat[i];
                 child.gameObject.SetActive(true);
                 ChatMessageController msgController = child.gameObject.GetComponent<ChatMessageController>();
                 if (msgController != null) {
