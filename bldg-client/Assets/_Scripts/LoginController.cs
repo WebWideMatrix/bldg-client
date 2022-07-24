@@ -25,6 +25,8 @@ public class LoginController : MonoBehaviour
     public TMP_Text errorDisplay;
     public TMP_Text verifyDisplay;
 
+    public TMP_Text residentName;
+
 
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -103,6 +105,9 @@ public class LoginController : MonoBehaviour
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
         Debug.Log("Login done, received " + rsdt.alias);
+
+        residentName.text = rsdt.alias;
+
         splashScreenAnimator.Play("Login to Loading");
         startTimedEvent.StartIEnumerator();
 

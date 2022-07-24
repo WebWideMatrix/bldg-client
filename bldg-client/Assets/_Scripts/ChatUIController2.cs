@@ -41,8 +41,6 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     void HandleNewMessage(string text) {
-        Debug.Log("@@@@@@ Sending new message");
-
         SayAction act = CreateChatMessage(text);
         AddToChatOutput(act); 
         SendChatMessage(act);
@@ -91,7 +89,6 @@ public class ChatUIController2 : MonoBehaviour {
     }
 
     public void AddMessageToHistory(string from, SayAction msg) {
-        Debug.Log("^^^^^ Invoked to add message to history");
         chatHistory.Add(msg);
         chatHistory.Sort(delegate(SayAction m1, SayAction m2) {
             if (m1.say_time > m2.say_time) return 1;
@@ -111,16 +108,11 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     void RedrawChat(List<SayAction> chat) {
-        Debug.Log("@@@@ There are " + chat.Count + " messages in the chat to draw");
-        Debug.Log("@@@@ There are " + listOfMessages.transform.childCount + " chat message children");
-
         // add more children if needed
         if (chat.Count > listOfMessages.transform.childCount) {
             for (int j = listOfMessages.transform.childCount; j < chat.Count; j++) {
-                Debug.Log("@@@@ Adding chat message child");
                 GameObject newMessage = Instantiate(chatMessageObj, listOfMessages.transform) as GameObject;
                 newMessage.gameObject.SetActive(false);
-                // newMessage.transform.parent = listOfMessages.transform;
             }
         }
 
@@ -137,10 +129,8 @@ public class ChatUIController2 : MonoBehaviour {
                     msgController.Clear();
                     msgController.SetMessage(msg.say_speaker, msg.say_text, msg.say_time);
                 }
-                Debug.Log("@@@@ Drawn message " + i);
             } else {
                 child.gameObject.SetActive(false);
-                Debug.Log("@@@@ chat message " + i + " isn't used, disabled");
             }
             i++;
         }
