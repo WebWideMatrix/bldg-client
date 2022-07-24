@@ -1,7 +1,10 @@
+using System;
+using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Utils;
 
 public class ChatMessageController : MonoBehaviour
 {
@@ -15,9 +18,10 @@ public class ChatMessageController : MonoBehaviour
         message.text = "";
     }
 
-    public void SetMessage(string fromText, string mesasgeText) 
+    public void SetMessage(string fromText, string mesasgeText, long messageTime) 
     {
+        //string timeFormatted = MissingLanguageFunctions.TimeStampToDateTime(messageTime);
         from.text = fromText;
-        message.text = mesasgeText;
+        message.text = mesasgeText;// + ", " + timeFormatted;
     }
 }

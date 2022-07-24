@@ -202,10 +202,10 @@ RectTransform:
   m_Father: {fileID: 3892985855803728404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.25, y: -21.5}
-  m_SizeDelta: {x: 286.5, y: 35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3895201000971473594
 CanvasRenderer:
@@ -447,10 +447,10 @@ RectTransform:
   m_Father: {fileID: 3892985855803728404}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.25, y: -58.5}
-  m_SizeDelta: {x: 286.5, y: 35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3894708259823943950
 CanvasRenderer:
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 3005150615482910282}
   - component: {fileID: 3826499631157804849}
   m_Layer: 5
-  m_Name: Friend Button
+  m_Name: Chat Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,7 +609,7 @@ RectTransform:
   - {fileID: 3893138625773335926}
   - {fileID: 3892348626613097408}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -759,8 +759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f850103796f94dd0a1b2788641fe023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  from: {fileID: 3786634724878399392}
-  message: {fileID: 3786718516520613708}
+  from: {fileID: 3786718516520613708}
+  message: {fileID: 3786634724878399392}
 --- !u!114 &3826499631157804849
 MonoBehaviour:
   m_ObjectHideFlags: 0

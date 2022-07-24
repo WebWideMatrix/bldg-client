@@ -135,7 +135,7 @@ public class ChatUIController2 : MonoBehaviour {
                 ChatMessageController msgController = child.gameObject.GetComponent<ChatMessageController>();
                 if (msgController != null) {
                     msgController.Clear();
-                    msgController.SetMessage(msg.say_speaker, msg.say_text);
+                    msgController.SetMessage(msg.say_speaker, msg.say_text, msg.say_time);
                 }
                 Debug.Log("@@@@ Drawn message " + i);
             } else {
