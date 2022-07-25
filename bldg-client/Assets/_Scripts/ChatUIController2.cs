@@ -39,8 +39,8 @@ public class ChatUIController2 : MonoBehaviour {
         chatMessageInput.onSubmit.RemoveListener(HandleNewMessage);
     }
 
-
-    void HandleNewMessage(string text) {
+    // making this public to allow other controllers to generate & send chat messages
+    public void HandleNewMessage(string text) {
         SayAction act = CreateChatMessage(text);
         AddToChatOutput(act); 
         SendChatMessage(act);
