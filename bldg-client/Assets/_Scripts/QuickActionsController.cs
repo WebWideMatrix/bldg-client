@@ -25,8 +25,6 @@ public class QuickActionsController : MonoBehaviour
     }
     
     public void ShowFormForSelectedAction() {
-        Debug.Log("$$$$$ 0");
-
         string action = actionInput.options[actionInput.value].text;
 
         switch (action) {
@@ -51,7 +49,6 @@ public class QuickActionsController : MonoBehaviour
 
     
     public void SendCommand() {
-        Debug.Log("#########################");
         string action = actionInput.options[actionInput.value].text;
         string entity = entityInput.options[entityInput.value].text;
         string name = nameInput.text;
@@ -135,7 +132,6 @@ public class QuickActionsController : MonoBehaviour
     //
     
     void showCreateForm() {
-        Debug.Log("$$$$$ 1");
         // TODO use arrays
 
         // show controls
@@ -147,11 +143,9 @@ public class QuickActionsController : MonoBehaviour
 
         // hide rest
         entityWebsiteInput.transform.parent.gameObject.SetActive(false);
-        Debug.Log("$$$$$ 2");
     }
 
     void showMoveForm() {
-        Debug.Log("$$$$$ 3");
         // TODO use arrays
 
         // show controls
@@ -163,8 +157,6 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-
-        Debug.Log("$$$$$ 4");
     }
 
     void showConnectForm() {
