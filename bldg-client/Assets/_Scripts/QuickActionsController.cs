@@ -18,7 +18,37 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField pictureInput;
     public TMP_InputField entityWebsiteInput;
     
+
+    public void OnEnable() {
+        // default action is Create
+        showCreateForm();
+    }
     
+    public void ShowFormForSelectedAction() {
+        Debug.Log("$$$$$ 0");
+
+        string action = actionInput.options[actionInput.value].text;
+
+        switch (action) {
+            case "Create": 
+                showCreateForm();
+                break;
+            case "Move":
+                showMoveForm();
+                break; 
+            case "Connect":
+                // TODO support Connect command
+                showConnectForm();
+                break; 
+            case "Update":
+                // TODO support update command
+                showUpdateForm();
+                break;
+            default: 
+                throw new Exception("Unknown command: " + action);
+        }
+    }
+
     
     public void SendCommand() {
         Debug.Log("#########################");
@@ -40,8 +70,7 @@ public class QuickActionsController : MonoBehaviour
             {"entityWebsite", entityWebsite}
         };
 
-
-        string command = action;
+        string command = "";
         switch (action) {
             case "Create": 
                 command = generateCreateCommand(commandData);
@@ -49,14 +78,22 @@ public class QuickActionsController : MonoBehaviour
             case "Move":
                 command = generateMoveCommand(commandData);
                 break; 
+            // TODO support Connect command
+
+            // TODO support update command
+
             default: 
                 throw new Exception("Unknown command: " + action);
         }
-
-        Debug.Log("Sending command from Quick Actions dialog: " + command);
-        chatController.HandleNewMessage(command);
+        if (command != "") {
+            Debug.Log("Sending command from Quick Actions dialog: " + command);
+            chatController.HandleNewMessage(command);
+        }
     }
     
+    //
+    // GENERATE COMMANDS
+    //
 
     string generateCreateCommand(Dictionary<string, string> data) {
         string command = "/create " + data["entity"] + " bldg";
@@ -89,5 +126,72 @@ public class QuickActionsController : MonoBehaviour
 
         command = command.ToLower();
         return command;
+    }
+
+
+    
+    //
+    // GENERATE COMMANDS
+    //
+    
+    void showCreateForm() {
+        Debug.Log("$$$$$ 1");
+        // TODO use arrays
+
+        // show controls
+        entityInput.transform.parent.gameObject.SetActive(true);
+        nameInput.transform.parent.gameObject.SetActive(true);
+        websiteInput.transform.parent.gameObject.SetActive(true);
+        summaryInput.transform.parent.gameObject.SetActive(true);
+        pictureInput.transform.parent.gameObject.SetActive(true);
+
+        // hide rest
+        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        Debug.Log("$$$$$ 2");
+    }
+
+    void showMoveForm() {
+        Debug.Log("$$$$$ 3");
+        // TODO use arrays
+
+        // show controls
+        entityWebsiteInput.transform.parent.gameObject.SetActive(true);
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+
+        Debug.Log("$$$$$ 4");
+    }
+
+    void showConnectForm() {
+        // TODO use arrays
+
+        // show controls
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+    }
+
+    void showUpdateForm() {
+        // TODO use arrays
+
+        // show controls
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
     }
 }
