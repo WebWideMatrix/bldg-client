@@ -20,9 +20,13 @@ MonoBehaviour:
     id: 1
     text: 
     is_online: 1
-    location: g/b(-2,103)
+    location: g/b(133,206)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(63,168)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name gould and website https://gould.xyz","say_time":637945867017853910}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-2,112)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      cantata bldg with name gitcoin and website https://gitcoin.co and picture https://s.gitcoin.co/static/landingpage/sponsors.e07ea4881856.png","say_time":637944407213007940}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(21,113)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name ft-purpose and website https://fromteal.app/entities/purpose
       and summary connect people with shared purpose and help them work together
@@ -86,10 +90,10 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
     session_id: 9119085a-9606-4cb7-a971-baa485a87dd6
-    x: -2
-    y: 103
+    x: 133
+    y: 206
     flr: g
-  initialized: 1
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0

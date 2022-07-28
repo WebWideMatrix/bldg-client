@@ -16,6 +16,8 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField websiteInput;
     public TMP_InputField summaryInput;
     public TMP_InputField pictureInput;
+    public TMP_InputField entityWebsiteInput;
+    
     
     
     public void SendCommand() {
@@ -26,13 +28,16 @@ public class QuickActionsController : MonoBehaviour
         string website = websiteInput.text;
         string summary = summaryInput.text;
         string picture = pictureInput.text;
+        string entityWebsite = entityWebsiteInput.text;
+        
         Dictionary<string, string> commandData = new Dictionary<string, string> {
             {"action", action},
             {"entity", entity},
             {"name", name},
             {"website", website},
             {"summary", summary},
-            {"picture", picture}
+            {"picture", picture},
+            {"entityWebsite", entityWebsite}
         };
 
 
@@ -41,6 +46,9 @@ public class QuickActionsController : MonoBehaviour
             case "Create": 
                 command = generateCreateCommand(commandData);
                 break;
+            case "Move":
+                command = generateMoveCommand(commandData);
+                break; 
             default: 
                 throw new Exception("Unknown command: " + action);
         }
@@ -69,4 +77,17 @@ public class QuickActionsController : MonoBehaviour
         return command;
     }
     
+
+    string generateMoveCommand(Dictionary<string, string> data) {
+        string command = "/move bldg";
+        if (data["entityWebsite"] != "") {
+            command += " " + data["entityWebsite"];
+        } else {
+            // TODO required field validation
+        }
+        command += " here";
+
+        command = command.ToLower();
+        return command;
+    }
 }
