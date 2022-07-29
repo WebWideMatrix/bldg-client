@@ -17,6 +17,7 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField summaryInput;
     public TMP_InputField pictureInput;
     public TMP_InputField entityWebsiteInput;
+    public TMP_InputField targetEntityWebsiteInput;
     
 
     public void OnEnable() {
@@ -42,6 +43,15 @@ public class QuickActionsController : MonoBehaviour
                 // TODO support update command
                 showUpdateForm();
                 break;
+            case "Add owner":
+                // TODO support update command
+                showAddOwnerForm();
+                break;
+            case "Remove owner":
+                // TODO support update command
+                showRemoveOwnerForm();
+                break;
+
             default: 
                 throw new Exception("Unknown command: " + action);
         }
@@ -56,6 +66,7 @@ public class QuickActionsController : MonoBehaviour
         string summary = summaryInput.text;
         string picture = pictureInput.text;
         string entityWebsite = entityWebsiteInput.text;
+        string targetEntityWebsite = targetEntityWebsiteInput.text;
         
         Dictionary<string, string> commandData = new Dictionary<string, string> {
             {"action", action},
@@ -64,7 +75,8 @@ public class QuickActionsController : MonoBehaviour
             {"website", website},
             {"summary", summary},
             {"picture", picture},
-            {"entityWebsite", entityWebsite}
+            {"entityWebsite", entityWebsite},
+            {"targetEntityWebsite", targetEntityWebsite}
         };
 
         string command = "";
@@ -74,10 +86,15 @@ public class QuickActionsController : MonoBehaviour
                 break;
             case "Move":
                 command = generateMoveCommand(commandData);
+                break;             
+            case "Connect":
+                command = generateConnectCommand(commandData);
                 break; 
-            // TODO support Connect command
 
             // TODO support update command
+
+
+            // TODO suport add/remove owner commands
 
             default: 
                 throw new Exception("Unknown command: " + action);
@@ -125,10 +142,25 @@ public class QuickActionsController : MonoBehaviour
         return command;
     }
 
+    string generateConnectCommand(Dictionary<string, string> data) {
+        string command = "/connect between";
+        if (data["entityWebsite"] != "") {
+            command += " " + data["entityWebsite"];
+        } else {
+            // TODO required field validation
+        }
+        if (data["targetEntityWebsite"] != "") {
+            command += " and " + data["targetEntityWebsite"];
+        } else {
+            // TODO required field validation
+        }
 
+        command = command.ToLower();
+        return command;
+    }
     
     //
-    // GENERATE COMMANDS
+    // SHOW FORMS
     //
     
     void showCreateForm() {
@@ -143,6 +175,7 @@ public class QuickActionsController : MonoBehaviour
 
         // hide rest
         entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
     }
 
     void showMoveForm() {
@@ -157,12 +190,15 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
     }
 
     void showConnectForm() {
         // TODO use arrays
 
         // show controls
+        entityWebsiteInput.transform.parent.gameObject.SetActive(true);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(true);
 
         // hide rest
         entityInput.transform.parent.gameObject.SetActive(false);
@@ -170,7 +206,6 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
     }
 
     void showUpdateForm() {
@@ -185,5 +220,36 @@ public class QuickActionsController : MonoBehaviour
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
         entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+    }
+
+    void showAddOwnerForm() {
+        // TODO use arrays
+
+        // show controls
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+    }
+
+    void showRemoveOwnerForm() {
+        // TODO use arrays
+
+        // show controls
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
     }
 }

@@ -20,9 +20,13 @@ MonoBehaviour:
     id: 1
     text: 
     is_online: 1
-    location: g/b(133,206)
+    location: g/b(117,145)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(133,206)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://gould.xyz here","say_time":637945880110233870}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(133,206)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      team bldg https://gould.xyz here","say_time":637945879054793570}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(63,168)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       team bldg with name gould and website https://gould.xyz","say_time":637945867017853910}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-2,112)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -90,8 +94,8 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
     session_id: 9119085a-9606-4cb7-a971-baa485a87dd6
-    x: 133
-    y: 206
+    x: 117
+    y: 145
     flr: g
   initialized: 0
   ACTION_SEND_INTERVAL: 200
