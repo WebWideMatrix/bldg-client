@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 using ImageUtils;
 using BrowserUtils;
@@ -101,38 +102,38 @@ public class BldgController : MonoBehaviour
 
 
 
-GameObject getPrefabByEntityClass(string entity_type) {
+	GameObject getPrefabByEntityClass(string entity_type) {
 		Debug.Log("Getting prefab for entity class " + entity_type);
-        
-        switch (entity_type) {
-		case "purpose":
-			return whiteboardBldg;
-		case "cantata":
-			return presentationStandBldg;
-		case "neighborhood":
-			return trafficSignBldg;
-		case "street":
-			return streetSignBldg;
-		case "member":
-			return laptopBldg;
-		case "milestone":
-			return briefcaseBldg;
-		case "task":
-			return roundTableBldg;
-		case "web_page":
-			return tabletBldg;
-		case "team":
-			return buildingWithStorefront;
-		case "lot":
-			return greenLotObject;
-		case "green-lot":
-			return greenLotObject;
-		case "blue-lot":
-			return blueLotObject;
-		case "yellow-lot":
-			return yellowLotObject;
-		default:
-			return chairBldg;
+		
+		switch (entity_type) {
+			case "purpose":
+				return whiteboardBldg;
+			case "cantata":
+				return presentationStandBldg;
+			case "neighborhood":
+				return trafficSignBldg;
+			case "street":
+				return streetSignBldg;
+			case "member":
+				return laptopBldg;
+			case "milestone":
+				return briefcaseBldg;
+			case "task":
+				return roundTableBldg;
+			case "web_page":
+				return tabletBldg;
+			case "team":
+				return buildingWithStorefront;
+			case "lot":
+				return greenLotObject;
+			case "green-lot":
+				return greenLotObject;
+			case "blue-lot":
+				return blueLotObject;
+			case "yellow-lot":
+				return yellowLotObject;
+			default:
+				return chairBldg;
 		}
 	}
 
@@ -346,6 +347,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 
 		currentFlr = AddressUtils.extractFlr(currentAddress);
 
+		CurrentMetadata cm = CurrentMetadata.Instance;
+		cm.clearEntities();
+
 		// TODO check whether it changed
 
 		// TODO DECIDE WHETHER WE NEED DIFFERENT SCENES FOR G & FLR
@@ -467,6 +471,8 @@ GameObject getPrefabByEntityClass(string entity_type) {
 	}
 
 	void reloadBuildings(string address) {
+		CurrentMetadata cm = CurrentMetadata.Instance;
+		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
@@ -508,6 +514,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 					if (movedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
+					// new entity, so add to metadata
+					cm.addEntity(b.entity_type, b.web_url);
+					dataChanged = true;
 
 					float height = 0F;
 					if (address != "g") {
@@ -535,6 +544,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 				}
 				// Debug.Log("Rendered " + count + " bldgs");
 			});
+			if (dataChanged) {
+				EventManager.Instance.TriggerEvent("EntitiesChanged");
+			}
 	}
 
 	void reloadResidents(string address) {

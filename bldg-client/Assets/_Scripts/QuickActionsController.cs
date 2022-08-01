@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class QuickActionsController : MonoBehaviour
@@ -20,9 +21,33 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField targetEntityWebsiteInput;
     
 
+    private UnityAction onEntitiesChange;
+
+
     public void OnEnable() {
         // default action is Create
         showCreateForm();
+        entityInput.ClearOptions();
+        CurrentMetadata cm = CurrentMetadata.Instance;
+        entityInput.AddOptions(cm.getEntityTypes());
+        EventManager.Instance.StartListening("EntitiesChanged", onEntitiesChange);
+    }
+    
+    void OnDisable()
+    {
+        EventManager.Instance.StopListening("EntitiesChanged", onEntitiesChange);
+    }
+
+    private void Awake()
+    {
+        onEntitiesChange = new UnityAction(OnEntitiesChange);
+    }
+
+    private void OnEntitiesChange()
+    {
+        entityInput.ClearOptions();
+        CurrentMetadata cm = CurrentMetadata.Instance;
+        entityInput.AddOptions(cm.getEntityTypes());
     }
     
     public void ShowFormForSelectedAction() {
@@ -43,11 +68,11 @@ public class QuickActionsController : MonoBehaviour
                 // TODO support update command
                 showUpdateForm();
                 break;
-            case "Add owner":
+            case "Add Owner":
                 // TODO support update command
                 showAddOwnerForm();
                 break;
-            case "Remove owner":
+            case "Remove Owner":
                 // TODO support update command
                 showRemoveOwnerForm();
                 break;
@@ -251,5 +276,9 @@ public class QuickActionsController : MonoBehaviour
         pictureInput.transform.parent.gameObject.SetActive(false);
         entityWebsiteInput.transform.parent.gameObject.SetActive(false);
         targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+
+
+
+
     }
 }
