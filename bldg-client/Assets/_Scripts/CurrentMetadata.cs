@@ -63,4 +63,22 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
         }
         return entityWebsitesPerType[type];
     }
+
+    public int getEntitiesCount() {
+        int count = 0;
+        foreach (string type in entityCountPerType.Keys) {
+            count += entityCountPerType[type];
+        }
+        return count;
+    }
+
+    public List<string> getAllEntities() {
+        List<string> entities = new List<string>();
+        foreach (string type in entityWebsitesPerType.Keys) {
+            foreach (string website in entityWebsitesPerType[type]) {
+                entities.Add(website);
+            }
+        }
+        return entities;
+    }
 }

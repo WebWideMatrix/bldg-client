@@ -20,7 +20,7 @@ MonoBehaviour:
     id: 1
     text: 
     is_online: 1
-    location: g/b(22,80)
+    location: g/b(39,-58)/l0/b(8,40)
     name: Udi Bauman
     previous_messages:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(40,-51)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"good
@@ -106,9 +106,9 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(13,-25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       team bldg with name fromTeal and website fromteal.com","say_time":637718373156980180}'
     session_id: 8228019b-5a38-4040-a74a-564ce918b82e
-    x: 22
-    y: 80
-    flr: g
+    x: 8
+    y: 40
+    flr: g/b(39,-58)/l0
   initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0

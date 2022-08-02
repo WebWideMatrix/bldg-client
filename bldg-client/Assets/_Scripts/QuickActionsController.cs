@@ -18,6 +18,7 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField summaryInput;
     public TMP_InputField pictureInput;
     public TMP_InputField entityWebsiteInput;
+    public TMP_Dropdown entityWebsiteDropdown1;
     public TMP_InputField targetEntityWebsiteInput;
     
 
@@ -30,24 +31,18 @@ public class QuickActionsController : MonoBehaviour
         entityInput.ClearOptions();
         CurrentMetadata cm = CurrentMetadata.Instance;
         entityInput.AddOptions(cm.getEntityTypes());
+        if (onEntitiesChange == null) {
+            onEntitiesChange = new UnityAction(OnEntitiesChange);
+        }
         EventManager.Instance.StartListening("EntitiesChanged", onEntitiesChange);
-    }
-    
-    void OnDisable()
-    {
-        EventManager.Instance.StopListening("EntitiesChanged", onEntitiesChange);
-    }
-
-    private void Awake()
-    {
-        onEntitiesChange = new UnityAction(OnEntitiesChange);
     }
 
     private void OnEntitiesChange()
     {
-        entityInput.ClearOptions();
+        entityWebsiteDropdown1.ClearOptions();
         CurrentMetadata cm = CurrentMetadata.Instance;
-        entityInput.AddOptions(cm.getEntityTypes());
+        List<string> entities = cm.getAllEntities();
+        entityWebsiteDropdown1.AddOptions(entities);
     }
     
     public void ShowFormForSelectedAction() {

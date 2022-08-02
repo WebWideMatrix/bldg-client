@@ -542,11 +542,12 @@ public class BldgController : MonoBehaviour
                     // TODO create picture element
 					// controller.renderMainPicture();
 				}
+				if (dataChanged) {
+					Debug.Log("~~~~ DATA CHANGED ~~~~");
+					EventManager.Instance.TriggerEvent("EntitiesChanged");
+				}
 				// Debug.Log("Rendered " + count + " bldgs");
 			});
-			if (dataChanged) {
-				EventManager.Instance.TriggerEvent("EntitiesChanged");
-			}
 	}
 
 	void reloadResidents(string address) {
