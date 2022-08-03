@@ -2055,7 +2055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: title
-      value: Entity Website
+      value: Entity
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: detailIcon
@@ -2067,11 +2067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: buttonTitle
-      value: Entity Website
+      value: Entity
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: description
-      value: Enter the URL of the entity
+      value: Choose entity
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: detailImage
@@ -3787,7 +3787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: title
-      value: And Entity Website
+      value: And entity
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: detailIcon
@@ -3799,11 +3799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: buttonTitle
-      value: And Entity Website
+      value: And entity
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: description
-      value: Enter the URL of the  entity you want to connect to
+      value: Choose the  entity you want to connect to
       objectReference: {fileID: 0}
     - target: {fileID: 114641788525586780, guid: d61199bc3cc627642aafe870d3626773, type: 3}
       propertyPath: detailImage
@@ -25096,7 +25096,6 @@ MonoBehaviour:
   websiteInput: {fileID: 1430605539}
   summaryInput: {fileID: 1866912440}
   pictureInput: {fileID: 52408453}
-  entityWebsiteInput: {fileID: 0}
   entityWebsiteDropdown1: {fileID: 74428411}
   entityWebsiteDropdown2: {fileID: 674140116}
 --- !u!1001 &1527922959
