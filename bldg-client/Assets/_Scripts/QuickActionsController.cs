@@ -17,9 +17,8 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField websiteInput;
     public TMP_InputField summaryInput;
     public TMP_InputField pictureInput;
-    public TMP_InputField entityWebsiteInput;
     public TMP_Dropdown entityWebsiteDropdown1;
-    public TMP_InputField targetEntityWebsiteInput;
+    public TMP_Dropdown entityWebsiteDropdown2;
     
 
     private UnityAction onEntitiesChange;
@@ -40,9 +39,11 @@ public class QuickActionsController : MonoBehaviour
     private void OnEntitiesChange()
     {
         entityWebsiteDropdown1.ClearOptions();
+        entityWebsiteDropdown2.ClearOptions();
         CurrentMetadata cm = CurrentMetadata.Instance;
         List<string> entities = cm.getAllEntities();
         entityWebsiteDropdown1.AddOptions(entities);
+        entityWebsiteDropdown2.AddOptions(entities);
     }
     
     public void ShowFormForSelectedAction() {
@@ -85,8 +86,8 @@ public class QuickActionsController : MonoBehaviour
         string website = websiteInput.text;
         string summary = summaryInput.text;
         string picture = pictureInput.text;
-        string entityWebsite = entityWebsiteInput.text;
-        string targetEntityWebsite = targetEntityWebsiteInput.text;
+        string entityWebsite = entityWebsiteDropdown1.options[entityWebsiteDropdown1.value].text;
+        string targetEntityWebsite = entityWebsiteDropdown2.options[entityWebsiteDropdown2.value].text;
         
         Dictionary<string, string> commandData = new Dictionary<string, string> {
             {"action", action},
@@ -194,15 +195,15 @@ public class QuickActionsController : MonoBehaviour
         pictureInput.transform.parent.gameObject.SetActive(true);
 
         // hide rest
-        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showMoveForm() {
         // TODO use arrays
 
         // show controls
-        entityWebsiteInput.transform.parent.gameObject.SetActive(true);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
 
         // hide rest
         entityInput.transform.parent.gameObject.SetActive(false);
@@ -210,15 +211,15 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showConnectForm() {
         // TODO use arrays
 
         // show controls
-        entityWebsiteInput.transform.parent.gameObject.SetActive(true);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(true);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(true);
 
         // hide rest
         entityInput.transform.parent.gameObject.SetActive(false);
@@ -239,8 +240,8 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showAddOwnerForm() {
@@ -254,8 +255,8 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showRemoveOwnerForm() {
@@ -269,11 +270,7 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteInput.transform.parent.gameObject.SetActive(false);
-        targetEntityWebsiteInput.transform.parent.gameObject.SetActive(false);
-
-
-
-
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
     }
 }
