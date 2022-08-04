@@ -55,4 +55,22 @@ public class InitApp : MonoBehaviour
         flyCamera.gameObject.SetActive(false);
     }
 
+    public static void startWalking()
+    {
+        EventManager.Instance.TriggerEvent("StartWalking");
+    }
+
+    public static void startFlyingLow()
+    {
+        Debug.Log("!!!! EventManager.Instance = " + EventManager.Instance);
+        Debug.Log("!!!! before");
+        EventManager.Instance.TriggerEvent("StartFlyingLow");
+        Debug.Log("!!!! after");
+    }
+
+    public static void startFlyingHigh()
+    {
+        EventManager.Instance.TriggerEvent("StartFlyingHigh");
+    }
+
 }
