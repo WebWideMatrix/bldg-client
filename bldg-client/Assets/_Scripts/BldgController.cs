@@ -472,6 +472,7 @@ public class BldgController : MonoBehaviour
 
 	void reloadBuildings(string address) {
 		CurrentMetadata cm = CurrentMetadata.Instance;
+		CurrentResidentController crc = CurrentResidentController.Instance;
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
@@ -514,8 +515,10 @@ public class BldgController : MonoBehaviour
 					if (movedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
-					// new entity, so add to metadata
-					cm.addEntity(b.entity_type, b.web_url);
+					// new entity so add to metadata of entities belonging to current user
+					if (Array.IndexOf(b.owners, crc.resident.email) > -1) {
+						cm.addEntity(b.entity_type, b.web_url);
+					}
 					dataChanged = true;
 
 					float height = 0F;
