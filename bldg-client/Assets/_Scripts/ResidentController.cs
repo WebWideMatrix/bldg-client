@@ -54,7 +54,6 @@ public class ResidentController : MonoBehaviour
         initialized = true;
         isCurrentUser = isCurrent;
         if (isCurrentUser) {
-            Debug.Log("!!!!! Enabling current user - startign listening for events");
             EventManager.Instance.StartListening("StartWalking", OnStartWalking);
             EventManager.Instance.StartListening("StartFlyingLow", OnStartFlyingLow);
             EventManager.Instance.StartListening("StartFlyingHigh", OnStartFlyingHigh);

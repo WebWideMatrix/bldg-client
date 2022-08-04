@@ -26,7 +26,7 @@ public class QuickActionsController : MonoBehaviour
 
     public void OnEnable() {
         // default action is Create
-        showCreateForm();
+        showEmptyForm();
         entityInput.ClearOptions();
         CurrentMetadata cm = CurrentMetadata.Instance;
         entityInput.AddOptions(cm.getEntityTypes());
@@ -74,7 +74,8 @@ public class QuickActionsController : MonoBehaviour
                 break;
 
             default: 
-                throw new Exception("Unknown command: " + action);
+                showEmptyForm();
+                break;
         }
     }
 
@@ -260,6 +261,21 @@ public class QuickActionsController : MonoBehaviour
     }
 
     void showRemoveOwnerForm() {
+        // TODO use arrays
+
+        // show controls
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
+        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+    }
+
+    void showEmptyForm() {
         // TODO use arrays
 
         // show controls
