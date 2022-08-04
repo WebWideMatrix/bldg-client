@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 80
+    direction: 160
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(103,167)
+    location: g/b(103,180)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,167)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name a lot and website https://a.org","say_time":637952189680985700}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(92,162)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
       between https://gould.xyz and fromteal.com","say_time":637951291519425000}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(162,177)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
@@ -109,7 +111,7 @@ MonoBehaviour:
       good morning","say_time":637896629044775770}'
     session_id: afbdc382-a875-4ed6-afde-43c5d7d78f9d
     x: 103
-    y: 167
+    y: 180
     flr: g
   initialized: 0
   ACTION_SEND_INTERVAL: 200
