@@ -31,7 +31,6 @@ public class InitApp : MonoBehaviour
         //     loginController.Show();
         // }
         // else {
-        //     Debug.Log("CRC Initialized!!!!");
         //     loginController.completeLogin(crc.resident);
         // }
 
@@ -62,10 +61,7 @@ public class InitApp : MonoBehaviour
 
     public static void startFlyingLow()
     {
-        Debug.Log("!!!! EventManager.Instance = " + EventManager.Instance);
-        Debug.Log("!!!! before");
         EventManager.Instance.TriggerEvent("StartFlyingLow");
-        Debug.Log("!!!! after");
     }
 
     public static void startFlyingHigh()

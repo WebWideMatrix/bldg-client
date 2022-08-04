@@ -543,7 +543,6 @@ public class BldgController : MonoBehaviour
 					// controller.renderMainPicture();
 				}
 				if (dataChanged) {
-					Debug.Log("~~~~ DATA CHANGED ~~~~");
 					EventManager.Instance.TriggerEvent("EntitiesChanged");
 				}
 				// Debug.Log("Rendered " + count + " bldgs");
