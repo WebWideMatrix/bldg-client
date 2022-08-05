@@ -20,7 +20,9 @@ public class QuickActionsController : MonoBehaviour
     public TMP_Dropdown entityWebsiteDropdown1;
     public TMP_Dropdown entityWebsiteDropdown2;
     public TMP_InputField ownerInput;
-    
+
+    public TMP_Text informationText;
+    public TMP_Text errorText;
 
     private UnityAction onEntitiesChange;
 
@@ -34,6 +36,7 @@ public class QuickActionsController : MonoBehaviour
         if (onEntitiesChange == null) {
             onEntitiesChange = new UnityAction(OnEntitiesChange);
         }
+        clearForm();
         EventManager.Instance.StartListening("EntitiesChanged", onEntitiesChange);
     }
 
@@ -237,6 +240,8 @@ public class QuickActionsController : MonoBehaviour
         summaryInput.transform.parent.gameObject.SetActive(true);
         pictureInput.transform.parent.gameObject.SetActive(true);
 
+        informationText.text = "Create a new entity";
+
         // hide rest
         entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
         entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
@@ -248,6 +253,8 @@ public class QuickActionsController : MonoBehaviour
 
         // show controls
         entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
+
+        informationText.text = "Choose an entity to move to where you are.";
 
         // hide rest
         entityInput.transform.parent.gameObject.SetActive(false);
@@ -265,6 +272,8 @@ public class QuickActionsController : MonoBehaviour
         // show controls
         entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
         entityWebsiteDropdown2.transform.parent.gameObject.SetActive(true);
+
+        informationText.text = "Choose two entities to connect.";
 
         // hide rest
         entityInput.transform.parent.gameObject.SetActive(false);
@@ -337,5 +346,32 @@ public class QuickActionsController : MonoBehaviour
         entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
         entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
         ownerInput.transform.parent.gameObject.SetActive(false);
+
+        informationText.text = "";
+        errorText.text = "";
+    }
+
+    void clearForm() {
+        // clear form
+        actionInput.value = 0;
+        nameInput.text = "";
+        websiteInput.text = "";
+        summaryInput.text = "";
+        pictureInput.text = "";
+        entityWebsiteDropdown1.value = 0;
+        entityWebsiteDropdown2.value = 0;
+        ownerInput.text = "";
+        informationText.text = "";
+        errorText.text = "";
+    }
+
+    public void validateName(string name) {
+        if (name != "" && name.IndexOf(' ') > -1) {
+            errorText.text = "Name cannot contain spaces.";
+            // return false;
+        } else {
+            errorText.text = "";
+            // return true;
+        }
     }
 }

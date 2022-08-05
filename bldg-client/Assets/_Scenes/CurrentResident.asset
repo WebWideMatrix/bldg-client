@@ -20,9 +20,27 @@ MonoBehaviour:
     id: 1
     text: 
     is_online: 1
-    location: g/b(103,180)
+    location: g/b(224,221)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,218)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between https://coop.co/purpose and https://cc.xyz","say_time":637952950946280670}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,228)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name cc and website https://cc.xyz and summary capture carbon
+      to mitigate global warming","say_time":637952950604451610}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(226,230)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name coop-purpose and website https://coop.co/purpose and
+      summary increase cooperation between people & teams with shared purpose","say_time":637952947648995050}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(225,234)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name cooperation and website http://cooperation.co","say_time":637952944766091590}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(193,244)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name cooperation and website http://coop.xyz","say_time":637952944136784740}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(193,244)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      green-lot bldg with name increasing cooperation and website http://coop.xyz","say_time":637952942956029410}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,180)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
+      owner inna.bauman@gmail.com from bldg fromteal.com","say_time":637952217751019930}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,180)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner inna.bauman@gmail.com to bldg fromteal.com","say_time":637952217407377380}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,167)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       blue-lot bldg with name a lot and website https://a.org","say_time":637952189680985700}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(92,162)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
@@ -110,10 +128,10 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
     session_id: afbdc382-a875-4ed6-afde-43c5d7d78f9d
-    x: 103
-    y: 180
+    x: 224
+    y: 221
     flr: g
-  initialized: 0
+  initialized: 1
   ACTION_SEND_INTERVAL: 200
-  inFlyingMode: 0
-  flyingHigh: 0
+  inFlyingMode: 1
+  flyingHigh: 1
