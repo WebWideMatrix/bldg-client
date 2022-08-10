@@ -14,15 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 160
+    direction: 180
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(224,221)
+    location: g/b(236,182)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,191)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner eddiefidler12@gmail.com to bldg https://trello.com/card123","say_time":637953061245920120}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(245,184)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between https://trello.com/card123 and https://trello.com/card456","say_time":637953060494863040}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(245,183)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name 2nstask and website https://trello.com/card456 and summary
+      then build abc","say_time":637953059986544740}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,199)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name sometask and website https://trello.com/card123 and summary
+      build xyz","say_time":637953058359140520}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,197)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://fromteal.com/purpose2 here","say_time":637953057393068470}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(222,224)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name my-purpose and website https://fromteal.com/purpose2
+      and summary purpose text bla bla","say_time":637953056896245190}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(224,221)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hi","say_time":637953056144099600}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,218)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
       between https://coop.co/purpose and https://cc.xyz","say_time":637952950946280670}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,228)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -127,11 +143,11 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
-    session_id: afbdc382-a875-4ed6-afde-43c5d7d78f9d
-    x: 224
-    y: 221
+    session_id: 2b95c135-03e4-4a75-979f-ed51702bcdb7
+    x: 236
+    y: 182
     flr: g
   initialized: 1
   ACTION_SEND_INTERVAL: 200
-  inFlyingMode: 1
-  flyingHigh: 1
+  inFlyingMode: 0
+  flyingHigh: 0
