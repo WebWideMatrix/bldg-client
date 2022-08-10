@@ -26,6 +26,9 @@ public class LoginController : MonoBehaviour
     public TMP_Text verifyDisplay;
 
     public TMP_Text residentName;
+    public TMP_Text residentName2;
+    public TMP_Text currentAddress;
+    
 
 
     // TODO move to shared constants/configuration file
@@ -107,6 +110,8 @@ public class LoginController : MonoBehaviour
         Debug.Log("Login done, received " + rsdt.alias);
 
         residentName.text = rsdt.alias;
+        residentName2.text = rsdt.alias;
+        currentAddress.text = rsdt.flr;
 
         splashScreenAnimator.Play("Login to Loading");
         startTimedEvent.StartIEnumerator();
