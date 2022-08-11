@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Michsky.UI.Shift;
+
 
 public class QuickActionsController : MonoBehaviour
 {
@@ -26,6 +28,8 @@ public class QuickActionsController : MonoBehaviour
 
     private UnityAction onEntitiesChange;
 
+    private ModalWindowManager modalManager;
+
 
     public void OnEnable() {
         // default action is Create
@@ -38,6 +42,7 @@ public class QuickActionsController : MonoBehaviour
         }
         clearForm();
         EventManager.Instance.StartListening("EntitiesChanged", onEntitiesChange);
+        modalManager = gameObject.GetComponent<ModalWindowManager>();
     }
 
     private void OnEntitiesChange()
@@ -108,24 +113,40 @@ public class QuickActionsController : MonoBehaviour
         };
 
         string command = "";
+        string error = "";
         switch (action) {
-            case "Create": 
-                command = generateCreateCommand(commandData);
+            case "Create":
+                error = validateCreateForm(commandData);
+                if (error == "") {
+                    command = generateCreateCommand(commandData);
+                } 
                 break;
             case "Move":
-                command = generateMoveCommand(commandData);
+                error = validateMoveForm(commandData);
+                if (error == "") {
+                    command = generateMoveCommand(commandData);
+                }
                 break;             
             case "Connect":
-                command = generateConnectCommand(commandData);
+                error = validateConnectForm(commandData);
+                if (error == "") {
+                    command = generateConnectCommand(commandData);
+                }
                 break; 
 
             // TODO support update command
 
             case "Add Owner":
-                command = generateAddOwnerCommand(commandData);
+                error = validateAddOwnerForm(commandData);
+                if (error == "") {
+                    command = generateAddOwnerCommand(commandData);
+                }
                 break; 
             case "Remove Owner":
-                command = generateRemoveOwnerCommand(commandData);
+                error = validateRemoveOwnerForm(commandData);
+                if (error == "") {
+                    command = generateRemoveOwnerCommand(commandData);
+                }
                 break; 
 
             default: 
@@ -134,8 +155,82 @@ public class QuickActionsController : MonoBehaviour
         if (command != "") {
             Debug.Log("Sending command from Quick Actions dialog: " + command);
             chatController.HandleNewMessage(command);
+            modalManager.ModalWindowOut();
+        } else {
+            Debug.Log("Validation error: " + error);
+            errorText.text = error;
         }
     }
+
+
+    //
+    // VALIDATE FORM DATA
+    //
+
+    string validateCreateForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entity"] == "" ) {
+            error = "Please select an entity type";
+        } else if (commandData["name"] == "") {
+            error = "Name is required";
+        } else if (commandData["name"].IndexOf(' ') > -1) {
+            error = "Name cannot contain spaces";
+        } else if (commandData["website"] == "") {
+            error = "Website is required";
+        } else if (commandData["website"].IndexOf(' ') > -1) {
+            error = "Website cannot contain spaces";
+        } else if (commandData["summary"] == "") {
+            error = "Summary is required";
+        }
+        return error;
+    }
+
+    string validateMoveForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityWebsite"] == "" ) {
+            error = "Please select an entity";
+        }
+        return error;
+    }
+
+    string validateConnectForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityWebsite"] == "" ) {
+            error = "Please select an entity";
+        } else if (commandData["targetEntityWebsite"] == "" ) {
+            error = "Please select a target entity";
+        }
+        return error;
+    }
+
+    string validateAddOwnerForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityWebsite"] == "" ) {
+            error = "Please select an entity";
+        } else if (commandData["owner"] == "" ) {
+            error = "Please enter an owner email";
+        } else if (commandData["owner"].IndexOf(' ') > -1) {
+            error = "Owner email cannot contain spaces";
+        } else if (commandData["owner"].IndexOf('@') < 1) {
+            error = "Owner email needs to be a valid email address";
+        }
+        return error;
+    }
+
+    string validateRemoveOwnerForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityWebsite"] == "" ) {
+            error = "Please select an entity";
+        } else if (commandData["owner"] == "" ) {
+            error = "Please enter an owner email";
+        } else if (commandData["owner"].IndexOf(' ') > -1) {
+            error = "Owner email cannot contain spaces";
+        } else if (commandData["owner"].IndexOf('@') < 1) {
+            error = "Owner email needs to be a valid email address";
+        }
+        return error;
+    }
+
     
     //
     // GENERATE COMMANDS
