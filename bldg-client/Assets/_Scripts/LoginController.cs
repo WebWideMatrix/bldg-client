@@ -107,7 +107,7 @@ public class LoginController : MonoBehaviour
 
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
-        Debug.Log("@@@@@@@@@@@@ Login done, received " + rsdt.alias);
+        Debug.Log("Login done, received " + rsdt.alias);
 
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
@@ -122,8 +122,6 @@ public class LoginController : MonoBehaviour
             crc.initialize(rsdt);
         }
         
-        Debug.Log("@@@@@@@@@@@@ 3");
-
         // check whether we need to load the bldg_flr scene
         if (crc.resident.flr != "g") {
             Scene scene = SceneManager.GetActiveScene();
@@ -131,8 +129,6 @@ public class LoginController : MonoBehaviour
                 SceneManager.LoadScene("bldg_flr");
             }
         }
-
-        Debug.Log("@@@@@@@@@@@@ 4");
 
         float height = 0.5F;
         if (rsdt.flr != "g") {
@@ -146,29 +142,22 @@ public class LoginController : MonoBehaviour
         qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
         GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
 
-        Debug.Log("@@@@@@@@@@@@ rsdtClone is " + rsdtClone);
-        Debug.Log("@@@@@@@@@@@@ walkCamera is " + walkCamera);
-        Debug.Log("@@@@@@@@@@@@ flyCamera is " + flyCamera);
-
         walkCamera.Follow = rsdtClone.transform;
         walkCamera.LookAt = rsdtClone.transform;
         flyCamera.Follow = rsdtClone.transform;
         flyCamera.LookAt = rsdtClone.transform;
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
-        Debug.Log("@@@@@@@@@@@@ 5");
-
 
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
         bldgController.SetAddress(rsdt.flr);
         
 
-        // hide the login dialog
+        // hide the login dialog - TODO IS IT STILL NEEDED?
         this.gameObject.SetActive(false);
 
         EventManager.Instance.TriggerEvent("LoginSuccessful");
-        Debug.Log("@@@@@@@@@@@@ 10");
     }
 
 

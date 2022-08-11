@@ -724,6 +724,7 @@ public class BldgController : MonoBehaviour
 	void reloadContainerBldg() {
 		// check whether the container bldg already has a model object
 		GameObject container = getContainerBldg();
+		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
 		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
