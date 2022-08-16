@@ -10,7 +10,6 @@ public class InitApp : MonoBehaviour
 {
 
     [Header("Resources")]
-    public LoginController loginController;
 
     // TODO is there a better place for the cameras?
     public CinemachineVirtualCamera flyCamera;

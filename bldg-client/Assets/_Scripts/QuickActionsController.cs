@@ -147,7 +147,7 @@ public class QuickActionsController : MonoBehaviour
                 if (error == "") {
                     command = generateRemoveOwnerCommand(commandData);
                 }
-                break; 
+                break;
 
             default: 
                 throw new Exception("Unknown command: " + action);
@@ -166,6 +166,8 @@ public class QuickActionsController : MonoBehaviour
     //
     // VALIDATE FORM DATA
     //
+
+
 
     string validateCreateForm(Dictionary<string, string> commandData) {
         string error = "";
@@ -321,6 +323,10 @@ public class QuickActionsController : MonoBehaviour
         command = command.ToLower();
         return command;
     }
+
+
+
+
     //
     // SHOW FORMS
     //

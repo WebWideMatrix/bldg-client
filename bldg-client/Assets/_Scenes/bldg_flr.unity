@@ -2628,7 +2628,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1485643, y: 1}
+    m_SensorSize: {x: 2.065896, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3080,7 +3080,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abdd0ae8641a4f1da84d2980a0eb816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginController: {fileID: 1174329304}
   flyCamera: {fileID: 944579215}
   walkCamera: {fileID: 1395082724}
 --- !u!114 &1541636055
@@ -4980,7 +4979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 998.9464
+      value: 976.6261
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5544,7 +5543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1591.3678
+      value: 1546.7272
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5564,7 +5563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1425.158
+      value: 1380.5173
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5584,7 +5583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1283.4429
+      value: 1238.8022
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5604,7 +5603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1077.9678
+      value: 1033.3271
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5624,6 +5623,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6597928075328489178, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597928075350161175, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6597928075359725424, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
@@ -5966,6 +5969,14 @@ PrefabInstance:
       propertyPath: bldgController
       value: 
       objectReference: {fileID: 2138089338}
+    - target: {fileID: 6597928075821545320, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597928075821545320, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+      propertyPath: virtualCursor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6597928076048037028, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
