@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 340
+    direction: 0
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(12,28)
+    location: g/b(-45,142)/l0/b(9,31)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(42,136)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      yellow-lot bldg with name fight-maleria and website https://maleria.xyz and
+      summary fight maleria","say_time":637962593514587140}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(14,128)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       task bldg with name dima and website http://dime.org and summary do something","say_time":637961688339157220}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-56,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
@@ -164,10 +167,10 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
     session_id: 673c875c-b0d9-46cb-bfd5-8b633a6a7d61
-    x: 12
-    y: 28
-    flr: g/b(16,92)/l0
-  initialized: 0
+    x: 9
+    y: 31
+    flr: g/b(-45,142)/l0
+  initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
