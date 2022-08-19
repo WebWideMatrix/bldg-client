@@ -96,8 +96,13 @@ public class QuickActionsController : MonoBehaviour
         string website = websiteInput.text;
         string summary = summaryInput.text;
         string picture = pictureInput.text;
-        string entityWebsite = entityWebsiteDropdown1.options[entityWebsiteDropdown1.value].text;
-        string targetEntityWebsite = entityWebsiteDropdown2.options[entityWebsiteDropdown2.value].text;
+        
+        string entityWebsite = "";
+        if (entityWebsiteDropdown1.options.Count > 0) entityWebsite = entityWebsiteDropdown1.options[entityWebsiteDropdown1.value].text;
+        
+        string targetEntityWebsite = "";
+        if (entityWebsiteDropdown2.options.Count > 0) targetEntityWebsite = entityWebsiteDropdown2.options[entityWebsiteDropdown2.value].text;
+        
         string owner = ownerInput.text;
         
         Dictionary<string, string> commandData = new Dictionary<string, string> {

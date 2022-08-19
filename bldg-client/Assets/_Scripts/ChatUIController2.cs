@@ -20,7 +20,7 @@ public class ChatUIController2 : MonoBehaviour {
     private string residentAlias;
 
 
-    List<SayAction> chatHistory;
+    List<SayAction> chatHistory = new List<SayAction>();
     private ScrollRect scrollRect;
 
 
