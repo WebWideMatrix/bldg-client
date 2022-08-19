@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 using UnityEngine.Events;
-
+using Michsky.UI.Shift;
 
 public class InitApp : MonoBehaviour
 {
 
     [Header("Resources")]
+    public PressKeyEvent quickActionsHotkey;
+
 
     // TODO is there a better place for the cameras?
     public CinemachineVirtualCamera flyCamera;
@@ -18,6 +20,7 @@ public class InitApp : MonoBehaviour
 
     private UnityAction onFlying;
     private UnityAction onWalking;
+    private UnityAction onLogin;
 	
 
     void OnEnable() {
@@ -35,8 +38,10 @@ public class InitApp : MonoBehaviour
 
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);
+        onLogin = new UnityAction(OnLogin);
         EventManager.Instance.StartListening("SwitchToFlying", onFlying);
         EventManager.Instance.StartListening("SwitchToWalking", onWalking);
+        EventManager.Instance.StartListening("LoginSuccessful", onLogin);
     }
 
     private void OnFlying()
@@ -51,6 +56,14 @@ public class InitApp : MonoBehaviour
         Debug.Log("On Walking");
         walkCamera.gameObject.SetActive(true);
         flyCamera.gameObject.SetActive(false);
+    }
+
+    private void OnLogin()
+    {
+        Debug.Log("~~~~~~ On Login");
+        Debug.Log("~~~~~~ [before] QuickActions Key is active? " + quickActionsHotkey.gameObject.active);
+        quickActionsHotkey.gameObject.SetActive(true);
+        Debug.Log("~~~~~~ [after] QuickActions Key is active? " + quickActionsHotkey.gameObject.active);
     }
 
     public static void startWalking()

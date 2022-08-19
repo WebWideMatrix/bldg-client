@@ -3080,6 +3080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abdd0ae8641a4f1da84d2980a0eb816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quickActionsHotkey: {fileID: 2065942377}
   flyCamera: {fileID: 944579215}
   walkCamera: {fileID: 1395082724}
 --- !u!114 &1541636055
@@ -6497,6 +6498,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9540e26a23e6c4e9bad9f14cba580fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2065942377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928076056143299, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 2065942375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdcd8c02e7b6edc45964e533ac4306cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2138089336

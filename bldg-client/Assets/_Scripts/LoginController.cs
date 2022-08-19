@@ -107,7 +107,7 @@ public class LoginController : MonoBehaviour
 
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
-        Debug.Log("Login done, received " + rsdt.alias);
+        Debug.Log("~~~~~ Login done, received " + rsdt.alias);
 
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
@@ -157,6 +157,7 @@ public class LoginController : MonoBehaviour
         // hide the login dialog - TODO IS IT STILL NEEDED?
         this.gameObject.SetActive(false);
 
+        Debug.Log("~~~~~ triggering LoginSuccessful");
         EventManager.Instance.TriggerEvent("LoginSuccessful");
     }
 
