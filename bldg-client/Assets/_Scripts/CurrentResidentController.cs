@@ -13,6 +13,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
     public Resident resident;
 
     public bool initialized = false;
+    public DateTime lastLoginTime = DateTime.Today.AddYears(-1);
 
     public float ACTION_SEND_INTERVAL = 200;  // Milliseconds
 
@@ -27,6 +28,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
         resident = model;
         Debug.Log("Initializing resident " + resident.alias + " at " + resident.location);
         initialized = true;
+        lastLoginTime = DateTime.Now;
         lastActionTime = DateTime.Now;
         inFlyingMode = false;
         flyingHigh = false;

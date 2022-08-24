@@ -65,6 +65,7 @@ namespace Michsky.UI.Shift
                     splashScreenAnimator.Play("Login");
                 } 
                 else {
+                    Debug.Log("~~~~~ SplashScreen OnEnable is calling complete login...");
                     loginController.completeLogin(crc.resident);
                 }
 

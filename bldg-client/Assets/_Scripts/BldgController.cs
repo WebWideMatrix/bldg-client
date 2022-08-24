@@ -73,6 +73,8 @@ public class BldgController : MonoBehaviour
 	Resident currentRsdt;
 	BldgChatController bldgChatController;
 
+	// RETURN:
+	//private UnityAction onLogin;
 
 
     // Start is called before the first frame update
@@ -84,6 +86,10 @@ public class BldgController : MonoBehaviour
         Debug.Log("BldgController Started");
 
 		bldgChatController = gameObject.GetComponent<BldgChatController>();
+        
+		// RETURN:
+		//onLogin = new UnityAction(OnLogin);
+		//EventManager.Instance.StartListening("LoginSuccessful", onLogin);
 
         // if (currentAddress == null) {
 			// TODO change to user's home bldg (received from login?)
@@ -99,6 +105,15 @@ public class BldgController : MonoBehaviour
 		// }
 
     }
+
+	// RETURN:
+	// private void OnLogin()
+    // {
+	// 	Debug.Log("~~~~ Bldg Controller On Login");
+    //     CurrentResidentController crc = CurrentResidentController.Instance;
+	// 	SetCurrentResident(crc.resident);
+	// 	SetAddress(crc.resident.flr);
+	// }
 
 
 
@@ -722,8 +737,12 @@ public class BldgController : MonoBehaviour
 	
 
 	void reloadContainerBldg() {
+		Debug.Log("~~~~~ Reloading container bldg");
+
 		// check whether the container bldg already has a model object
+		Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
 		GameObject container = getContainerBldg();
+		Debug.Log("~~~~~ and container bldg is: " + container);
 		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
@@ -737,14 +756,14 @@ public class BldgController : MonoBehaviour
 		// invoke the get bldg API
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
-		Debug.Log("Loading container bldg model from: " + url);
+		Debug.Log("~~~~ Loading container bldg model from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
 			bldgObj.model = res.data;
-			Debug.Log("Loaded container bldg data: " + bldgObj.model.name);
+			Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
-			Debug.Log("Rendered bldg data");
+			Debug.Log("~~~~ Rendered bldg data");
 		}).Catch(err => {
 			Debug.Log(err.Message);
 			Debug.Log("Failed to load container bldg model: " + address);

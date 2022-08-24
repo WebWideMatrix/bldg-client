@@ -16,6 +16,7 @@ using Michsky.UI.Shift;
 public class LoginController : MonoBehaviour
 {
 
+    [Header("Resources")]
     public GameObject baseResidentObject;
 
     public BldgController bldgController;
@@ -28,16 +29,15 @@ public class LoginController : MonoBehaviour
     public TMP_Text residentName;
     public TMP_Text residentName2;
     public TMP_Text currentAddress;
+
+    public CinemachineVirtualCamera flyCamera;
+    public CinemachineVirtualCamera walkCamera;
     
 
 
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
-
-    public CinemachineVirtualCamera flyCamera;
-    public CinemachineVirtualCamera walkCamera;
-
 
     private bool isPollingForVerificationStatus = false;
     private bool isSigningOnStarted = false;
@@ -149,10 +149,10 @@ public class LoginController : MonoBehaviour
         ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
 
+        // RETURN: replace all of these with event handling on bldg controller
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
-        bldgController.SetAddress(rsdt.flr);
-        
+        bldgController.SetAddress(rsdt.flr);        
 
         // hide the login dialog - TODO IS IT STILL NEEDED?
         this.gameObject.SetActive(false);
@@ -160,7 +160,6 @@ public class LoginController : MonoBehaviour
         Debug.Log("~~~~~ triggering LoginSuccessful");
         EventManager.Instance.TriggerEvent("LoginSuccessful");
     }
-
 
     public void SignInHandler() {
         if (isSigningOnStarted) return;
@@ -186,6 +185,7 @@ public class LoginController : MonoBehaviour
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
+                Debug.Log("~~~~ Email verification done recently, completing login");
                 completeLogin(loginResponse.data);
             } else {
                 // no valid session found, notify the user that they need to verify their email
@@ -228,6 +228,7 @@ public class LoginController : MonoBehaviour
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
+                Debug.Log("~~~~ Email verification done! completing login");
                 completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);

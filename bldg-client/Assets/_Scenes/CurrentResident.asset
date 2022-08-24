@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 40
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(-10,230)/l0/b(14,33)/l0/b(24,14)
+    location: g/b(16,92)/l0/b(1,40)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-10,230)/l0/b(14,33)/l0","say_location":"g/b(-10,230)/l0/b(14,33)/l0/b(24,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name blueroadmap and website https://blueroadmap.co and
+      summary roadmap to blue","say_time":637965113129638950}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(42,136)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       yellow-lot bldg with name fight-maleria and website https://maleria.xyz and
       summary fight maleria","say_time":637962593514587140}'
@@ -166,11 +169,11 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
-    session_id: 673c875c-b0d9-46cb-bfd5-8b633a6a7d61
-    x: 24
-    y: 14
-    flr: g/b(-10,230)/l0/b(14,33)/l0
-  initialized: 1
+    session_id: ec73460f-e4e5-42bb-8486-5551a71c9779
+    x: 1
+    y: 40
+    flr: g/b(16,92)/l0
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
