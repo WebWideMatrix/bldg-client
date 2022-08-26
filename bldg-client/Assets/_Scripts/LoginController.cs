@@ -19,20 +19,10 @@ public class LoginController : MonoBehaviour
     [Header("Resources")]
     public GameObject baseResidentObject;
 
-    public BldgController bldgController;
-
     public Button signInButton;
     public TMP_InputField emailInputField;
     public TMP_Text errorDisplay;
-    public TMP_Text verifyDisplay;
-
-    public TMP_Text residentName;
-    public TMP_Text residentName2;
-    public TMP_Text currentAddress;
-
-    public CinemachineVirtualCamera flyCamera;
-    public CinemachineVirtualCamera walkCamera;
-    
+    public TMP_Text verifyDisplay;    
 
     private bool isPollingForVerificationStatus = false;
     private bool isSigningOnStarted = false;
@@ -45,9 +35,6 @@ public class LoginController : MonoBehaviour
     private string currentResidentSessionId = null;
 
     private Animator splashScreenAnimator;
-    private Animator mainAnimator;
-    private TimedEvent startTimedEvent;
-
 
     // Start is called before the first frame update
     void Start()
@@ -94,19 +81,8 @@ public class LoginController : MonoBehaviour
     }
 
 
-    public void setAnimators(Animator sAnimator, Animator mAnimator, TimedEvent stEvent) {
+    public void setAnimators(Animator sAnimator) {
         splashScreenAnimator = sAnimator;
-        mainAnimator = mAnimator;
-        startTimedEvent = stEvent;
-    }
-
-
-    private void setLabelsInUI(Resident rsdt) {
-        // ROLE 8  /////////////////////
-        residentName.text = rsdt.alias;
-        residentName2.text = rsdt.alias;
-        currentAddress.text = rsdt.flr;
-        ////////////////////////////////
     }
 
 
@@ -114,27 +90,6 @@ public class LoginController : MonoBehaviour
         // ROLE 5   ///////////////////
         splashScreenAnimator.Play("Login to Loading");
         ////////////////////////////////
-    }
-
-    private void loadBldgSceneIfNeeded() {
-        // ROLE 4   //////////////////////
-        // check whether we need to load the bldg_flr scene
-        CurrentResidentController crc = CurrentResidentController.Instance;
-        if (crc.resident.flr != "g") {
-            Scene scene = SceneManager.GetActiveScene();
-            if (scene.name != "bldg_flr") {
-                SceneManager.LoadScene("bldg_flr");
-            }
-        }
-        ///////////////////////////////////
-    }
-
-
-
-    private void loadBldgs(Resident rsdt) {
-        // ROLE 7   /////////////////////////
-        bldgController.SetAddress(rsdt.flr);        
-        /////////////////////////////////////
     }
 
     private void initCurrentResidentController(Resident rsdt) {
@@ -158,16 +113,10 @@ public class LoginController : MonoBehaviour
         isPollingForVerificationStatus = false;
         Debug.Log("~~~~~ Login done, received " + rsdt.alias);
 
-        setLabelsInUI(rsdt);
-
         animateOutOfLogin();
 
         initCurrentResidentController(rsdt);
     
-        loadBldgSceneIfNeeded();
-
-        loadBldgs(rsdt);
-
         // hide the login dialog - TODO IS IT STILL NEEDED?
         this.gameObject.SetActive(false);
 

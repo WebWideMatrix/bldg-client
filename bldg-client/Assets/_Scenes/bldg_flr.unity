@@ -4168,6 +4168,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9540e26a23e6c4e9bad9f14cba580fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &956529724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928075675123590, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 956529721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &956529725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928076802844379, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 956529721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &956529726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928075174458317, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 956529721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &992707030
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,13 +4411,8 @@ MonoBehaviour:
   emailInputField: {fileID: 668714995}
   errorDisplay: {fileID: 992707033}
   verifyDisplay: {fileID: 1443111180}
-  residentName: {fileID: 0}
-  residentName2: {fileID: 0}
-  currentAddress: {fileID: 0}
   flyCamera: {fileID: 944579215}
   walkCamera: {fileID: 1395082724}
-  floorStartX: -8
-  floorStartZ: -6
 --- !u!114 &1174329305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5158,8 +5186,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quickActionsHotkey: {fileID: 956529722}
+  baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
+  bldgController: {fileID: 2138089338}
+  residentName: {fileID: 956529726}
+  residentName2: {fileID: 956529725}
+  currentAddress: {fileID: 956529724}
   flyCamera: {fileID: 944579215}
   walkCamera: {fileID: 1395082724}
+  floorStartX: -8
+  floorStartZ: -6
 --- !u!114 &1541636055
 MonoBehaviour:
   m_ObjectHideFlags: 0

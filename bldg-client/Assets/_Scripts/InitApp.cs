@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 using UnityEngine.Events;
+using TMPro;
 using Michsky.UI.Shift;
 using Models;
 
@@ -13,9 +14,11 @@ public class InitApp : MonoBehaviour
     [Header("Resources")]
     public PressKeyEvent quickActionsHotkey;
     public GameObject baseResidentObject;
-    // TEMPORARY
     public BldgController bldgController;
 
+    public TMP_Text residentName;
+    public TMP_Text residentName2;
+    public TMP_Text currentAddress;
 
 
     // TODO is there a better place for the cameras?
@@ -67,6 +70,36 @@ public class InitApp : MonoBehaviour
         /////////////////////////////////////
     }
 
+    private void loadBldgs(Resident rsdt) {
+        // ROLE 7   /////////////////////////
+        bldgController.SetAddress(rsdt.flr);        
+        /////////////////////////////////////
+    }
+
+    private void setLabelsInUI(Resident rsdt) {
+        // ROLE 8  /////////////////////
+        residentName.text = rsdt.alias;
+        residentName2.text = rsdt.alias;
+        currentAddress.text = rsdt.flr;
+        ////////////////////////////////
+    }
+
+    private bool loadBldgSceneIfNeeded() {
+        // ROLE 4   //////////////////////
+        // check whether we need to load the bldg_flr scene
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        if (crc.resident.flr != "g") {
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name != "bldg_flr") {
+                SceneManager.LoadScene("bldg_flr");
+                return true;
+            }
+        }
+        return false;
+        ///////////////////////////////////
+    }
+
+
     void OnEnable() {
         Debug.Log("*********************   Init App - On Enable  *********************");
 
@@ -90,8 +123,16 @@ public class InitApp : MonoBehaviour
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
             startLoadingAnimation();
+
+            initCurrentResidentUI(crc.resident);
+
+            loadBldgs(crc.resident);
+
+            setLabelsInUI(crc.resident);
         }
     }
+
+
 
 
     private void OnLogin()
@@ -106,7 +147,13 @@ public class InitApp : MonoBehaviour
             return;
         }
 
+        if (loadBldgSceneIfNeeded()) return;
+
         initCurrentResidentUI(crc.resident);
+
+        loadBldgs(crc.resident);
+
+        setLabelsInUI(crc.resident);
 
         Debug.Log("~~~~~~ [before] QuickActions Key is active? " + quickActionsHotkey.gameObject.active);
         quickActionsHotkey.gameObject.SetActive(true);

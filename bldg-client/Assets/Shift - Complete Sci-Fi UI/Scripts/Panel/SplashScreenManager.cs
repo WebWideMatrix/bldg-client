@@ -35,7 +35,7 @@ namespace Michsky.UI.Shift
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
             if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
-            loginController.setAnimators(splashScreenAnimator, mainPanelsAnimator, ssTimedEvent);
+            loginController.setAnimators(splashScreenAnimator);
             InitApp appCtrl = getAppController();
             if (appCtrl != null) {
                 appCtrl.setAnimators(ssTimedEvent);
@@ -75,13 +75,7 @@ namespace Michsky.UI.Shift
                     Debug.Log("CRC not initialized - show login screen");
                     splashScreenAnimator.Play("Login");
                     ////////////////////////////////////////////////////
-                } 
-                // TODO: MOVE LOGIC TO InitApp
-                else {
-                    Debug.Log("~~~~~ SplashScreen OnEnable is calling complete login...");
-                    loginController.completeLogin(crc.resident);
                 }
-
             }
 
             if (enableLoginScreen == false && enablePressAnyKeyScreen == false && disableSplashScreen == false)

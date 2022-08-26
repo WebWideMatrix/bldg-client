@@ -1075,6 +1075,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &425896856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928075675123590, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 6597928076784437710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &441306659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1208,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441306659}
   m_CullTransparentMesh: 1
+--- !u!114 &470569001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928076802844379, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 6597928076784437710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &496695833
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,10 +4025,24 @@ MonoBehaviour:
   quickActionsHotkey: {fileID: 1333944156}
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 734139650}
+  residentName: {fileID: 1999113476}
+  residentName2: {fileID: 470569001}
+  currentAddress: {fileID: 425896856}
   flyCamera: {fileID: 199427418}
   walkCamera: {fileID: 1825441622}
   floorStartX: -8
   floorStartZ: -6
+--- !u!114 &1999113476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6597928075174458317, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_PrefabInstance: {fileID: 6597928076784437710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2030830002
 GameObject:
   m_ObjectHideFlags: 0
