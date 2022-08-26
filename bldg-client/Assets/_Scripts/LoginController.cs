@@ -34,11 +34,6 @@ public class LoginController : MonoBehaviour
     public CinemachineVirtualCamera walkCamera;
     
 
-
-    // TODO move to shared constants/configuration file
-	public float floorStartX = -8f;
-	public float floorStartZ = -6f;
-
     private bool isPollingForVerificationStatus = false;
     private bool isSigningOnStarted = false;
     private int pollInterval = 2000;
@@ -105,60 +100,78 @@ public class LoginController : MonoBehaviour
         startTimedEvent = stEvent;
     }
 
-    public void completeLogin(Resident rsdt) {
-        isPollingForVerificationStatus = false;
-        Debug.Log("~~~~~ Login done, received " + rsdt.alias);
 
+    private void setLabelsInUI(Resident rsdt) {
+        // ROLE 8  /////////////////////
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
         currentAddress.text = rsdt.flr;
+        ////////////////////////////////
+    }
 
+
+    private void animateOutOfLogin() {
+        // ROLE 5   ///////////////////
         splashScreenAnimator.Play("Login to Loading");
-        startTimedEvent.StartIEnumerator();
+        ////////////////////////////////
+    }
 
-        // once login result received, initialize crc & player with resident details
-        CurrentResidentController crc = CurrentResidentController.Instance;
-        if (!crc.isInitialized()) {
-            crc.initialize(rsdt);
-        }
-        
+    private void loadBldgSceneIfNeeded() {
+        // ROLE 4   //////////////////////
         // check whether we need to load the bldg_flr scene
+        CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.resident.flr != "g") {
             Scene scene = SceneManager.GetActiveScene();
             if (scene.name != "bldg_flr") {
                 SceneManager.LoadScene("bldg_flr");
             }
         }
+        ///////////////////////////////////
+    }
 
-        float height = 0.5F;
-        if (rsdt.flr != "g") {
-            height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
-        }
-        Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-        baseline.x += rsdt.x;
-        baseline.z += rsdt.y;
-        Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-        Quaternion qrt = Quaternion.identity;
-        qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-        GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
 
-        walkCamera.Follow = rsdtClone.transform;
-        walkCamera.LookAt = rsdtClone.transform;
-        flyCamera.Follow = rsdtClone.transform;
-        flyCamera.LookAt = rsdtClone.transform;
-        ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-        rsdtObject.initialize(rsdt, true);
 
-        // RETURN: replace all of these with event handling on bldg controller
-        bldgController.SetCurrentResident(rsdt);
-        bldgController.SetCurrentResidentController(rsdtObject);
+    private void loadBldgs(Resident rsdt) {
+        // ROLE 7   /////////////////////////
         bldgController.SetAddress(rsdt.flr);        
+        /////////////////////////////////////
+    }
+
+    private void initCurrentResidentController(Resident rsdt) {
+        // ROLE 1   //////////////////////
+        // once login result received, initialize crc & player with resident details
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        if (!crc.isInitialized()) {
+            crc.initialize(rsdt);
+        }
+        //////////////////////////////////
+    }
+
+    private void fireLoginSuccessfulEvent() {
+        // ROLE 2   //////////////////////////
+        Debug.Log("~~~~~ triggering LoginSuccessful");
+        EventManager.Instance.TriggerEvent("LoginSuccessful");
+        /////////////////////////////////////
+    }
+
+    public void completeLogin(Resident rsdt) {
+        isPollingForVerificationStatus = false;
+        Debug.Log("~~~~~ Login done, received " + rsdt.alias);
+
+        setLabelsInUI(rsdt);
+
+        animateOutOfLogin();
+
+        initCurrentResidentController(rsdt);
+    
+        loadBldgSceneIfNeeded();
+
+        loadBldgs(rsdt);
 
         // hide the login dialog - TODO IS IT STILL NEEDED?
         this.gameObject.SetActive(false);
 
-        Debug.Log("~~~~~ triggering LoginSuccessful");
-        EventManager.Instance.TriggerEvent("LoginSuccessful");
+        fireLoginSuccessfulEvent();
     }
 
     public void SignInHandler() {

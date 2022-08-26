@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 40
+    direction: 280
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(1,40)
+    location: g/b(22,98)
     name: Udi Bauman
     previous_messages:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-10,230)/l0/b(14,33)/l0","say_location":"g/b(-10,230)/l0/b(14,33)/l0/b(24,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -170,10 +170,10 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
     session_id: ec73460f-e4e5-42bb-8486-5551a71c9779
-    x: 1
-    y: 40
-    flr: g/b(16,92)/l0
-  initialized: 0
+    x: 22
+    y: 98
+    flr: g
+  initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
