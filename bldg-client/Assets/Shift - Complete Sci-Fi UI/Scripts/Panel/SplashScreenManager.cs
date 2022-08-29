@@ -38,7 +38,7 @@ namespace Michsky.UI.Shift
             loginController.setAnimators(splashScreenAnimator);
             InitApp appCtrl = getAppController();
             if (appCtrl != null) {
-                appCtrl.setAnimators(ssTimedEvent);
+                appCtrl.setAnimators(splashScreenAnimator, ssTimedEvent);
             }
 
             if (disableSplashScreen == true)

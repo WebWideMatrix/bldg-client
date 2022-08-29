@@ -2965,7 +2965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1334.1997
+      value: 1223.0151
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3529,7 +3529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2261.8745
+      value: 2039.5054
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3549,7 +3549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2095.6646
+      value: 1873.2954
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3569,7 +3569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1953.9495
+      value: 1731.5803
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3589,7 +3589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1748.4744
+      value: 1526.1052
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3969,6 +3969,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6597928076048037028, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6597928076084596851, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6597928076253614543, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
@@ -4406,13 +4410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
-  bldgController: {fileID: 2138089338}
   signInButton: {fileID: 493380755}
   emailInputField: {fileID: 668714995}
   errorDisplay: {fileID: 992707033}
   verifyDisplay: {fileID: 1443111180}
-  flyCamera: {fileID: 944579215}
-  walkCamera: {fileID: 1395082724}
 --- !u!114 &1174329305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4733,7 +4734,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.5853658, y: 1}
+    m_SensorSize: {x: 3.0683112, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

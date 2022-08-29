@@ -31,6 +31,7 @@ public class InitApp : MonoBehaviour
     private UnityAction onLogin;
 
     private TimedEvent startTimedEvent;
+    private Animator splashScreenAnimator;
 	
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -39,6 +40,7 @@ public class InitApp : MonoBehaviour
 
     private void startLoadingAnimation() {
         // ROLE 9   ////////////////////
+        Debug.Log("~~~~~ starting loading animation with " + startTimedEvent);
         startTimedEvent.StartIEnumerator();
         ////////////////////////////////
     }
@@ -100,8 +102,27 @@ public class InitApp : MonoBehaviour
     }
 
 
+    private void animateOutOfLogin() {
+        // ROLE 5   ///////////////////
+        splashScreenAnimator.Play("Login to Loading");
+        ////////////////////////////////
+    }
+
     void OnEnable() {
-        Debug.Log("*********************   Init App - On Enable  *********************");
+        Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
+
+
+        onFlying = new UnityAction(OnFlying);
+        onWalking = new UnityAction(OnWalking);
+        onLogin = new UnityAction(OnLogin);
+        EventManager.Instance.StartListening("SwitchToFlying", onFlying);
+        EventManager.Instance.StartListening("SwitchToWalking", onWalking);
+        EventManager.Instance.StartListening("LoginSuccessful", onLogin);
+    }
+
+
+    void Awake() {
+        Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
 
         // check whether logged in already
         // CurrentResidentController crc = CurrentResidentController.Instance;
@@ -112,16 +133,11 @@ public class InitApp : MonoBehaviour
         // else {
         //     loginController.completeLogin(crc.resident);
         // }
-
-        onFlying = new UnityAction(OnFlying);
-        onWalking = new UnityAction(OnWalking);
-        onLogin = new UnityAction(OnLogin);
-        EventManager.Instance.StartListening("SwitchToFlying", onFlying);
-        EventManager.Instance.StartListening("SwitchToWalking", onWalking);
-        EventManager.Instance.StartListening("LoginSuccessful", onLogin);
     
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
+            animateOutOfLogin();
+
             startLoadingAnimation();
 
             initCurrentResidentUI(crc.resident);
@@ -137,7 +153,8 @@ public class InitApp : MonoBehaviour
 
     private void OnLogin()
     {
-        Debug.Log("~~~~~~ On Login");
+        Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
+
 
         startLoadingAnimation();
         
@@ -189,8 +206,9 @@ public class InitApp : MonoBehaviour
         EventManager.Instance.TriggerEvent("StartFlyingHigh");
     }
 
-    public void setAnimators(TimedEvent stEvent) {
+    public void setAnimators(Animator sAnimator, TimedEvent stEvent) {
         startTimedEvent = stEvent;
-        Debug.Log("~~~~~~~~~ got TimesEvent!!!");
+        splashScreenAnimator = sAnimator;
+        Debug.Log("~~~~~~~~~ got animators!!!");
     }
 }

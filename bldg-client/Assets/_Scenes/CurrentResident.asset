@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 280
+    direction: 80
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(22,98)
+    location: g/b(22,80)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(-10,12)/l0","say_location":"g/b(16,92)/l0/b(-10,12)/l0/b(1,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name statement-of-purpose and website http://sop.org and
+      summary we want to make it easier to produce legal documents","say_time":637973774414587250}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-10,230)/l0/b(14,33)/l0","say_location":"g/b(-10,230)/l0/b(14,33)/l0/b(24,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       blue-lot bldg with name blueroadmap and website https://blueroadmap.co and
       summary roadmap to blue","say_time":637965113129638950}'
@@ -169,9 +172,9 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
       good morning","say_time":637896629044775770}'
-    session_id: ec73460f-e4e5-42bb-8486-5551a71c9779
+    session_id: d2f458f4-ce83-409a-b0cf-7fc27bd67ebe
     x: 22
-    y: 98
+    y: 80
     flr: g
   initialized: 0
   ACTION_SEND_INTERVAL: 200
