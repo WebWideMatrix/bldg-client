@@ -12,13 +12,14 @@ public class InitApp : MonoBehaviour
 {
 
     [Header("Resources")]
-    public PressKeyEvent quickActionsHotkey;
     public GameObject baseResidentObject;
     public BldgController bldgController;
 
     public TMP_Text residentName;
     public TMP_Text residentName2;
     public TMP_Text currentAddress;
+
+    public ModalWindowManager quickActionsDialog;
 
 
     // TODO is there a better place for the cameras?
@@ -29,6 +30,7 @@ public class InitApp : MonoBehaviour
     private UnityAction onFlying;
     private UnityAction onWalking;
     private UnityAction onLogin;
+    private UnityAction onQuickActions;
 
     private TimedEvent startTimedEvent;
     private Animator splashScreenAnimator;
@@ -115,24 +117,16 @@ public class InitApp : MonoBehaviour
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);
         onLogin = new UnityAction(OnLogin);
+        onQuickActions = new UnityAction(OnQuickActions);
         EventManager.Instance.StartListening("SwitchToFlying", onFlying);
         EventManager.Instance.StartListening("SwitchToWalking", onWalking);
         EventManager.Instance.StartListening("LoginSuccessful", onLogin);
+        EventManager.Instance.StartListening("OpenQuickActions", onQuickActions);
     }
 
 
     void Awake() {
         Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
-
-        // check whether logged in already
-        // CurrentResidentController crc = CurrentResidentController.Instance;
-        // if (!crc.isInitialized()) {
-        //     Debug.Log("CRC not initializede");
-        //     loginController.Show();
-        // }
-        // else {
-        //     loginController.completeLogin(crc.resident);
-        // }
     
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
@@ -171,10 +165,6 @@ public class InitApp : MonoBehaviour
         loadBldgs(crc.resident);
 
         setLabelsInUI(crc.resident);
-
-        Debug.Log("~~~~~~ [before] QuickActions Key is active? " + quickActionsHotkey.gameObject.active);
-        quickActionsHotkey.gameObject.SetActive(true);
-        Debug.Log("~~~~~~ [after] QuickActions Key is active? " + quickActionsHotkey.gameObject.active);
     }
 
     private void OnFlying()
@@ -189,6 +179,11 @@ public class InitApp : MonoBehaviour
         Debug.Log("On Walking");
         walkCamera.gameObject.SetActive(true);
         flyCamera.gameObject.SetActive(false);
+    }
+
+    private void OnQuickActions() {
+        Debug.Log("~~~~~~ on quick actions");
+        quickActionsDialog.ModalWindowIn();
     }
 
     public static void startWalking()

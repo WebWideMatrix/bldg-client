@@ -2965,7 +2965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1223.0151
+      value: 942.006
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3529,7 +3529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2039.5054
+      value: 1477.4869
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3549,7 +3549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1873.2954
+      value: 1311.2771
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3569,7 +3569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1731.5803
+      value: 1169.562
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3589,7 +3589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1526.1052
+      value: 964.087
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4152,13 +4152,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
 --- !u!114 &956529722 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6597928076056143299, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6486717713194571211, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
   m_PrefabInstance: {fileID: 956529721}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdcd8c02e7b6edc45964e533ac4306cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b18e36b055152f41afbb464d8500cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &956529723 stripped
@@ -4734,7 +4734,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.0683112, y: 1}
+    m_SensorSize: {x: 1.9408805, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5186,12 +5186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abdd0ae8641a4f1da84d2980a0eb816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quickActionsHotkey: {fileID: 956529722}
   baseResidentObject: {fileID: 6904879942269349202, guid: 42998d66969e4467283f9ebeb3fd7636, type: 3}
   bldgController: {fileID: 2138089338}
   residentName: {fileID: 956529726}
   residentName2: {fileID: 956529725}
   currentAddress: {fileID: 956529724}
+  quickActionsDialog: {fileID: 956529722}
   flyCamera: {fileID: 944579215}
   walkCamera: {fileID: 1395082724}
   floorStartX: -8

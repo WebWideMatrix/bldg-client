@@ -127,6 +127,16 @@ public class ResidentController : MonoBehaviour
         }
     }
 
+    void OnGUI()
+    {
+        if (!isCurrentUser) return;
+
+        if (Event.current.command && Event.current.keyCode == KeyCode.K)
+        {
+            EventManager.Instance.TriggerEvent("OpenQuickActions");
+        }
+    }
+
     void handleMovement() {
         if (Input.GetKey("f")) {
             move(MovementType.FLY_LOW);
