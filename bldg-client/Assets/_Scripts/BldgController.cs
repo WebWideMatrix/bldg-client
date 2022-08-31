@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 using ImageUtils;
 using BrowserUtils;
@@ -72,6 +73,8 @@ public class BldgController : MonoBehaviour
 	Resident currentRsdt;
 	BldgChatController bldgChatController;
 
+	// RETURN:
+	//private UnityAction onLogin;
 
 
     // Start is called before the first frame update
@@ -83,6 +86,10 @@ public class BldgController : MonoBehaviour
         Debug.Log("BldgController Started");
 
 		bldgChatController = gameObject.GetComponent<BldgChatController>();
+        
+		// RETURN:
+		//onLogin = new UnityAction(OnLogin);
+		//EventManager.Instance.StartListening("LoginSuccessful", onLogin);
 
         // if (currentAddress == null) {
 			// TODO change to user's home bldg (received from login?)
@@ -99,40 +106,49 @@ public class BldgController : MonoBehaviour
 
     }
 
+	// RETURN:
+	// private void OnLogin()
+    // {
+	// 	Debug.Log("~~~~ Bldg Controller On Login");
+    //     CurrentResidentController crc = CurrentResidentController.Instance;
+	// 	SetCurrentResident(crc.resident);
+	// 	SetAddress(crc.resident.flr);
+	// }
 
 
-GameObject getPrefabByEntityClass(string entity_type) {
+
+	GameObject getPrefabByEntityClass(string entity_type) {
 		Debug.Log("Getting prefab for entity class " + entity_type);
-        
-        switch (entity_type) {
-		case "purpose":
-			return whiteboardBldg;
-		case "cantata":
-			return presentationStandBldg;
-		case "neighborhood":
-			return trafficSignBldg;
-		case "street":
-			return streetSignBldg;
-		case "member":
-			return laptopBldg;
-		case "milestone":
-			return briefcaseBldg;
-		case "task":
-			return roundTableBldg;
-		case "web_page":
-			return tabletBldg;
-		case "team":
-			return buildingWithStorefront;
-		case "lot":
-			return greenLotObject;
-		case "green-lot":
-			return greenLotObject;
-		case "blue-lot":
-			return blueLotObject;
-		case "yellow-lot":
-			return yellowLotObject;
-		default:
-			return chairBldg;
+		
+		switch (entity_type) {
+			case "purpose":
+				return whiteboardBldg;
+			case "cantata":
+				return presentationStandBldg;
+			case "neighborhood":
+				return trafficSignBldg;
+			case "street":
+				return streetSignBldg;
+			case "member":
+				return laptopBldg;
+			case "milestone":
+				return briefcaseBldg;
+			case "task":
+				return roundTableBldg;
+			case "web_page":
+				return tabletBldg;
+			case "team":
+				return buildingWithStorefront;
+			case "lot":
+				return greenLotObject;
+			case "green-lot":
+				return greenLotObject;
+			case "blue-lot":
+				return blueLotObject;
+			case "yellow-lot":
+				return yellowLotObject;
+			default:
+				return chairBldg;
 		}
 	}
 
@@ -346,6 +362,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 
 		currentFlr = AddressUtils.extractFlr(currentAddress);
 
+		CurrentMetadata cm = CurrentMetadata.Instance;
+		cm.clearEntities();
+
 		// TODO check whether it changed
 
 		// TODO DECIDE WHETHER WE NEED DIFFERENT SCENES FOR G & FLR
@@ -467,6 +486,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 	}
 
 	void reloadBuildings(string address) {
+		CurrentMetadata cm = CurrentMetadata.Instance;
+		CurrentResidentController crc = CurrentResidentController.Instance;
+		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
@@ -508,6 +530,11 @@ GameObject getPrefabByEntityClass(string entity_type) {
 					if (movedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
+					// new entity so add to metadata of entities belonging to current user
+					if (Array.IndexOf(b.owners, crc.resident.email) > -1) {
+						cm.addEntity(b.entity_type, b.web_url);
+					}
+					dataChanged = true;
 
 					float height = 0F;
 					if (address != "g") {
@@ -532,6 +559,9 @@ GameObject getPrefabByEntityClass(string entity_type) {
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
+				}
+				if (dataChanged) {
+					EventManager.Instance.TriggerEvent("EntitiesChanged");
 				}
 				// Debug.Log("Rendered " + count + " bldgs");
 			});
@@ -707,8 +737,13 @@ GameObject getPrefabByEntityClass(string entity_type) {
 	
 
 	void reloadContainerBldg() {
+		// Debug.Log("~~~~~ Reloading container bldg");
+
 		// check whether the container bldg already has a model object
+		// Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
 		GameObject container = getContainerBldg();
+		// Debug.Log("~~~~~ and container bldg is: " + container);
+		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
 		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
@@ -721,14 +756,14 @@ GameObject getPrefabByEntityClass(string entity_type) {
 		// invoke the get bldg API
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
-		Debug.Log("Loading container bldg model from: " + url);
+		// Debug.Log("~~~~ Loading container bldg model from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
 			bldgObj.model = res.data;
-			Debug.Log("Loaded container bldg data: " + bldgObj.model.name);
+			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
-			Debug.Log("Rendered bldg data");
+			// Debug.Log("~~~~ Rendered bldg data");
 		}).Catch(err => {
 			Debug.Log(err.Message);
 			Debug.Log("Failed to load container bldg model: " + address);

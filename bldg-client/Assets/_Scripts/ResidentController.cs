@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 using Utils;
 using Models;
@@ -38,6 +39,10 @@ public class ResidentController : MonoBehaviour
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
 
+    private UnityAction onStartWalking;
+    private UnityAction onStartFlyingLow;
+    private UnityAction onStartFlyingHigh;
+
 
     public void initialize(Resident model) {
         initialize(model, false);
@@ -48,6 +53,11 @@ public class ResidentController : MonoBehaviour
         Debug.Log("Initializing resident " + resident.alias + " at " + resident.location);
         initialized = true;
         isCurrentUser = isCurrent;
+        if (isCurrentUser) {
+            EventManager.Instance.StartListening("StartWalking", OnStartWalking);
+            EventManager.Instance.StartListening("StartFlyingLow", OnStartFlyingLow);
+            EventManager.Instance.StartListening("StartFlyingHigh", OnStartFlyingHigh);
+        }
     }
 
     float getFlyHeight(CurrentResidentController crc) {
@@ -64,50 +74,80 @@ public class ResidentController : MonoBehaviour
             return INDOOR_GROUND_HEIGHT;
     }
 
-    void handleMovement() {
+    void move(MovementType moveType) {
         CurrentResidentController currentResident = CurrentResidentController.Instance; // TODO only get it when you need it
-        if (Input.GetKey("f") && !currentResident.inFlyingMode) {
-            // clicking f while on the land: start flying
-            currentResident.inFlyingMode = true;
-            currentResident.flyingHigh = false;
-            Debug.Log("Fly mode");
-            float h = getFlyHeight(currentResident);
-            transform.position = new Vector3(transform.position.x, h, transform.position.z);
-            //transform.Rotate(90, 0, 0);
-            EventManager.Instance.TriggerEvent("SwitchToFlying");
+        
+        switch (moveType) {
+            case MovementType.FLY_LOW:
+                if (!currentResident.inFlyingMode) {
+                    // clicking f while walking: start flying
+                    currentResident.inFlyingMode = true;
+                    currentResident.flyingHigh = false;
+                    Debug.Log("Fly mode");
+                    float h = getFlyHeight(currentResident);
+                    transform.position = new Vector3(transform.position.x, h, transform.position.z);
+                    //transform.Rotate(90, 0, 0);
+                    EventManager.Instance.TriggerEvent("SwitchToFlying");
+                } else if (currentResident.flyingHigh) {
+                    // clicking f while flying high: fly lower
+                    currentResident.flyingHigh = false;
+                    float h = getFlyHeight(currentResident);
+                    transform.position = new Vector3(transform.position.x, h, transform.position.z);
+                }
+                break;
+            case MovementType.FLY_HIGH:
+                if (!currentResident.inFlyingMode) {
+                    // clicking h while on the land: fly high
+                    currentResident.inFlyingMode = true;
+                    Debug.Log("High fly mode");
+                    float h = getFlyHeight(currentResident);
+                    transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
+                    //transform.Rotate(90, 0, 0);
+                    EventManager.Instance.TriggerEvent("SwitchToFlying");
+                }
+                else if (!currentResident.flyingHigh) {
+                    // clicking h while flying low: fly higher
+                    currentResident.flyingHigh = true;
+                    float h = getFlyHeight(currentResident);
+                    transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
+                }
+                break;
+            case MovementType.WALK:
+                if (currentResident.inFlyingMode) {
+                    // clicking l while flying: land on the ground
+                    currentResident.inFlyingMode = false;
+                    currentResident.flyingHigh = false;
+                    Debug.Log("Walking mode");
+                    float h = getGroundHeight(currentResident);
+                    transform.position = new Vector3(transform.position.x, h, transform.position.z);
+                    //transform.Rotate(-90, 0, 0);
+                    EventManager.Instance.TriggerEvent("SwitchToWalking");
+                }
+                break;
         }
-        else if (Input.GetKey("f") && currentResident.flyingHigh) {
-            // clicking f while flying high: fly lower
-            currentResident.flyingHigh = false;
-            float h = getFlyHeight(currentResident);
-            transform.position = new Vector3(transform.position.x, h, transform.position.z);
+    }
+
+    void OnGUI()
+    {
+        if (!isCurrentUser) return;
+
+        if (Event.current.command && Event.current.keyCode == KeyCode.K)
+        {
+            EventManager.Instance.TriggerEvent("OpenQuickActions");
+        }
+    }
+
+    void handleMovement() {
+        if (Input.GetKey("f")) {
+            move(MovementType.FLY_LOW);
         }
 
-        if (Input.GetKey("h") && !currentResident.inFlyingMode) {
-            // clicking h while on the land: fly high
-            currentResident.inFlyingMode = true;
-            Debug.Log("High fly mode");
-            float h = getFlyHeight(currentResident);
-            transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
-            //transform.Rotate(90, 0, 0);
-            EventManager.Instance.TriggerEvent("SwitchToFlying");
-        }
-        else if (Input.GetKey("h") && !currentResident.flyingHigh) {
-            // clicking h while flying low: fly higher
-            currentResident.flyingHigh = true;
-            float h = getFlyHeight(currentResident);
-            transform.position = new Vector3(transform.position.x, h * 3.5F, transform.position.z);
+        if (Input.GetKey("h")) {
+            move(MovementType.FLY_HIGH);
         }
         
-        if (Input.GetKey("l") && currentResident.inFlyingMode) {
-            // clicking l while flying: land on the ground
-            currentResident.inFlyingMode = false;
-            currentResident.flyingHigh = false;
-            Debug.Log("Walking mode");
-            float h = getGroundHeight(currentResident);
-            transform.position = new Vector3(transform.position.x, h, transform.position.z);
-            //transform.Rotate(-90, 0, 0);
-            EventManager.Instance.TriggerEvent("SwitchToWalking");
+        if (Input.GetKey("l")) {
+            move(MovementType.WALK);
         }
 
         // control movement
@@ -128,15 +168,13 @@ public class ResidentController : MonoBehaviour
         //Debug.Log("Current rotation: " + transform.eulerAngles.y);
         exactDirection = (int)transform.eulerAngles.y;
 
-
+        CurrentResidentController currentResident = CurrentResidentController.Instance; // TODO only get it when you need it
+        
         // check whether resident turned to the sides
         if (isRotationChange) {
-            
-            //Debug.Log("======================================");
-            //Debug.Log("exactDirection = " + exactDirection);
+
 
             int newDirection = exactDirection - (exactDirection % directionInterval);
-            //Debug.Log("newDirection = " + newDirection);
 
             if (newDirection != previousDirection) {
                 previousDirection = newDirection;
@@ -171,12 +209,25 @@ public class ResidentController : MonoBehaviour
         }
     }
 
+    void OnStartWalking() {
+        move(MovementType.WALK);
+    }
 
+    void OnStartFlyingLow() {
+        move(MovementType.FLY_LOW);
+    }
+
+    void OnStartFlyingHigh() {
+        move(MovementType.FLY_HIGH);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         alias = this.gameObject.GetComponentInChildren<TMP_Text>();
+        onStartWalking = new UnityAction(OnStartWalking);
+        onStartFlyingLow = new UnityAction(OnStartFlyingLow);
+        onStartFlyingHigh = new UnityAction(OnStartFlyingHigh);
     }
 
     // Update is called once per frame

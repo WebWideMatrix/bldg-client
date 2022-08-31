@@ -23,8 +23,6 @@ public class ChatUIController : MonoBehaviour {
 
     List<SayAction> chatHistory;
 
-    private UnityAction onLogin;
-
     private UnityAction<string> onSelect;
     private UnityAction<string> onDeselect;
     
@@ -34,32 +32,19 @@ public class ChatUIController : MonoBehaviour {
         ChatInputField.onSubmit.AddListener(HandleNewMessage);
         ChatInputField.onSelect.AddListener(onSelect);
         ChatInputField.onDeselect.AddListener(onDeselect);
-        EventManager.Instance.StartListening("LoginSuccessful", onLogin);
     }
 
     void OnDisable()
     {
-        
         ChatInputField.onSubmit.RemoveListener(HandleNewMessage);
-        EventManager.Instance.StopListening("LoginSuccessful", onLogin);
     }
 
 
     private void Awake()
     {
-        
-        onLogin = new UnityAction(OnLogin);
         onSelect = new UnityAction<string>(OnInputFieldSelect);
         onDeselect = new UnityAction<string>(OnInputFieldDeselect);
     }
-
-    private void OnLogin()
-    {
-        ChatInputField.gameObject.SetActive(true);
-        // ChatInputField.ActivateInputField();
-        ChatHistoryDisplay.gameObject.SetActive(true);
-    }
-
 
     void OnInputFieldSelect(string s) {
         rsdtController.enabled = false;

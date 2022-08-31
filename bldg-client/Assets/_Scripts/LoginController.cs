@@ -10,30 +10,22 @@ using Models;
 using Utils;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using Michsky.UI.Shift;
 
 
 public class LoginController : MonoBehaviour
 {
 
+    [Header("Resources")]
     public GameObject baseResidentObject;
-
-    public BldgController bldgController;
 
     public Button signInButton;
     public TMP_InputField emailInputField;
     public TMP_Text errorDisplay;
-    public TMP_Text verifyDisplay;
-
-
-    // TODO move to shared constants/configuration file
-	public float floorStartX = -8f;
-	public float floorStartZ = -6f;
-
-    public CinemachineVirtualCamera flyCamera;
-    public CinemachineVirtualCamera walkCamera;
-
+    public TMP_Text verifyDisplay;    
 
     private bool isPollingForVerificationStatus = false;
+    private bool isSigningOnStarted = false;
     private int pollInterval = 2000;
     private int verificationExpirationTime = 6*60*1000; // 6 minutess
     private DateTime lastPollTime = DateTime.Now;
@@ -42,6 +34,7 @@ public class LoginController : MonoBehaviour
     private string currentResidentEmail = null;
     private string currentResidentSessionId = null;
 
+    private Animator splashScreenAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -88,59 +81,53 @@ public class LoginController : MonoBehaviour
     }
 
 
-    public void completeLogin(Resident rsdt) {
-        isPollingForVerificationStatus = false;
-        Debug.Log("Login done, received " + rsdt.alias);
+    public void setAnimators(Animator sAnimator) {
+        splashScreenAnimator = sAnimator;
+    }
 
 
+    private void animateOutOfLogin() {
+        // ROLE 5   ///////////////////
+        splashScreenAnimator.Play("Login to Loading");
+        ////////////////////////////////
+    }
+
+    private void initCurrentResidentController(Resident rsdt) {
+        // ROLE 1   //////////////////////
         // once login result received, initialize crc & player with resident details
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (!crc.isInitialized()) {
             crc.initialize(rsdt);
         }
-
-        // check whether we need to load the bldg_flr scene
-        if (crc.resident.flr != "g") {
-            Scene scene = SceneManager.GetActiveScene();
-            if (scene.name != "bldg_flr") {
-                SceneManager.LoadScene("bldg_flr");
-            }
-        }
-
-        float height = 0.5F;
-        if (rsdt.flr != "g") {
-            height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
-        }
-        Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
-        baseline.x += rsdt.x;
-        baseline.z += rsdt.y;
-        Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
-        Quaternion qrt = Quaternion.identity;
-        qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-        GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-        walkCamera.Follow = rsdtClone.transform;
-        walkCamera.LookAt = rsdtClone.transform;
-        flyCamera.Follow = rsdtClone.transform;
-        flyCamera.LookAt = rsdtClone.transform;
-        ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-        rsdtObject.initialize(rsdt, true);
-
-
-        bldgController.SetCurrentResident(rsdt);
-        bldgController.SetCurrentResidentController(rsdtObject);
-        bldgController.SetAddress(rsdt.flr);
-        
-
-        // hide the login dialog
-        this.gameObject.SetActive(false);
-
-        EventManager.Instance.TriggerEvent("LoginSuccessful");
+        //////////////////////////////////
     }
 
+    private void fireLoginSuccessfulEvent() {
+        // ROLE 2   //////////////////////////
+        // Debug.Log("~~~~~ triggering LoginSuccessful");
+        EventManager.Instance.TriggerEvent("LoginSuccessful");
+        /////////////////////////////////////
+    }
 
-    void SignInHandler() {
+    public void completeLogin(Resident rsdt) {
+        isPollingForVerificationStatus = false;
+        // Debug.Log("~~~~~ Login done, received " + rsdt.alias);
+
+        animateOutOfLogin();
+
+        initCurrentResidentController(rsdt);
+    
+        // hide the login dialog - TODO IS IT STILL NEEDED?
+        this.gameObject.SetActive(false);
+
+        fireLoginSuccessfulEvent();
+    }
+
+    public void SignInHandler() {
+        if (isSigningOnStarted) return;
+        isSigningOnStarted = true;
         string email = emailInputField.text;
-        Debug.Log("Signing in as " + email);
+        Debug.Log("Signing in as " + email + " " + DateTime.UtcNow);
         errorDisplay.text = "";
 
         // disable the button
@@ -156,9 +143,11 @@ public class LoginController : MonoBehaviour
 		// invoke login API
         RequestHelper req = RestUtils.createRequest("POST", url, new LoginRequest {email = email});
 		RestClient.Post<LoginResponse>(req).Then(loginResponse => {
+            isSigningOnStarted = false;
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
+                // Debug.Log("~~~~ Email verification done recently, completing login");
                 completeLogin(loginResponse.data);
             } else {
                 // no valid session found, notify the user that they need to verify their email
@@ -201,6 +190,7 @@ public class LoginController : MonoBehaviour
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
+                // Debug.Log("~~~~ Email verification done! completing login");
                 completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);

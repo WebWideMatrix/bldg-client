@@ -14,15 +14,155 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 120
+    direction: 160
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(17,14)
+    location: g/b(22,106)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(-10,12)/l0","say_location":"g/b(16,92)/l0/b(-10,12)/l0/b(1,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name statement-of-purpose and website http://sop.org and
+      summary we want to make it easier to produce legal documents","say_time":637973774414587250}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-10,230)/l0/b(14,33)/l0","say_location":"g/b(-10,230)/l0/b(14,33)/l0/b(24,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name blueroadmap and website https://blueroadmap.co and
+      summary roadmap to blue","say_time":637965113129638950}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(42,136)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      yellow-lot bldg with name fight-maleria and website https://maleria.xyz and
+      summary fight maleria","say_time":637962593514587140}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(14,128)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name dima and website http://dime.org and summary do something","say_time":637961688339157220}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-56,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
+      owner dibaunaumh@gmail.com from bldg http://fromteal.app/task/validate","say_time":637958105917079790}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-56,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner dibaunaumh@gmail.com to bldg http://fromteal.app/task/validate","say_time":637958105586521170}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-56,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
+      owner inna.bauman@gmail.com from bldg http://fromteal.app/task/validate","say_time":637958102909194090}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-53,35)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner inna.bauman@gmail.com to bldg http://fromteal.app/task/validate","say_time":637958102589947570}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-54,32)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg http://fromteal.app/task/validate here","say_time":637958102286369430}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-26,24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name validate-form-input and website http://fromteal.app/task/validate
+      and summary validate form input","say_time":637958096739250510}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(249,174)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://trello.com/card456 here","say_time":637957374785091110}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(236,191)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name the-orb and website http://orb.org and summary interstaller
+      travel made easy","say_time":637957373601343560}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,191)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner eddiefidler12@gmail.com to bldg https://trello.com/card123","say_time":637953061245920120}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(245,184)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between https://trello.com/card123 and https://trello.com/card456","say_time":637953060494863040}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(245,183)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name 2nstask and website https://trello.com/card456 and summary
+      then build abc","say_time":637953059986544740}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,199)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name sometask and website https://trello.com/card123 and summary
+      build xyz","say_time":637953058359140520}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(235,197)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://fromteal.com/purpose2 here","say_time":637953057393068470}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(222,224)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name my-purpose and website https://fromteal.com/purpose2
+      and summary purpose text bla bla","say_time":637953056896245190}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(224,221)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hi","say_time":637953056144099600}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,218)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between https://coop.co/purpose and https://cc.xyz","say_time":637952950946280670}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(216,228)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name cc and website https://cc.xyz and summary capture carbon
+      to mitigate global warming","say_time":637952950604451610}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(226,230)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name coop-purpose and website https://coop.co/purpose and
+      summary increase cooperation between people & teams with shared purpose","say_time":637952947648995050}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(225,234)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name cooperation and website http://cooperation.co","say_time":637952944766091590}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(193,244)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name cooperation and website http://coop.xyz","say_time":637952944136784740}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(193,244)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      green-lot bldg with name increasing cooperation and website http://coop.xyz","say_time":637952942956029410}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,180)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/remove
+      owner inna.bauman@gmail.com from bldg fromteal.com","say_time":637952217751019930}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,180)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/add
+      owner inna.bauman@gmail.com to bldg fromteal.com","say_time":637952217407377380}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(103,167)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      blue-lot bldg with name a lot and website https://a.org","say_time":637952189680985700}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(92,162)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between https://gould.xyz and fromteal.com","say_time":637951291519425000}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(162,177)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://gould.xyz here","say_time":637951279248905120}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(162,177)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg test4.org here","say_time":637951274764138010}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(162,177)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg here","say_time":637950623760870760}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(162,177)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg here","say_time":637950531331234980}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(61,143)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between fromteal.com and https://gitcoin.co","say_time":637946976651343980}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(117,143)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://gitcoin.co here","say_time":637946098899049560}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(133,206)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg https://gould.xyz here","say_time":637945880110233870}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(133,206)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      team bldg https://gould.xyz here","say_time":637945879054793570}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(63,168)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name gould and website https://gould.xyz","say_time":637945867017853910}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-2,112)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      cantata bldg with name gitcoin and website https://gitcoin.co and picture https://s.gitcoin.co/static/landingpage/sponsors.e07ea4881856.png","say_time":637944407213007940}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(21,113)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name ft-purpose and website https://fromteal.app/entities/purpose
+      and summary connect people with shared purpose and help them work together
+      towards it","say_time":637944404952759450}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(12,107)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name quickactionsdialog and website https://fromteal.app/entities/quickactionsdialog
+      and summary create quick actions dialog","say_time":637944353422038560}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(13,104)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"create
+      task bldg with name quickactionsdialog and website https://fromteal.app/entities/quickactionsdialog
+      and summary create quick actions dialog","say_time":637944350746057530}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"yes,
+      some issues tho","say_time":637942114892518300}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Almost
+      working tno","say_time":637941829989560580}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Scrolling
+      isn''t working well","say_time":637941829774971960}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Don''t
+      think so","say_time":637941829652280300}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Is
+      this working?","say_time":637941828630721920}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-59,91)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Good
+      after noon","say_time":637941821608530220}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      task bldg with name task-1 and website task-1.org and summary Build something
+      that looks like a task","say_time":637896629044775770}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-184,161)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      road between t200.org and okbldg.org","say_time":637892465198464380}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-184,161)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      road between t200.org and okbldg.org","say_time":637892463778614330}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-184,161)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name not-ok-bldg and website notok.org","say_time":637892463326398090}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-132,157)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name ok-bldg and website okbldg.org","say_time":637892462308165540}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-45,142)/l0","say_location":"g/b(-45,142)/l0/b(-8,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t200 and website t200.org","say_time":637892413295629490}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-45,142)/l0","say_location":"g/b(-45,142)/l0/b(-8,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg t200 and website t200.org","say_time":637892413018077600}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-82,101)/l0","say_location":"g/b(-82,101)/l0/b(0,29)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name tt401 and website tt401.org","say_time":637892412491253520}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-82,101)/l0","say_location":"g/b(-82,101)/l0/b(0,30)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t401 and website t401.org","say_time":637892411358622910}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-23,194)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      road between test4.org and t9.org","say_time":637887550083737920}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-28,270)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      road between t10.org and t9.org","say_time":637887549584969460}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(-10,230)/l0","say_location":"g/b(-10,230)/l0/b(14,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t11 and website t11.org","say_time":637887547684132990}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-10,230)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t10 and website t10.org","say_time":637887546785406860}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-70,202)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t9 and website t9.org","say_time":637887545274301110}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_location":"g/b(-45,142)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      team bldg with name t8 and website team8.org","say_time":637887535787040490}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(-10,12)/l0","say_location":"g/b(16,92)/l0/b(-10,12)/l0/b(19,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name t4p and summary To be the test building every team needs","say_time":637887399613467500}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(19,38)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -30,10 +170,12 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(34,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       team bldg with name test7 and website test7.org","say_time":637886747431689410}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(-1,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":637885038028552970}'
-    session_id: f310cbb0-dfff-46ed-902b-670e1937b668
-    x: 17
-    y: 14
-    flr: g/b(16,92)/l0
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hey,
+      good morning","say_time":637896629044775770}'
+    session_id: d2f458f4-ce83-409a-b0cf-7fc27bd67ebe
+    x: 22
+    y: 106
+    flr: g
   initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0

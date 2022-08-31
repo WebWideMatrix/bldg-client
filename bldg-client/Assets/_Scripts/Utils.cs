@@ -199,4 +199,14 @@ namespace Utils {
 			return finalArray;
 		}
 	}
+
+
+	public static class MissingLanguageFunctions {
+
+		public static string TimeStampToDateTime(long timeStamp)
+		{
+			DateTimeOffset offset = DateTimeOffset.FromUnixTimeMilliseconds(timeStamp);
+			return offset.ToString();
+		}
+	}
 }

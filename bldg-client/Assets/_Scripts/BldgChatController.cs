@@ -6,7 +6,8 @@ using Models;
 public class BldgChatController : MonoBehaviour
 {    
 
-    public ChatUIController chatUIController;
+    // public ChatUIController chatUIController;
+    public ChatUIController2 chatUIController;
 
     public void SetResidentController(ResidentController controller) {
         chatUIController.SetResidentController(controller);

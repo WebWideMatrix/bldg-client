@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Models
 {
+	public enum MovementType
+	{
+		WALK,
+		FLY_LOW,
+		FLY_HIGH
+	}
+
 	[Serializable]
 	public class WrappedBldg
 	{

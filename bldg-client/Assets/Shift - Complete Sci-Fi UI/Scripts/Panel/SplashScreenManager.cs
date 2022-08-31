@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Michsky.UI.Shift
 {
@@ -18,6 +19,14 @@ namespace Michsky.UI.Shift
         public bool enableLoginScreen;
 
         MainPanelManager mpm;
+        LoginController loginController;
+
+
+        public InitApp getAppController() {
+            GameObject[] found = GameObject.FindGameObjectsWithTag("AppController");
+            if (found.Length == 0) return null;
+            return found[0].GetComponent<InitApp>();
+        }
 
         void OnEnable()
         {
@@ -25,6 +34,12 @@ namespace Michsky.UI.Shift
             if (ssTimedEvent == null) { ssTimedEvent = splashScreen.GetComponent<TimedEvent>(); }
             if (mainPanelsAnimator == null) { mainPanelsAnimator = mainPanels.GetComponent<Animator>(); }
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
+            if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
+            loginController.setAnimators(splashScreenAnimator);
+            InitApp appCtrl = getAppController();
+            if (appCtrl != null) {
+                appCtrl.setAnimators(splashScreenAnimator, ssTimedEvent);
+            }
 
             if (disableSplashScreen == true)
             {
@@ -51,7 +66,14 @@ namespace Michsky.UI.Shift
             {
                 splashScreen.SetActive(true);
                 mainPanelsAnimator.Play("Invisible");
-                splashScreenAnimator.Play("Login");
+                // check whether logged in already
+                CurrentResidentController crc = CurrentResidentController.Instance;
+                if (!crc.isInitialized()) {
+                    // ROLE 3   ////////////////////////////////////////
+                    Debug.Log("[SPLASH SCREEN MANAGER] CRC not initialized - show login screen");
+                    splashScreenAnimator.Play("Login");
+                    ////////////////////////////////////////////////////
+                }
             }
 
             if (enableLoginScreen == false && enablePressAnyKeyScreen == false && disableSplashScreen == false)
