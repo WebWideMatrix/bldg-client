@@ -59,7 +59,7 @@ public class ChatUIController2 : MonoBehaviour {
     SayAction CreateChatMessage(string text) {
         // TODO extract recipient
         CurrentResidentController crc = CurrentResidentController.Instance;
-        Debug.Log("Found a rsdt controller");
+        // Debug.Log("Found a rsdt controller");
         SayAction act = new SayAction {
             resident_email = crc.resident.email,
             action_type = "SAY",
@@ -78,7 +78,7 @@ public class ChatUIController2 : MonoBehaviour {
     void SendChatMessage(SayAction act) {
         // TODO extract recipient
         CurrentResidentController crc = CurrentResidentController.Instance;
-        Debug.Log("Found a rsdt controller");
+        // Debug.Log("Found a rsdt controller");
         crc.SendSayAction(act);
     }
     

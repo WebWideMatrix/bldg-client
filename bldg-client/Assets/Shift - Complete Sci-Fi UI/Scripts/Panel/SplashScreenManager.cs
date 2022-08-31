@@ -64,15 +64,13 @@ namespace Michsky.UI.Shift
 
             if (enableLoginScreen == true && enablePressAnyKeyScreen == false && disableSplashScreen == false)
             {
-                Debug.Log("Should be here!");
-
                 splashScreen.SetActive(true);
                 mainPanelsAnimator.Play("Invisible");
                 // check whether logged in already
                 CurrentResidentController crc = CurrentResidentController.Instance;
                 if (!crc.isInitialized()) {
                     // ROLE 3   ////////////////////////////////////////
-                    Debug.Log("CRC not initialized - show login screen");
+                    Debug.Log("[SPLASH SCREEN MANAGER] CRC not initialized - show login screen");
                     splashScreenAnimator.Play("Login");
                     ////////////////////////////////////////////////////
                 }

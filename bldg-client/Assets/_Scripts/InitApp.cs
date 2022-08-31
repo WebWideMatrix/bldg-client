@@ -42,7 +42,7 @@ public class InitApp : MonoBehaviour
 
     private void startLoadingAnimation() {
         // ROLE 9   ////////////////////
-        Debug.Log("~~~~~ starting loading animation with " + startTimedEvent);
+        // Debug.Log("~~~~~ starting loading animation with " + startTimedEvent);
         startTimedEvent.StartIEnumerator();
         ////////////////////////////////
     }
@@ -111,7 +111,7 @@ public class InitApp : MonoBehaviour
     }
 
     void OnEnable() {
-        Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
+        // Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
 
 
         onFlying = new UnityAction(OnFlying);
@@ -126,7 +126,7 @@ public class InitApp : MonoBehaviour
 
 
     void Awake() {
-        Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
+        // Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
     
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
@@ -147,7 +147,7 @@ public class InitApp : MonoBehaviour
 
     private void OnLogin()
     {
-        Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
+        // Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
 
 
         startLoadingAnimation();
@@ -182,7 +182,7 @@ public class InitApp : MonoBehaviour
     }
 
     private void OnQuickActions() {
-        Debug.Log("~~~~~~ on quick actions");
+        // Debug.Log("~~~~~~ on quick actions");
         quickActionsDialog.ModalWindowIn();
     }
 
@@ -204,6 +204,6 @@ public class InitApp : MonoBehaviour
     public void setAnimators(Animator sAnimator, TimedEvent stEvent) {
         startTimedEvent = stEvent;
         splashScreenAnimator = sAnimator;
-        Debug.Log("~~~~~~~~~ got animators!!!");
+        // Debug.Log("~~~~~~~~~ got animators!!!");
     }
 }

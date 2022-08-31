@@ -737,12 +737,12 @@ public class BldgController : MonoBehaviour
 	
 
 	void reloadContainerBldg() {
-		Debug.Log("~~~~~ Reloading container bldg");
+		// Debug.Log("~~~~~ Reloading container bldg");
 
 		// check whether the container bldg already has a model object
-		Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
+		// Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
 		GameObject container = getContainerBldg();
-		Debug.Log("~~~~~ and container bldg is: " + container);
+		// Debug.Log("~~~~~ and container bldg is: " + container);
 		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
@@ -756,14 +756,14 @@ public class BldgController : MonoBehaviour
 		// invoke the get bldg API
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
-		Debug.Log("~~~~ Loading container bldg model from: " + url);
+		// Debug.Log("~~~~ Loading container bldg model from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
 			bldgObj.model = res.data;
-			Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
+			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
-			Debug.Log("~~~~ Rendered bldg data");
+			// Debug.Log("~~~~ Rendered bldg data");
 		}).Catch(err => {
 			Debug.Log(err.Message);
 			Debug.Log("Failed to load container bldg model: " + address);

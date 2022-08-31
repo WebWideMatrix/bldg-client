@@ -104,14 +104,14 @@ public class LoginController : MonoBehaviour
 
     private void fireLoginSuccessfulEvent() {
         // ROLE 2   //////////////////////////
-        Debug.Log("~~~~~ triggering LoginSuccessful");
+        // Debug.Log("~~~~~ triggering LoginSuccessful");
         EventManager.Instance.TriggerEvent("LoginSuccessful");
         /////////////////////////////////////
     }
 
     public void completeLogin(Resident rsdt) {
         isPollingForVerificationStatus = false;
-        Debug.Log("~~~~~ Login done, received " + rsdt.alias);
+        // Debug.Log("~~~~~ Login done, received " + rsdt.alias);
 
         animateOutOfLogin();
 
@@ -147,7 +147,7 @@ public class LoginController : MonoBehaviour
             // TODO find a better way to determine whether the login was done
             if (loginResponse.data.alias != null && loginResponse.data.alias != "") {
                 // there was already a valid session, so just complete the login
-                Debug.Log("~~~~ Email verification done recently, completing login");
+                // Debug.Log("~~~~ Email verification done recently, completing login");
                 completeLogin(loginResponse.data);
             } else {
                 // no valid session found, notify the user that they need to verify their email
@@ -190,7 +190,7 @@ public class LoginController : MonoBehaviour
                 // If status is 200, meaning that the verification is successful:
                 // - change the isPollingForVerificationStatus to false
                 // - continue the login flow
-                Debug.Log("~~~~ Email verification done! completing login");
+                // Debug.Log("~~~~ Email verification done! completing login");
                 completeLogin(loginResponse.data);
             }).Catch(err => {
                 Debug.Log("Emeil verification not yet done - " + err.Message);
