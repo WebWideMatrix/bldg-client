@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class InitApp : MonoBehaviour
 
     public ModalWindowManager quickActionsDialog;
 
+    public TimedEvent startTimedEvent;
+    public Animator splashScreenAnimator;
+
 
     // TODO is there a better place for the cameras?
     public CinemachineVirtualCamera flyCamera;
@@ -31,9 +35,6 @@ public class InitApp : MonoBehaviour
     private UnityAction onWalking;
     private UnityAction onLogin;
     private UnityAction onQuickActions;
-
-    private TimedEvent startTimedEvent;
-    private Animator splashScreenAnimator;
 	
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -49,6 +50,8 @@ public class InitApp : MonoBehaviour
 
     private void initCurrentResidentUI(Resident rsdt) {
         // ROLE 6   ///////////////////////
+        Debug.Log("~~~~~ *********************   initCurrentResidentUI - Start  *********************");
+
         float height = 0.5F;
         if (rsdt.flr != "g") {
             height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
@@ -72,6 +75,8 @@ public class InitApp : MonoBehaviour
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
         /////////////////////////////////////
+
+        Debug.Log("~~~~~ *********************   initCurrentResidentUI - End  *********************");
     }
 
     private void loadBldgs(Resident rsdt) {
@@ -106,12 +111,19 @@ public class InitApp : MonoBehaviour
 
     private void animateOutOfLogin() {
         // ROLE 5   ///////////////////
-        splashScreenAnimator.Play("Login to Loading");
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log("~~~~~~~~~~~~~~~~ animate Out of Login - current scene is " + scene.name);
+        try {
+            splashScreenAnimator.Play("Login to Loading");
+        } catch (Exception e) {
+			Debug.Log("~~~~~~ Failed to animate loading: splashScreenAnimator is `" + splashScreenAnimator + "` " + e.ToString());
+		}
+        
         ////////////////////////////////
     }
 
     void OnEnable() {
-        // Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
+        Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
 
 
         onFlying = new UnityAction(OnFlying);
@@ -126,7 +138,7 @@ public class InitApp : MonoBehaviour
 
 
     void Awake() {
-        // Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
+        Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
     
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
@@ -147,7 +159,7 @@ public class InitApp : MonoBehaviour
 
     private void OnLogin()
     {
-        // Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
+        Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
 
 
         startLoadingAnimation();
@@ -204,6 +216,7 @@ public class InitApp : MonoBehaviour
     public void setAnimators(Animator sAnimator, TimedEvent stEvent) {
         startTimedEvent = stEvent;
         splashScreenAnimator = sAnimator;
-        // Debug.Log("~~~~~~~~~ got animators!!!");
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log("~~~~~~~~~ Scene is " + scene.name + " got animators!!! SplashAnimator is " + sAnimator);
     }
 }
