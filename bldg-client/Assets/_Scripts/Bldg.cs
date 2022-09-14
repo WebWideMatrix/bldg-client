@@ -25,6 +25,8 @@ namespace Models
 
 		public int y;
 
+		public string bldg_url;
+
 		public string web_url;
 
 		public string summary;
@@ -32,6 +34,12 @@ namespace Models
 		public bool is_composite;
 
 		public string flr;
+
+		public string flr_url;
+
+		public int flr_level;
+		
+		public int nesting_depth;
 
 		public string entity_type;
 
@@ -81,6 +89,7 @@ namespace Models
 		public int x;
 		public int y;
 		public string flr;
+		public string flr_url;
 	}
 
 	[Serializable]
@@ -168,6 +177,7 @@ namespace Models
 		public string say_text;
 		public long say_time;
 		public string say_flr;
+		public string say_flr_url;
 		public string say_location;
 		public string say_mimetype;
 		public string say_recipient;

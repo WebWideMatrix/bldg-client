@@ -32,7 +32,7 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
     
     private Dictionary<string, int> entityCountPerType = new Dictionary<string, int>();
 
-    private Dictionary<string, List<string>> entityWebsitesPerType = new Dictionary<string, List<string>>();
+    private Dictionary<string, List<string>> entityNamesPerType = new Dictionary<string, List<string>>();
 
 
     public List<string> getEntityTypes() {
@@ -41,27 +41,31 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
 
     public void clearEntities() {
         entityCountPerType.Clear();
-        entityWebsitesPerType.Clear();
+        entityNamesPerType.Clear();
     }
 
-    public void addEntity(string type, string website) {
+
+    //
+    // IMPORTANT: this must be cleared when switching floors - names are only unique within floors!
+    //
+    public void addEntity(string type, string name) {
         if (!entityCountPerType.ContainsKey(type)) {
             entityCountPerType[type] = 0;
         }
         entityCountPerType[type]++;
-        if (!entityWebsitesPerType.ContainsKey(type)) {
-            entityWebsitesPerType[type] = new List<string>();
+        if (!entityNamesPerType.ContainsKey(type)) {
+            entityNamesPerType[type] = new List<string>();
         }
-        if (!entityWebsitesPerType[type].Contains(website)) {
-            entityWebsitesPerType[type].Add(website);
+        if (!entityNamesPerType[type].Contains(name)) {
+            entityNamesPerType[type].Add(name);
         }
     }
 
     public List<string> getEntitiesPerType(string type) {
-        if (!entityWebsitesPerType.ContainsKey(type)) {
+        if (!entityNamesPerType.ContainsKey(type)) {
             return new List<string>();
         }
-        return entityWebsitesPerType[type];
+        return entityNamesPerType[type];
     }
 
     public int getEntitiesCount() {
@@ -74,9 +78,9 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
 
     public List<string> getAllEntities() {
         List<string> entities = new List<string>();
-        foreach (string type in entityWebsitesPerType.Keys) {
-            foreach (string website in entityWebsitesPerType[type]) {
-                entities.Add(website);
+        foreach (string type in entityNamesPerType.Keys) {
+            foreach (string name in entityNamesPerType[type]) {
+                entities.Add("[" + type + "] " + name);
             }
         }
         return entities;

@@ -94,6 +94,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
                 resident.x = actionResponse.data.x;
                 resident.y = actionResponse.data.y;
                 resident.flr = actionResponse.data.flr;
+                resident.flr_url = actionResponse.data.flr_url;
             });
         }
     }
@@ -114,6 +115,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.x = actionResponse.data.x;
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
+            resident.flr_url = actionResponse.data.flr_url;
             Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
             if (resident.flr != "g") {
                 // Debug.Log("~~~~~~~ EnterBldg action done - loading scene bldg_flr...");
@@ -140,6 +142,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.x = actionResponse.data.x;
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
+            resident.flr_url = actionResponse.data.flr_url;
             Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
             Scene scene = SceneManager.GetActiveScene();
             if (resident.flr == "g" && scene.name != "g") {
