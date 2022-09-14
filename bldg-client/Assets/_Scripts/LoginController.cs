@@ -115,6 +115,10 @@ public class LoginController : MonoBehaviour
 
         animateOutOfLogin();
 
+        Debug.Log("~~~~~~ Received rsdt: " + rsdt);
+        Debug.Log("~~~~~~ rsdt flr_url: " + rsdt.flr_url);
+        
+
         initCurrentResidentController(rsdt);
     
         // hide the login dialog - TODO IS IT STILL NEEDED?

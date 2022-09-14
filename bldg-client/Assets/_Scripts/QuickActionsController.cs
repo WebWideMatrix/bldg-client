@@ -118,8 +118,8 @@ public class QuickActionsController : MonoBehaviour
             {"website", website},
             {"summary", summary},
             {"picture", picture},
-            {"entityWebsite", entityName},
-            {"targetEntityWebsite", targetEntityName},
+            {"entityName", entityName},
+            {"targetEntityName", targetEntityName},
             {"owner", owner}
         };
 
@@ -188,9 +188,7 @@ public class QuickActionsController : MonoBehaviour
             error = "Name is required";
         } else if (commandData["name"].IndexOf(' ') > -1) {
             error = "Name cannot contain spaces";
-        } else if (commandData["website"] == "") {
-            error = "Website is required";
-        } else if (commandData["website"].IndexOf(' ') > -1) {
+        } else if (commandData["website"] != "" && commandData["website"].IndexOf(' ') > -1) {
             error = "Website cannot contain spaces";
         } else if (commandData["summary"] == "") {
             error = "Summary is required";
@@ -200,7 +198,7 @@ public class QuickActionsController : MonoBehaviour
 
     string validateMoveForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         }
         return error;
@@ -208,9 +206,9 @@ public class QuickActionsController : MonoBehaviour
 
     string validateConnectForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
-        } else if (commandData["targetEntityWebsite"] == "" ) {
+        } else if (commandData["targetEntityName"] == "" ) {
             error = "Please select a target entity";
         }
         return error;
@@ -218,7 +216,7 @@ public class QuickActionsController : MonoBehaviour
 
     string validateAddOwnerForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         } else if (commandData["owner"] == "" ) {
             error = "Please enter an owner email";
@@ -232,7 +230,7 @@ public class QuickActionsController : MonoBehaviour
 
     string validateRemoveOwnerForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         } else if (commandData["owner"] == "" ) {
             error = "Please enter an owner email";
@@ -271,8 +269,8 @@ public class QuickActionsController : MonoBehaviour
 
     string generateMoveCommand(Dictionary<string, string> data) {
         string command = "/move bldg";
-        if (data["entityWebsite"] != "") {
-            command += " " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
         } else {
             // TODO required field validation
         }
@@ -284,13 +282,13 @@ public class QuickActionsController : MonoBehaviour
 
     string generateConnectCommand(Dictionary<string, string> data) {
         string command = "/connect between";
-        if (data["entityWebsite"] != "") {
-            command += " " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
         } else {
             // TODO required field validation
         }
-        if (data["targetEntityWebsite"] != "") {
-            command += " and " + data["targetEntityWebsite"];
+        if (data["targetEntityName"] != "") {
+            command += " and " + data["targetEntityName"];
         } else {
             // TODO required field validation
         }
@@ -307,8 +305,8 @@ public class QuickActionsController : MonoBehaviour
             // TODO required field validation
         }
 
-        if (data["entityWebsite"] != "") {
-            command += " to bldg " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " to bldg " + data["entityName"];
         } else {
             // TODO required field validation
         }
@@ -325,8 +323,8 @@ public class QuickActionsController : MonoBehaviour
             // TODO required field validation
         }
 
-        if (data["entityWebsite"] != "") {
-            command += " from bldg " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " from bldg " + data["entityName"];
         } else {
             // TODO required field validation
         }
