@@ -97,6 +97,8 @@ public class LoginController : MonoBehaviour
         // once login result received, initialize crc & player with resident details
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (!crc.isInitialized()) {
+            Debug.Log("~~~~~~~~ initializing current resident: " + rsdt + " with flr_url: " + rsdt.flr_url);
+
             crc.initialize(rsdt);
         }
         //////////////////////////////////

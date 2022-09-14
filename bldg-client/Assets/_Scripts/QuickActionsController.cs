@@ -497,6 +497,6 @@ public class QuickActionsController : MonoBehaviour
         // TODO: remove assumption
         
         int endBracketPos = typedName.IndexOf("]");
-        return typedName.Substring(endBracketPos + 1);
+        return typedName.Substring(endBracketPos + 2);
     }
 }
