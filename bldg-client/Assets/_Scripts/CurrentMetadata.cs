@@ -85,4 +85,14 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
         }
         return entities;
     }
+
+    public bool nameExists(string a_name) {
+        Dictionary<string, bool> all_names = new Dictionary<string, bool>();
+        foreach (string type in entityNamesPerType.Keys) {
+            foreach (string name in entityNamesPerType[type]) {
+                all_names.Add(name, true);
+            }
+        }
+        return all_names.ContainsKey(a_name);
+    }
 }

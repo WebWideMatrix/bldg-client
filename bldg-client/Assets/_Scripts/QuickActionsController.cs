@@ -193,6 +193,13 @@ public class QuickActionsController : MonoBehaviour
         } else if (commandData["summary"] == "") {
             error = "Summary is required";
         }
+
+        // validate name uniqueness
+        CurrentMetadata cm = CurrentMetadata.Instance;
+        if (cm.nameExists(commandData["name"])) {
+            error = "Bldg with this name already exists in this floor";
+        }
+        
         return error;
     }
 
