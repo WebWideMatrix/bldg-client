@@ -150,6 +150,7 @@ namespace Models
 		public string resident_email;
 		public string action_type;
 		public string bldg_address;
+		public string bldg_url;
 	}
 
 	[Serializable]
@@ -158,6 +159,7 @@ namespace Models
 		public string resident_email;
 		public string action_type;
 		public string bldg_address;
+		public string bldg_url;
 	}
 
 	[Serializable]

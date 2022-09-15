@@ -89,7 +89,7 @@ public class InitApp : MonoBehaviour
         // ROLE 8  /////////////////////
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
-        currentAddress.text = rsdt.flr;
+        currentAddress.text = rsdt.flr_url;
         ////////////////////////////////
     }
 

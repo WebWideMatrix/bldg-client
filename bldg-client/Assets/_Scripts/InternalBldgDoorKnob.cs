@@ -12,6 +12,7 @@ public class InternalBldgDoorKnob : MonoBehaviour
 
     private string bldgName = "";
     private string bldgAddress = "";
+    private string bldgURL = "";
     private Color initialColor;
 
     void getContainerBldgDetails()
@@ -22,6 +23,7 @@ public class InternalBldgDoorKnob : MonoBehaviour
         if (bldgObject != null) {
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
+            bldgURL = bldgObject.model.bldg_url;
         }
     }
 
@@ -48,7 +50,8 @@ public class InternalBldgDoorKnob : MonoBehaviour
             crc.SendExitBldgAction(new ExitBldgAction() {
                 resident_email = crc.resident.email,
                 action_type = "EXIT_BLDG",
-                bldg_address = bldgAddress
+                bldg_address = bldgAddress,
+                bldg_url = bldgURL
             });
         // }
     }
