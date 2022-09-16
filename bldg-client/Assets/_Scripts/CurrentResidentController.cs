@@ -94,13 +94,13 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
                 resident.x = actionResponse.data.x;
                 resident.y = actionResponse.data.y;
                 resident.flr = actionResponse.data.flr;
+                resident.flr_url = actionResponse.data.flr_url;
             });
         }
     }
 
     public void SendEnterBldgAction(EnterBldgAction action) {
         // call the act API
-        // Debug.Log("~~~~~ Invoking resident enter bldg action for resident " + resident.email);
         GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
@@ -114,9 +114,8 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.x = actionResponse.data.x;
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
-            Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
+            resident.flr_url = actionResponse.data.flr_url;
             if (resident.flr != "g") {
-                // Debug.Log("~~~~~~~ EnterBldg action done - loading scene bldg_flr...");
                 SceneManager.LoadScene("bldg_flr");
             }
         }).Catch(err => {
@@ -126,7 +125,6 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
 
     public void SendExitBldgAction(ExitBldgAction action) {
         // call the act API
-        // Debug.Log("~~~~~ Invoking resident exit bldg action for resident " + resident.email);
         GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/act";
         Debug.Log("url = " + url);
@@ -140,13 +138,11 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.x = actionResponse.data.x;
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
-            Debug.Log("CRC registered the resident at " + resident.x + ", " + resident.y);
+            resident.flr_url = actionResponse.data.flr_url;
             Scene scene = SceneManager.GetActiveScene();
             if (resident.flr == "g" && scene.name != "g") {
-                // Debug.Log("~~~~~~~ ExitBldg action done - loading scene g...");
                 SceneManager.LoadScene("g");
             } else {
-                // Debug.Log("~~~~~~~ ExitBldg action done - loading scene bldg_flr...");
                 SceneManager.LoadScene("bldg_flr");
             }
         }).Catch(err => {

@@ -532,7 +532,7 @@ public class BldgController : MonoBehaviour
 					}
 					// new entity so add to metadata of entities belonging to current user
 					if (Array.IndexOf(b.owners, crc.resident.email) > -1) {
-						cm.addEntity(b.entity_type, b.web_url);
+						cm.addEntity(b.entity_type, b.name);
 					}
 					dataChanged = true;
 

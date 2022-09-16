@@ -136,7 +136,8 @@ public class ChatUIController : MonoBehaviour {
         Debug.Log("Got new text " + text);
         // TODO extract recipient
         CurrentResidentController crc = CurrentResidentController.Instance;
-        Debug.Log("Found a rsdt controller");
+        // Debug.Log("Found a rsdt controller");
+
         crc.SendSayAction(new SayAction {
             resident_email = crc.resident.email,
             action_type = "SAY",
@@ -144,6 +145,7 @@ public class ChatUIController : MonoBehaviour {
             say_text = text,
             say_time = DateTime.Now.Ticks,
             say_flr = crc.resident.flr,
+            say_flr_url = crc.resident.flr_url,
             say_location = crc.resident.location,
             say_mimetype = "text/plain",
             say_recipient = null

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class InitApp : MonoBehaviour
 
     public ModalWindowManager quickActionsDialog;
 
+    public TimedEvent startTimedEvent;
+    public Animator splashScreenAnimator;
+
 
     // TODO is there a better place for the cameras?
     public CinemachineVirtualCamera flyCamera;
@@ -31,9 +35,6 @@ public class InitApp : MonoBehaviour
     private UnityAction onWalking;
     private UnityAction onLogin;
     private UnityAction onQuickActions;
-
-    private TimedEvent startTimedEvent;
-    private Animator splashScreenAnimator;
 	
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -41,14 +42,10 @@ public class InitApp : MonoBehaviour
 
 
     private void startLoadingAnimation() {
-        // ROLE 9   ////////////////////
-        // Debug.Log("~~~~~ starting loading animation with " + startTimedEvent);
         startTimedEvent.StartIEnumerator();
-        ////////////////////////////////
     }
 
     private void initCurrentResidentUI(Resident rsdt) {
-        // ROLE 6   ///////////////////////
         float height = 0.5F;
         if (rsdt.flr != "g") {
             height = 2.5F;  // bldg is larger when inside a bldg, so floor is higher
@@ -71,25 +68,19 @@ public class InitApp : MonoBehaviour
         // RETURN: replace all of these with event handling on bldg controller
         bldgController.SetCurrentResident(rsdt);
         bldgController.SetCurrentResidentController(rsdtObject);
-        /////////////////////////////////////
     }
 
     private void loadBldgs(Resident rsdt) {
-        // ROLE 7   /////////////////////////
         bldgController.SetAddress(rsdt.flr);        
-        /////////////////////////////////////
     }
 
     private void setLabelsInUI(Resident rsdt) {
-        // ROLE 8  /////////////////////
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
-        currentAddress.text = rsdt.flr;
-        ////////////////////////////////
+        currentAddress.text = rsdt.flr_url;
     }
 
     private bool loadBldgSceneIfNeeded() {
-        // ROLE 4   //////////////////////
         // check whether we need to load the bldg_flr scene
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.resident.flr != "g") {
@@ -100,20 +91,21 @@ public class InitApp : MonoBehaviour
             }
         }
         return false;
-        ///////////////////////////////////
     }
 
 
     private void animateOutOfLogin() {
-        // ROLE 5   ///////////////////
-        splashScreenAnimator.Play("Login to Loading");
+        Scene scene = SceneManager.GetActiveScene();
+        try {
+            splashScreenAnimator.Play("Login to Loading");
+        } catch (Exception e) {
+			Debug.Log("~~~~~~ Failed to animate loading: splashScreenAnimator is `" + splashScreenAnimator + "` " + e.ToString());
+		}
+        
         ////////////////////////////////
     }
 
     void OnEnable() {
-        // Debug.Log("~~~~~ *********************   Init App - On Enable  *********************");
-
-
         onFlying = new UnityAction(OnFlying);
         onWalking = new UnityAction(OnWalking);
         onLogin = new UnityAction(OnLogin);
@@ -125,9 +117,7 @@ public class InitApp : MonoBehaviour
     }
 
 
-    void Awake() {
-        // Debug.Log("~~~~~ *********************   Init App - Awake  *********************");
-    
+    void Awake() {    
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
             animateOutOfLogin();
@@ -147,8 +137,7 @@ public class InitApp : MonoBehaviour
 
     private void OnLogin()
     {
-        // Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
-
+        Debug.Log("~~~~~ *********************   Init App - On Login  *********************");
 
         startLoadingAnimation();
         
@@ -182,7 +171,6 @@ public class InitApp : MonoBehaviour
     }
 
     private void OnQuickActions() {
-        // Debug.Log("~~~~~~ on quick actions");
         quickActionsDialog.ModalWindowIn();
     }
 
@@ -204,6 +192,5 @@ public class InitApp : MonoBehaviour
     public void setAnimators(Animator sAnimator, TimedEvent stEvent) {
         startTimedEvent = stEvent;
         splashScreenAnimator = sAnimator;
-        // Debug.Log("~~~~~~~~~ got animators!!!");
     }
 }

@@ -36,10 +36,6 @@ namespace Michsky.UI.Shift
             if (mpm == null) { mpm = gameObject.GetComponent<MainPanelManager>(); }
             if (loginController == null) { loginController = gameObject.GetComponent<LoginController>(); }
             loginController.setAnimators(splashScreenAnimator);
-            InitApp appCtrl = getAppController();
-            if (appCtrl != null) {
-                appCtrl.setAnimators(splashScreenAnimator, ssTimedEvent);
-            }
 
             if (disableSplashScreen == true)
             {

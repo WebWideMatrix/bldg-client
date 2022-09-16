@@ -19,8 +19,8 @@ public class QuickActionsController : MonoBehaviour
     public TMP_InputField websiteInput;
     public TMP_InputField summaryInput;
     public TMP_InputField pictureInput;
-    public TMP_Dropdown entityWebsiteDropdown1;
-    public TMP_Dropdown entityWebsiteDropdown2;
+    public TMP_Dropdown entityNameDropdown1;
+    public TMP_Dropdown entityNameDropdown2;
     public TMP_InputField ownerInput;
 
     public TMP_Text informationText;
@@ -47,12 +47,12 @@ public class QuickActionsController : MonoBehaviour
 
     private void OnEntitiesChange()
     {
-        entityWebsiteDropdown1.ClearOptions();
-        entityWebsiteDropdown2.ClearOptions();
+        entityNameDropdown1.ClearOptions();
+        entityNameDropdown2.ClearOptions();
         CurrentMetadata cm = CurrentMetadata.Instance;
         List<string> entities = cm.getAllEntities();
-        entityWebsiteDropdown1.AddOptions(entities);
-        entityWebsiteDropdown2.AddOptions(entities);
+        entityNameDropdown1.AddOptions(entities);
+        entityNameDropdown2.AddOptions(entities);
     }
     
     public void ShowFormForSelectedAction() {
@@ -97,11 +97,17 @@ public class QuickActionsController : MonoBehaviour
         string summary = summaryInput.text;
         string picture = pictureInput.text;
         
-        string entityWebsite = "";
-        if (entityWebsiteDropdown1.options.Count > 0) entityWebsite = entityWebsiteDropdown1.options[entityWebsiteDropdown1.value].text;
+        string entityName = "";
+        if (entityNameDropdown1.options.Count > 0) {
+            entityName = entityNameDropdown1.options[entityNameDropdown1.value].text;
+            entityName = removeEntityTypePrefix(entityName);
+        }
         
-        string targetEntityWebsite = "";
-        if (entityWebsiteDropdown2.options.Count > 0) targetEntityWebsite = entityWebsiteDropdown2.options[entityWebsiteDropdown2.value].text;
+        string targetEntityName = "";
+        if (entityNameDropdown2.options.Count > 0) {
+            targetEntityName = entityNameDropdown2.options[entityNameDropdown2.value].text;
+            targetEntityName = removeEntityTypePrefix(targetEntityName);
+        }
         
         string owner = ownerInput.text;
         
@@ -112,8 +118,8 @@ public class QuickActionsController : MonoBehaviour
             {"website", website},
             {"summary", summary},
             {"picture", picture},
-            {"entityWebsite", entityWebsite},
-            {"targetEntityWebsite", targetEntityWebsite},
+            {"entityName", entityName},
+            {"targetEntityName", targetEntityName},
             {"owner", owner}
         };
 
@@ -182,19 +188,24 @@ public class QuickActionsController : MonoBehaviour
             error = "Name is required";
         } else if (commandData["name"].IndexOf(' ') > -1) {
             error = "Name cannot contain spaces";
-        } else if (commandData["website"] == "") {
-            error = "Website is required";
-        } else if (commandData["website"].IndexOf(' ') > -1) {
+        } else if (commandData["website"] != "" && commandData["website"].IndexOf(' ') > -1) {
             error = "Website cannot contain spaces";
         } else if (commandData["summary"] == "") {
             error = "Summary is required";
         }
+
+        // validate name uniqueness
+        CurrentMetadata cm = CurrentMetadata.Instance;
+        if (cm.nameExists(commandData["name"])) {
+            error = "Object with this name already exists in this floor";
+        }
+        
         return error;
     }
 
     string validateMoveForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         }
         return error;
@@ -202,9 +213,9 @@ public class QuickActionsController : MonoBehaviour
 
     string validateConnectForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
-        } else if (commandData["targetEntityWebsite"] == "" ) {
+        } else if (commandData["targetEntityName"] == "" ) {
             error = "Please select a target entity";
         }
         return error;
@@ -212,7 +223,7 @@ public class QuickActionsController : MonoBehaviour
 
     string validateAddOwnerForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         } else if (commandData["owner"] == "" ) {
             error = "Please enter an owner email";
@@ -226,7 +237,7 @@ public class QuickActionsController : MonoBehaviour
 
     string validateRemoveOwnerForm(Dictionary<string, string> commandData) {
         string error = "";
-        if (commandData["entityWebsite"] == "" ) {
+        if (commandData["entityName"] == "" ) {
             error = "Please select an entity";
         } else if (commandData["owner"] == "" ) {
             error = "Please enter an owner email";
@@ -265,8 +276,8 @@ public class QuickActionsController : MonoBehaviour
 
     string generateMoveCommand(Dictionary<string, string> data) {
         string command = "/move bldg";
-        if (data["entityWebsite"] != "") {
-            command += " " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
         } else {
             // TODO required field validation
         }
@@ -278,13 +289,13 @@ public class QuickActionsController : MonoBehaviour
 
     string generateConnectCommand(Dictionary<string, string> data) {
         string command = "/connect between";
-        if (data["entityWebsite"] != "") {
-            command += " " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
         } else {
             // TODO required field validation
         }
-        if (data["targetEntityWebsite"] != "") {
-            command += " and " + data["targetEntityWebsite"];
+        if (data["targetEntityName"] != "") {
+            command += " and " + data["targetEntityName"];
         } else {
             // TODO required field validation
         }
@@ -301,8 +312,8 @@ public class QuickActionsController : MonoBehaviour
             // TODO required field validation
         }
 
-        if (data["entityWebsite"] != "") {
-            command += " to bldg " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " to bldg " + data["entityName"];
         } else {
             // TODO required field validation
         }
@@ -319,8 +330,8 @@ public class QuickActionsController : MonoBehaviour
             // TODO required field validation
         }
 
-        if (data["entityWebsite"] != "") {
-            command += " from bldg " + data["entityWebsite"];
+        if (data["entityName"] != "") {
+            command += " from bldg " + data["entityName"];
         } else {
             // TODO required field validation
         }
@@ -349,8 +360,8 @@ public class QuickActionsController : MonoBehaviour
         informationText.text = "Create a new entity";
 
         // hide rest
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
         ownerInput.transform.parent.gameObject.SetActive(false);
     }
 
@@ -358,7 +369,7 @@ public class QuickActionsController : MonoBehaviour
         // TODO use arrays
 
         // show controls
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
 
         informationText.text = "Choose an entity to move to where you are.";
 
@@ -368,7 +379,7 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
         ownerInput.transform.parent.gameObject.SetActive(false);
     }
 
@@ -376,8 +387,8 @@ public class QuickActionsController : MonoBehaviour
         // TODO use arrays
 
         // show controls
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(true);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(true);
 
         informationText.text = "Choose two entities to connect.";
 
@@ -401,8 +412,8 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
         ownerInput.transform.parent.gameObject.SetActive(false);
     }
 
@@ -410,7 +421,7 @@ public class QuickActionsController : MonoBehaviour
         // TODO use arrays
 
         // show controls
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
         ownerInput.transform.parent.gameObject.SetActive(true);
 
         // hide rest
@@ -419,14 +430,14 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showRemoveOwnerForm() {
         // TODO use arrays
 
         // show controls
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(true);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
         ownerInput.transform.parent.gameObject.SetActive(true);
 
         // hide rest
@@ -435,7 +446,7 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
     }
 
     void showEmptyForm() {
@@ -449,8 +460,8 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.transform.parent.gameObject.SetActive(false);
         summaryInput.transform.parent.gameObject.SetActive(false);
         pictureInput.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown1.transform.parent.gameObject.SetActive(false);
-        entityWebsiteDropdown2.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown1.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
         ownerInput.transform.parent.gameObject.SetActive(false);
 
         informationText.text = "";
@@ -464,8 +475,8 @@ public class QuickActionsController : MonoBehaviour
         websiteInput.text = "";
         summaryInput.text = "";
         pictureInput.text = "";
-        entityWebsiteDropdown1.value = 0;
-        entityWebsiteDropdown2.value = 0;
+        entityNameDropdown1.value = 0;
+        entityNameDropdown2.value = 0;
         ownerInput.text = "";
         informationText.text = "";
         errorText.text = "";
@@ -479,5 +490,20 @@ public class QuickActionsController : MonoBehaviour
             errorText.text = "";
             // return true;
         }
+    }
+
+
+
+    //
+    // HELPER FUNCTIONS
+    //
+
+    string removeEntityTypePrefix(string typedName) {
+
+        // ASSUMPTION: type names don't contain square brackets
+        // TODO: remove assumption
+        
+        int endBracketPos = typedName.IndexOf("]");
+        return typedName.Substring(endBracketPos + 2);
     }
 }

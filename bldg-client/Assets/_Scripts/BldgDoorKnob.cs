@@ -11,6 +11,7 @@ public class BldgDoorKnob : MonoBehaviour
 
     private string bldgName = "";
     private string bldgAddress = "";
+    private string bldgURL = "";
 
     private Color initialColor;
 
@@ -25,6 +26,7 @@ public class BldgDoorKnob : MonoBehaviour
             Debug.Log("[DoorKnob] parent bldg object: " + bldgObject);
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
+            bldgURL = bldgObject.model.bldg_url;
         }
     }
 
@@ -47,7 +49,8 @@ public class BldgDoorKnob : MonoBehaviour
             crc.SendEnterBldgAction(new EnterBldgAction() {
                 resident_email = crc.resident.email,
                 action_type = "ENTER_BLDG",
-                bldg_address = bldgAddress
+                bldg_address = bldgAddress,
+                bldg_url = bldgURL
             });
         // }
     }
