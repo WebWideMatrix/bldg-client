@@ -131,7 +131,13 @@ public class ResidentController : MonoBehaviour
     {
         if (!isCurrentUser) return;
 
+        // Mac
         if (Event.current.command && Event.current.keyCode == KeyCode.K)
+        {
+            EventManager.Instance.TriggerEvent("OpenQuickActions");
+        }
+        // Win
+        if (Event.current.control && Event.current.keyCode == KeyCode.K)
         {
             EventManager.Instance.TriggerEvent("OpenQuickActions");
         }

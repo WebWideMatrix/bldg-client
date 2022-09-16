@@ -14,15 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 200
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(-94,114)
+    location: g/b(34,123)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-83,119)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg purpose-of-life here","say_time":637988305356429930}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-84,113)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name purpose-of-life and summary to appreciate beauty, whatever
+      that is","say_time":637988305031373080}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-94,117)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name the-pr and summary pr prp pr","say_time":637988303417467360}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-94,114)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      purpose bldg with name history-of-cinema and summary tell a story with feelings","say_time":637988298290267450}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-77,135)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name prupose-of-life and summary the purpose of life is to
       appreciate beauty","say_time":637988284652400830}'
@@ -51,11 +60,11 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: -94
-    y: 114
+    x: 34
+    y: 123
     flr: g
     flr_url: g
-  initialized: 0
+  initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
