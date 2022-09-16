@@ -197,7 +197,7 @@ public class QuickActionsController : MonoBehaviour
         // validate name uniqueness
         CurrentMetadata cm = CurrentMetadata.Instance;
         if (cm.nameExists(commandData["name"])) {
-            error = "Bldg with this name already exists in this floor";
+            error = "Object with this name already exists in this floor";
         }
         
         return error;

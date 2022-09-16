@@ -138,8 +138,6 @@ public class ChatUIController : MonoBehaviour {
         CurrentResidentController crc = CurrentResidentController.Instance;
         // Debug.Log("Found a rsdt controller");
 
-        Debug.Log("~~~~~~~~~ About to send Say Action with flr_url: " + crc.resident.flr_url);
-
         crc.SendSayAction(new SayAction {
             resident_email = crc.resident.email,
             action_type = "SAY",
