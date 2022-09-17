@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 160
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(22,15)
+    location: g/b(16,92)/l0/b(16,9)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(17,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      member bldg with name ef and summary eddie fidler","say_time":637990264637785530}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       capability bldg with name convert-data-to-organized-space and summary convert
       data into organized space","say_time":637990249028227740}'
@@ -102,8 +104,8 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 22
-    y: 15
+    x: 16
+    y: 9
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
   initialized: 0

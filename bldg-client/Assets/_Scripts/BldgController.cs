@@ -59,7 +59,7 @@ public class BldgController : MonoBehaviour
 	public GameObject fancyChair;
 	public GameObject coffeeTableChair;
 	// -----
-	public GameObject drawerStandingLight;
+	public GameObject standingLight;
 	public GameObject candle;
 	public GameObject fireplace;
 	// -----
@@ -174,7 +174,7 @@ public class BldgController : MonoBehaviour
 				return coffeeTableChair;
 			// ----
 			case "member":
-				return drawerStandingLight;
+				return standingLight;
 			case "customer":
 				return candle;
 			case "community":
