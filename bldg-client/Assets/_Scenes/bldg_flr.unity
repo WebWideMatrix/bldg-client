@@ -3205,11 +3205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381180923563627767, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6381180923563627767, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6381180923563627767, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3221,7 +3221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381180923563627767, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 6381238838701514514, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6343,7 +6343,7 @@ MonoBehaviour:
   coffeeTableChair: {fileID: 4142336423394004859, guid: f3631ec1f816d424086cfdd8d693e9c1, type: 3}
   standingLight: {fileID: 7731149380681873967, guid: 92fbd3fcc4a2a48889bf4ecbabb49686, type: 3}
   candle: {fileID: 0}
-  fireplace: {fileID: 0}
+  fireplace: {fileID: 3124279497323299432, guid: 4927ef6df389b4068918ac389148cdc3, type: 3}
   pottedPlant: {fileID: 1195497649831968120, guid: 9c85314af0bb842f58d5783dca77c773, type: 3}
   tree: {fileID: 0}
   largePottedPlant: {fileID: 3255406378158320473, guid: 96e0ef6559aa24c27a3fe18012f753ea, type: 3}
