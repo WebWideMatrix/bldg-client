@@ -14,15 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 200
+    direction: 180
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(34,123)
+    location: g/b(16,92)/l0/b(14,7)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      action bldg with name go-outside and summary just go outside","say_time":637990114218693200}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      goal bldg with name apple-a-day and summary eat one apple a day","say_time":637990088750689570}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(36,122)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg quickactionsdialog here","say_time":637989171213686430}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-84,123)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
+      between t8 and fight-maleria","say_time":637989170615453830}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-83,119)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
       bldg purpose-of-life here","say_time":637988305356429930}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-84,113)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -60,10 +68,10 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 34
-    y: 123
-    flr: g
-    flr_url: g
+    x: 14
+    y: 7
+    flr: g/b(16,92)/l0
+    flr_url: g/fromTeal/l0
   initialized: 1
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0

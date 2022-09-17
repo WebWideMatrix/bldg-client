@@ -19,15 +19,36 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
         "cantata",
         "neighborhood",
         "street",
-        "member",
-        "milestone",
-        "task",
-        "web_page",
-        "team",
         "lot",
         "green-lot",
         "blue-lot",
-        "yellow-lot"
+        "yellow-lot",
+        "team",
+
+        "goal",
+        "milestone",
+        "problem",
+
+        "solution",
+        "product",
+        "service",
+
+        "member",
+        "customer",
+        "community",
+        // "advisor",   // TODO add
+
+        "task",
+        "project",
+        "action",
+        
+        "equity",
+        "costs",
+        "sales",
+
+        "agreement",
+        "decision",
+        // "document"   // TODO add
     };
     
     private Dictionary<string, int> entityCountPerType = new Dictionary<string, int>();
