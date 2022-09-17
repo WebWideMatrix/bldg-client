@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 160
+    direction: 20
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(17,10)
+    location: g/b(16,92)/l0/b(23,4)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(22,13)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      milestone bldg with name bit-project-montage and summary quickly montage the
+      bit work on the project with a nice music","say_time":637990146579891550}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       action bldg with name go-outside and summary just go outside","say_time":637990114218693200}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -68,8 +71,8 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 17
-    y: 10
+    x: 23
+    y: 4
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
   initialized: 0
