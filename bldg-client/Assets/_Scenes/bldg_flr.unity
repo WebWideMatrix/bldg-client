@@ -2965,7 +2965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 937.9082
+      value: 1159.3207
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3529,7 +3529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1469.2914
+      value: 1912.1163
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3549,7 +3549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1303.0815
+      value: 1745.9065
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258204677122, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3569,7 +3569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1161.3665
+      value: 1604.1914
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258653393076, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3589,7 +3589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 920.5764
+      value: 1363.4014
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258991830574, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4738,7 +4738,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9263421, y: 1}
+    m_SensorSize: {x: 2.790235, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5338,10 +5338,14 @@ MonoBehaviour:
     id: 0
     x: 0
     y: 0
+    bldg_url: 
     web_url: 
     summary: 
     is_composite: 0
     flr: 
+    flr_url: 
+    flr_level: 0
+    nesting_depth: 0
     entity_type: 
     name: 
     state: 
@@ -6305,10 +6309,14 @@ MonoBehaviour:
     id: 0
     x: 0
     y: 0
+    bldg_url: 
     web_url: 
     summary: 
     is_composite: 0
     flr: 
+    flr_url: 
+    flr_level: 0
+    nesting_depth: 0
     entity_type: 
     name: 
     state: 
@@ -6318,20 +6326,33 @@ MonoBehaviour:
     picture_url: 
     owners: []
     data: 
-  whiteboardBldg: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
-  presentationStandBldg: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
-  trafficSignBldg: {fileID: 7470651789751783693, guid: b93b1df134467463085645bf52f7e3b5, type: 3}
-  streetSignBldg: {fileID: 6582989488119007097, guid: 5d8bd93a290cb4c1eb2e8e7ed95b815b, type: 3}
-  chairBldg: {fileID: 1000011006089572, guid: 38c5e3d697adf88469bb91aa7f8b7b60, type: 3}
-  laptopBldg: {fileID: 0}
-  briefcaseBldg: {fileID: 0}
-  tabletBldg: {fileID: 0}
-  roundTableBldg: {fileID: 7850256460131175102, guid: dba623613785b4336918b52437f055f9, type: 3}
-  filingCabinetBldg: {fileID: 0}
+  whiteboard: {fileID: 3633249363041345782, guid: d4ea3b5d2e4664dc983e9f12354c4a90, type: 3}
+  presentationStand: {fileID: 2742541555221942242, guid: 4fe2c0625f67140faa9ff440101534c9, type: 3}
+  trafficSign: {fileID: 7470651789751783693, guid: b93b1df134467463085645bf52f7e3b5, type: 3}
+  streetSign: {fileID: 6582989488119007097, guid: 5d8bd93a290cb4c1eb2e8e7ed95b815b, type: 3}
+  greenLot: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
+  blueLot: {fileID: 2492593957530484147, guid: 798b16d319a8e4269bb879e3f5c7ff5c, type: 3}
+  yellowLot: {fileID: 8427195997855233162, guid: f95c43762484a4e199d99301a94a28f7, type: 3}
   buildingWithStorefront: {fileID: 4375624366157185526, guid: d5fc2e306ffc049f6a68e92b7d99c070, type: 3}
-  greenLotObject: {fileID: 6421017674819628770, guid: f775b104c3cfd4103a96f745b3948c76, type: 3}
-  blueLotObject: {fileID: 2492593957530484147, guid: 798b16d319a8e4269bb879e3f5c7ff5c, type: 3}
-  yellowLotObject: {fileID: 8427195997855233162, guid: f95c43762484a4e199d99301a94a28f7, type: 3}
+  coffeeTable: {fileID: 5400362928361810193, guid: df1ddecd765c641f5b7a7bdb55df9c6b, type: 3}
+  gardenRoundTable: {fileID: 7850256460131175102, guid: dba623613785b4336918b52437f055f9, type: 3}
+  livingRoomTable: {fileID: 1567094013339168276, guid: 0d4c95d5c842d43e192eda39840d1ac4, type: 3}
+  couch: {fileID: 1654687789410654844, guid: 4899621973ceb4537b3582ec6eabb2c1, type: 3}
+  sofa: {fileID: 5354061150783387622, guid: bae2814626f4d4f6f98a6b6189c9c33a, type: 3}
+  fancyChair: {fileID: 9204173392691062944, guid: 932127435f11841eb8efd25f5ce12b0a, type: 3}
+  coffeeTableChair: {fileID: 4142336423394004859, guid: f3631ec1f816d424086cfdd8d693e9c1, type: 3}
+  standingLight: {fileID: 7731149380681873967, guid: 92fbd3fcc4a2a48889bf4ecbabb49686, type: 3}
+  candle: {fileID: 706965953574537989, guid: d67bcd176af9c47e8b67baaafbf60571, type: 3}
+  fireplace: {fileID: 3124279497323299432, guid: 4927ef6df389b4068918ac389148cdc3, type: 3}
+  pottedPlant: {fileID: 1195497649831968120, guid: 9c85314af0bb842f58d5783dca77c773, type: 3}
+  tree: {fileID: 6353946750597795034, guid: 477f2f8dbbf9b484a93b4ca9d4d4dda1, type: 3}
+  largePottedPlant: {fileID: 3255406378158320473, guid: 96e0ef6559aa24c27a3fe18012f753ea, type: 3}
+  tableWithDrawers: {fileID: 2796400786370918979, guid: 0d50c905317854c0e8e273ec2f231fa6, type: 3}
+  chestOfDrawers: {fileID: 4147320365329870983, guid: fe0e8ecaa833d428b940d30e60628ccb, type: 3}
+  bookCabinet: {fileID: 7114112540544426744, guid: 6bb9393f806c6490f97e90a6fb6424b6, type: 3}
+  owlSculpture: {fileID: 3510999101317090465, guid: cdc9211c9d0e143e691e3f0d9e019c2b, type: 3}
+  headSculpture: {fileID: 7558311701551329944, guid: ab02bb20706f5470a9f06ef8205a60a1, type: 3}
+  tv: {fileID: 2524673726521139321, guid: e1f61316cca4cdd41bc496dfcc71cad8, type: 3}
 --- !u!4 &2138089339
 Transform:
   m_ObjectHideFlags: 0

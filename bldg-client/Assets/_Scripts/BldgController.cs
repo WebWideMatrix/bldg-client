@@ -39,25 +39,42 @@ public class BldgController : MonoBehaviour
 	
 
     // SHAPES
-    // TODO: change to array
-	public GameObject whiteboardBldg;
-	public GameObject presentationStandBldg;
-	public GameObject trafficSignBldg;
-	public GameObject streetSignBldg;
-	
-	public GameObject chairBldg;
-	public GameObject laptopBldg;
-	public GameObject briefcaseBldg;
-	public GameObject tabletBldg;
-	public GameObject roundTableBldg;
-	public GameObject filingCabinetBldg;
+	[Header("Bldg Templates")]
+    // TODO: change to list
+	public GameObject whiteboard;
+	public GameObject presentationStand;
+	public GameObject trafficSign;
+	public GameObject streetSign;	
+	public GameObject greenLot;
+	public GameObject blueLot;
+	public GameObject yellowLot;
 	public GameObject buildingWithStorefront;
-
-	public GameObject greenLotObject;
-	public GameObject blueLotObject;
-	public GameObject yellowLotObject;
-
-
+	// ----
+	public GameObject coffeeTable;
+	public GameObject gardenRoundTable;
+	public GameObject livingRoomTable;
+	// -----
+	public GameObject couch;
+	public GameObject sofa;
+	public GameObject fancyChair;
+	public GameObject coffeeTableChair;
+	// -----
+	public GameObject standingLight;
+	public GameObject candle;
+	public GameObject fireplace;
+	// -----
+	public GameObject pottedPlant;
+	public GameObject tree;
+	public GameObject largePottedPlant;
+	// -----
+	public GameObject tableWithDrawers;
+	public GameObject chestOfDrawers;
+	public GameObject bookCabinet;
+	// -----
+	public GameObject owlSculpture;
+	public GameObject headSculpture;
+	// -----
+	public GameObject tv;
 
 
 	bool isRelocating = false;
@@ -122,33 +139,68 @@ public class BldgController : MonoBehaviour
 		
 		switch (entity_type) {
 			case "purpose":
-				return whiteboardBldg;
+				return whiteboard;
 			case "cantata":
-				return presentationStandBldg;
+				return presentationStand;
 			case "neighborhood":
-				return trafficSignBldg;
+				return trafficSign;
 			case "street":
-				return streetSignBldg;
-			case "member":
-				return laptopBldg;
-			case "milestone":
-				return briefcaseBldg;
-			case "task":
-				return roundTableBldg;
-			case "web_page":
-				return tabletBldg;
+				return streetSign;
+			case "lot":
+				return greenLot;
+			case "green-lot":
+				return greenLot;
+			case "blue-lot":
+				return blueLot;
+			case "yellow-lot":
+				return yellowLot;
 			case "team":
 				return buildingWithStorefront;
-			case "lot":
-				return greenLotObject;
-			case "green-lot":
-				return greenLotObject;
-			case "blue-lot":
-				return blueLotObject;
-			case "yellow-lot":
-				return yellowLotObject;
+			// ----
+			case "goal":
+				return coffeeTable;
+			case "milestone":
+				return gardenRoundTable;
+			case "problem":
+				return livingRoomTable;
+			// ----
+			case "solution":
+				return couch;
+			case "product":
+				return sofa;
+			case "service":
+				return fancyChair;
+			case "capability":
+				return coffeeTableChair;
+			// ----
+			case "member":
+				return standingLight;
+			case "customer":
+				return candle;
+			case "community":
+				return fireplace;
+			// ----
+			case "task":
+				return pottedPlant;
+			case "project":
+				return tree;
+			case "action":
+				return largePottedPlant;
+			// ----
+			case "equity":
+				return tableWithDrawers;
+			case "costs":
+				return chestOfDrawers;
+			case "sales":
+				return bookCabinet;
+			// ----
+			case "agreement":
+				return owlSculpture;
+			case "decision":
+				return headSculpture;
+			// ----
 			default:
-				return chairBldg;
+				return tv;
 		}
 	}
 
@@ -546,12 +598,14 @@ public class BldgController : MonoBehaviour
 					GameObject prefab = getPrefabByEntityClass(b.entity_type);
 					GameObject bldgClone = null;
 					try {
+						Debug.Log("~~~~~~ Trying to instantiate " + b.name);
 						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
 						bldgClone.tag = "Building";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 						bldgObject.initialize(b, this);
 						renderModelData(bldgClone, b);
 					} catch (Exception e) {
+						Debug.Log("Failed to instantiate object: " + b.name);
 						Debug.LogError(e.ToString());
 					}
 					

@@ -1,0 +1,508 @@
+fileFormatVersion: 2
+guid: 8e960c26b52a2564791669ac0b42a691
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: floor
+    100004: walls
+    100006: glass
+    100008: glass001
+    100010: glass002
+    100012: glass003
+    100014: glass004
+    100016: glass005
+    100018: glass006
+    100020: glass007
+    100022: Window
+    100024: window
+    100026: Window001
+    100028: window001
+    100030: Window002
+    100032: window002
+    100034: Window003
+    100036: window003
+    100038: Window004
+    100040: window004
+    100042: Window005
+    100044: window005
+    100046: Window006
+    100048: window006
+    100050: Window007
+    100052: window007
+    100054: decor
+    100056: decor001
+    100058: decor002
+    100060: decor003
+    100062: decor004
+    100064: decor005
+    100066: glass008
+    100068: Window008
+    100070: window008
+    100072: decor006
+    100074: decor007
+    100076: decor008
+    100078: decor009
+    100080: decor012
+    100082: decor013
+    100084: Object003
+    100086: Object004
+    100088: decor014
+    100090: decor015
+    100092: decor016
+    100094: decor017
+    100096: decor018
+    100098: glass009
+    100100: glass010
+    100102: Window009
+    100104: window009
+    100106: Window010
+    100108: window010
+    100110: Object005
+    100112: Object006
+    100114: decor019
+    100116: decor020
+    100118: decor022
+    100120: decor024
+    100122: decor025
+    100124: decor026
+    100126: decor027
+    100128: Object007
+    100130: Object008
+    100132: Object009
+    100134: Object010
+    100136: Object011
+    100138: Object012
+    100140: Object013
+    100142: Object014
+    100144: ceiling
+    100146: glass 1
+    100148: glass 2
+    100150: glass 3
+    100152: glass 4
+    100154: glass 5
+    100156: glass 6
+    100158: glass 7
+    100160: Cover
+    100162: Sky001
+    400000: //RootNode
+    400002: floor
+    400004: walls
+    400006: glass
+    400008: glass001
+    400010: glass002
+    400012: glass003
+    400014: glass004
+    400016: glass005
+    400018: glass006
+    400020: glass007
+    400022: Window
+    400024: window
+    400026: Window001
+    400028: window001
+    400030: Window002
+    400032: window002
+    400034: Window003
+    400036: window003
+    400038: Window004
+    400040: window004
+    400042: Window005
+    400044: window005
+    400046: Window006
+    400048: window006
+    400050: Window007
+    400052: window007
+    400054: decor
+    400056: decor001
+    400058: decor002
+    400060: decor003
+    400062: decor004
+    400064: decor005
+    400066: glass008
+    400068: Window008
+    400070: window008
+    400072: decor006
+    400074: decor007
+    400076: decor008
+    400078: decor009
+    400080: decor012
+    400082: decor013
+    400084: Object003
+    400086: Object004
+    400088: decor014
+    400090: decor015
+    400092: decor016
+    400094: decor017
+    400096: decor018
+    400098: glass009
+    400100: glass010
+    400102: Window009
+    400104: window009
+    400106: Window010
+    400108: window010
+    400110: Object005
+    400112: Object006
+    400114: decor019
+    400116: decor020
+    400118: decor022
+    400120: decor024
+    400122: decor025
+    400124: decor026
+    400126: decor027
+    400128: Object007
+    400130: Object008
+    400132: Object009
+    400134: Object010
+    400136: Object011
+    400138: Object012
+    400140: Object013
+    400142: Object014
+    400144: ceiling
+    400146: glass 1
+    400148: glass 2
+    400150: glass 3
+    400152: glass 4
+    400154: glass 5
+    400156: glass 6
+    400158: glass 7
+    400160: Cover
+    400162: Sky001
+    2300000: //RootNode
+    2300002: floor
+    2300004: walls
+    2300006: glass
+    2300008: glass001
+    2300010: glass002
+    2300012: glass003
+    2300014: glass004
+    2300016: glass005
+    2300018: glass006
+    2300020: glass007
+    2300022: window
+    2300024: window001
+    2300026: window002
+    2300028: window003
+    2300030: window004
+    2300032: window005
+    2300034: window006
+    2300036: window007
+    2300038: decor
+    2300040: decor001
+    2300042: decor002
+    2300044: decor003
+    2300046: decor004
+    2300048: decor005
+    2300050: glass008
+    2300052: window008
+    2300054: decor006
+    2300056: decor007
+    2300058: decor008
+    2300060: decor009
+    2300062: decor012
+    2300064: decor013
+    2300066: Object003
+    2300068: Object004
+    2300070: decor014
+    2300072: decor015
+    2300074: decor016
+    2300076: decor017
+    2300078: decor018
+    2300080: glass009
+    2300082: glass010
+    2300084: window009
+    2300086: window010
+    2300088: Object005
+    2300090: Object006
+    2300092: decor019
+    2300094: decor020
+    2300096: decor022
+    2300098: decor024
+    2300100: decor025
+    2300102: decor026
+    2300104: decor027
+    2300106: Object007
+    2300108: Object008
+    2300110: Object009
+    2300112: Object010
+    2300114: Object011
+    2300116: Object012
+    2300118: Object013
+    2300120: Object014
+    2300122: ceiling
+    2300124: glass 1
+    2300126: glass 2
+    2300128: glass 3
+    2300130: glass 4
+    2300132: glass 5
+    2300134: glass 6
+    2300136: glass 7
+    2300138: Cover
+    3300000: //RootNode
+    3300002: floor
+    3300004: walls
+    3300006: glass
+    3300008: glass001
+    3300010: glass002
+    3300012: glass003
+    3300014: glass004
+    3300016: glass005
+    3300018: glass006
+    3300020: glass007
+    3300022: window
+    3300024: window001
+    3300026: window002
+    3300028: window003
+    3300030: window004
+    3300032: window005
+    3300034: window006
+    3300036: window007
+    3300038: decor
+    3300040: decor001
+    3300042: decor002
+    3300044: decor003
+    3300046: decor004
+    3300048: decor005
+    3300050: glass008
+    3300052: window008
+    3300054: decor006
+    3300056: decor007
+    3300058: decor008
+    3300060: decor009
+    3300062: decor012
+    3300064: decor013
+    3300066: Object003
+    3300068: Object004
+    3300070: decor014
+    3300072: decor015
+    3300074: decor016
+    3300076: decor017
+    3300078: decor018
+    3300080: glass009
+    3300082: glass010
+    3300084: window009
+    3300086: window010
+    3300088: Object005
+    3300090: Object006
+    3300092: decor019
+    3300094: decor020
+    3300096: decor022
+    3300098: decor024
+    3300100: decor025
+    3300102: decor026
+    3300104: decor027
+    3300106: Object007
+    3300108: Object008
+    3300110: Object009
+    3300112: Object010
+    3300114: Object011
+    3300116: Object012
+    3300118: Object013
+    3300120: Object014
+    3300122: ceiling
+    3300124: glass 1
+    3300126: glass 2
+    3300128: glass 3
+    3300130: glass 4
+    3300132: glass 5
+    3300134: glass 6
+    3300136: glass 7
+    3300138: Cover
+    4300000: Plane002
+    4300002: walls
+    4300004: floor
+    4300006: glass
+    4300008: window
+    4300010: glass001
+    4300012: window001
+    4300014: glass002
+    4300016: window002
+    4300018: glass003
+    4300020: window003
+    4300022: window004
+    4300024: glass004
+    4300026: glass005
+    4300028: window005
+    4300030: glass006
+    4300032: window006
+    4300034: glass007
+    4300036: window007
+    4300038: decor
+    4300040: decor001
+    4300042: decor002
+    4300044: decor003
+    4300046: decor004
+    4300048: window008
+    4300050: glass008
+    4300052: decor005
+    4300054: decor006
+    4300056: decor007
+    4300058: decor008
+    4300060: decor009
+    4300062: decor012
+    4300064: Object003
+    4300066: Object004
+    4300068: decor013
+    4300070: window009
+    4300072: glass009
+    4300074: window010
+    4300076: glass010
+    4300078: decor014
+    4300080: decor015
+    4300082: decor016
+    4300084: decor017
+    4300086: decor018
+    4300088: Object005
+    4300090: Object006
+    4300092: Object007
+    4300094: decor019
+    4300096: Object008
+    4300098: decor020
+    4300100: Object009
+    4300102: Object010
+    4300104: decor022
+    4300106: Object011
+    4300108: decor024
+    4300110: Object012
+    4300112: decor025
+    4300114: decor026
+    4300116: decor027
+    4300118: Object013
+    4300120: Object014
+    4300122: ceiling
+    4300124: glass
+    4300126: glass
+    4300128: glass
+    4300130: glass
+    4300132: glass
+    4300134: glass
+    4300136: glass
+    4300138: Cover
+    6400000: decor004
+    6400002: decor005
+    6400004: decor008
+    6400006: decor012
+    6400008: decor013
+    6400010: decor014
+    6400012: decor015
+    6400014: decor016
+    6400016: decor017
+    6400018: decor018
+    6400020: floor
+    6400022: glass
+    6400024: glass004
+    6400026: glass005
+    6400028: glass006
+    6400030: glass007
+    6400032: glass008
+    6400034: glass009
+    6400036: glass010
+    6400038: Object003
+    6400040: Object004
+    6400042: Object005
+    6400044: Object006
+    6400046: walls
+    6400048: window
+    6400050: window004
+    6400052: window005
+    6400054: window006
+    6400056: window007
+    6400058: window008
+    6400060: window009
+    6400062: window010
+    6400064: ceiling
+    6400066: Cover
+    6400068: decor
+    6400070: glass 1
+    6400072: glass 2
+    6400074: glass 3
+    6400076: glass 4
+    6400078: glass 5
+    6400080: glass 6
+    6400082: glass 7
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
