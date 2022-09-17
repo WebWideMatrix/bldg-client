@@ -32,6 +32,7 @@ public class CurrentMetadata : ScriptableObjectSingleton<CurrentMetadata>
         "solution",
         "product",
         "service",
+        "capability",
 
         "member",
         "customer",
