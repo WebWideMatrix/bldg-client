@@ -2082,7 +2082,7 @@ MonoBehaviour:
   gardenRoundTable: {fileID: 7850256460131175102, guid: dba623613785b4336918b52437f055f9, type: 3}
   livingRoomTable: {fileID: 1567094013339168276, guid: 0d4c95d5c842d43e192eda39840d1ac4, type: 3}
   couch: {fileID: 1654687789410654844, guid: 4899621973ceb4537b3582ec6eabb2c1, type: 3}
-  sofa: {fileID: 0}
+  sofa: {fileID: 5354061150783387622, guid: bae2814626f4d4f6f98a6b6189c9c33a, type: 3}
   fancyChair: {fileID: 0}
   drawerStandingLight: {fileID: 0}
   candle: {fileID: 0}
@@ -5190,7 +5190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 937.2328
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6380931285633616727, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5746,7 +5746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381518313206873029, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00012207031
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5762,7 +5762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1467.9406
+      value: 1467.9407
       objectReference: {fileID: 0}
     - target: {fileID: 6381520258049565530, guid: 6d57488068ac04c3687339da22ce7788, type: 3}
       propertyPath: m_AnchoredPosition.y
