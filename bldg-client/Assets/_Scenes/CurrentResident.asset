@@ -14,15 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 100
+    direction: 140
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(12,21)
+    location: g/b(16,92)/l0/b(-19,11)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,0)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg fromteal-community here","say_time":637990273652616910}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(1,6)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg fromteal-community here","say_time":637990273288124760}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      community bldg with name fromteal-community and summary fromteal community","say_time":637990272923394420}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(17,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       member bldg with name ef and summary eddie fidler","say_time":637990264637785530}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
@@ -104,11 +110,11 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 12
-    y: 21
+    x: -19
+    y: 11
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
-  initialized: 1
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
