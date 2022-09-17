@@ -14,15 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 20
+    direction: 200
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(23,4)
+    location: g/b(16,92)/l0/b(10,18)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg some-solution here","say_time":637990199704999800}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(11,18)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      solution bldg with name some-solution and summary a clever solution to the
+      problem","say_time":637990199306932110}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(14,27)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      problem bldg with name artificial-hierarchy and summary people shouldn''t own
+      other people","say_time":637990153652362960}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(23,4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg bit-project-montage here","say_time":637990148266968890}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(22,13)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       milestone bldg with name bit-project-montage and summary quickly montage the
       bit work on the project with a nice music","say_time":637990146579891550}'
@@ -71,8 +81,8 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 23
-    y: 4
+    x: 10
+    y: 18
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
   initialized: 0
