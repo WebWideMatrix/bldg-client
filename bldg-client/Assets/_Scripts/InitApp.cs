@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using TMPro;
 using Michsky.UI.Shift;
 using Models;
+using ImageUtils;
+
 
 public class InitApp : MonoBehaviour
 {
