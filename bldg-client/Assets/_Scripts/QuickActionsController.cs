@@ -66,7 +66,6 @@ public class QuickActionsController : MonoBehaviour
                 showMoveForm();
                 break; 
             case "Connect":
-                // TODO support Connect command
                 showConnectForm();
                 break; 
             case "Update":
@@ -74,12 +73,16 @@ public class QuickActionsController : MonoBehaviour
                 showUpdateForm();
                 break;
             case "Add Owner":
-                // TODO support update command
                 showAddOwnerForm();
                 break;
             case "Remove Owner":
-                // TODO support update command
                 showRemoveOwnerForm();
+                break;
+            case "Promote":
+                showPromoteForm();
+                break;
+            case "Demote":
+                showDemoteForm();
                 break;
 
             default: 
@@ -159,6 +162,20 @@ public class QuickActionsController : MonoBehaviour
                     command = generateRemoveOwnerCommand(commandData);
                 }
                 break;
+
+            case "Promote":
+                error = validatePromoteForm(commandData);
+                if (error == "") {
+                    command = generatePromoteCommand(commandData);
+                }
+                break;
+            case "Demote":
+                error = validateDemoteForm(commandData);
+                if (error == "") {
+                    command = generateDemoteCommand(commandData);
+                }
+                break;
+
 
             default: 
                 throw new Exception("Unknown command: " + action);
@@ -249,7 +266,24 @@ public class QuickActionsController : MonoBehaviour
         return error;
     }
 
-    
+    string validatePromoteForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityName"] == "" ) {
+            error = "Please select an entity";
+        }
+        return error;
+    }
+
+
+    string validateDemoteForm(Dictionary<string, string> commandData) {
+        string error = "";
+        if (commandData["entityName"] == "" ) {
+            error = "Please select an entity";
+        }
+        return error;
+    }
+
+
     //
     // GENERATE COMMANDS
     //
@@ -340,7 +374,32 @@ public class QuickActionsController : MonoBehaviour
         return command;
     }
 
+    string generatePromoteCommand(Dictionary<string, string> data) {
+        string command = "/promote bldg";
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
+        } else {
+            // TODO required field validation
+        }
+        command += " inside";
 
+        command = command.ToLower();
+        return command;
+    }
+
+
+    string generateDemoteCommand(Dictionary<string, string> data) {
+        string command = "/demote bldg";
+        if (data["entityName"] != "") {
+            command += " " + data["entityName"];
+        } else {
+            // TODO required field validation
+        }
+        command += " inside";
+
+        command = command.ToLower();
+        return command;
+    }
 
 
     //
@@ -448,6 +507,44 @@ public class QuickActionsController : MonoBehaviour
         pictureInput.transform.parent.gameObject.SetActive(false);
         entityNameDropdown2.transform.parent.gameObject.SetActive(false);
     }
+
+    void showPromoteForm() {
+        // TODO use arrays
+
+        // show controls
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
+
+        informationText.text = "Choose an entity to promote on the wall, infront of where you are.";
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
+        ownerInput.transform.parent.gameObject.SetActive(false);
+    }
+
+
+    void showDemoteForm() {
+        // TODO use arrays
+
+        // show controls
+        entityNameDropdown1.transform.parent.gameObject.SetActive(true);
+
+        informationText.text = "Choose a promoted entity to be removed from the wall.";
+
+        // hide rest
+        entityInput.transform.parent.gameObject.SetActive(false);
+        nameInput.transform.parent.gameObject.SetActive(false);
+        websiteInput.transform.parent.gameObject.SetActive(false);
+        summaryInput.transform.parent.gameObject.SetActive(false);
+        pictureInput.transform.parent.gameObject.SetActive(false);
+        entityNameDropdown2.transform.parent.gameObject.SetActive(false);
+        ownerInput.transform.parent.gameObject.SetActive(false);
+    }
+
 
     void showEmptyForm() {
         // TODO use arrays
