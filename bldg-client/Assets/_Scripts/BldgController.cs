@@ -515,12 +515,17 @@ public class BldgController : MonoBehaviour
 		}
 		
 		try {
-			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>();
-			foreach (ImageController imgDisplay in imageDisplays) {				
-				if (data_attributes.ContainsKey(imgDisplay.imageName))
+			Debug.Log("~~~~~~~~~~~ got the followng data attributes: ");
+			foreach (string key in data_attributes.Keys) { Debug.Log("~~~~~~ " + key); };
+			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>(true);
+			foreach (ImageController imgDisplay in imageDisplays) {
+				Debug.Log("~~~~~~~~~~~~~ checking imageName " + imgDisplay.imageName);				
+				if (data_attributes.ContainsKey(imgDisplay.imageName)) {
+					imgDisplay.gameObject.SetActive(true);
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
-				else
-					imgDisplay.SetImageURL(data.picture_url);
+				} else
+					if (imgDisplay.gameObject.active) 
+						imgDisplay.SetImageURL(data.picture_url);
 			}
 		} catch (Exception e) {
 			Debug.Log("Failed to render images: " + e.ToString());
@@ -598,7 +603,6 @@ public class BldgController : MonoBehaviour
 					GameObject prefab = getPrefabByEntityClass(b.entity_type);
 					GameObject bldgClone = null;
 					try {
-						Debug.Log("~~~~~~ Trying to instantiate " + b.name);
 						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
 						bldgClone.tag = "Building";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
@@ -790,7 +794,7 @@ public class BldgController : MonoBehaviour
 	}
 	
 
-	void reloadContainerBldg() {
+	public void reloadContainerBldg() {
 		// Debug.Log("~~~~~ Reloading container bldg");
 
 		// check whether the container bldg already has a model object
@@ -800,8 +804,9 @@ public class BldgController : MonoBehaviour
 		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
-		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
+		// if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
 
+		// Debug.Log("~~~~~~~~~~~ moving on with reload container bldg...");
 		// if not: load the data of the container bldg
 		// remove floor from address
 		string address = removeFlrFromAddress(currentAddress);
@@ -817,7 +822,7 @@ public class BldgController : MonoBehaviour
 			bldgObj.model = res.data;
 			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
-			// Debug.Log("~~~~ Rendered bldg data");
+			// Debug.Log("~~~~ Done rendering container bldg data.");
 		}).Catch(err => {
 			Debug.Log(err.Message);
 			Debug.Log("Failed to load container bldg model: " + address);
