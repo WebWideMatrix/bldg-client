@@ -794,18 +794,19 @@ public class BldgController : MonoBehaviour
 	}
 	
 
-	void reloadContainerBldg() {
+	public void reloadContainerBldg() {
 		Debug.Log("~~~~~ Reloading container bldg");
 
 		// check whether the container bldg already has a model object
-		// Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
+		Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
 		GameObject container = getContainerBldg();
-		// Debug.Log("~~~~~ and container bldg is: " + container);
+		Debug.Log("~~~~~ and container bldg is: " + container);
 		
 		if (container == null) return;
 		BldgObject bldgObj = container.GetComponent<BldgObject>();
-		if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
+		// if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
 
+		Debug.Log("~~~~~~~~~~~ moving on with reload container bldg...");
 		// if not: load the data of the container bldg
 		// remove floor from address
 		string address = removeFlrFromAddress(currentAddress);
@@ -814,7 +815,7 @@ public class BldgController : MonoBehaviour
 		// invoke the get bldg API
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.bldgsBasePath + "/" + encodedAddress;
-		// Debug.Log("~~~~ Loading container bldg model from: " + url);
+		Debug.Log("~~~~ Loading container bldg model from: " + url);
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{

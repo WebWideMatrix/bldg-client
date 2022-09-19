@@ -37,6 +37,7 @@ public class InitApp : MonoBehaviour
     private UnityAction onWalking;
     private UnityAction onLogin;
     private UnityAction onQuickActions;
+    private UnityAction onPromoteOrDemote;
 	
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
@@ -112,10 +113,12 @@ public class InitApp : MonoBehaviour
         onWalking = new UnityAction(OnWalking);
         onLogin = new UnityAction(OnLogin);
         onQuickActions = new UnityAction(OnQuickActions);
+        onPromoteOrDemote = new UnityAction(OnPromoteOrDemote);
         EventManager.Instance.StartListening("SwitchToFlying", onFlying);
         EventManager.Instance.StartListening("SwitchToWalking", onWalking);
         EventManager.Instance.StartListening("LoginSuccessful", onLogin);
         EventManager.Instance.StartListening("OpenQuickActions", onQuickActions);
+        EventManager.Instance.StartListening("PromoteOrDemote", onPromoteOrDemote);
     }
 
 
@@ -174,6 +177,10 @@ public class InitApp : MonoBehaviour
 
     private void OnQuickActions() {
         quickActionsDialog.ModalWindowIn();
+    }
+
+    private void OnPromoteOrDemote() {
+        bldgController.reloadContainerBldg();
     }
 
     public static void startWalking()
