@@ -14,15 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 140
+    direction: 280
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(4,21)
+    location: g/b(16,92)/l0/b(75,-4)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(30,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
+      bldg miami-look-and-feel inside","say_time":637992180385016660}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(30,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
+      bldg ftpurpose inside","say_time":637992167622180620}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(63,-19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992167416001650}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(26,-12)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992167237344570}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-14,-24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992164890486500}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-57,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992158807261570}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-57,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992156659311350}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(68,-20)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992140733184370}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-3,-22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992130681250320}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,6)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      milestone bldg with name miami-look-and-feel and picture https://i.imgur.com/s0p6oyp.jpg
+      and summary miami look & feel","say_time":637992130112536250}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(89,-4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
       bldg graffiti-goal inside","say_time":637991404784404710}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(89,-8)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
@@ -257,11 +278,11 @@ MonoBehaviour:
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
     session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 4
-    y: 21
+    x: 75
+    y: -4
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
-  initialized: 1
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
