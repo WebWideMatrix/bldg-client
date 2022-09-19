@@ -41,7 +41,7 @@ public class ChatUIController2 : MonoBehaviour {
 
     // making this public to allow other controllers to generate & send chat messages
     public void HandleNewMessage(string text) {
-        Debug.Log("~~~~~~~~~~~~ HandleNewMessage: " + text);
+        // Debug.Log("~~~~~~~~~~~~ HandleNewMessage: " + text);
         SayAction act = CreateChatMessage(text);
         AddToChatOutput(act); 
         SendChatMessage(act);
@@ -78,7 +78,7 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     void SendChatMessage(SayAction act) {
-        Debug.Log("~~~~~~~~~~~~~~~ SendChatMessage for " + act.say_text);
+        // Debug.Log("~~~~~~~~~~~~~~~ SendChatMessage for " + act.say_text);
         // TODO extract recipient
         CurrentResidentController crc = CurrentResidentController.Instance;
         // Debug.Log("Found a rsdt controller");
