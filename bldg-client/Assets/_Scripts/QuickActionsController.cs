@@ -296,11 +296,11 @@ public class QuickActionsController : MonoBehaviour
         if (data["website"] != "") {
             command += " and website " + data["website"];
         }
-        if (data["summary"] != "") {
-            command += " and summary " + data["summary"];
-        }
         if (data["picture"] != "") {
             command += " and picture " + data["picture"];
+        }
+        if (data["summary"] != "") {
+            command += " and summary " + data["summary"];
         }
 
         command = command.ToLower();
