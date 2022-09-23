@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 public class CurrentResidentController : ScriptableObjectSingleton<CurrentResidentController>
 {    
     public Resident resident;
-    public string containerEntityType;
 
     public bool initialized = false;
     public DateTime lastLoginTime = DateTime.Today.AddYears(-1);
@@ -25,10 +24,9 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
     DateTime lastActionTime;
 
 
-    public void initialize(Resident model, string _containerEntityType) {
+    public void initialize(Resident model) {
         Debug.Log("CRC initialized with " + model.alias);
         resident = model;
-        containerEntityType = _containerEntityType;
         Debug.Log("Initializing resident " + resident.alias + " at " + resident.location);
         initialized = true;
         lastLoginTime = DateTime.Now;
@@ -53,11 +51,6 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
     {
         hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
-    
-    public void setContainerEntityType(string entityType) {
-        containerEntityType = entityType;
-    }
-
 
     public void SendTurnAction(TurnAction action) {
         // call the act API
@@ -122,6 +115,7 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
             resident.nesting_depth = actionResponse.data.nesting_depth;
+            resident.container_entity_type = actionResponse.data.container_entity_type;
             
             EventManager.Instance.TriggerEvent("EnterBldgDone");
 
@@ -152,6 +146,8 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
             resident.nesting_depth = actionResponse.data.nesting_depth;
+            resident.container_entity_type = actionResponse.data.container_entity_type;
+
             EventManager.Instance.TriggerEvent("ExitBldgDone");
 
             // TODO cleanup ~~~~

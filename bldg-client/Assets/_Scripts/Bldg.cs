@@ -91,6 +91,7 @@ namespace Models
 		public int y;
 		public string flr;
 		public string flr_url;
+		public string container_entity_type;
 	}
 
 	[Serializable]

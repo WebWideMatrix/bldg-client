@@ -486,7 +486,6 @@ public class BldgController : MonoBehaviour
 
 	void switchAddress(string address) {
 		if (address.ToLower() != "g") {
-			// IMPORTANT: reloadContainerBldg must be called before reloadBuildings
 			reloadContainerBldg();
 			updateFloorSign ();
 		}
@@ -581,8 +580,8 @@ public class BldgController : MonoBehaviour
 		float base_height = 0F;
 		float flr_height = base_height;
 		string curr_flr = AddressUtils.extractFlr(address);
-		if (crc.containerEntityType != "g") {
-			flr_height = FLOOR_HEIGHTS[crc.containerEntityType][curr_flr] * aliceFactor;
+		if (crc.resident.container_entity_type != "g") {
+			flr_height = FLOOR_HEIGHTS[crc.resident.container_entity_type][curr_flr] * aliceFactor;
 		}
 		float height = flr_height;
 
@@ -860,7 +859,6 @@ public class BldgController : MonoBehaviour
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
-			crc.setContainerEntityType(res.data.entity_type);
 			bldgObj.model = res.data;
 			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
