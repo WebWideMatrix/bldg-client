@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using TMPro;
 using Michsky.UI.Shift;
 using Models;
+using Utils;
 using ImageUtils;
 
 
@@ -64,9 +65,8 @@ public class InitApp : MonoBehaviour
         Quaternion qrt = Quaternion.identity;
         qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
         currentResidentObject = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
-        if (rsdt.nesting_depth > 0) {
-            float aliceFactor = (float)(1.0f / Math.Pow(10.0f, rsdt.nesting_depth));
-            Debug.Log("~~~~~~~~~~~ Alice factor is: " + aliceFactor);
+        float aliceFactor = AddressUtils.calcAliceFactor(rsdt.nesting_depth);
+        if (aliceFactor != 1) {
             Vector3 currScale = currentResidentObject.transform.localScale ;
             currentResidentObject.transform.localScale = currScale * aliceFactor;
         }
@@ -75,6 +75,8 @@ public class InitApp : MonoBehaviour
         walkCamera.LookAt = currentResidentObject.transform;
         flyCamera.Follow = currentResidentObject.transform;
         flyCamera.LookAt = currentResidentObject.transform;
+        // TODO change cameras distance & screen size based on Alice Factor
+
         ResidentController rsdtObject = currentResidentObject.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
 

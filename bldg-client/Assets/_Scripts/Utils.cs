@@ -127,7 +127,15 @@ namespace Utils {
 			return string.Join (DELIM, parts);
 		}
 
-
+		public static float calcAliceFactor(int nesting_depth) {
+			float aliceFactor = 1.0f;
+			if (nesting_depth > 0) nesting_depth -= 1;
+			if (nesting_depth > 0) {
+				aliceFactor = (float)(1.0f / Math.Pow(10.0f, nesting_depth));
+				Debug.Log("~~~~~~~~~~~ Alice factor is: " + aliceFactor);
+			}
+			return aliceFactor;
+		}
 
 	}
 

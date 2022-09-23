@@ -414,8 +414,9 @@ public class BldgController : MonoBehaviour
 
 		currentFlr = AddressUtils.extractFlr(currentAddress);
 
-		CurrentMetadata cm = CurrentMetadata.Instance;
-		cm.clearEntities();
+		// TODO Cleanup ~~~~
+		//CurrentMetadata cm = CurrentMetadata.Instance;
+		//cm.clearEntities();
 
 		// TODO check whether it changed
 
@@ -542,6 +543,7 @@ public class BldgController : MonoBehaviour
 	void reloadBuildings(string address) {
 		CurrentMetadata cm = CurrentMetadata.Instance;
 		CurrentResidentController crc = CurrentResidentController.Instance;
+		float aliceFactor = AddressUtils.calcAliceFactor(crc.resident.nesting_depth);
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
@@ -604,6 +606,9 @@ public class BldgController : MonoBehaviour
 						bldgClone.tag = "Building";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 						bldgObject.initialize(b, this);
+						if (aliceFactor != 1.0f) {
+							bldgClone.transform.localScale = bldgClone.transform.localScale * aliceFactor;
+						}
 						renderModelData(bldgClone, b);
 					} catch (Exception e) {
 						Debug.Log("Failed to instantiate object: " + b.name);

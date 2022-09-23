@@ -20,9 +20,34 @@ MonoBehaviour:
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(15,34)
+    location: g/b(16,92)/l0/b(11,22)/l1/b(8,27)
     name: Udi Bauman
+    nesting_depth: 2
     previous_messages:
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l0","say_flr_url":"g/fromTeal/l0/apple-a-day/l0","say_location":"g/b(16,92)/l0/b(11,22)/l0/b(9,28)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg eat-more-apples here","say_time":637995430072058980}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l0","say_flr_url":"g/fromTeal/l0/apple-a-day/l0","say_location":"g/b(16,92)/l0/b(11,22)/l0/b(10,33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg eat-more-apples here","say_time":637995429871645550}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l0","say_flr_url":"g/fromTeal/l0/apple-a-day/l0","say_location":"g/b(16,92)/l0/b(11,22)/l0/b(9,28)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      action bldg with name eat-more-apples and summary eat more apples","say_time":637995429692816980}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l1","say_flr_url":"g/fromTeal/l0/apple-a-day/l1","say_location":"g/b(16,92)/l0/b(11,22)/l1/b(7,28)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg ocean-love here","say_time":637995429013177560}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l1","say_flr_url":"g/fromTeal/l0/apple-a-day/l1","say_location":"g/b(16,92)/l0/b(11,22)/l1/b(3,31)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      solution bldg with name ocean-love and summary ocean love apples","say_time":637995428770702150}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l0","say_flr_url":"g/fromTeal/l0/apple-a-day/l0","say_location":"g/b(16,92)/l0/b(11,22)/l0/b(7,37)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      goal bldg with name another-goal and summary another sub-goal","say_time":637995427638474100}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0/b(11,22)/l1","say_flr_url":"g/fromTeal/l0/apple-a-day/l1","say_location":"g/b(16,92)/l0/b(11,22)/l1/b(9,38)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      problem bldg with name apples-are-boring and summary apples are too boring","say_time":637995426685407860}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(87,-17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992251872718400}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(69,-26)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992251742884640}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(23,-27)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992251468362050}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-20,-23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg miami-look-and-feel inside","say_time":637992251277716120}'
+    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-64,-25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
+      bldg ftpurpose inside","say_time":637992251062811890}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(42,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
       bldg miami-look-and-feel inside","say_time":637992221494508410}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(70,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
@@ -283,12 +308,12 @@ MonoBehaviour:
       purpose bldg with name yellowpurp and summary a yellow purpose","say_time":637987018318420610}'
     - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
       purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
-    session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 15
-    y: 34
-    flr: g/b(16,92)/l0
-    flr_url: g/fromTeal/l0
-  initialized: 1
+    session_id: bbd8c17e-74c6-4293-8e79-c61bb1d35c5b
+    x: 8
+    y: 27
+    flr: g/b(16,92)/l0/b(11,22)/l1
+    flr_url: g/fromTeal/l0/apple-a-day/l1
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
