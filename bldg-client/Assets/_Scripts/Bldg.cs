@@ -83,6 +83,7 @@ namespace Models
 		public DateTime last_login_at;
 		public string location;
 		public string name;
+		public int nesting_depth;
 		public ResidentAttributes other_attributes;
 		public string[] previous_messages;
 		public string session_id;
