@@ -399,7 +399,7 @@ public class BldgController : MonoBehaviour
 	// }
 
 	public void SetAddress(string address) {
-		Debug.Log("SetAddress -> " + address);
+		Debug.Log("~~~~~~~~~~~~ SetAddress -> " + address);
 		currentAddress = address;
 		AddressChanged();
 	}
@@ -434,7 +434,7 @@ public class BldgController : MonoBehaviour
 	}
 
 	public void AddressChanged() {
-		Debug.Log ("Address changed to: " + currentAddress);
+		Debug.Log ("~~~~~~~~~~~ Address changed to: " + currentAddress);
 		// InputField input = GameObject.FindObjectOfType<InputField> ();
 		// if (input.text != currentAddress) {
 		// 	input.text = currentAddress;
@@ -475,7 +475,7 @@ public class BldgController : MonoBehaviour
 
 
 	public void Reload() {
-		Debug.Log("Reload invoked");
+		Debug.Log("~~~~~~~~~~~~~~ Reload invoked");
 		switchAddress (getCurrentAddressFromResident());
 		if (!isReloadingInLoop) {
 			Debug.Log("Starting reload loop");
@@ -485,10 +485,11 @@ public class BldgController : MonoBehaviour
 	}
 
 	void switchAddress(string address) {
-		if (address.ToLower() != "g") {
-			reloadContainerBldg();
-			updateFloorSign ();
-		}
+		Debug.Log("~~~~~~~~~~~~~~ switchAddress: " + address);
+		// if (address.ToLower() != "g") {
+		// 	reloadContainerBldg();
+		// 	updateFloorSign ();
+		// }
 
 		reloadBuildings(address);
 		reloadResidents(address);
@@ -577,6 +578,8 @@ public class BldgController : MonoBehaviour
 		CurrentResidentController crc = CurrentResidentController.Instance;
 		float aliceFactor = AddressUtils.calcAliceFactor(crc.resident.nesting_depth);
 
+		Debug.Log("~~~~~~~~~~~~~ reloading bldgs - alice factor is: " + aliceFactor);
+		Debug.Log("~~~~~~~~~~~~~ container type is: " + crc.resident.container_entity_type);
 		float base_height = 0F;
 		float flr_height = base_height;
 		string curr_flr = AddressUtils.extractFlr(address);
@@ -584,6 +587,8 @@ public class BldgController : MonoBehaviour
 			flr_height = FLOOR_HEIGHTS[crc.resident.container_entity_type][curr_flr] * aliceFactor;
 		}
 		float height = flr_height;
+		Debug.Log("~~~~~~~~~~~~~~ calculated height based on flr: " + height);
+
 
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
@@ -610,7 +615,7 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Bldg b in res) {
 					count += 1;
-					Debug.Log("processing bldg " + count + ": " + b.name);
+					// Debug.Log("~~~~~~~~~~~ processing bldg " + count + ": " + b.name);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
@@ -831,10 +836,22 @@ public class BldgController : MonoBehaviour
 		}
 		return address;
 	}
+
+	public void reloadContainerContainerFlr(string address) {
+		Debug.Log("~~~~~~~~~~~~~ reloading the container container flr for: " + address);
+		string container = AddressUtils.getContainingBldgAddress(address);
+		string containerContainerFlr = "g";
+		if (container != "g") {
+			containerContainerFlr = AddressUtils.getContainerFlr(container);
+		}
+		Debug.Log("~~~~~~~~~~~~~~~ The container container flr is: " + containerContainerFlr);
+		reloadBuildings(containerContainerFlr);		
+	}
 	
 
 	public void reloadContainerBldg() {
-		// Debug.Log("~~~~~ Reloading container bldg");
+		Debug.Log("~~~~~ Reloading container bldg");
+		bool containerIsntCreated = false;
 		CurrentResidentController crc = CurrentResidentController.Instance;
 
 		// check whether the container bldg already has a model object
@@ -842,8 +859,9 @@ public class BldgController : MonoBehaviour
 		GameObject container = getContainerBldg();
 		// Debug.Log("~~~~~ and container bldg is: " + container);
 		
-		if (container == null) return;
-		BldgObject bldgObj = container.GetComponent<BldgObject>();
+		if (container == null) {
+			containerIsntCreated = true;
+		}
 		// if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
 
 		// Debug.Log("~~~~~~~~~~~ moving on with reload container bldg...");
@@ -859,6 +877,20 @@ public class BldgController : MonoBehaviour
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
+			if (containerIsntCreated) {
+				// instantiate the container bldg
+
+				// size should be based on the container aliceFactor
+
+				// set the container bldg tag
+
+			}
+			if (container == null) {
+				throw new Exception("Couldn't create container bldg!");
+			}
+
+			BldgObject bldgObj = container.GetComponent<BldgObject>();
+
 			bldgObj.model = res.data;
 			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);

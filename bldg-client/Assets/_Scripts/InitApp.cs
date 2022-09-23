@@ -89,6 +89,10 @@ public class InitApp : MonoBehaviour
         bldgController.SetAddress(rsdt.flr);
     }
 
+    private void loadContainerContainerFlr(string address) {
+        bldgController.reloadContainerContainerFlr(address);
+    }
+
     private void setLabelsInUI(Resident rsdt) {
         residentName.text = rsdt.alias;
         residentName2.text = rsdt.alias;
@@ -166,11 +170,11 @@ public class InitApp : MonoBehaviour
             return;
         }
 
-        // if (loadBldgSceneIfNeeded()) return;
-
         initCurrentResidentUI(crc.resident);
 
+        Debug.Log("~~~~~~~~~~ loading bldgs");
         loadBldgs(crc.resident);
+        loadContainerContainerFlr(crc.resident.flr);
 
         setLabelsInUI(crc.resident);
     }
