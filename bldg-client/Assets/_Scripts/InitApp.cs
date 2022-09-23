@@ -38,10 +38,14 @@ public class InitApp : MonoBehaviour
     private UnityAction onLogin;
     private UnityAction onQuickActions;
     private UnityAction onPromoteOrDemote;
+    private UnityAction onEnterBldgDone;
+    private UnityAction onExitBldgDone;
 	
     // TODO move to shared constants/configuration file
 	public float floorStartX = -8f;
 	public float floorStartZ = -6f;
+
+    private GameObject currentResidentObject;
 
 
     private void startLoadingAnimation() {
@@ -59,17 +63,23 @@ public class InitApp : MonoBehaviour
         Debug.Log("Rendering current resident " + rsdt.alias + " at " + baseline.x + ", " + baseline.z);
         Quaternion qrt = Quaternion.identity;
         qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
-        GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+        currentResidentObject = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+        if (rsdt.nesting_depth > 0) {
+            float aliceFactor = (float)(1.0f / Math.Pow(10.0f, rsdt.nesting_depth));
+            Debug.Log("~~~~~~~~~~~ Alice factor is: " + aliceFactor);
+            Vector3 currScale = currentResidentObject.transform.localScale ;
+            currentResidentObject.transform.localScale = currScale * aliceFactor;
+        }
 
-        walkCamera.Follow = rsdtClone.transform;
-        walkCamera.LookAt = rsdtClone.transform;
-        flyCamera.Follow = rsdtClone.transform;
-        flyCamera.LookAt = rsdtClone.transform;
-        ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+        walkCamera.Follow = currentResidentObject.transform;
+        walkCamera.LookAt = currentResidentObject.transform;
+        flyCamera.Follow = currentResidentObject.transform;
+        flyCamera.LookAt = currentResidentObject.transform;
+        ResidentController rsdtObject = currentResidentObject.AddComponent<ResidentController>();
         rsdtObject.initialize(rsdt, true);
 
         // RETURN: replace all of these with event handling on bldg controller
-        bldgController.SetCurrentResident(rsdt);
+        bldgController.SetCurrentResidentAlias(rsdt.alias);
         bldgController.SetCurrentResidentController(rsdtObject);
     }
 
@@ -104,8 +114,6 @@ public class InitApp : MonoBehaviour
         } catch (Exception e) {
 			Debug.Log("~~~~~~ Failed to animate loading: splashScreenAnimator is `" + splashScreenAnimator + "` " + e.ToString());
 		}
-        
-        ////////////////////////////////
     }
 
     void OnEnable() {
@@ -114,11 +122,15 @@ public class InitApp : MonoBehaviour
         onLogin = new UnityAction(OnLogin);
         onQuickActions = new UnityAction(OnQuickActions);
         onPromoteOrDemote = new UnityAction(OnPromoteOrDemote);
+        onEnterBldgDone = new UnityAction(OnEnterBldgDone);
+        onExitBldgDone = new UnityAction(OnExitBldgDone);
         EventManager.Instance.StartListening("SwitchToFlying", onFlying);
         EventManager.Instance.StartListening("SwitchToWalking", onWalking);
         EventManager.Instance.StartListening("LoginSuccessful", onLogin);
         EventManager.Instance.StartListening("OpenQuickActions", onQuickActions);
         EventManager.Instance.StartListening("PromoteOrDemote", onPromoteOrDemote);
+        EventManager.Instance.StartListening("EnterBldgDone", onEnterBldgDone);
+        EventManager.Instance.StartListening("ExitBldgDone", onExitBldgDone);
     }
 
 
@@ -182,6 +194,27 @@ public class InitApp : MonoBehaviour
     private void OnPromoteOrDemote() {
         bldgController.reloadContainerBldg();
     }
+
+    private void OnEnterBldgDone() {
+        Debug.Log("~~~~~~~~ OnEnterBldgDone");
+        CurrentResidentController crc = CurrentResidentController.Instance;
+
+        // scale resident avatar by nesting depth & locate it based on new flr
+        Destroy(currentResidentObject);
+        initCurrentResidentUI(crc.resident);
+        loadBldgs(crc.resident);
+    }
+
+    private void OnExitBldgDone() {
+        Debug.Log("~~~~~~~~ OnExitBldgDone");
+        CurrentResidentController crc = CurrentResidentController.Instance;
+
+        // scale resident avatar by nesting depth & locate it based on new flr
+        Destroy(currentResidentObject);
+        initCurrentResidentUI(crc.resident);
+        loadBldgs(crc.resident);
+    }
+
 
     public static void startWalking()
     {

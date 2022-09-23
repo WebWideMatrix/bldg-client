@@ -87,7 +87,7 @@ public class BldgController : MonoBehaviour
     string currentAddress;
 	string currentFlr;
 
-	Resident currentRsdt;
+	string currentRsdtAlias;
 	BldgChatController bldgChatController;
 
 	// RETURN:
@@ -212,8 +212,8 @@ public class BldgController : MonoBehaviour
 		bldgChatController.SetResidentController(rsdtController);
 	}
 
-	public void SetCurrentResident(Resident rsdt) {
-		currentRsdt = rsdt;
+	public void SetCurrentResidentAlias(string alias) {
+		currentRsdtAlias = alias;
 	}
 
 	void showContextMenu() {
@@ -515,11 +515,8 @@ public class BldgController : MonoBehaviour
 		}
 		
 		try {
-			Debug.Log("~~~~~~~~~~~ got the followng data attributes: ");
-			foreach (string key in data_attributes.Keys) { Debug.Log("~~~~~~ " + key); };
 			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>(true);
 			foreach (ImageController imgDisplay in imageDisplays) {
-				Debug.Log("~~~~~~~~~~~~~ checking imageName " + imgDisplay.imageName);				
 				if (data_attributes.ContainsKey(imgDisplay.imageName)) {
 					imgDisplay.gameObject.SetActive(true);
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
@@ -655,7 +652,7 @@ public class BldgController : MonoBehaviour
 					}
 
 					// if it's the current user, skip
-					if (r.alias == currentRsdt.alias) continue;
+					if (r.alias == currentRsdtAlias) continue;
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 

@@ -117,12 +117,13 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
             resident.nesting_depth = actionResponse.data.nesting_depth;
-            Debug.Log("~~~~~~~ got resident nesting depth after enter: " + resident.nesting_depth + " from server: " + actionResponse.data.nesting_depth);
             
+            EventManager.Instance.TriggerEvent("EnterBldgDone");
+
             // TODO cleanup ~~~
-            if (resident.flr != "g") {
-                SceneManager.LoadScene("bldg_flr");
-            }
+            // if (resident.flr != "g") {
+            //     SceneManager.LoadScene("bldg_flr");
+            // }
 
         }).Catch(err => {
             Debug.Log("Enter bldg action failed - " + err.Message);        
@@ -146,16 +147,17 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
             resident.nesting_depth = actionResponse.data.nesting_depth;
-            Debug.Log("~~~~~~~ got resident nesting depth after exit: " + resident.nesting_depth + " from server: " + actionResponse.data.nesting_depth);
+            EventManager.Instance.TriggerEvent("ExitBldgDone");
 
-            Scene scene = SceneManager.GetActiveScene();
-            if (resident.flr == "g" && scene.name != "g") {
-                SceneManager.LoadScene("g");
-            } else {
-                SceneManager.LoadScene("bldg_flr");
-            }
+            // TODO cleanup ~~~~
+            // Scene scene = SceneManager.GetActiveScene();
+            // if (resident.flr == "g" && scene.name != "g") {
+            //     SceneManager.LoadScene("g");
+            // } else {
+            //     SceneManager.LoadScene("bldg_flr");
+            // }
         }).Catch(err => {
-            Debug.Log("Enter bldg action failed - " + err.Message);        
+            Debug.Log("Exit bldg action failed - " + err.Message);        
         });
     }
 
