@@ -151,6 +151,7 @@ namespace Models
 		public string action_type;
 		public string bldg_address;
 		public string bldg_url;
+		public string flr;
 	}
 
 	[Serializable]
