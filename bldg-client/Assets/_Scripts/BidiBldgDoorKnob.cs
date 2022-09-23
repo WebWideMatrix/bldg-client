@@ -47,7 +47,7 @@ public class BidiBldgDoorKnob : MonoBehaviour
         bool entering = true;
         // determine whether we're entering or exiting the bldg
         CurrentResidentController crc = CurrentResidentController.Instance;
-        Debug.Log("~~~~~~~~~~ determining enter/exit: resident flr_url is: " + crc.resident.flr_url + " and bldg_url is " + bldgURL);
+        Debug.Log("~~~~~~~~~~ determining enter/exit: resident flr_url is: " + crc.resident.flr_url + " and bldg_url+flr is " + (bldgURL + "/" + flr));
         if (crc.resident.flr_url == bldgURL + "/" + flr) {
             // we're already inside the parent bldg -> need to exit
             entering = false;

@@ -845,7 +845,7 @@ public class BldgController : MonoBehaviour
 			containerContainerFlr = AddressUtils.getContainerFlr(container);
 		}
 		Debug.Log("~~~~~~~~~~~~~~~ The container container flr is: " + containerContainerFlr);
-		reloadBuildings(containerContainerFlr);		
+		switchAddress(containerContainerFlr);		
 	}
 	
 
