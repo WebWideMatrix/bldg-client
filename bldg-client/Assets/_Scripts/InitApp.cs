@@ -86,7 +86,7 @@ public class InitApp : MonoBehaviour
     }
 
     private void loadBldgs(Resident rsdt) {
-        bldgController.SetAddress(rsdt.flr);        
+        bldgController.SetAddress(rsdt.flr);
     }
 
     private void setLabelsInUI(Resident rsdt) {
@@ -166,7 +166,7 @@ public class InitApp : MonoBehaviour
             return;
         }
 
-        if (loadBldgSceneIfNeeded()) return;
+        // if (loadBldgSceneIfNeeded()) return;
 
         initCurrentResidentUI(crc.resident);
 

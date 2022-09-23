@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class CurrentResidentController : ScriptableObjectSingleton<CurrentResidentController>
 {    
     public Resident resident;
+    public string containerEntityType;
 
     public bool initialized = false;
     public DateTime lastLoginTime = DateTime.Today.AddYears(-1);
@@ -24,9 +25,10 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
     DateTime lastActionTime;
 
 
-    public void initialize(Resident model) {
+    public void initialize(Resident model, string _containerEntityType) {
         Debug.Log("CRC initialized with " + model.alias);
         resident = model;
+        containerEntityType = _containerEntityType;
         Debug.Log("Initializing resident " + resident.alias + " at " + resident.location);
         initialized = true;
         lastLoginTime = DateTime.Now;
@@ -52,6 +54,9 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
         hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
     
+    public void setContainerEntityType(string entityType) {
+        containerEntityType = entityType;
+    }
 
 
     public void SendTurnAction(TurnAction action) {

@@ -90,6 +90,38 @@ public class BldgController : MonoBehaviour
 	string currentRsdtAlias;
 	BldgChatController bldgChatController;
 
+
+	Dictionary<string, Dictionary<string, float>> FLOOR_HEIGHTS = new Dictionary<string, Dictionary<string, float>>() {
+		{"team", new Dictionary<string, float>() {{"l0", 2.0f}}},
+		{"goal", new Dictionary<string, float>() {{"l0", 0.315f}, {"l1", 0.77f}}},
+
+		{"purpose", new Dictionary<string, float>() {{"l0", 0.315f}, {"l1", 0.77f}}},
+		{"cantata", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"neighborhood", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"street", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"green-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"blue-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"yellow-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},		
+		{"solution", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"product", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"service", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"capability", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"milestone", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"member", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"customer", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"community", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"task", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"project", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"action", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"equity", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"costs", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"sales", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"agreement", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"decision", new Dictionary<string, float>() {{"l0", 1.0f}}}
+	};
+
+
 	// RETURN:
 	//private UnityAction onLogin;
 
@@ -454,6 +486,7 @@ public class BldgController : MonoBehaviour
 
 	void switchAddress(string address) {
 		if (address.ToLower() != "g") {
+			// IMPORTANT: reloadContainerBldg must be called before reloadBuildings
 			reloadContainerBldg();
 			updateFloorSign ();
 		}
@@ -544,6 +577,15 @@ public class BldgController : MonoBehaviour
 		CurrentMetadata cm = CurrentMetadata.Instance;
 		CurrentResidentController crc = CurrentResidentController.Instance;
 		float aliceFactor = AddressUtils.calcAliceFactor(crc.resident.nesting_depth);
+
+		float base_height = 0F;
+		float flr_height = base_height;
+		string curr_flr = AddressUtils.extractFlr(address);
+		if (crc.containerEntityType != "g") {
+			flr_height = FLOOR_HEIGHTS[crc.containerEntityType][curr_flr] * aliceFactor;
+		}
+		float height = flr_height;
+
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
@@ -592,10 +634,6 @@ public class BldgController : MonoBehaviour
 					}
 					dataChanged = true;
 
-					float height = 0F;
-					if (address != "g") {
-						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
-					}
 					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
@@ -798,6 +836,7 @@ public class BldgController : MonoBehaviour
 
 	public void reloadContainerBldg() {
 		// Debug.Log("~~~~~ Reloading container bldg");
+		CurrentResidentController crc = CurrentResidentController.Instance;
 
 		// check whether the container bldg already has a model object
 		// Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
@@ -821,6 +860,7 @@ public class BldgController : MonoBehaviour
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
+			crc.setContainerEntityType(res.data.entity_type);
 			bldgObj.model = res.data;
 			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);
