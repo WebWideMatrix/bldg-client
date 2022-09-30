@@ -51,8 +51,6 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
     {
         hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
-    
-
 
     public void SendTurnAction(TurnAction action) {
         // call the act API
@@ -116,9 +114,16 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
-            if (resident.flr != "g") {
-                SceneManager.LoadScene("bldg_flr");
-            }
+            resident.nesting_depth = actionResponse.data.nesting_depth;
+            resident.container_entity_type = actionResponse.data.container_entity_type;
+            
+            EventManager.Instance.TriggerEvent("EnterBldgDone");
+
+            // TODO cleanup ~~~
+            // if (resident.flr != "g") {
+            //     SceneManager.LoadScene("bldg_flr");
+            // }
+
         }).Catch(err => {
             Debug.Log("Enter bldg action failed - " + err.Message);        
         });
@@ -140,14 +145,20 @@ public class CurrentResidentController : ScriptableObjectSingleton<CurrentReside
             resident.y = actionResponse.data.y;
             resident.flr = actionResponse.data.flr;
             resident.flr_url = actionResponse.data.flr_url;
-            Scene scene = SceneManager.GetActiveScene();
-            if (resident.flr == "g" && scene.name != "g") {
-                SceneManager.LoadScene("g");
-            } else {
-                SceneManager.LoadScene("bldg_flr");
-            }
+            resident.nesting_depth = actionResponse.data.nesting_depth;
+            resident.container_entity_type = actionResponse.data.container_entity_type;
+
+            EventManager.Instance.TriggerEvent("ExitBldgDone");
+
+            // TODO cleanup ~~~~
+            // Scene scene = SceneManager.GetActiveScene();
+            // if (resident.flr == "g" && scene.name != "g") {
+            //     SceneManager.LoadScene("g");
+            // } else {
+            //     SceneManager.LoadScene("bldg_flr");
+            // }
         }).Catch(err => {
-            Debug.Log("Enter bldg action failed - " + err.Message);        
+            Debug.Log("Exit bldg action failed - " + err.Message);        
         });
     }
 

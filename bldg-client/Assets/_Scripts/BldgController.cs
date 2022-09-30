@@ -87,8 +87,40 @@ public class BldgController : MonoBehaviour
     string currentAddress;
 	string currentFlr;
 
-	Resident currentRsdt;
+	string currentRsdtAlias;
 	BldgChatController bldgChatController;
+
+
+	Dictionary<string, Dictionary<string, float>> FLOOR_HEIGHTS = new Dictionary<string, Dictionary<string, float>>() {
+		{"team", new Dictionary<string, float>() {{"l0", 2.0f}}},
+		{"goal", new Dictionary<string, float>() {{"l0", 0.315f}, {"l1", 0.77f}}},
+
+		{"purpose", new Dictionary<string, float>() {{"l0", 0.315f}, {"l1", 0.77f}}},
+		{"cantata", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"neighborhood", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"street", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"green-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"blue-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"yellow-lot", new Dictionary<string, float>() {{"l0", 1.0f}}},		
+		{"solution", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"product", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"service", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"capability", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"milestone", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"member", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"customer", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"community", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"task", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"project", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"action", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"equity", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"costs", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"sales", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"agreement", new Dictionary<string, float>() {{"l0", 1.0f}}},
+		{"decision", new Dictionary<string, float>() {{"l0", 1.0f}}}
+	};
+
 
 	// RETURN:
 	//private UnityAction onLogin;
@@ -212,8 +244,8 @@ public class BldgController : MonoBehaviour
 		bldgChatController.SetResidentController(rsdtController);
 	}
 
-	public void SetCurrentResident(Resident rsdt) {
-		currentRsdt = rsdt;
+	public void SetCurrentResidentAlias(string alias) {
+		currentRsdtAlias = alias;
 	}
 
 	void showContextMenu() {
@@ -367,7 +399,7 @@ public class BldgController : MonoBehaviour
 	// }
 
 	public void SetAddress(string address) {
-		Debug.Log("SetAddress -> " + address);
+		Debug.Log("~~~~~~~~~~~~ SetAddress -> " + address);
 		currentAddress = address;
 		AddressChanged();
 	}
@@ -402,7 +434,7 @@ public class BldgController : MonoBehaviour
 	}
 
 	public void AddressChanged() {
-		Debug.Log ("Address changed to: " + currentAddress);
+		Debug.Log ("~~~~~~~~~~~ Address changed to: " + currentAddress);
 		// InputField input = GameObject.FindObjectOfType<InputField> ();
 		// if (input.text != currentAddress) {
 		// 	input.text = currentAddress;
@@ -414,8 +446,9 @@ public class BldgController : MonoBehaviour
 
 		currentFlr = AddressUtils.extractFlr(currentAddress);
 
-		CurrentMetadata cm = CurrentMetadata.Instance;
-		cm.clearEntities();
+		// TODO Cleanup ~~~~
+		//CurrentMetadata cm = CurrentMetadata.Instance;
+		//cm.clearEntities();
 
 		// TODO check whether it changed
 
@@ -442,7 +475,7 @@ public class BldgController : MonoBehaviour
 
 
 	public void Reload() {
-		Debug.Log("Reload invoked");
+		Debug.Log("~~~~~~~~~~~~~~ Reload invoked");
 		switchAddress (getCurrentAddressFromResident());
 		if (!isReloadingInLoop) {
 			Debug.Log("Starting reload loop");
@@ -452,10 +485,11 @@ public class BldgController : MonoBehaviour
 	}
 
 	void switchAddress(string address) {
-		if (address.ToLower() != "g") {
-			reloadContainerBldg();
-			updateFloorSign ();
-		}
+		Debug.Log("~~~~~~~~~~~~~~ switchAddress: " + address);
+		// if (address.ToLower() != "g") {
+		// 	reloadContainerBldg();
+		// 	updateFloorSign ();
+		// }
 
 		reloadBuildings(address);
 		reloadResidents(address);
@@ -515,11 +549,8 @@ public class BldgController : MonoBehaviour
 		}
 		
 		try {
-			Debug.Log("~~~~~~~~~~~ got the followng data attributes: ");
-			foreach (string key in data_attributes.Keys) { Debug.Log("~~~~~~ " + key); };
 			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>(true);
 			foreach (ImageController imgDisplay in imageDisplays) {
-				Debug.Log("~~~~~~~~~~~~~ checking imageName " + imgDisplay.imageName);				
 				if (data_attributes.ContainsKey(imgDisplay.imageName)) {
 					imgDisplay.gameObject.SetActive(true);
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
@@ -545,6 +576,20 @@ public class BldgController : MonoBehaviour
 	void reloadBuildings(string address) {
 		CurrentMetadata cm = CurrentMetadata.Instance;
 		CurrentResidentController crc = CurrentResidentController.Instance;
+		float aliceFactor = AddressUtils.calcAliceFactor(crc.resident.nesting_depth);
+
+		Debug.Log("~~~~~~~~~~~~~ reloading bldgs - alice factor is: " + aliceFactor);
+		Debug.Log("~~~~~~~~~~~~~ container type is: " + crc.resident.container_entity_type);
+		float base_height = 0F;
+		float flr_height = base_height;
+		string curr_flr = AddressUtils.extractFlr(address);
+		if (crc.resident.container_entity_type != "g") {
+			flr_height = FLOOR_HEIGHTS[crc.resident.container_entity_type][curr_flr] * aliceFactor;
+		}
+		float height = flr_height;
+		Debug.Log("~~~~~~~~~~~~~~ calculated height based on flr: " + height);
+
+
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
@@ -570,7 +615,7 @@ public class BldgController : MonoBehaviour
 				int count = 0;
 				foreach (Bldg b in res) {
 					count += 1;
-					Debug.Log("processing bldg " + count + ": " + b.name);
+					// Debug.Log("~~~~~~~~~~~ processing bldg " + count + ": " + b.name);
 					
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
@@ -593,10 +638,6 @@ public class BldgController : MonoBehaviour
 					}
 					dataChanged = true;
 
-					float height = 0F;
-					if (address != "g") {
-						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
-					}
 					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;
 					baseline.z += b.y;
@@ -607,6 +648,9 @@ public class BldgController : MonoBehaviour
 						bldgClone.tag = "Building";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 						bldgObject.initialize(b, this);
+						if (aliceFactor != 1.0f) {
+							bldgClone.transform.localScale = bldgClone.transform.localScale * aliceFactor;
+						}
 						renderModelData(bldgClone, b);
 					} catch (Exception e) {
 						Debug.Log("Failed to instantiate object: " + b.name);
@@ -655,7 +699,7 @@ public class BldgController : MonoBehaviour
 					}
 
 					// if it's the current user, skip
-					if (r.alias == currentRsdt.alias) continue;
+					if (r.alias == currentRsdtAlias) continue;
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
@@ -792,18 +836,32 @@ public class BldgController : MonoBehaviour
 		}
 		return address;
 	}
+
+	public void reloadContainerContainerFlr(string address) {
+		Debug.Log("~~~~~~~~~~~~~ reloading the container container flr for: " + address);
+		string container = AddressUtils.getContainingBldgAddress(address);
+		string containerContainerFlr = "g";
+		if (container != "g") {
+			containerContainerFlr = AddressUtils.getContainerFlr(container);
+		}
+		Debug.Log("~~~~~~~~~~~~~~~ The container container flr is: " + containerContainerFlr);
+		switchAddress(containerContainerFlr);		
+	}
 	
 
 	public void reloadContainerBldg() {
-		// Debug.Log("~~~~~ Reloading container bldg");
+		Debug.Log("~~~~~ Reloading container bldg");
+		bool containerIsntCreated = false;
+		CurrentResidentController crc = CurrentResidentController.Instance;
 
 		// check whether the container bldg already has a model object
 		// Debug.Log("~~~~~ Currently inside scene " + SceneManager.GetActiveScene().name);
 		GameObject container = getContainerBldg();
 		// Debug.Log("~~~~~ and container bldg is: " + container);
 		
-		if (container == null) return;
-		BldgObject bldgObj = container.GetComponent<BldgObject>();
+		if (container == null) {
+			containerIsntCreated = true;
+		}
 		// if (bldgObj.model != null && bldgObj.model.address != null && bldgObj.model.address != "") return;
 
 		// Debug.Log("~~~~~~~~~~~ moving on with reload container bldg...");
@@ -819,6 +877,20 @@ public class BldgController : MonoBehaviour
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.Get<WrappedBldg>(req).Then(res =>
 		{
+			if (containerIsntCreated) {
+				// instantiate the container bldg
+
+				// size should be based on the container aliceFactor
+
+				// set the container bldg tag
+
+			}
+			if (container == null) {
+				throw new Exception("Couldn't create container bldg!");
+			}
+
+			BldgObject bldgObj = container.GetComponent<BldgObject>();
+
 			bldgObj.model = res.data;
 			// Debug.Log("~~~~ Loaded container bldg data: " + bldgObj.model.name);
 			renderModelData(container, res.data);

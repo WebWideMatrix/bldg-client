@@ -8,6 +8,7 @@ using Models;
 
 public class BldgDoorKnob : MonoBehaviour
 {
+    public string flr = "l0";
 
     private string bldgName = "";
     private string bldgAddress = "";
@@ -50,7 +51,8 @@ public class BldgDoorKnob : MonoBehaviour
                 resident_email = crc.resident.email,
                 action_type = "ENTER_BLDG",
                 bldg_address = bldgAddress,
-                bldg_url = bldgURL
+                bldg_url = bldgURL,
+                flr = flr
             });
         // }
     }

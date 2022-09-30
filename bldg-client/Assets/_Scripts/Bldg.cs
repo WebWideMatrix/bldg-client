@@ -83,6 +83,7 @@ namespace Models
 		public DateTime last_login_at;
 		public string location;
 		public string name;
+		public int nesting_depth;
 		public ResidentAttributes other_attributes;
 		public string[] previous_messages;
 		public string session_id;
@@ -90,6 +91,7 @@ namespace Models
 		public int y;
 		public string flr;
 		public string flr_url;
+		public string container_entity_type;
 	}
 
 	[Serializable]
@@ -151,6 +153,7 @@ namespace Models
 		public string action_type;
 		public string bldg_address;
 		public string bldg_url;
+		public string flr;
 	}
 
 	[Serializable]

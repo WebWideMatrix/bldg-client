@@ -4,17 +4,18 @@ using UnityEngine;
 // using UnityEditor;
 using UnityEngine.Events;
 using Models;
-using Utils;
 
 
-public class InternalBldgDoorKnob : MonoBehaviour
+public class BidiBldgDoorKnob : MonoBehaviour
 {
-    public string flr = "l0";
+    public string flr = "l0";   // jusf the flr name itself, not full flr path
 
     private string bldgName = "";
     private string bldgAddress = "";
     private string bldgURL = "";
+
     private Color initialColor;
+
 
     void getContainerBldgDetails()
     {
@@ -42,11 +43,28 @@ public class InternalBldgDoorKnob : MonoBehaviour
         if (bldgName == "") {
             getContainerBldgDetails();
         }
-        
-        // if (EditorUtility.DisplayDialog ("Exiting " + bldgName, "You're about to exit the " + bldgName + " team HQ.", "Ok", "Cancel")) {
+
+        bool entering = true;
+        // determine whether we're entering or exiting the bldg
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        Debug.Log("~~~~~~~~~~ determining enter/exit: resident flr_url is: " + crc.resident.flr_url + " and bldg_url+flr is " + (bldgURL + "/" + flr));
+        if (crc.resident.flr_url == bldgURL + "/" + flr) {
+            // we're already inside the parent bldg -> need to exit
+            entering = false;
+        }
+
+        if (entering) {
+            EventManager.Instance.TriggerEvent("EnteringBldg");
+            Debug.Log("Sending enter bldg action for resident " +  crc.resident.email);
+            crc.SendEnterBldgAction(new EnterBldgAction() {
+                resident_email = crc.resident.email,
+                action_type = "ENTER_BLDG",
+                bldg_address = bldgAddress,
+                bldg_url = bldgURL,
+                flr = flr
+            });
+        } else {
             EventManager.Instance.TriggerEvent("ExitingBldg");
-            Debug.Log("Invoking exit bldg action");
-            CurrentResidentController crc = CurrentResidentController.Instance;
             Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);
             crc.SendExitBldgAction(new ExitBldgAction() {
                 resident_email = crc.resident.email,
@@ -54,6 +72,6 @@ public class InternalBldgDoorKnob : MonoBehaviour
                 bldg_address = bldgAddress,
                 bldg_url = bldgURL
             });
-        // }
+        }
     }
 }
