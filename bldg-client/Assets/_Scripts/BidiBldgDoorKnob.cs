@@ -16,10 +16,12 @@ public class BidiBldgDoorKnob : MonoBehaviour
 
     private Color initialColor;
 
+    public void start() {
+        initialColor = GetComponent<Renderer>().material.color;
+    }
 
     void getContainerBldgDetails()
     {
-        initialColor = GetComponent<Renderer>().material.color;
         GameObject bldg = transform.parent.gameObject;
         BldgObject bldgObject = bldg.GetComponent<BldgObject>();
         if (bldgObject != null) {

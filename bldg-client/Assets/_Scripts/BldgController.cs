@@ -92,6 +92,7 @@ public class BldgController : MonoBehaviour
 
 
 	Dictionary<string, Dictionary<string, float>> FLOOR_HEIGHTS = new Dictionary<string, Dictionary<string, float>>() {
+		{"g", new Dictionary<string, float>() {{"g", 0.0f}}},
 		{"team", new Dictionary<string, float>() {{"l0", 2.0f}}},
 		{"goal", new Dictionary<string, float>() {{"l0", 0.315f}, {"l1", 0.77f}}},
 
@@ -583,7 +584,7 @@ public class BldgController : MonoBehaviour
 		float base_height = 0F;
 		float flr_height = base_height;
 		string curr_flr = AddressUtils.extractFlr(address);
-		if (crc.resident.container_entity_type != "g") {
+		if (curr_flr != "g") {
 			flr_height = FLOOR_HEIGHTS[crc.resident.container_entity_type][curr_flr] * aliceFactor;
 		}
 		float height = flr_height;
@@ -637,6 +638,9 @@ public class BldgController : MonoBehaviour
 						cm.addEntity(b.entity_type, b.name);
 					}
 					dataChanged = true;
+
+
+					// determine coords: take coords of container bldg, & add bldg coords multiplied by aliceFactor
 
 					Vector3 baseline = new Vector3(floorStartX, height, floorStartZ);	// WHY? if you set the correct Y, some images fail to display
 					baseline.x += b.x;

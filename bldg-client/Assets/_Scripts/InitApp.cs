@@ -143,6 +143,8 @@ public class InitApp : MonoBehaviour
     void Awake() {    
         CurrentResidentController crc = CurrentResidentController.Instance;
         if (crc.isInitialized()) {
+            Debug.Log("~~~~~ *********************   Init App - Awake - Resident initializied  *********************");
+
             animateOutOfLogin();
 
             startLoadingAnimation();
@@ -151,8 +153,12 @@ public class InitApp : MonoBehaviour
 
             loadBldgs(crc.resident);
 
+            Debug.Log("~~~~~~~~~~ Awake - calling setLabelsInUI..");
             setLabelsInUI(crc.resident);
+        } else {
+            Debug.Log("~~~~~ *********************   Init App - Awake - Resident NOT YET INITIALIZED  *********************");
         }
+
     }
 
 
@@ -173,9 +179,15 @@ public class InitApp : MonoBehaviour
         initCurrentResidentUI(crc.resident);
 
         Debug.Log("~~~~~~~~~~ loading bldgs");
-        loadBldgs(crc.resident);
-        loadContainerContainerFlr(crc.resident.flr);
-
+        try {
+            loadBldgs(crc.resident);
+            loadContainerContainerFlr(crc.resident.flr);
+        } catch (Exception e) {
+            Debug.Log("Failed to load bldgs on Login:");
+            Debug.LogError(e.ToString());
+        }
+        
+        Debug.Log("~~~~~~~~~~ OnLogin - calling setLabelsInUI..");
         setLabelsInUI(crc.resident);
     }
 
@@ -209,6 +221,7 @@ public class InitApp : MonoBehaviour
         Destroy(currentResidentObject);
         initCurrentResidentUI(crc.resident);
         loadBldgs(crc.resident);
+        setLabelsInUI(crc.resident);
     }
 
     private void OnExitBldgDone() {
@@ -219,6 +232,7 @@ public class InitApp : MonoBehaviour
         Destroy(currentResidentObject);
         initCurrentResidentUI(crc.resident);
         loadBldgs(crc.resident);
+        setLabelsInUI(crc.resident);
     }
 
 

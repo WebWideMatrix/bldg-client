@@ -17,14 +17,15 @@ public class BldgDoorKnob : MonoBehaviour
     private Color initialColor;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void start() {
         initialColor = GetComponent<Renderer>().material.color;
+    }
+
+    void getContainerBldgDetails()
+    {
         GameObject bldg = transform.parent.gameObject;
         BldgObject bldgObject = bldg.GetComponent<BldgObject>();
         if (bldgObject != null) {
-            Debug.Log("[DoorKnob] parent bldg object: " + bldgObject);
             bldgName = bldgObject.model.name;
             bldgAddress = bldgObject.model.address;
             bldgURL = bldgObject.model.bldg_url;
@@ -42,10 +43,21 @@ public class BldgDoorKnob : MonoBehaviour
     }
 
     void OnMouseDown() {
-        // if (EditorUtility.DisplayDialog ("Entering " + bldgName, "You're about to enter the " + bldgName + " team HQ. Please note that due to the Alice effect, everything is 10x smaller inside buildings.", "Ok", "Cancel")) {
+        if (bldgName == "") {
+            getContainerBldgDetails();
+        }
+
+        bool entering = true;
+        // determine whether we're entering or exiting the bldg
+        CurrentResidentController crc = CurrentResidentController.Instance;
+        Debug.Log("~~~~~~~~~~ determining enter/exit: resident flr_url is: " + crc.resident.flr_url + " and bldg_url+flr is " + (bldgURL + "/" + flr));
+        if (crc.resident.flr_url == bldgURL + "/" + flr) {
+            // we're already inside the parent bldg -> need to exit
+            entering = false;
+        }
+
+        if (entering) {
             EventManager.Instance.TriggerEvent("EnteringBldg");
-            Debug.Log("Invoking enter bldg action");
-            CurrentResidentController crc = CurrentResidentController.Instance;
             Debug.Log("Sending enter bldg action for resident " +  crc.resident.email);
             crc.SendEnterBldgAction(new EnterBldgAction() {
                 resident_email = crc.resident.email,
@@ -54,6 +66,15 @@ public class BldgDoorKnob : MonoBehaviour
                 bldg_url = bldgURL,
                 flr = flr
             });
-        // }
+        } else {
+            EventManager.Instance.TriggerEvent("ExitingBldg");
+            Debug.Log("Sending exit bldg action for resident " +  crc.resident.email);
+            crc.SendExitBldgAction(new ExitBldgAction() {
+                resident_email = crc.resident.email,
+                action_type = "EXIT_BLDG",
+                bldg_address = bldgAddress,
+                bldg_url = bldgURL
+            });
+        }
     }
 }
