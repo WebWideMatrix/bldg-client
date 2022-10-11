@@ -90,6 +90,8 @@ public class BldgController : MonoBehaviour
 	Resident currentRsdt;
 	BldgChatController bldgChatController;
 
+	private bool clearedChatHistory = false;
+
 	// RETURN:
 	//private UnityAction onLogin;
 
@@ -456,6 +458,7 @@ public class BldgController : MonoBehaviour
 			reloadContainerBldg();
 			updateFloorSign ();
 		}
+		clearedChatHistory = false;
 
 		reloadBuildings(address);
 		reloadResidents(address);
@@ -593,6 +596,20 @@ public class BldgController : MonoBehaviour
 					}
 					dataChanged = true;
 
+
+					if (!clearedChatHistory) {
+						clearedChatHistory = true;
+						bldgChatController.ClearMessageHistory();
+					}
+
+					if (b.name == "test-decision") {
+						Debug.Log("~~~~~~~~~~ At test-decision");
+					}
+					if (b.previous_messages.Length > 0) {
+						Debug.Log("Found " + b.previous_messages.Length + " previous messages");
+						bldgChatController.AddHistoricMessages(b.previous_messages);
+					}
+
 					float height = 0F;
 					if (address != "g") {
 						height = 2F;  // bldg is larger when inside a bldg, so floor is higher
@@ -636,7 +653,6 @@ public class BldgController : MonoBehaviour
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
-		bool clearedChatHistory = false;
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Resident>(req).Then(result =>
 			{
@@ -646,12 +662,12 @@ public class BldgController : MonoBehaviour
 					// Debug.Log("processing resident " + count);
 
 					if (!clearedChatHistory) {
-						bldgChatController.ClearMessageHistory();
 						clearedChatHistory = true;
+						bldgChatController.ClearMessageHistory();
 					}
 
 					if (r.previous_messages.Length > 0) {
-						bldgChatController.AddHistoricMessages(r.alias, r.previous_messages);
+						bldgChatController.AddHistoricMessages(r.previous_messages);
 					}
 
 					// if it's the current user, skip

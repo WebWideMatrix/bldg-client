@@ -57,6 +57,8 @@ namespace Models
 
 		public string[] owners;
 
+		public string[] previous_messages;
+
 		public string data;
 
 		public override string ToString(){
@@ -174,6 +176,7 @@ namespace Models
 	public struct SayAction
 	{
 		public string resident_email;
+		public string bldg_url;
 		public string action_type;
 		public string say_speaker;
 		public string say_text;

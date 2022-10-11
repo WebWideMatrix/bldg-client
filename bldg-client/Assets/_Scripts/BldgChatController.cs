@@ -13,11 +13,11 @@ public class BldgChatController : MonoBehaviour
         chatUIController.SetResidentController(controller);
     }
 
-    public void AddHistoricMessages(string from, string[] messages) {
-        // Debug.Log("Got messages for " + from);
+    public void AddHistoricMessages(string[] messages) {
         foreach (string msg in messages) {
             SayAction msgObject = JsonUtility.FromJson<SayAction>(msg);
-            chatUIController.AddMessageToHistory(from, msgObject);
+            Debug.Log("~~~~~~~~ Adding historic message: " + msgObject.say_text);
+            chatUIController.AddMessageToHistory(msgObject.say_speaker, msgObject);
         }
         // Debug.Log("Done adding them to chat history");
     }
