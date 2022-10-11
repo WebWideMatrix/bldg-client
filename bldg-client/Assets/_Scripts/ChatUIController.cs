@@ -143,7 +143,6 @@ public class ChatUIController : MonoBehaviour {
             action_type = "SAY",
             say_speaker = crc.resident.alias,
             say_text = text,
-            say_time = DateTime.Now.Ticks,
             say_flr = crc.resident.flr,
             say_flr_url = crc.resident.flr_url,
             say_location = crc.resident.location,

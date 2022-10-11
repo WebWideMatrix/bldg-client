@@ -60,6 +60,7 @@ public class InitApp : MonoBehaviour
         Quaternion qrt = Quaternion.identity;
         qrt.eulerAngles = new Vector3(0, rsdt.direction, 0);
         GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
+        rsdtClone.tag = "Resident";
 
         walkCamera.Follow = rsdtClone.transform;
         walkCamera.LookAt = rsdtClone.transform;

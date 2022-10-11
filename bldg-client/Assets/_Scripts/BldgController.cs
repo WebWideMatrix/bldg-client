@@ -515,11 +515,8 @@ public class BldgController : MonoBehaviour
 		}
 		
 		try {
-			Debug.Log("~~~~~~~~~~~ got the followng data attributes: ");
-			foreach (string key in data_attributes.Keys) { Debug.Log("~~~~~~ " + key); };
 			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>(true);
 			foreach (ImageController imgDisplay in imageDisplays) {
-				Debug.Log("~~~~~~~~~~~~~ checking imageName " + imgDisplay.imageName);				
 				if (data_attributes.ContainsKey(imgDisplay.imageName)) {
 					imgDisplay.gameObject.SetActive(true);
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
@@ -548,12 +545,14 @@ public class BldgController : MonoBehaviour
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
+		var lastUpdateCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
-			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
+			BldgObject bObj = bldg.GetComponent<BldgObject>();
 			if (!idsCache.ContainsKey(bObj.model.id)) {
 				idsCache.Add(bObj.model.id, bldg);
 				addrCache.Add(bObj.model.id, bObj.model.address);
+				lastUpdateCache.Add(bObj.model.id, bObj.model.updated_at);
 			} else {
 				Debug.LogWarning("Building rendered twice! " + bObj.model.name);
 			}
@@ -576,22 +575,29 @@ public class BldgController : MonoBehaviour
 
 					bool newBldg = !idsCache.ContainsKey(b.id);
 					bool movedBldg = false;
+					bool changedBldg = false;
 					if (!newBldg) {
 						movedBldg = addrCache[b.id] != b.address;
+						changedBldg = lastUpdateCache[b.id] != b.updated_at;
 					}
-					if (!(newBldg || movedBldg)) {
-						// don't draw existing or unmoved bldgs
-						// TODO this is just a temporary measure - bldgs could change & need redraw
+					if (!(newBldg || movedBldg || changedBldg)) {
+						// don't draw existing or unmoved or unchanged residents
 						continue;
 					}
-					if (movedBldg) {
+					if (movedBldg || changedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
+
 					// new entity so add to metadata of entities belonging to current user
 					if (Array.IndexOf(b.owners, crc.resident.email) > -1) {
 						cm.addEntity(b.entity_type, b.name);
 					}
 					dataChanged = true;
+
+					if (b.previous_messages.Length > 0) {
+						Debug.Log("Found " + b.previous_messages.Length + " previous messages for " + b.name);
+						bldgChatController.AddHistoricMessages(b.previous_messages);
+					}
 
 					float height = 0F;
 					if (address != "g") {
@@ -626,17 +632,32 @@ public class BldgController : MonoBehaviour
 	}
 
 	void reloadResidents(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		var addrCache = new Dictionary<int, string>();
+		var lastUpdateCache = new Dictionary<int, string>();
 		GameObject[] currentFlrResidents = GameObject.FindGameObjectsWithTag("Resident");
+		int cou = 0;
 		foreach (GameObject rsdnt in currentFlrResidents) {
-			GameObject.Destroy (rsdnt);
+			cou++;
+			ResidentController rObj = rsdnt.GetComponent<ResidentController>();
+			Debug.Log("~~~~~~~~~~ " + cou + " checking RENDERED resident id: " + rObj.resident.id);
+			Debug.Log("~~~~~~~~~~ " + cou + " checking RENDERED resident alias: " + rObj.resident.alias);			
+			if (!idsCache.ContainsKey(rObj.resident.id)) {
+				Debug.Log("~~~~~~~~~~ " + cou + " not in cache so adding " + rObj.resident.id);
+				idsCache.Add(rObj.resident.id, rsdnt);
+				addrCache.Add(rObj.resident.id, rObj.resident.location);
+				lastUpdateCache.Add(rObj.resident.id, rObj.resident.updated_at);
+			} else {
+				Debug.LogWarning("Resident rendered twice! " + rObj.resident.name);
+			}
 		}
+		
 		// escape the address
 		address = Uri.EscapeDataString(address);
 		Debug.Log("address escaped to: " + address);
 		GlobalConfig conf = GlobalConfig.Instance;
         string url = conf.bldgServer + conf.residentsBasePath + "/look/" + address;
 		// Debug.Log("Loading residents from: " + url);
-		bool clearedChatHistory = false;
 		RequestHelper req = RestUtils.createRequest("GET", url);
 		RestClient.GetArray<Resident>(req).Then(result =>
 			{
@@ -645,17 +666,33 @@ public class BldgController : MonoBehaviour
 					count += 1;
 					// Debug.Log("processing resident " + count);
 
-					if (!clearedChatHistory) {
-						bldgChatController.ClearMessageHistory();
-						clearedChatHistory = true;
-					}
-
 					if (r.previous_messages.Length > 0) {
-						bldgChatController.AddHistoricMessages(r.alias, r.previous_messages);
+						bldgChatController.AddHistoricMessages(r.previous_messages);
 					}
 
 					// if it's the current user, skip
 					if (r.alias == currentRsdt.alias) continue;
+
+					Debug.Log("~~~~~~~~~~ checking RECEIVED resident " + r.id);
+					bool newResident = !idsCache.ContainsKey(r.id);
+					Debug.Log("~~~~~~~~~~ RECEIVED resident is NOT in cache? " + newResident);
+
+					bool movedResident = false;
+					bool changedResident = false;
+					if (!newResident) {
+						movedResident = addrCache[r.id] != r.location;
+						changedResident = lastUpdateCache[r.id] != r.updated_at;
+					}
+					Debug.Log("~~~~~~~~~~ RECEIVED moved? " + movedResident);
+					Debug.Log("~~~~~~~~~~ RECEIVED changed? " + changedResident);
+
+					if (!(newResident || movedResident || changedResident)) {
+						// don't draw existing or unmoved or unchanged residents
+						continue;
+					}
+					if (movedResident || changedResident) {
+						GameObject.Destroy (idsCache[r.id]);
+					}
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
@@ -672,14 +709,19 @@ public class BldgController : MonoBehaviour
 					qrt.eulerAngles = new Vector3(0, r.direction, 0);
 					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
 					rsdtClone.tag = "Resident";
-                    ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+					Debug.Log("~~~~~~~~~~ rendering resident " + r.id);
+                    
+					ResidentController rsdtObject = rsdtClone.GetComponent<ResidentController>();
+					Debug.Log("~~~~~~~ About to set resident to controller with id " + r.id);
 					rsdtObject.initialize(r);
+					Debug.Log("~~~~~~~ rsdtController resident id = " + rsdtObject.resident.id);
+
 					// Debug.Log(r.alias);
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
                     // TODO create picture element
 					// controller.renderMainPicture();
 				};
-				// Debug.Log("Rendered " + count + " bldgs");
+				// Debug.Log("Rendered " + count + " residents");
 			});
 	}
 

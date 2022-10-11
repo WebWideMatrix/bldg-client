@@ -21,6 +21,7 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     List<SayAction> chatHistory = new List<SayAction>();
+    Dictionary<string, bool> chatCache = new Dictionary<string, bool>();    // to know whether we've seen a msg before. key is speaker + time 
     private ScrollRect scrollRect;
 
 
@@ -66,7 +67,6 @@ public class ChatUIController2 : MonoBehaviour {
             action_type = "SAY",
             say_speaker = crc.resident.alias,
             say_text = text,
-            say_time = DateTime.Now.Ticks,
             say_flr = crc.resident.flr,
             say_flr_url = crc.resident.flr_url,
             say_location = crc.resident.location,
@@ -91,7 +91,15 @@ public class ChatUIController2 : MonoBehaviour {
         residentAlias = rsdtController.resident.alias;
     }
 
+    string getMsgKey(SayAction msg) {
+        return msg.say_speaker + msg.say_time;
+    }
+
     public void AddMessageToHistory(string from, SayAction msg) {
+        if (chatCache.ContainsKey(getMsgKey(msg))) {
+            return;
+        }
+        chatCache.Add(getMsgKey(msg), true);
         chatHistory.Add(msg);
         chatHistory.Sort(delegate(SayAction m1, SayAction m2) {
             if (m1.say_time > m2.say_time) return 1;
@@ -142,8 +150,8 @@ public class ChatUIController2 : MonoBehaviour {
 
 
     public void ClearMessageHistory() {
-        // TODO clear the chat messages from the UI
         chatHistory = new List<SayAction>();
+        chatCache = new Dictionary<string, bool>();
 
         foreach (Transform child in listOfMessages.transform)
         {

@@ -14,276 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 140
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(5,27)
+    location: g/b(16,92)/l0/b(9,11)
     name: Udi Bauman
     previous_messages:
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(86,-7)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637992186611025470}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(30,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg miami-look-and-feel inside","say_time":637992180385016660}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(30,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637992167622180620}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(63,-19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637992167416001650}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(26,-12)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg miami-look-and-feel inside","say_time":637992167237344570}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-14,-24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637992164890486500}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-57,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg miami-look-and-feel inside","say_time":637992158807261570}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-57,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637992156659311350}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(68,-20)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg miami-look-and-feel inside","say_time":637992140733184370}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-3,-22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg miami-look-and-feel inside","say_time":637992130681250320}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,6)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      milestone bldg with name miami-look-and-feel and picture https://i.imgur.com/s0p6oyp.jpg
-      and summary miami look & feel","say_time":637992130112536250}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(89,-4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg graffiti-goal inside","say_time":637991404784404710}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(89,-8)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg graffiti-goal inside","say_time":637991402498486600}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(69,12)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      goal bldg with name graffiti-goal and summary find a good graffiti and picture
-      https://i.imgur.com/eczdqjw.jpg","say_time":637991402294589440}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(19,20)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991399628919350}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(15,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg go-outside inside","say_time":637991399349751450}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-23,-9)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991398955082510}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(36,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991398554050430}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(36,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991386600332910}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(36,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991384984998700}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(36,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991382746023660}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(36,-16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991382009782270}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(32,-17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991373501318290}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-58,-17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991341669928200}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-58,-19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991333212608360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-53,-14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991331258513000}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-53,-14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991330893609900}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(87,-7)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991330412401660}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,-17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991329821455180}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(26,-19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991326695936590}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(48,-30)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991314745333570}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(85,-32)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991314142298620}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(77,-23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991313687386220}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(77,-25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991313033679780}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-71,-32)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991312371654670}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-34,-34)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991311820588180}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-50,-21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991303263716200}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-31,-29)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991295681621300}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(8,-32)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991294752064230}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(45,-33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991294196893880}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-30,-33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991293138715010}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(5,-33)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991292433966200}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-70,-26)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991291659286250}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-58,-25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991291242885360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-11,-24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991290822259320}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(24,-27)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991290025478790}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(71,-32)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991289246990480}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(87,2)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991288965358420}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(87,2)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose inside","say_time":637991288371426790}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(86,3)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/demote
-      bldg ftpurpose","say_time":637991287949355400}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(4,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991277632915400}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(4,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991269676382470}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(4,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991269312899610}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(5,24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991255128588450}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(5,24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/promote
-      bldg ftpurpose inside","say_time":637991252575607410}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(5,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg ftpurpose here","say_time":637991223753808270}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,10)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg validate-form-input here","say_time":637991189055996120}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg decide-on-equity-model here","say_time":637991185092008860}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg some-project here","say_time":637991117178860280}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-1,25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      project bldg with name some-project and summary a large project","say_time":637990492491022630}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(11,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg apple-a-day here","say_time":637990489890534620}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(10,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      customer bldg with name ambience-mall and summary ambience mall in delhi","say_time":637990361238565710}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,18)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg launch-decision here","say_time":637990345208932520}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(15,12)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      decision bldg with name launch-decision and summary fromteal alpha launch:
-      oct 1st, 2022","say_time":637990345029444540}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(8,6)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg advice-asking-agreement here","say_time":637990331371336800}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(4,8)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      agreement bldg with name advice-asking-agreement and summary advice asking
-      prior to decisions","say_time":637990330783243770}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,7)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-sales here","say_time":637990311992955250}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(20,11)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      sales bldg with name fromteal-sales and summary sales archive","say_time":637990311544548330}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(4,97)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      project bldg with name ro and summary reinventing work advocacy","say_time":637990296465744230}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(11,7)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg team-costs here","say_time":637990295814312850}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(8,7)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      costs bldg with name team-costs and summary fromteal costs","say_time":637990295476913640}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(1,-5)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-community here","say_time":637990294663907000}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(1,-4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-community here","say_time":637990294449594880}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,-2)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-community here","say_time":637990294136006740}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(15,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg ef here","say_time":637990289558818260}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg decide-on-equity-model here","say_time":637990289130431980}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg decide-on-equity-model here","say_time":637990288941685670}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(6,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      action bldg with name decide-on-equity-model and summary decide on equity model","say_time":637990288589021310}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(9,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg team-equity here","say_time":637990288029599310}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,10)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      equity bldg with name team-equity and summary fromteal equity distribution","say_time":637990286886198800}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(23,15)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg the-el-dorado-project here","say_time":637990282158610790}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(39,30)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg the-el-dorado-project here","say_time":637990281930293030}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(-21,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      project bldg with name the-el-dorado-project and summary el dorado 306","say_time":637990279547032180}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,0)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-community here","say_time":637990273652616910}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(1,6)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg fromteal-community here","say_time":637990273288124760}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(2,4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      community bldg with name fromteal-community and summary fromteal community","say_time":637990272923394420}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(17,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      member bldg with name ef and summary eddie fidler","say_time":637990264637785530}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      capability bldg with name convert-data-to-organized-space and summary convert
-      data into organized space","say_time":637990249028227740}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,18)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg coaching here","say_time":637990245886127440}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(17,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg coaching here","say_time":637990245730974040}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,24)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg coaching here","say_time":637990245328060520}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,20)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      service bldg with name coaching and summary coaching service for teal teams","say_time":637990244181827530}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(21,20)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg alifib here","say_time":637990224196709640}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg alifib here","say_time":637990224066034330}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(17,21)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg alifib here","say_time":637990223671722160}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(23,23)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      product bldg with name alifib and summary the alifib product","say_time":637990222229549840}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,18)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg some-solution here","say_time":637990203641909390}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg some-solution here","say_time":637990199704999800}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(11,18)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      solution bldg with name some-solution and summary a clever solution to the
-      problem","say_time":637990199306932110}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(14,27)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      problem bldg with name artificial-hierarchy and summary people shouldn''t own
-      other people","say_time":637990153652362960}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(23,4)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg bit-project-montage here","say_time":637990148266968890}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(22,13)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      milestone bldg with name bit-project-montage and summary quickly montage the
-      bit work on the project with a nice music","say_time":637990146579891550}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(16,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      action bldg with name go-outside and summary just go outside","say_time":637990114218693200}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,19)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      goal bldg with name apple-a-day and summary eat one apple a day","say_time":637990088750689570}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(36,122)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg quickactionsdialog here","say_time":637989171213686430}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-84,123)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
-      between t8 and fight-maleria","say_time":637989170615453830}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-83,119)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg purpose-of-life here","say_time":637988305356429930}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-84,113)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name purpose-of-life and summary to appreciate beauty, whatever
-      that is","say_time":637988305031373080}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-94,117)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name the-pr and summary pr prp pr","say_time":637988303417467360}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-94,114)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name history-of-cinema and summary tell a story with feelings","say_time":637988298290267450}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-77,135)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name prupose-of-life and summary the purpose of life is to
-      appreciate beauty","say_time":637988284652400830}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(-38,152)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/connect
-      between t8 and t10","say_time":637987059617557480}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(38,136)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
-      bldg yellow-purpose here","say_time":637987057092535290}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(58,130)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellow-purpose and summary for yellow lot to be less
-      yellowish","say_time":637987056120317450}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellowishpurpose and summary for yellow lot to be less
-      yellow","say_time":637987054406871710}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yp1 and summary yellow purpose 1","say_time":637987035079341430}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yypp and summary yellow purpose","say_time":637987026028749530}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yp and summary yellow purpose","say_time":637987024692658180}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellowp and summary yellow purp","say_time":637987023160915980}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(59,131)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellowpurpo and summary for yellow lot","say_time":637987020967445430}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(62,134)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellowpurp and summary a yellow purpose","say_time":637987018318420610}'
-    - '{"action_type":"SAY","resident_email":"dibaunaumh@gmail.com","say_flr":"g","say_flr_url":"g","say_location":"g/b(65,127)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
-      purpose bldg with name yellowpur and summary a yellow purpose","say_time":637987012650424730}'
-    session_id: 45974786-dea9-4826-b895-7e5128e9770a
-    x: 5
-    y: 27
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg a-solution here","say_time":1665515968476}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(19,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      solution bldg with name a-solution and summary another solution","say_time":1665515925550}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665515304418}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(9,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665513471040}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665513247124}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"Hi
+      all","say_time":1665513241304}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(8,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665511165420}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(8,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"hi","say_time":1665511158596}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,11)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665510706990}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(9,25)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665472389762}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,31)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it","say_time":1665469436167}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,31)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it","say_time":1665469431627}'
+    session_id: 827e6d61-a1b1-49e1-b144-5d6b3ba9e335
+    x: 9
+    y: 11
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
+    updated_at: 2022-10-11T19:20:09
   initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
