@@ -22,43 +22,25 @@ namespace Models
 	{
 		public int id;
 		public int x;
-
 		public int y;
-
 		public string bldg_url;
-
 		public string web_url;
-
 		public string summary;
-
 		public bool is_composite;
-
 		public string flr;
-
 		public string flr_url;
-
 		public int flr_level;
-		
 		public int nesting_depth;
-
 		public string entity_type;
-
 		public string name;
-
 		public string state;
-
 		public string category;
-
 		public string[] tags;
-
 		public string address;
-
 		public string picture_url;
-
 		public string[] owners;
-
 		public string[] previous_messages;
-
+		public string updated_at;
 		public string data;
 
 		public override string ToString(){
@@ -92,6 +74,7 @@ namespace Models
 		public int y;
 		public string flr;
 		public string flr_url;
+		public string updated_at;
 	}
 
 	[Serializable]

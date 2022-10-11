@@ -551,12 +551,14 @@ public class BldgController : MonoBehaviour
 		bool dataChanged = false;
 		var idsCache = new Dictionary<int, GameObject>();
 		var addrCache = new Dictionary<int, string>();
+		var lastUpdateCache = new Dictionary<int, string>();
 		GameObject[] currentFlrBuildings = GameObject.FindGameObjectsWithTag("Building");
 		foreach (GameObject bldg in currentFlrBuildings) {
 			BldgObject bObj = bldg.GetComponentsInChildren<BldgObject>()[0];
 			if (!idsCache.ContainsKey(bObj.model.id)) {
 				idsCache.Add(bObj.model.id, bldg);
 				addrCache.Add(bObj.model.id, bObj.model.address);
+				lastUpdateCache.Add(bObj.model.id, bObj.model.updated_at);
 			} else {
 				Debug.LogWarning("Building rendered twice! " + bObj.model.name);
 			}
@@ -579,15 +581,17 @@ public class BldgController : MonoBehaviour
 
 					bool newBldg = !idsCache.ContainsKey(b.id);
 					bool movedBldg = false;
+					bool changedBldg = false;
 					if (!newBldg) {
 						movedBldg = addrCache[b.id] != b.address;
+						changedBldg = lastUpdateCache[b.id] != b.updated_at;
 					}
-					if (!(newBldg || movedBldg)) {
-						// don't draw existing or unmoved bldgs
+					if (!(newBldg || movedBldg || changedBldg)) {
+						// don't draw existing or unmoved bldgs or unchanged
 						// TODO this is just a temporary measure - bldgs could change & need redraw
 						continue;
 					}
-					if (movedBldg) {
+					if (movedBldg || changedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
 					// new entity so add to metadata of entities belonging to current user
