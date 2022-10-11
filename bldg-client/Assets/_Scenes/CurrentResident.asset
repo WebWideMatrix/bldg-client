@@ -14,15 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resident:
     alias: dibau
-    direction: 180
+    direction: 140
     email: dibaunaumh@gmail.com
     home_bldg: g/b(17,24)/l0/b(4,5)
     id: 1
     text: 
     is_online: 1
-    location: g/b(16,92)/l0/b(12,14)
+    location: g/b(16,92)/l0/b(9,11)
     name: Udi Bauman
     previous_messages:
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(18,16)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/move
+      bldg a-solution here","say_time":1665515968476}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(19,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/create
+      solution bldg with name a-solution and summary another solution","say_time":1665515925550}'
+    - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(12,14)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
+      time is it?","say_time":1665515304418}'
     - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(9,17)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
       time is it?","say_time":1665513471040}'
     - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(13,22)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
@@ -41,12 +47,12 @@ MonoBehaviour:
     - '{"action_type":"SAY","bldg_url":"","resident_email":"dibaunaumh@gmail.com","say_flr":"g/b(16,92)/l0","say_flr_url":"g/fromTeal/l0","say_location":"g/b(16,92)/l0/b(7,31)","say_mimetype":"text/plain","say_recipient":"","say_speaker":"dibau","say_text":"/what
       time is it","say_time":1665469431627}'
     session_id: 827e6d61-a1b1-49e1-b144-5d6b3ba9e335
-    x: 12
-    y: 14
+    x: 9
+    y: 11
     flr: g/b(16,92)/l0
     flr_url: g/fromTeal/l0
-    updated_at: 2022-10-11T18:37:51
-  initialized: 1
+    updated_at: 2022-10-11T19:20:09
+  initialized: 0
   ACTION_SEND_INTERVAL: 200
   inFlyingMode: 0
   flyingHigh: 0
