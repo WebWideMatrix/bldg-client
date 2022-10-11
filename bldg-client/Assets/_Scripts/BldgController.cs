@@ -515,11 +515,8 @@ public class BldgController : MonoBehaviour
 		}
 		
 		try {
-			Debug.Log("~~~~~~~~~~~ got the followng data attributes: ");
-			foreach (string key in data_attributes.Keys) { Debug.Log("~~~~~~ " + key); };
 			ImageController[] imageDisplays = bldg.GetComponentsInChildren<ImageController>(true);
 			foreach (ImageController imgDisplay in imageDisplays) {
-				Debug.Log("~~~~~~~~~~~~~ checking imageName " + imgDisplay.imageName);				
 				if (data_attributes.ContainsKey(imgDisplay.imageName)) {
 					imgDisplay.gameObject.SetActive(true);
 					imgDisplay.SetImageURL(data_attributes[imgDisplay.imageName]);
@@ -613,7 +610,7 @@ public class BldgController : MonoBehaviour
 					GameObject bldgClone = null;
 					try {
 						bldgClone = (GameObject) Instantiate(prefab, baseline, Quaternion.identity);
-						bldgClone.tag = "Building";
+						bldgClone.tag = "Resident";
 						BldgObject bldgObject = bldgClone.AddComponent<BldgObject>();
 						bldgObject.initialize(b, this);
 						renderModelData(bldgClone, b);
@@ -672,12 +669,14 @@ public class BldgController : MonoBehaviour
 					if (r.alias == currentRsdt.alias) continue;
 
 					bool newResident = !idsCache.ContainsKey(r.id);
+
 					bool movedResident = false;
 					bool changedResident = false;
 					if (!newResident) {
 						movedResident = addrCache[r.id] != r.location;
 						changedResident = lastUpdateCache[r.id] != r.updated_at;
 					}
+
 					if (!(newResident || movedResident || changedResident)) {
 						// don't draw existing or unmoved or unchanged residents
 						continue;

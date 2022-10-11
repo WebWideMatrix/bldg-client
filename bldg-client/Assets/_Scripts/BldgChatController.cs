@@ -16,7 +16,6 @@ public class BldgChatController : MonoBehaviour
     public void AddHistoricMessages(string[] messages) {
         foreach (string msg in messages) {
             SayAction msgObject = JsonUtility.FromJson<SayAction>(msg);
-            Debug.Log("~~~~~~~~ Adding historic message: " + msgObject.say_text);
             chatUIController.AddMessageToHistory(msgObject.say_speaker, msgObject);
         }
         // Debug.Log("Done adding them to chat history");
