@@ -587,13 +587,13 @@ public class BldgController : MonoBehaviour
 						changedBldg = lastUpdateCache[b.id] != b.updated_at;
 					}
 					if (!(newBldg || movedBldg || changedBldg)) {
-						// don't draw existing or unmoved bldgs or unchanged
-						// TODO this is just a temporary measure - bldgs could change & need redraw
+						// don't draw existing or unmoved or unchanged residents
 						continue;
 					}
 					if (movedBldg || changedBldg) {
 						GameObject.Destroy (idsCache[b.id]);
 					}
+
 					// new entity so add to metadata of entities belonging to current user
 					if (Array.IndexOf(b.owners, crc.resident.email) > -1) {
 						cm.addEntity(b.entity_type, b.name);
@@ -647,10 +647,21 @@ public class BldgController : MonoBehaviour
 	}
 
 	void reloadResidents(string address) {
+		var idsCache = new Dictionary<int, GameObject>();
+		var addrCache = new Dictionary<int, string>();
+		var lastUpdateCache = new Dictionary<int, string>();
 		GameObject[] currentFlrResidents = GameObject.FindGameObjectsWithTag("Resident");
 		foreach (GameObject rsdnt in currentFlrResidents) {
-			GameObject.Destroy (rsdnt);
+			ResidentController rObj = rsdnt.GetComponentsInChildren<ResidentController>()[0];
+			if (!idsCache.ContainsKey(rObj.resident.id)) {
+				idsCache.Add(rObj.resident.id, rsdnt);
+				addrCache.Add(rObj.resident.id, rObj.resident.location);
+				lastUpdateCache.Add(rObj.resident.id, rObj.resident.updated_at);
+			} else {
+				Debug.LogWarning("Resident rendered twice! " + rObj.resident.name);
+			}
 		}
+		
 		// escape the address
 		address = Uri.EscapeDataString(address);
 		Debug.Log("address escaped to: " + address);
@@ -665,6 +676,24 @@ public class BldgController : MonoBehaviour
 					count += 1;
 					// Debug.Log("processing resident " + count);
 
+					// if it's the current user, skip
+					if (r.alias == currentRsdt.alias) continue;
+
+					bool newResident = !idsCache.ContainsKey(r.id);
+					bool movedResident = false;
+					bool changedResident = false;
+					if (!newResident) {
+						movedResident = addrCache[r.id] != r.location;
+						changedResident = lastUpdateCache[r.id] != r.updated_at;
+					}
+					if (!(newResident || movedResident || changedResident)) {
+						// don't draw existing or unmoved or unchanged residents
+						continue;
+					}
+					if (movedResident || changedResident) {
+						GameObject.Destroy (idsCache[r.id]);
+					}	
+
 					if (!clearedChatHistory) {
 						clearedChatHistory = true;
 						bldgChatController.ClearMessageHistory();
@@ -674,8 +703,7 @@ public class BldgController : MonoBehaviour
 						bldgChatController.AddHistoricMessages(r.previous_messages);
 					}
 
-					// if it's the current user, skip
-					if (r.alias == currentRsdt.alias) continue;
+					
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
