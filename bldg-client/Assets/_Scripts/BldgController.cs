@@ -90,8 +90,6 @@ public class BldgController : MonoBehaviour
 	Resident currentRsdt;
 	BldgChatController bldgChatController;
 
-	private bool clearedChatHistory = false;
-
 	// RETURN:
 	//private UnityAction onLogin;
 
@@ -458,7 +456,6 @@ public class BldgController : MonoBehaviour
 			reloadContainerBldg();
 			updateFloorSign ();
 		}
-		clearedChatHistory = false;
 
 		reloadBuildings(address);
 		reloadResidents(address);
@@ -600,17 +597,8 @@ public class BldgController : MonoBehaviour
 					}
 					dataChanged = true;
 
-
-					if (!clearedChatHistory) {
-						clearedChatHistory = true;
-						bldgChatController.ClearMessageHistory();
-					}
-
-					if (b.name == "test-decision") {
-						Debug.Log("~~~~~~~~~~ At test-decision");
-					}
 					if (b.previous_messages.Length > 0) {
-						Debug.Log("Found " + b.previous_messages.Length + " previous messages");
+						Debug.Log("Found " + b.previous_messages.Length + " previous messages for " + b.name);
 						bldgChatController.AddHistoricMessages(b.previous_messages);
 					}
 
@@ -676,6 +664,10 @@ public class BldgController : MonoBehaviour
 					count += 1;
 					// Debug.Log("processing resident " + count);
 
+					if (r.previous_messages.Length > 0) {
+						bldgChatController.AddHistoricMessages(r.previous_messages);
+					}
+
 					// if it's the current user, skip
 					if (r.alias == currentRsdt.alias) continue;
 
@@ -692,18 +684,7 @@ public class BldgController : MonoBehaviour
 					}
 					if (movedResident || changedResident) {
 						GameObject.Destroy (idsCache[r.id]);
-					}	
-
-					if (!clearedChatHistory) {
-						clearedChatHistory = true;
-						bldgChatController.ClearMessageHistory();
 					}
-
-					if (r.previous_messages.Length > 0) {
-						bldgChatController.AddHistoricMessages(r.previous_messages);
-					}
-
-					
 
 					// // The area is 16x12, going from (8,6) - (-8,-6)
 
