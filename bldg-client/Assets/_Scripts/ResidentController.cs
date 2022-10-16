@@ -170,16 +170,13 @@ public class ResidentController : MonoBehaviour
 
         transform.Translate(0, 0, zValue);
         transform.Rotate(0, xValue, 0);
-
-        //Debug.Log("Current rotation: " + transform.eulerAngles.y);
-        exactDirection = (int)transform.eulerAngles.y;
-
+        
         CurrentResidentController currentResident = CurrentResidentController.Instance; // TODO only get it when you need it
         
         // check whether resident turned to the sides
         if (isRotationChange) {
 
-
+            exactDirection = (int)transform.eulerAngles.y;
             int newDirection = exactDirection - (exactDirection % directionInterval);
 
             if (newDirection != previousDirection) {

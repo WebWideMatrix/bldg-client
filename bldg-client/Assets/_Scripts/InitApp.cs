@@ -66,12 +66,12 @@ public class InitApp : MonoBehaviour
         walkCamera.LookAt = rsdtClone.transform;
         flyCamera.Follow = rsdtClone.transform;
         flyCamera.LookAt = rsdtClone.transform;
-        ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
-        rsdtObject.initialize(rsdt, true);
+        //ResidentController rsdtObject = rsdtClone.AddComponent<ResidentController>();
+        //rsdtObject.initialize(rsdt, true);
 
         // RETURN: replace all of these with event handling on bldg controller
         bldgController.SetCurrentResident(rsdt);
-        bldgController.SetCurrentResidentController(rsdtObject);
+        //bldgController.SetCurrentResidentController(rsdtObject);
     }
 
     private void loadBldgs(Resident rsdt) {
