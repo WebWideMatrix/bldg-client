@@ -77,6 +77,9 @@ public class FlyBehaviour : GenericBehaviour
 
 		// Call the fly manager.
 		FlyManagement(behaviourManager.GetH, behaviourManager.GetV);
+
+		Debug.Log("~~~~~~~~~~~~~~ [Fly] Sending move action " + transform.position.x + ", " + transform.position.z);
+
 	}
 	// Deal with the player movement when flying.
 	void FlyManagement(float horizontal, float vertical)

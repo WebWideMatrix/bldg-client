@@ -640,10 +640,7 @@ public class BldgController : MonoBehaviour
 		foreach (GameObject rsdnt in currentFlrResidents) {
 			cou++;
 			ResidentController rObj = rsdnt.GetComponent<ResidentController>();
-			Debug.Log("~~~~~~~~~~ " + cou + " checking RENDERED resident id: " + rObj.resident.id);
-			Debug.Log("~~~~~~~~~~ " + cou + " checking RENDERED resident alias: " + rObj.resident.alias);			
 			if (!idsCache.ContainsKey(rObj.resident.id)) {
-				Debug.Log("~~~~~~~~~~ " + cou + " not in cache so adding " + rObj.resident.id);
 				idsCache.Add(rObj.resident.id, rsdnt);
 				addrCache.Add(rObj.resident.id, rObj.resident.location);
 				lastUpdateCache.Add(rObj.resident.id, rObj.resident.updated_at);
@@ -673,9 +670,7 @@ public class BldgController : MonoBehaviour
 					// if it's the current user, skip
 					if (r.alias == currentRsdt.alias) continue;
 
-					Debug.Log("~~~~~~~~~~ checking RECEIVED resident " + r.id);
 					bool newResident = !idsCache.ContainsKey(r.id);
-					Debug.Log("~~~~~~~~~~ RECEIVED resident is NOT in cache? " + newResident);
 
 					bool movedResident = false;
 					bool changedResident = false;
@@ -683,8 +678,6 @@ public class BldgController : MonoBehaviour
 						movedResident = addrCache[r.id] != r.location;
 						changedResident = lastUpdateCache[r.id] != r.updated_at;
 					}
-					Debug.Log("~~~~~~~~~~ RECEIVED moved? " + movedResident);
-					Debug.Log("~~~~~~~~~~ RECEIVED changed? " + changedResident);
 
 					if (!(newResident || movedResident || changedResident)) {
 						// don't draw existing or unmoved or unchanged residents
@@ -709,12 +702,9 @@ public class BldgController : MonoBehaviour
 					qrt.eulerAngles = new Vector3(0, r.direction, 0);
 					GameObject rsdtClone = (GameObject) Instantiate(baseResidentObject, baseline, qrt);
 					rsdtClone.tag = "Resident";
-					Debug.Log("~~~~~~~~~~ rendering resident " + r.id);
                     
 					ResidentController rsdtObject = rsdtClone.GetComponent<ResidentController>();
-					Debug.Log("~~~~~~~ About to set resident to controller with id " + r.id);
 					rsdtObject.initialize(r);
-					Debug.Log("~~~~~~~ rsdtController resident id = " + rsdtObject.resident.id);
 
 					// Debug.Log(r.alias);
 					//Debug.Log("About to call renderAuthorPicture on bldg " + count);
